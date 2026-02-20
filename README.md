@@ -1,1 +1,1 @@
-# NucleusStaticAssets
+# nucleus-cdn
