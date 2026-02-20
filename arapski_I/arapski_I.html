@@ -1,0 +1,2509 @@
+<!DOCTYPE html>
+<html lang="hr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurs arapskog jezika - Pregled</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #2d3748;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #2563eb, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .arabic {
+            font-family: 'Traditional Arabic', 'Arabic Typesetting', serif;
+            font-size: 1.8em;
+            direction: rtl;
+            color: #1e40af;
+        }
+
+        .arabic-large {
+            font-size: 2.5em;
+        }
+
+        .section {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .section h2 {
+            color: #1e40af;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h3 {
+            color: #059669;
+            margin: 15px 0 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #bfdbfe;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: #059669;
+            margin-bottom: 8px;
+        }
+
+        .letter-box {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 5px;
+            min-width: 70px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .letter-box .arabic {
+            font-size: 2em;
+            color: #1e40af;
+        }
+
+        .letter-box .label {
+            font-size: 0.7em;
+            color: #64748b;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .forms-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: #fff;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #eff6ff;
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .highlight {
+            background: #dcfce7;
+            border-radius: 5px;
+            padding: 2px 8px;
+        }
+
+        .warning {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+            color: #991b1b;
+        }
+
+        .info {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+            color: #1e40af;
+        }
+
+        .vocab-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #ffffff;
+            border-radius: 6px;
+            margin: 5px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .vocab-item:hover {
+            background: #eff6ff;
+            border-color: #93c5fd;
+        }
+
+        .nav {
+            position: sticky;
+            top: 10px;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: #1e40af;
+            text-decoration: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            background: #eff6ff;
+            transition: all 0.3s;
+            font-size: 0.9em;
+            border: 1px solid #bfdbfe;
+        }
+
+        .nav-links a:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            margin-left: 8px;
+        }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-yellow {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+
+        .badge-orange {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        .badge-purple {
+            background: #f3e8ff;
+            color: #6b21a8;
+        }
+
+        .pron {
+            color: #6b7280;
+            font-size: 0.85em;
+            font-style: italic;
+        }
+
+        details {
+            margin: 8px 0;
+        }
+
+        details summary {
+            cursor: pointer;
+            color: #1e40af;
+            font-weight: 600;
+            padding: 8px 12px;
+            background: #eff6ff;
+            border-radius: 6px;
+            border: 1px solid #bfdbfe;
+            user-select: none;
+        }
+
+        details summary:hover {
+            background: #dbeafe;
+        }
+
+        details[open] summary {
+            border-radius: 6px 6px 0 0;
+        }
+
+        .exercise-answer {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-top: none;
+            padding: 12px 15px;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .exercise-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            margin: 8px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exercise-row:hover {
+            background: #f8fafc;
+        }
+
+        .sun-box {
+            background: #fef9c3 !important;
+            border-color: #fde047 !important;
+        }
+
+        .moon-box {
+            background: #e0e7ff !important;
+            border-color: #a5b4fc !important;
+        }
+
+        /* Collapsible section styles */
+        .section h2 {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .section h2::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            transition: transform 0.3s ease;
+            font-size: 0.8em;
+            color: #3b82f6;
+        }
+
+        .section.collapsed h2::after {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            max-height: 50000px;
+            opacity: 1;
+        }
+
+        .section.collapsed .section-content {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .section h2:hover {
+            color: #2563eb;
+        }
+
+        .section h2:hover::after {
+            color: #2563eb;
+        }
+
+        .toggle-all-btn {
+            display: block;
+            margin: 10px auto 0;
+            padding: 6px 18px;
+            border: 1px solid #bfdbfe;
+            border-radius: 5px;
+            background: #eff6ff;
+            color: #1e40af;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-all-btn:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🕌 Kurs arapskog jezika</h1>
+        <p class="subtitle">Sveobuhvatan pregled gradiva</p>
+
+        <nav class="nav">
+            <div class="nav-links">
+                <a href="#alphabet">Abeceda</a>
+                <a href="#letter-groups">Grupe slova</a>
+                <a href="#vowels">Samoglasnici</a>
+                <a href="#letters">Slova</a>
+                <a href="#guttural">Grlena slova</a>
+                <a href="#emphatic">Emfatici</a>
+                <a href="#signs">Pomoćni znakovi</a>
+                <a href="#grammar">Gramatika</a>
+                <a href="#article">Član AL-</a>
+                <a href="#attributive-phrase">Atributivna sintagma</a>
+                <a href="#conversation">Konverzacija</a>
+                <a href="#exercises">Vježbe</a>
+                <a href="#additional-vocab">Dodatni vokabular</a>
+            </div>
+            <button class="toggle-all-btn" id="toggleAllBtn" onclick="toggleAllSections()">▲ Skupi sve sekcije</button>
+        </nav>
+
+        <!-- LEGENDA TRANSLITERACIJE -->
+        <section class="section">
+            <h2>🔤 Legenda transliteracije</h2>
+            <div class="info"><strong>Njemačka notacija (DIN 31635)</strong> → <strong>Bosanska notacija</strong> →
+                <strong>Bosanski izgovor</strong>
+            </div>
+            <table style="margin-top: 15px;">
+                <tr>
+                    <th>Arapsko slovo</th>
+                    <th>DIN 31635</th>
+                    <th>Bosanska notacija</th>
+                    <th>Bosanski izgovor</th>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ا</span></td>
+                    <td>Ā</td>
+                    <td>Ā</td>
+                    <td>dugo A ili hamza</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ب</span></td>
+                    <td>B</td>
+                    <td>B</td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ت</span></td>
+                    <td>T</td>
+                    <td>T</td>
+                    <td>T</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ث</span></td>
+                    <td>Ṯ</td>
+                    <td>Ṯ</td>
+                    <td>mehko S (kao engl. "th" u "think")</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ج</span></td>
+                    <td>Ǧ</td>
+                    <td>DŽ</td>
+                    <td>DŽ</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ح</span></td>
+                    <td>Ḥ</td>
+                    <td>Ḥ</td>
+                    <td>grleno H</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">خ</span></td>
+                    <td>Ḫ</td>
+                    <td>Ḫ</td>
+                    <td>kao njemačko "ch"</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">د</span></td>
+                    <td>D</td>
+                    <td>D</td>
+                    <td>D</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ذ</span></td>
+                    <td>Ḏ</td>
+                    <td>Ḏ</td>
+                    <td>mehko Z (kao engl. "th" u "this")</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ر</span></td>
+                    <td>R</td>
+                    <td>R</td>
+                    <td>R</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ز</span></td>
+                    <td>Z</td>
+                    <td>Z</td>
+                    <td>Z</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">س</span></td>
+                    <td>S</td>
+                    <td>S</td>
+                    <td>S</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ش</span></td>
+                    <td>Š</td>
+                    <td>Š</td>
+                    <td>Š</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ص</span></td>
+                    <td>Ṣ</td>
+                    <td>Ṣ</td>
+                    <td>emfatično S</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ض</span></td>
+                    <td>Ḍ</td>
+                    <td>Ḍ</td>
+                    <td>emfatično D</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ط</span></td>
+                    <td>Ṭ</td>
+                    <td>Ṭ</td>
+                    <td>emfatično T</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ظ</span></td>
+                    <td>Ẓ</td>
+                    <td>Ẓ</td>
+                    <td>emfatično Z</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ع</span></td>
+                    <td>ʿ</td>
+                    <td>ʿ</td>
+                    <td>grleni vokal (duboko iz grla)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">غ</span></td>
+                    <td>Ġ</td>
+                    <td>Ġ</td>
+                    <td>grleno G (kao franc. "r")</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ف</span></td>
+                    <td>F</td>
+                    <td>F</td>
+                    <td>F</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ق</span></td>
+                    <td>Q</td>
+                    <td>Q</td>
+                    <td>duboko K iz grla</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ك</span></td>
+                    <td>K</td>
+                    <td>K</td>
+                    <td>K</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ل</span></td>
+                    <td>L</td>
+                    <td>L</td>
+                    <td>L</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">م</span></td>
+                    <td>M</td>
+                    <td>M</td>
+                    <td>M</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ن</span></td>
+                    <td>N</td>
+                    <td>N</td>
+                    <td>N</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ه</span></td>
+                    <td>H</td>
+                    <td>H</td>
+                    <td>obično H (ne grleno)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">و</span></td>
+                    <td>W</td>
+                    <td>W</td>
+                    <td>V ili dugo U</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">ي</span></td>
+                    <td>Y</td>
+                    <td>J</td>
+                    <td>J ili dugo I</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- OSNOVE -->
+        <section class="section" id="alphabet">
+            <h2>📚 Osnove arapskog pisma</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-title">Abeceda</div>
+                    <p><strong>28 suglasnika</strong> čini arapsku abecedu</p>
+                    <p><strong>6 samoglasnika</strong> (3 kratka + 3 duga)</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Smjer pisanja</div>
+                    <p>Arapski se piše <strong>zdesna nalijevo</strong> ←</p>
+                    <p>Slova se spajaju unutar riječi</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Oblici slova</div>
+                    <p>Svako slovo ima 4 oblika:</p>
+                    <p>• <strong>Samostalan</strong> (SAM)</p>
+                    <p>• <strong>Početak</strong> (POČ)</p>
+                    <p>• <strong>Sredina</strong> (SRED)</p>
+                    <p>• <strong>Kraj</strong></p>
+                </div>
+            </div>
+            <div class="warning">
+                <strong>⚠️ Slova koja se NE spajaju slijeve strane:</strong>
+                <div class="forms-row" style="justify-content: flex-start; margin-top: 10px;">
+                    <span class="letter-box"><span class="arabic">ا</span><span class="label">ELIF</span></span>
+                    <span class="letter-box"><span class="arabic">د</span><span class="label">DĀL</span></span>
+                    <span class="letter-box"><span class="arabic">ذ</span><span class="label">ḎĀL</span></span>
+                    <span class="letter-box"><span class="arabic">ر</span><span class="label">RĀ</span></span>
+                    <span class="letter-box"><span class="arabic">ز</span><span class="label">ZĀ</span></span>
+                    <span class="letter-box"><span class="arabic">و</span><span class="label">WĀW</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRUPIRANJE SLOVA PO OBLIKU -->
+        <section class="section" id="letter-groups">
+            <h2>🔗 Grupiranje slova po obliku</h2>
+            <div class="info">Arapska slova se mogu grupirati po vizualnoj sličnosti. Unutar grupe, slova se razlikuju
+                <strong>samo po broju i poziciji tačaka</strong>. Prepoznavanje grupa znatno olakšava učenje!
+            </div>
+            <table style="margin-top: 15px;">
+                <tr>
+                    <th>Gr.</th>
+                    <th>Slova</th>
+                    <th>Kako ih razlikovati</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span class="arabic" style="font-size:1.5em;">ب ت ث</span></td>
+                    <td>1 tačka ispod (B) → 2 iznad (T) → 3 iznad (Ṯ)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="arabic" style="font-size:1.5em;">ج ح خ</span></td>
+                    <td>1 tačka ispod (DŽ) → bez tačke (Ḥ) → 1 iznad (Ḫ)</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span class="arabic" style="font-size:1.5em;">د ذ</span></td>
+                    <td>bez tačke (D) → 1 iznad (Ḏ) — ne spajaju se slijeva</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><span class="arabic" style="font-size:1.5em;">ر ز</span></td>
+                    <td>bez tačke (R) → 1 iznad (Z) — ne spajaju se slijeva</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><span class="arabic" style="font-size:1.5em;">س ش</span></td>
+                    <td>bez tačke (S) → 3 tačke iznad (Š)</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><span class="arabic" style="font-size:1.5em;">ص ض</span></td>
+                    <td>bez tačke (Ṣ) → 1 iznad (Ḍ)</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><span class="arabic" style="font-size:1.5em;">ط ظ</span></td>
+                    <td>bez tačke (Ṭ) → 1 iznad (Ẓ)</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><span class="arabic" style="font-size:1.5em;">ع غ</span></td>
+                    <td>bez tačke (ʿAjn) → 1 iznad (Ġajn)</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><span class="arabic" style="font-size:1.5em;">ف ق</span></td>
+                    <td>1 tačka iznad (F) → 2 iznad (Q); ف viši, ق ima dublji rep</td>
+                </tr>
+            </table>
+            <div class="info" style="margin-top:15px;"><strong>Jedinstven oblik (bez para):</strong>
+                <span class="arabic" style="font-size:1.3em;">ا</span> (Elif),
+                <span class="arabic" style="font-size:1.3em;">ك</span> (Kāf),
+                <span class="arabic" style="font-size:1.3em;">ل</span> (Lām),
+                <span class="arabic" style="font-size:1.3em;">م</span> (Mīm),
+                <span class="arabic" style="font-size:1.3em;">ن</span> (Nūn — sličan ب ali tačka iznad),
+                <span class="arabic" style="font-size:1.3em;">ه</span> (Hāʾ),
+                <span class="arabic" style="font-size:1.3em;">و</span> (Wāw),
+                <span class="arabic" style="font-size:1.3em;">ي</span> (Jā — sličan ب ali 2 tačke ispod)
+            </div>
+            <div class="warning"><strong>Trik za pamćenje:</strong> U svakoj grupi, osnovna forma je ISTA —
+                jedino se mijenja broj/pozicija tačaka. Nauči jedan oblik, i znaš cijelu grupu!</div>
+        </section>
+
+        <!-- SAMOGLASNICI -->
+        <section class="section" id="vowels">
+            <h2>🔊 Samoglasnici (Ḥareketi)</h2>
+            <h3>Kratki samoglasnici</h3>
+            <table>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Znak</th>
+                    <th>Zvuk</th>
+                    <th>Primjer</th>
+                </tr>
+                <tr>
+                    <td><strong>FETḤA</strong> <span class="pron">(fetha)</span></td>
+                    <td><span class="arabic">بَ</span></td>
+                    <td>A / E</td>
+                    <td><span class="arabic">بَ</span> = BE <span class="pron">(be)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>KESRA</strong> <span class="pron">(kesra)</span></td>
+                    <td><span class="arabic">بِ</span></td>
+                    <td>I</td>
+                    <td><span class="arabic">بِ</span> = BI <span class="pron">(bi)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>ḌAMMA</strong> <span class="pron">(damma)</span></td>
+                    <td><span class="arabic">بُ</span></td>
+                    <td>U</td>
+                    <td><span class="arabic">بُ</span> = BU <span class="pron">(bu)</span></td>
+                </tr>
+            </table>
+            <h3>Dugi samoglasnici</h3>
+            <table>
+                <tr>
+                    <th>Dugi vokal</th>
+                    <th>Formira se</th>
+                    <th>Primjer</th>
+                </tr>
+                <tr>
+                    <td><strong>Ā</strong> (dugo A)</td>
+                    <td>FETḤA + ELIF (ا)</td>
+                    <td><span class="arabic">بَا</span> = BĀ <span class="pron">(baa)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Ī</strong> (dugo I)</td>
+                    <td>KESRA + JĀ (ي)</td>
+                    <td><span class="arabic">بِي</span> = BĪ <span class="pron">(bii)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Ū</strong> (dugo U)</td>
+                    <td>ḌAMMA + WĀW (و)</td>
+                    <td><span class="arabic">بُو</span> = BŪ <span class="pron">(buu)</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- SLOVA -->
+        <section class="section" id="letters">
+            <h2>✏️ Arapska slova - Svih 28 slova</h2>
+
+            <!-- ELIF -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">1. ELIF <span class="arabic">ا</span> <span class="pron">(elif)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ا</span><span class="label">SAM/POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـا</span><span class="label">SRED/KRAJ</span></span>
+                </div>
+                <div class="warning">Ne spaja se slijeve strane!</div>
+                <div class="info"><strong>Dvostruka uloga:</strong> 1) Nosi dugo Ā (npr. بَا = BĀ), 2) Nosi hamzu (أ،
+                    إ). Na početku riječi UVIJEK ima hamzu!</div>
+                <p>Primjeri: <span class="arabic">أَنَا</span> ANA <span class="pron">(ene)</span> - ja | <span
+                        class="arabic">بَابٌ</span> BĀB <span class="pron">(baab)</span> - vrata</p>
+            </div>
+
+            <!-- BA -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">2. BĀ <span class="arabic">ب</span> <span class="pron">(baa)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ب</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">بـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـبـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـب</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="warning"><strong>Pažnja - broj tačaka:</strong> <span class="arabic">ب</span> = 1 tačka
+                    ispod (B) | <span class="arabic">ت</span> = 2 tačke iznad (T) | <span class="arabic">ث</span> = 3
+                    tačke iznad (Ṯ)</div>
+                <p>Primjeri: <span class="arabic">بَابٌ</span> BĀB <span class="pron">(baab)</span> - vrata | <span
+                        class="arabic">أَبٌ</span> AB <span class="pron">(eb)</span> - otac</p>
+            </div>
+
+            <!-- TA -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">3. TĀ <span class="arabic">ت</span> <span class="pron">(taa)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ت</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">تـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـتـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـت</span><span class="label">KRAJ</span></span>
+                </div>
+                <p style="margin-top: 15px;"><strong>TĀ MARBŪṬA <span class="arabic">ة</span></strong> <span
+                        class="badge badge-green">ženski rod</span>:</p>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ة</span><span class="label">SAM/KRAJ</span></span>
+                    <span class="letter-box"><span class="arabic">ـة</span><span class="label">KRAJ
+                            (spojeno)</span></span>
+                </div>
+                <div class="info">"Okruglo T" - pojavljuje se samo na kraju riječi i označava imenice <strong>ženskog
+                        roda</strong>.</div>
+                <div class="warning"><strong>Pravilo izgovora:</strong> TĀ MARBŪṬA (ة) se na kraju riječi izgovara kao
+                    "H", ali u vezanom stanju postaje puno "T"! Npr: <span class="arabic">مَدْرَسَة</span> = madrasa-H,
+                    ali <span class="arabic">مَدْرَسَةُ الْقُرْآنِ</span> = madrasa-T al-Qur'ān.</div>
+                <p>Primjeri: <span class="arabic">تَوْبَةٌ</span> TAWBA <span class="pron">(tevba)</span> - pokajanje |
+                    <span class="arabic">شَجَرَةٌ</span> ŠADŽARA <span class="pron">(šedžera)</span> - stablo
+                </p>
+            </div>
+
+            <!-- ṮĀ (mehko S) -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">4. ṮĀ <span class="arabic">ث</span> <span class="pron">(saa - mehko)</span>
+                    <span class="badge badge-blue">mehko S</span>
+                </div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ث</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">ثـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـثـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـث</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Izgovara se kao englesko "th" u "think" - jezik između zuba.</div>
+                <p>Primjeri: <span class="arabic">ثَابِتٌ</span> ṮĀBIT <span class="pron">(saabit)</span> - miran |
+                    <span class="arabic">ثَوْبٌ</span> ṮAWB <span class="pron">(sevb)</span> - odjeća
+                </p>
+            </div>
+
+            <!-- DŽĪM -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">5. DŽĪM <span class="arabic">ج</span> <span class="pron">(džiim)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ج</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">جـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـجـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـج</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info"><strong>Regionalne varijacije:</strong> Egipat izgovara kao "G" (gim), a veći dio
+                    arapskog svijeta kao "DŽ" (džim). Standard je DŽ!</div>
+                <p>Primjeri: <span class="arabic">جَوَابٌ</span> DŽAWĀB <span class="pron">(dževaab)</span> - odgovor |
+                    <span class="arabic">جِيبَةٌ</span> DŽĪBA <span class="pron">(džiiba)</span> - suknja
+                </p>
+            </div>
+
+            <!-- ḤĀ (grleno) -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">6. ḤĀ <span class="arabic">ح</span> <span class="pron">(haa - grleno)</span>
+                    <span class="badge badge-yellow">grleni H</span>
+                </div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ح</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">حـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـحـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـح</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Duboko grleno H - kao da izdišeš na prozor da se zamagli.</div>
+                <div class="warning"><strong>Ne miješaj:</strong> <span class="arabic">ح</span> (ḤĀ - grleno) ≠ <span
+                        class="arabic">ه</span> (HĀʾ - obično H) ≠ <span class="arabic">خ</span> (ḪĀ - hrskavo)</div>
+                <p>Primjeri: <span class="arabic">حَبِيبٌ</span> ḤABĪB <span class="pron">(habiib)</span> - dragi |
+                    <span class="arabic">حَبِيبَةٌ</span> ḤABĪBA <span class="pron">(habiiba)</span> - draga
+                </p>
+            </div>
+
+            <!-- ḪĀ (kao njemačko ch) -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">7. ḪĀ <span class="arabic">خ</span> <span class="pron">(haa - hrskavo)</span>
+                </div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">خ</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">خـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـخـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـخ</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Kao njemačko "ch" u "Bach" - hrskavo iz grla.</div>
+                <p>Primjeri: <span class="arabic">خُبْزٌ</span> ḪUBZ <span class="pron">(hubz)</span> - hljeb | <span
+                        class="arabic">خَبَّازٌ</span> ḪABBĀZ <span class="pron">(habbaaz)</span> - pekar</p>
+            </div>
+
+            <!-- DĀL -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">8. DĀL <span class="arabic">د</span> <span class="pron">(daal)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">د</span><span class="label">SAM/POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـد</span><span class="label">SRED/KRAJ</span></span>
+                </div>
+                <div class="warning">Ne spaja se slijeve strane!</div>
+                <div class="info"><strong>Razlika po tački:</strong> <span class="arabic">د</span> (DĀL - bez tačke, D)
+                    vs <span class="arabic">ذ</span> (ḎĀL - sa tačkom, mehko Z)</div>
+                <p>Primjeri: <span class="arabic">دَجَاجٌ</span> DADŽĀDŽ <span class="pron">(dedžaadž)</span> - piletina
+                    | <span class="arabic">جَدٌّ</span> DŽADD <span class="pron">(džedd)</span> - djed</p>
+            </div>
+
+            <!-- ḎĀL -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">9. ḎĀL <span class="arabic">ذ</span> <span class="pron">(zaal - mehko)</span>
+                    <span class="badge badge-blue">mehko Z</span>
+                </div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ذ</span><span class="label">SAM/POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـذ</span><span class="label">SRED/KRAJ</span></span>
+                </div>
+                <div class="info">Izgovara se kao englesko "th" u "this" - jezik između zuba, zvučno.</div>
+                <div class="warning">Ne spaja se slijeve strane!</div>
+                <p>Primjeri: <span class="arabic">ذُبَابَةٌ</span> ḎUBĀBA <span class="pron">(zubaaba)</span> - muha |
+                    <span class="arabic">أُسْتَاذٌ</span> USTĀḎ <span class="pron">(ustaaz)</span> - profesor
+                </p>
+            </div>
+
+            <!-- RĀ -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">10. RĀ <span class="arabic">ر</span> <span class="pron">(raa)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ر</span><span class="label">SAM/POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـر</span><span class="label">SRED/KRAJ</span></span>
+                </div>
+                <div class="warning">Ne spaja se slijeve strane!</div>
+                <div class="info"><strong>Tvrdo ili meko R:</strong> Sa Fetḥom/Ḍammom je "tvrdo" R (رَ، رُ), sa Kesrom
+                    je "meko" R (رِ). Npr: رَجُل (radžul) vs رِيح (rīḥ).</div>
+                <p>Primjeri: <span class="arabic">حَرْبٌ</span> ḤARB <span class="pron">(harb)</span> - rat | <span
+                        class="arabic">ذُرَّةٌ</span> ḎURRA <span class="pron">(zurra)</span> - kukuruz</p>
+            </div>
+
+            <!-- ZĀ -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">11. ZĀ <span class="arabic">ز</span> <span class="pron">(zaa)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ز</span><span class="label">SAM/POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـز</span><span class="label">SRED/KRAJ</span></span>
+                </div>
+                <div class="warning">Ne spaja se slijeve strane!</div>
+                <div class="info"><strong>Pazi na razliku:</strong> <span class="arabic">ر</span> (RĀ - bez tačke,
+                    okruglo) vs <span class="arabic">ز</span> (ZĀ - sa tačkom, sličan oblik)</div>
+                <p>Primjeri: <span class="arabic">زَيْتٌ</span> ZAJT <span class="pron">(zejt)</span> - ulje | <span
+                        class="arabic">زَهْرَةٌ</span> ZAHRA <span class="pron">(zehra)</span> - cvijet</p>
+            </div>
+
+            <!-- SĪN -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">12. SĪN <span class="arabic">س</span> <span class="pron">(siin)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">س</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">سـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـسـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـس</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="warning"><strong>Razlika:</strong> <span class="arabic">س</span> (SĪN - S, 3 "zuba") vs
+                    <span class="arabic">ش</span> (ŠĪN - Š, 3 "zuba" + 3 tačke)
+                </div>
+                <p>Primjeri: <span class="arabic">سَبُّورَةٌ</span> SABBŪRA <span class="pron">(sebbuura)</span> -
+                    školska tabla | <span class="arabic">حِسَابٌ</span> ḤISĀB <span class="pron">(hisaab)</span> - račun
+                </p>
+            </div>
+
+            <!-- ŠĪN -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">13. ŠĪN <span class="arabic">ش</span> <span class="pron">(šiin)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ش</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">شـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـشـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـش</span><span class="label">KRAJ</span></span>
+                </div>
+                <p>Primjeri: <span class="arabic">شَاشَةٌ</span> ŠĀŠA <span class="pron">(šaaša)</span> - ekran | <span
+                        class="arabic">شَجَرَةٌ</span> ŠADŽARA <span class="pron">(šedžera)</span> - stablo</p>
+            </div>
+
+            <!-- ṢĀD -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">14. ṢĀD <span class="arabic">ص</span> <span class="pron">(saad -
+                        emfatično)</span> <span class="badge badge-orange">emfatično S</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ص</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">صـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـصـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـص</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Emfatično - izgovara se s povučenim jezikom, daje "tvrdi" zvuk. FETḤA daje "A".</div>
+                <p>Primjeri: <span class="arabic">صَارُوخٌ</span> ṢĀRŪḪ <span class="pron">(saaruuh)</span> - raketa |
+                    <span class="arabic">صُورَةٌ</span> ṢŪRA <span class="pron">(suura)</span> - slika
+                </p>
+            </div>
+
+            <!-- ḌĀD -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">15. ḌĀD <span class="arabic">ض</span> <span class="pron">(daad -
+                        emfatično)</span> <span class="badge badge-orange">emfatično D</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ض</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">ضـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـضـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـض</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info"><strong>Jedinstveno arapsko slovo!</strong> ḌĀD ne postoji ni u jednom drugom jeziku -
+                    zato se arapski zove "jezik ḌĀD-a" (لُغَةُ الضَّادِ).</div>
+                <p>Primjeri: <span class="arabic">ضَرْبَةٌ</span> ḌARBA <span class="pron">(darba)</span> - udarac |
+                    <span class="arabic">بَيْضَةٌ</span> BAJḌA <span class="pron">(bejda)</span> - jaje
+                </p>
+            </div>
+
+            <!-- ṬĀ emfatično -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">16. ṬĀ <span class="arabic">ط</span> <span class="pron">(taa - emfatično)</span>
+                    <span class="badge badge-orange">emfatično T</span>
+                </div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ط</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">طـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـطـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـط</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info"><strong>Savjet za emfatična slova:</strong> Povuci jezik unazad i spusti vilicu - zvuk
+                    postaje dublji i "tvrđi".</div>
+                <p>Primjeri: <span class="arabic">طَبِيبٌ</span> ṬABĪB <span class="pron">(tabiib)</span> - ljekar |
+                    <span class="arabic">بَطَّةٌ</span> BAṬṬA <span class="pron">(batta)</span> - patka
+                </p>
+            </div>
+
+            <!-- ẒĀ emfatično -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">17. ẒĀ <span class="arabic">ظ</span> <span class="pron">(zaa - emfatično)</span>
+                    <span class="badge badge-orange">emfatično Z</span>
+                </div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ظ</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">ظـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـظـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـظ</span><span class="label">KRAJ</span></span>
+                </div>
+                <p>Primjeri: <span class="arabic">ظَبْيٌ</span> ẒABJ <span class="pron">(zabj)</span> - gazela | <span
+                        class="arabic">حَظِيرَةٌ</span> ḤAẒĪRA <span class="pron">(haziira)</span> - štala</p>
+            </div>
+
+            <!-- ʿAJN -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">18. ʿAJN <span class="arabic">ع</span> <span class="pron">('ajn)</span> <span
+                        class="badge badge-purple">grleni suglasnik</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ع</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">عـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـعـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـع</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Duboki grleni zvuk - nema ekvivalent u bosanskom. Stisni grlo kao da se gušiš.</div>
+                <div class="warning"><strong>Vježba za ʿAJN:</strong> Reci "AAA", pa prekinuti zvuk stiskom grla, pa
+                    nastavi "AAA" - to je ʿA-ʿA-ʿA!</div>
+                <p>Primjeri: <span class="arabic">عَرَبِيَّةٌ</span> ʿARABIJJA <span class="pron">('arabijja)</span> -
+                    arapska | <span class="arabic">سَبْعٌ</span> SABʿ <span class="pron">(seb')</span> - sedam</p>
+            </div>
+
+            <!-- ĠAJN -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">19. ĠAJN <span class="arabic">غ</span> <span class="pron">(gajn)</span> <span
+                        class="badge badge-purple">grleno G</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">غ</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">غـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـغـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـغ</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Kao francusko "r" ili grgljanje vodom.</div>
+                <div class="warning"><strong>Razlika:</strong> <span class="arabic">خ</span> (ḪĀ - bezvučno, kao "ch")
+                    vs <span class="arabic">غ</span> (ĠAJN - zvučno, kao franc. "r")</div>
+                <p>Primjeri: <span class="arabic">غُرَابٌ</span> ĠURĀB <span class="pron">(guraab)</span> - vrana |
+                    <span class="arabic">غُرْفَةٌ</span> ĠURFA <span class="pron">(gurfa)</span> - soba
+                </p>
+            </div>
+
+            <!-- FĀ -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">20. FĀ <span class="arabic">ف</span> <span class="pron">(faa)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ف</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">فـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـفـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـف</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">FETḤA s FĀ daje zvuk "E" (ne "A").</div>
+                <p>Primjeri: <span class="arabic">فَرَاشَةٌ</span> FARĀŠA <span class="pron">(feraaša)</span> - leptir |
+                    <span class="arabic">دِفَاعٌ</span> DIFĀʿ <span class="pron">(difaa')</span> - odbrana
+                </p>
+            </div>
+
+            <!-- QĀF -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">21. QĀF <span class="arabic">ق</span> <span class="pron">(qaaf)</span> <span
+                        class="badge badge-orange">duboko K</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ق</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">قـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـقـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـق</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Duboko "K" iz grla - jezik je povučen nazad.</div>
+                <p>Primjeri: <span class="arabic">قَرِيبَةٌ</span> QARĪBA <span class="pron">(qariiba)</span> - bliska |
+                    <span class="arabic">قَبْرٌ</span> QABR <span class="pron">(qabr)</span> - kabur/grob
+                </p>
+            </div>
+
+            <!-- KĀF -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">22. KĀF <span class="arabic">ك</span> <span class="pron">(kaaf)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ك</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">كـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـكـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـك</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Obično K kao u bosanskom.</div>
+                <div class="warning"><strong>Ne miješaj:</strong> <span class="arabic">ك</span> (KĀF - obično K,
+                    prednje) vs <span class="arabic">ق</span> (QĀF - duboko K, stražnje iz grla)</div>
+                <p>Primjeri: <span class="arabic">كِتَابٌ</span> KITĀB <span class="pron">(kitaab)</span> - knjiga |
+                    <span class="arabic">كَبِيرٌ</span> KABĪR <span class="pron">(kebiir)</span> - velik |
+                    <span class="arabic">كَلْبٌ</span> KALB <span class="pron">(kelb)</span> - pas
+                </p>
+            </div>
+
+            <!-- LĀM -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">23. LĀM <span class="arabic">ل</span> <span class="pron">(laam)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ل</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">لـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـلـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـل</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info"><strong>LĀM-ELIF ligatura:</strong> Kad se LĀM (ل) spoji sa ELIF (ا), prave poseban
+                    znak <span class="arabic">لا</span> koji se piše kao jedno slovo!</div>
+                <p>Primjeri: <span class="arabic">لَيْلٌ</span> LAJL <span class="pron">(lejl)</span> - noć | <span
+                        class="arabic">جَمِيلٌ</span> DŽAMĪL <span class="pron">(džemiil)</span> - lijep | <span
+                        class="arabic">لَا</span> LĀ <span class="pron">(laa)</span> - ne | <span
+                        class="arabic">لَعِبَ</span> LAʿIBA <span class="pron">(le'ibe)</span> - igrati</p>
+            </div>
+
+            <!-- MĪM -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">24. MĪM <span class="arabic">م</span> <span class="pron">(miim)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">م</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">مـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـمـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـم</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info"><strong>Važno u gramatici:</strong> MĪM se koristi za pravljenje participa (مُعَلِّم -
+                    učitelj, مُسْلِم - musliman).</div>
+                <p>Primjeri: <span class="arabic">مَاءٌ</span> MĀʾ <span class="pron">(maa')</span> - voda | <span
+                        class="arabic">مُسْلِمٌ</span> MUSLIM <span class="pron">(muslim)</span> - musliman | <span
+                        class="arabic">سَلَامٌ</span> SALĀM <span class="pron">(selaam)</span> - mir | <span
+                        class="arabic">مُمَثِّلٌ</span> MUMAṮṮIL <span class="pron">(mumessil)</span> - glumac</p>
+            </div>
+
+            <!-- NŪN -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">25. NŪN <span class="arabic">ن</span> <span class="pron">(nuun)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ن</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">نـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـنـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـن</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info"><strong>Tanwīn:</strong> Udvostručeni samoglasnici (ٌ، ٍ، ً) čitaju se kao "-un",
+                    "-in", "-an" - to je zapravo skriveno NŪN!</div>
+                <p>Primjeri: <span class="arabic">نُورٌ</span> NŪR <span class="pron">(nuur)</span> - svjetlo | <span
+                        class="arabic">نَارٌ</span> NĀR <span class="pron">(naar)</span> - vatra | <span
+                        class="arabic">نَهْرٌ</span> NAHR <span class="pron">(nehr)</span> - rijeka | <span
+                        class="arabic">أَنَانَاسٌ</span> ANĀNĀS <span class="pron">(anaanaas)</span> - ananas</p>
+            </div>
+
+            <!-- HĀʾ -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">26. HĀʾ <span class="arabic">ه</span> <span class="pron">(haa)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ه</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">هـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـهـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـه</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Obično H kao u bosanskom - za razliku od grlenog ḤĀ (ح).</div>
+                <p>Primjeri: <span class="arabic">هُوَ</span> HUWA <span class="pron">(huve)</span> - on | <span
+                        class="arabic">هِيَ</span> HIJA <span class="pron">(hije)</span> - ona | <span
+                        class="arabic">هَرَمٌ</span> HARAM <span class="pron">(herem)</span> - piramida | <span
+                        class="arabic">وَجْهٌ</span> WADŽH <span class="pron">(vedžh)</span> - lice</p>
+            </div>
+
+            <!-- WĀW -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">27. WĀW <span class="arabic">و</span> <span class="pron">(vaav)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">و</span><span class="label">SAM/POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـو</span><span class="label">SRED/KRAJ</span></span>
+                </div>
+                <div class="warning">Ne spaja se slijeve strane!</div>
+                <div class="info">Izgovara se kao V. Koristi se i kao dugo Ū kada ima Ḍammu prije.</div>
+                <p>Primjeri: <span class="arabic">وَلَدٌ</span> WALAD <span class="pron">(veled)</span> - dijete (muško)
+                    | <span class="arabic">وَرْدٌ</span> WARD <span class="pron">(verd)</span> - ruža</p>
+            </div>
+
+            <!-- JĀ -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">28. JĀ <span class="arabic">ي</span> <span class="pron">(jaa)</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ي</span><span class="label">SAM</span></span>
+                    <span class="letter-box"><span class="arabic">يـ</span><span class="label">POČ</span></span>
+                    <span class="letter-box"><span class="arabic">ـيـ</span><span class="label">SRED</span></span>
+                    <span class="letter-box"><span class="arabic">ـي</span><span class="label">KRAJ</span></span>
+                </div>
+                <div class="info">Izgovara se kao J. Koristi se i kao dugo Ī kada ima Kesru prije.</div>
+                <p>Primjeri: <span class="arabic">يَدٌ</span> JAD <span class="pron">(jed)</span> - ruka | <span
+                        class="arabic">يَوْمٌ</span> JAWM <span class="pron">(jevim)</span> - dan</p>
+            </div>
+
+            <!-- HAMZA -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">HAMZA <span class="arabic">ء</span> <span class="pron">(hamza)</span> <span
+                        class="badge badge-purple">glotalni stop</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ء</span><span class="label">SAMA</span></span>
+                    <span class="letter-box"><span class="arabic">أ</span><span class="label">NA ELIF</span></span>
+                    <span class="letter-box"><span class="arabic">إ</span><span class="label">ISPOD ELIF</span></span>
+                    <span class="letter-box"><span class="arabic">ؤ</span><span class="label">NA WĀW</span></span>
+                    <span class="letter-box"><span class="arabic">ئ</span><span class="label">NA JĀ</span></span>
+                </div>
+                <div class="info">Glotalni stop — kratki prekid glasa, kao u bosanskom "ne-e" kada se izgovara sa
+                    začuđenjem.</div>
+
+                <h3 style="margin-top:15px;">Hamzatu-l-Qaṭʿ (همزة القطع) — Rezna hamza</h3>
+                <div class="info">Hamza koja se <strong>uvijek izgovara</strong>, bez obzira na poziciju u govoru.
+                    Piše se sa znakom hamze (ء) iznad ili ispod elifa.</div>
+                <div class="warning"><strong>Pravilo:</strong> أ (iznad) koristi se za A/U samoglasnik, إ (ispod)
+                    za I samoglasnik. Npr: <span class="arabic">أَنَا</span> (ANA) vs <span class="arabic">إِلَى</span>
+                    (ILĀ).</div>
+                <p>Primjeri: <span class="arabic">أَبٌ</span> AB <span class="pron">(eb)</span> - otac |
+                    <span class="arabic">أُمٌّ</span> UMM <span class="pron">(umm)</span> - majka |
+                    <span class="arabic">إِسْلَامٌ</span> ISLĀM <span class="pron">(islaam)</span> - islam
+                </p>
+
+                <h3 style="margin-top:15px;">Hamzatu-l-Waṣl (همزة الوصل) — Spojna hamza</h3>
+                <div class="info">Hamza koja se izgovara <strong>samo na početku govora</strong>. U sredini rečenice
+                    se <strong>preskače</strong> i veže na prethodni samoglasnik. Piše se kao obični elif (ا)
+                    <strong>bez</strong> znaka hamze.
+                </div>
+                <p>Gdje se pojavljuje:</p>
+                <p>• Određeni član: <span class="arabic">الـ</span> (al-)</p>
+                <p>• Glagolski oblici VII-X: <span class="arabic">اِسْتَغْفَرَ</span> (istaġfara - tražiti oprost),
+                    <span class="arabic">اِنْكَسَرَ</span> (inkasara - slomiti se)
+                </p>
+                <p>• Neke imenice: <span class="arabic">اِبْنٌ</span> (ibn - sin), <span class="arabic">اِسْمٌ</span>
+                    (ism - ime)</p>
+                <div class="warning"><strong>Praktični primjer:</strong><br>
+                    Na početku: "<span class="arabic">اِسْمِي أَحْمَد</span>" — ismī Aḥmad (izgovaraš "i")<br>
+                    U sredini: "<span class="arabic">مَا اسْمُكَ؟</span>" — ma-smuka? (preskačeš hamzu, vežeš)
+                </div>
+
+                <h3 style="margin-top:15px;">Pozicija hamze u sredini/kraju riječi</h3>
+                <table>
+                    <tr>
+                        <th>Pozicija</th>
+                        <th>Primjer</th>
+                        <th>Transliteracija</th>
+                        <th>Značenje</th>
+                    </tr>
+                    <tr>
+                        <td>Na elif (أ) — početak</td>
+                        <td><span class="arabic">أَنَا</span></td>
+                        <td>ANA</td>
+                        <td>ja</td>
+                    </tr>
+                    <tr>
+                        <td>Na wāw (ؤ) — sredina</td>
+                        <td><span class="arabic">سُؤَالٌ</span></td>
+                        <td>SUʾĀL</td>
+                        <td>pitanje</td>
+                    </tr>
+                    <tr>
+                        <td>Na jā (ئ) — sredina</td>
+                        <td><span class="arabic">رَئِيسٌ</span></td>
+                        <td>RAʾĪS</td>
+                        <td>predsjednik</td>
+                    </tr>
+                    <tr>
+                        <td>Na liniji (ء) — kraj</td>
+                        <td><span class="arabic">مَاءٌ</span></td>
+                        <td>MĀʾ</td>
+                        <td>voda</td>
+                    </tr>
+                    <tr>
+                        <td>Na elif sa maddom (آ)</td>
+                        <td><span class="arabic">قُرْآنٌ</span></td>
+                        <td>QURʾĀN</td>
+                        <td>Kur'an</td>
+                    </tr>
+                </table>
+                <div class="info" style="margin-top:10px;"><strong>ELIF sa MADDOM</strong> <span class="arabic"
+                        style="font-size:1.5em;">آ</span> — Kad se hamza sa fethom (أَ) nađe ispred
+                    elifa, spajaju se u <span class="arabic">آ</span> i čita se kao dugo "ĀĀ". Npr: <span
+                        class="arabic">آدَمُ</span> (Ādam), <span class="arabic">قُرْآنٌ</span> (Qurʾān).</div>
+            </div>
+
+            <!-- ELIF MAQṢŪRA -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div class="card-title">ELIF MAQṢŪRA <span class="arabic">ى</span> <span class="pron">(elif
+                        maqsuura)</span> <span class="badge badge-green">samo na kraju
+                        riječi</span></div>
+                <div class="forms-row">
+                    <span class="letter-box"><span class="arabic">ى</span><span class="label">SAM/KRAJ</span></span>
+                    <span class="letter-box"><span class="arabic">ـى</span><span class="label">KRAJ
+                            (spojeno)</span></span>
+                </div>
+                <div class="info">Izgleda kao <span class="arabic">ي</span> (Jā) ali <strong>bez tačaka</strong>.
+                    Pojavljuje se samo na kraju riječi i izgovara se kao <strong>dugo Ā</strong>.</div>
+                <div class="warning"><strong>Ne miješaj:</strong> <span class="arabic">ي</span> (JĀ — sa 2 tačke
+                    ispod, suglasnik J) ≠ <span class="arabic">ى</span> (ELIF MAQṢŪRA — bez tačaka, dugo A)</div>
+                <p>Primjeri: <span class="arabic">عَلَى</span> ʿALĀ <span class="pron">('alaa)</span> - na/prema |
+                    <span class="arabic">إِلَى</span> ILĀ <span class="pron">(ilaa)</span> - prema |
+                    <span class="arabic">مُوسَى</span> MŪSĀ <span class="pron">(muusaa)</span> - Musa |
+                    <span class="arabic">هُدًى</span> HUDĀ <span class="pron">(hudaa)</span> - uputa
+                </p>
+            </div>
+        </section>
+
+        <!-- POMOĆNI ZNAKOVI -->
+        <section class="section" id="signs">
+            <h2>🔣 Pomoćni znakovi</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-title">SUKŪN <span class="arabic arabic-large">ـْـ</span> <span
+                            class="pron">(sukuun)</span></div>
+                    <p>Označava da se suglasnik čita <strong>sam, bez samoglasnika</strong>.</p>
+                    <div class="warning">
+                        Nikada ne stoji na:<br>
+                        • početnom suglasniku<br>
+                        • posljednjem suglasniku imenice
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">TAŠDĪD <span class="arabic arabic-large">ـّـ</span> <span
+                            class="pron">(tašdiid)</span></div>
+                    <p>Označava <strong>udvostručeni suglasnik</strong>.</p>
+                    <p>Čita se s pritiskom/naglaskom.</p>
+                    <div class="warning">
+                        Nikada ne stoji na prvom suglasniku riječi.
+                    </div>
+                    <p style="margin-top: 10px;">Primjer: <span class="arabic">خَبَّاز</span> ḪABBĀZ <span
+                            class="pron">(habbaaz)</span> - pekar</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAMATIKA - TENVIN -->
+        <section class="section" id="grammar">
+            <h2>📖 Gramatika - Padeži (Tanwīn)</h2>
+            <div class="info">
+                <strong>TANWĪN</strong> <span class="pron">(tenviin)</span> je udvostručeni kratki samoglasnik koji
+                označava:<br>
+                1. Padež u kojem se imenica nalazi<br>
+                2. Neodređenost imenice
+            </div>
+            <table style="margin-top: 20px;">
+                <tr>
+                    <th>Padež</th>
+                    <th>Naziv</th>
+                    <th>Znak</th>
+                    <th>Zvuk</th>
+                    <th>Primjer</th>
+                </tr>
+                <tr>
+                    <td><strong>Nominativ</strong></td>
+                    <td>Tanwīn Ḍamme</td>
+                    <td><span class="arabic">ـٌـ</span></td>
+                    <td>-UN</td>
+                    <td><span class="arabic">بَيْتٌ</span> BAJTUN <span class="pron">(bejtun)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Akuzativ</strong></td>
+                    <td>Tanwīn Fatḥe</td>
+                    <td><span class="arabic">ـًـ</span></td>
+                    <td>-AN</td>
+                    <td><span class="arabic">بَيْتًا</span> BAJTAN <span class="pron">(bejtan)</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Genitiv</strong></td>
+                    <td>Tanwīn Kasre</td>
+                    <td><span class="arabic">ـٍـ</span></td>
+                    <td>-IN</td>
+                    <td><span class="arabic">بَيْتٍ</span> BAJTIN <span class="pron">(bejtin)</span></td>
+                </tr>
+            </table>
+            <div class="warning" style="margin-top: 20px;">
+                <strong>Pravilo za akuzativ:</strong> Ako imenica NE završava na TĀ MARBŪṬA (ة), dodaje se ELIF (ا) na
+                kraju.<br>
+                Primjer: <span class="arabic">تُفَّاحَةً</span> (već ima ة) vs <span class="arabic">بَيْتًا</span>
+                (dodan ا)
+            </div>
+            <h3 style="margin-top: 25px;">Primjeri deklinacije</h3>
+            <table>
+                <tr>
+                    <th>Riječ</th>
+                    <th>Nominativ (N)</th>
+                    <th>Genitiv (G)</th>
+                    <th>Akuzativ (A)</th>
+                </tr>
+                <tr>
+                    <td><span class="arabic">تُفَّاحَة</span> jabuka</td>
+                    <td><span class="arabic">تُفَّاحَةٌ</span> <span class="pron">(tuffaaḥatun)</span></td>
+                    <td><span class="arabic">تُفَّاحَةٍ</span> <span class="pron">(tuffaaḥatin)</span></td>
+                    <td><span class="arabic">تُفَّاحَةً</span> <span class="pron">(tuffaaḥatan)</span></td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">دُبٌّ</span> medvjed</td>
+                    <td><span class="arabic">دُبٌّ</span> <span class="pron">(dubbun)</span></td>
+                    <td><span class="arabic">دُبٍّ</span> <span class="pron">(dubbin)</span></td>
+                    <td><span class="arabic">دُبًّا</span> <span class="pron">(dubban)</span></td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">حُوت</span> kit</td>
+                    <td><span class="arabic">حُوتٌ</span> <span class="pron">(ḥuutun)</span></td>
+                    <td><span class="arabic">حُوتٍ</span> <span class="pron">(ḥuutin)</span></td>
+                    <td><span class="arabic">حُوتًا</span> <span class="pron">(ḥuutan)</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ODREĐENI ČLAN AL- I SUNČANA/MJESEČEVA SLOVA -->
+        <section class="section" id="article">
+            <h2>☀️🌙 Određeni član AL- i Sunčana/Mjesečeva slova</h2>
+            <div class="info">
+                Arapski nema neodređeni član (kao "a/an" u engleskom). Za <strong>određenost</strong> (kao "the")
+                dodaje se <span class="arabic" style="font-size:1.3em;">الـ</span> (AL-) na početak riječi.<br>
+                Primjer: <span class="arabic">بَيْتٌ</span> (jedna kuća) → <span class="arabic">الْبَيْتُ</span>
+                (ta kuća)
+            </div>
+            <div class="warning" style="margin-top:15px;">
+                <strong>Važno!</strong> Kad riječ dobije الـ (al-), gubi tanwīn!<br>
+                <span class="arabic">بَيْتٌ</span> (bajtun) → <span class="arabic">الْبَيْتُ</span> (al-bajtu) —
+                NE "al-bajtun"
+            </div>
+
+            <h3 style="margin-top:20px;">☀️ Sunčana slova (الحروف الشمسية)</h3>
+            <p>Kad الـ dolazi ispred <strong>sunčanog slova</strong>, LAM se <strong>ne izgovara</strong> — umjesto
+                toga, sljedeće slovo se udvostručuje (tašdīd).</p>
+            <div class="forms-row" style="margin: 15px 0;">
+                <span class="letter-box sun-box"><span class="arabic">ت</span><span class="label">T</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ث</span><span class="label">Ṯ</span></span>
+                <span class="letter-box sun-box"><span class="arabic">د</span><span class="label">D</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ذ</span><span class="label">Ḏ</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ر</span><span class="label">R</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ز</span><span class="label">Z</span></span>
+                <span class="letter-box sun-box"><span class="arabic">س</span><span class="label">S</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ش</span><span class="label">Š</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ص</span><span class="label">Ṣ</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ض</span><span class="label">Ḍ</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ط</span><span class="label">Ṭ</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ظ</span><span class="label">Ẓ</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ل</span><span class="label">L</span></span>
+                <span class="letter-box sun-box"><span class="arabic">ن</span><span class="label">N</span></span>
+            </div>
+            <table>
+                <tr>
+                    <th>Riječ</th>
+                    <th>Sa الـ</th>
+                    <th>Izgovor</th>
+                    <th>Značenje</th>
+                </tr>
+                <tr>
+                    <td><span class="arabic">شَمْسٌ</span></td>
+                    <td><span class="arabic">الشَّمْسُ</span></td>
+                    <td><strong>aš-šamsu</strong> (NE al-šamsu)</td>
+                    <td>sunce</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">نُورٌ</span></td>
+                    <td><span class="arabic">النُّورُ</span></td>
+                    <td><strong>an-nūru</strong> (NE al-nūru)</td>
+                    <td>svjetlo</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">سَلَامٌ</span></td>
+                    <td><span class="arabic">السَّلَامُ</span></td>
+                    <td><strong>as-salāmu</strong> (NE al-salāmu)</td>
+                    <td>mir</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">دَرْسٌ</span></td>
+                    <td><span class="arabic">الدَّرْسُ</span></td>
+                    <td><strong>ad-darsu</strong> (NE al-darsu)</td>
+                    <td>lekcija</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top:20px;">🌙 Mjesečeva slova (الحروف القمرية)</h3>
+            <p>Kad الـ dolazi ispred <strong>mjesečevog slova</strong>, LAM se <strong>normalno izgovara</strong>.
+            </p>
+            <div class="forms-row" style="margin: 15px 0;">
+                <span class="letter-box moon-box"><span class="arabic">ا</span><span class="label">A</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ب</span><span class="label">B</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ج</span><span class="label">DŽ</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ح</span><span class="label">Ḥ</span></span>
+                <span class="letter-box moon-box"><span class="arabic">خ</span><span class="label">Ḫ</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ع</span><span class="label">ʿ</span></span>
+                <span class="letter-box moon-box"><span class="arabic">غ</span><span class="label">Ġ</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ف</span><span class="label">F</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ق</span><span class="label">Q</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ك</span><span class="label">K</span></span>
+                <span class="letter-box moon-box"><span class="arabic">م</span><span class="label">M</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ه</span><span class="label">H</span></span>
+                <span class="letter-box moon-box"><span class="arabic">و</span><span class="label">W</span></span>
+                <span class="letter-box moon-box"><span class="arabic">ي</span><span class="label">J</span></span>
+            </div>
+            <table>
+                <tr>
+                    <th>Riječ</th>
+                    <th>Sa الـ</th>
+                    <th>Izgovor</th>
+                    <th>Značenje</th>
+                </tr>
+                <tr>
+                    <td><span class="arabic">قَمَرٌ</span></td>
+                    <td><span class="arabic">الْقَمَرُ</span></td>
+                    <td><strong>al-qamaru</strong></td>
+                    <td>mjesec</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">بَيْتٌ</span></td>
+                    <td><span class="arabic">الْبَيْتُ</span></td>
+                    <td><strong>al-bajtu</strong></td>
+                    <td>kuća</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">كِتَابٌ</span></td>
+                    <td><span class="arabic">الْكِتَابُ</span></td>
+                    <td><strong>al-kitābu</strong></td>
+                    <td>knjiga</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">مَاءٌ</span></td>
+                    <td><span class="arabic">الْمَاءُ</span></td>
+                    <td><strong>al-māʾu</strong></td>
+                    <td>voda</td>
+                </tr>
+            </table>
+
+            <div class="info" style="margin-top: 20px;">
+                <strong>Trik za pamćenje:</strong> Riječ <span class="arabic">الشَّمْسُ</span> (sunce) počinje
+                sunčanim slovom Š — lam se NE čuje (aš-šams). Riječ <span class="arabic">الْقَمَرُ</span> (mjesec)
+                počinje mjesečevim slovom Q — lam SE čuje (al-qamar). Zato se i zovu sunčana i mjesečeva!
+            </div>
+            <div class="warning" style="margin-top:10px;">
+                <strong>Još jedan trik:</strong> Sunčana slova su uglavnom ona čiji se izgovor proizvodi na
+                <strong>prednjim dijelovima usta</strong> (zubi, desni, vrh jezika) — pa se lam lako "stopi" sa
+                njima. Mjesečeva dolaze iz <strong>dubljeg dijela usta/grla</strong>.
+            </div>
+        </section>
+
+        <!-- VOKABULAR -->
+
+        <!-- KONVERZACIJA -->
+        <section class="section" id="conversation">
+            <h2>💬 Konverzacija - Pozdravi i upoznavanje</h2>
+            <div class="info">Praktični dijalog iz udžbenika (str. 106). Nauči osnovne pozdrave i izraze za
+                upoznavanje!</div>
+
+            <h3>Pozdravi</h3>
+            <table>
+                <tr>
+                    <th>Arapski</th>
+                    <th>Transliteracija</th>
+                    <th>Značenje</th>
+                </tr>
+                <tr>
+                    <td><span class="arabic">السَّلَامُ عَلَيْكُمْ</span></td>
+                    <td>AS-SALĀMU ʿALAJKUM <span class="pron">(es-selaamu 'alejkum)</span></td>
+                    <td>Mir vama (pozdrav)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">وَعَلَيْكُمُ السَّلَامُ</span></td>
+                    <td>WA ʿALAJKUMU AS-SALĀM <span class="pron">(ve 'alejkumu-s-selaam)</span></td>
+                    <td>I vama mir (odgovor)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللهِ</span></td>
+                    <td>WA ʿALAJKUMU AS-SALĀM WA RAḤMATU-LLĀH</td>
+                    <td>I vama mir i Allahova milost</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</span></td>
+                    <td>WA ʿALAJKUMU AS-SALĀM WA RAḤMATU-LLĀHI WA BARAKĀTUHU</td>
+                    <td>I vama mir, Allahova milost i Njegovi blagoslovi</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">مَرْحَبًا</span></td>
+                    <td>MARḤABAN <span class="pron">(merhaben)</span></td>
+                    <td>Zdravo</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">مَرْحَبًا بِكَ</span></td>
+                    <td>MARḤABAN BIKA <span class="pron">(merhaben bike)</span></td>
+                    <td>Zdravo tebi (m.r.)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">أَهْلًا بِكَ</span></td>
+                    <td>AHLAN BIKA <span class="pron">(ehlen bike)</span></td>
+                    <td>Zdravo tebi (m.r.)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">أَهْلًا وَسَهْلًا</span></td>
+                    <td>AHLAN WA SAHLAN <span class="pron">(ehlen ve sehlen)</span></td>
+                    <td>Dobrodošao/la</td>
+                </tr>
+            </table>
+
+            <h3>Pitanja i odgovori</h3>
+            <table>
+                <tr>
+                    <th>Arapski</th>
+                    <th>Transliteracija</th>
+                    <th>Značenje</th>
+                </tr>
+                <tr>
+                    <td><span class="arabic">كَيْفَ حَالُكَ؟</span></td>
+                    <td>KAJFA ḤĀLUKA? <span class="pron">(kejfe haaluke?)</span></td>
+                    <td>Kako si? (m.r.)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">بِخَيْرٍ</span></td>
+                    <td>BIḪAJRIN <span class="pron">(bihejrin)</span></td>
+                    <td>Dobro (sam)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">تَفَضَّلْ</span></td>
+                    <td>TAFAḌḌAL <span class="pron">(tefeddal)</span></td>
+                    <td>Izvoli</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">شُكْرًا</span></td>
+                    <td>ŠUKRAN <span class="pron">(šukren)</span></td>
+                    <td>Hvala</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">عَفْوًا</span></td>
+                    <td>ʿAFWAN <span class="pron">('afven)</span></td>
+                    <td>Nema na čemu</td>
+                </tr>
+            </table>
+
+            <h3>Upoznavanje</h3>
+            <table>
+                <tr>
+                    <th>Arapski</th>
+                    <th>Transliteracija</th>
+                    <th>Značenje</th>
+                </tr>
+                <tr>
+                    <td><span class="arabic">هَلْ أَنْتَ سَالِمٌ؟</span></td>
+                    <td>HAL ANTA SĀLIM? <span class="pron">(hel ente saalim?)</span></td>
+                    <td>Da li si ti Salim? (m.r.)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">نَعَمْ، أَنَا سَالِمٌ.</span></td>
+                    <td>NAʿAM, ANA SĀLIM. <span class="pron">(ne'am, ene saalim.)</span></td>
+                    <td>Da, ja sam Salim.</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">هَلْ أَنْتِ سَارَةٌ؟</span></td>
+                    <td>HAL ANTI SĀRA? <span class="pron">(hel enti saara?)</span></td>
+                    <td>Da li si ti Sara? (ž.r.)</td>
+                </tr>
+                <tr>
+                    <td><span class="arabic">لَا، أَنَا سَلْمَى.</span></td>
+                    <td>LĀ, ANA SALMĀ. <span class="pron">(laa, ene selmaa.)</span></td>
+                    <td>Ne, ja sam Selma.</td>
+                </tr>
+            </table>
+
+            <div class="warning" style="margin-top:15px;">
+                <strong>Napomena o rodu:</strong><br>
+                <span class="arabic">أَنْتَ</span> (ANTA) = ti (za muškarce) — koristi se sa <span
+                    class="arabic">بِكَ</span> (BIKA)<br>
+                <span class="arabic">أَنْتِ</span> (ANTI) = ti (za žene) — koristi se sa <span
+                    class="arabic">بِكِ</span> (BIKI)
+            </div>
+            <div class="info" style="margin-top:10px;">
+                <strong>Spojena lična zamjenica:</strong> <span class="arabic">بِكَ</span> / <span
+                    class="arabic">بِكِ</span> je spoj prijedloga <span class="arabic">بِ</span> (bi = sa/u) + lične
+                zamjenice <span class="arabic">كَ</span> (ka = ti m.r.) ili <span class="arabic">كِ</span> (ki = ti
+                ž.r.)
+            </div>
+        </section>
+
+        <!-- VJEŽBE -->
+        <section class="section" id="exercises">
+            <h2>✍️ Vježbe čitanja i pisanja</h2>
+
+            <h3>Vježba 1: Sastavi slova u riječ</h3>
+            <div class="info">Data su rastavljena slova (samostalni oblik, zdesna nalijevo). Spoji ih u riječ i
+                pokušaj pročitati naglas! Klikni "Odgovor" da provjeriš.</div>
+
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">كَ لْ بٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">كَلْبٌ</span> — KALB
+                        <span class="pron">(kelb)</span> — pas
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">سَ لَ ا مٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">سَلَامٌ</span> — SALĀM
+                        <span class="pron">(selaam)</span> — mir
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">كِ تَ ا بٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">كِتَابٌ</span> — KITĀB
+                        <span class="pron">(kitaab)</span> — knjiga
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">مَ دْ رَ سَ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">مَدْرَسَةٌ</span> —
+                        MADRASA <span class="pron">(medresa)</span> — škola
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">عُ صْ فُ و رٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">عُصْفُورٌ</span> —
+                        ʿUṢFŪR <span class="pron">('usfuur)</span> — vrabac
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">اِ سْ تَ غْ فَ رَ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">اِسْتَغْفَرَ</span> —
+                        ISTAĠFARA <span class="pron">(istagfere)</span> — tražiti oprost
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">حَ قِ ي بَ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">حَقِيبَةٌ</span> —
+                        ḤAQĪBA <span class="pron">(haqiiba)</span> — tašna/ruksak
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">مِ لْ عَ قَ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">مِلْعَقَةٌ</span> —
+                        MILʿAQA <span class="pron">(mil'aqa)</span> — kašika
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">فِ نْ جَ ا نٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">فِنْجَانٌ</span> —
+                        FINDŽĀN <span class="pron">(findžaan)</span> — šoljica (za kahvu)
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">قَ هْ وَ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">قَهْوَةٌ</span> —
+                        QAHWA <span class="pron">(qahva)</span> — kahva
+                    </div>
+                </details>
+            </div>
+
+            <h3 style="margin-top:25px;">Vježba 2: Rastavi riječ na slova</h3>
+            <div class="info">Data je spojena riječ. Rastavi je na pojedinačna slova (samostalni oblik) i pročitaj
+                svako slovo!</div>
+
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">يَفْهَمُ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.3em; letter-spacing:10px;">يَ
+                            فْ
+                            هَ مُ</span><br>JĀ - FĀ - HĀʾ - MĪM →
+                        JAFHAMU <span class="pron">(jefhemu)</span> — on razumije
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">سِكِّينٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.3em; letter-spacing:10px;">سِ
+                            كِّ
+                            ي نٌ</span><br>SĪN - KĀF(×2) - JĀ - NŪN
+                        → SIKKĪN <span class="pron">(sikkiin)</span> — nož
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">صَنْدُوقٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.3em; letter-spacing:10px;">صَ
+                            نْ
+                            دُ و قٌ</span><br>ṢĀD - NŪN - DĀL - WĀW -
+                        QĀF → ṢANDŪQ <span class="pron">(sanduuq)</span> — sanduk/kutija
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">حَدِيقَةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.3em; letter-spacing:10px;">حَ
+                            دِ
+                            ي قَ ةٌ</span><br>ḤĀ - DĀL - JĀ - QĀF -
+                        TĀ MARBŪṬA → ḤADĪQA <span class="pron">(hadiiqa)</span> — park/bašta
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">رِجَالٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.3em; letter-spacing:10px;">رِ
+                            جَ
+                            ا لٌ</span><br>RĀ - DŽĪM - ELIF - LĀM →
+                        RIDŽĀL <span class="pron">(ridžaal)</span> — muškarci
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">سِلْسِلَةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.3em; letter-spacing:10px;">سِ
+                            لْ
+                            سِ لَ ةٌ</span><br>SĪN - LĀM - SĪN - LĀM -
+                        TĀ MARBŪṬA → SILSILA <span class="pron">(silsila)</span> — lanac
+                    </div>
+                </details>
+            </div>
+
+            <h3 style="margin-top:25px;">Vježba 3: Pročitaj i prevedi</h3>
+            <div class="info">Pročitaj arapsku riječ naglas, pa provjeri prijevod!</div>
+
+            <div class="grid">
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">غُرَابٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">ĠURĀB <span class="pron">(guraab)</span> — vrana</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">فَرَاشَةٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">FARĀŠA <span class="pron">(feraaša)</span> — leptir</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">بَطِّيخٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">BAṬṬĪḪ <span class="pron">(battiih)</span> — lubenica</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">غَابَةٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">ĠĀBA <span class="pron">(gaaba)</span> — šuma</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">صَغِيرٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">ṢAĠĪR <span class="pron">(sagiir)</span> — malen</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">كَبِيرٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">KABĪR <span class="pron">(kebiir)</span> — velik</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">حُقُوقٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">ḤUQŪQ <span class="pron">(huquuq)</span> — prava</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">ثَرْثَارٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">ṮARṮĀR <span class="pron">(sarsaar)</span> — pričalica</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">مَجْنُونٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">MADŽNŪN <span class="pron">(medžnuun)</span> — lud</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">قَصْرٌ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">QAṢR <span class="pron">(qasr)</span> — dvorac</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">ضَحِكَ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">ḌAḤIKA <span class="pron">(dahike)</span> — smijati se</div>
+                    </details>
+                </div>
+                <div class="exercise-row">
+                    <span class="arabic" style="font-size:1.5em;">فَتَحَ</span>
+                    <details>
+                        <summary>Prijevod</summary>
+                        <div class="exercise-answer">FATAḤA <span class="pron">(feteha)</span> — otvoriti</div>
+                    </details>
+                </div>
+            </div>
+
+            <h3 style="margin-top:25px;">Vježba 4: Sastavi slova u riječ (novi primjeri)</h3>
+            <div class="info">Isti princip kao Vježba 1 — data su rastavljena slova, spoji ih u riječ!</div>
+
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">مُ سْ تَ شْ فَ ى</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">مُسْتَشْفَى</span> —
+                        MUSTAŠFĀ
+                        <span class="pron">(mustešfaa)</span> — bolnica
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">رَ فِ ي قٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">رَفِيقٌ</span> — RAFĪQ
+                        <span class="pron">(refiiq)</span> — prijatelj/drug
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">يَ عْ مَ لُ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">يَعْمَلُ</span> — JAʿMALU
+                        <span class="pron">(je'melu)</span> — on radi
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">مُ هَ نْ دِ سٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">مُهَنْدِسٌ</span> —
+                        MUHANDIS
+                        <span class="pron">(muhendis)</span> — inženjer
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">نَ جْ مَ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">نَجْمَةٌ</span> — NADŽMA
+                        <span class="pron">(nedžma)</span> — zvijezda
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">فَ ا كِ هَ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">فَاكِهَةٌ</span> — FĀKIHA
+                        <span class="pron">(faakiha)</span> — voće
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">يَ تَ كَ لَّ مُ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">يَتَكَلَّمُ</span> —
+                        JATAKALLAMU
+                        <span class="pron">(jetekellemu)</span> — on govori
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">مِ كْ نَ سَ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">مِكْنَسَةٌ</span> —
+                        MIKNASA
+                        <span class="pron">(miknesa)</span> — metla
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">جُ مْ جُ مَ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">جُمْجُمَةٌ</span> —
+                        DŽUMDŽUMA
+                        <span class="pron">(džumdžuma)</span> — lubanja
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.4em; letter-spacing: 12px;">صَ يْ دَ لِ يَّ ةٌ</span>
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">صَيْدَلِيَّةٌ</span> —
+                        ṢAJDALIYYA
+                        <span class="pron">(sajdalijja)</span> — apoteka
+                    </div>
+                </details>
+            </div>
+
+            <h3 style="margin-top:25px;">Vježba 5: Odredi imenicu određenim članom (الـ)</h3>
+            <div class="info">Dodaj الـ na neodređenu imenicu. Pazi na sunčeva i mjesečeva slova!</div>
+
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">شَوْكَةٌ</span> (viljuška)
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">الشَّوْكَةُ</span> —
+                        AŠ-ŠAWKA <span class="pron">(eš-ševka)</span> — Š je sunčevo slovo, lam se ne čita
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">قَلَمٌ</span> (olovka)
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">الْقَلَمُ</span> —
+                        AL-QALAM <span class="pron">(el-qalem)</span> — Q je mjesečevo slovo, lam se čita
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">سَيَّارَةٌ</span> (automobil)
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">السَّيَّارَةُ</span> —
+                        AS-SAJJĀRA <span class="pron">(es-sejjaara)</span> — S je sunčevo slovo
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">مَنْزِلٌ</span> (stan)
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">الْمَنْزِلُ</span> —
+                        AL-MANZIL <span class="pron">(el-menzil)</span> — M je mjesečevo slovo
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">جِدَارٌ</span> (zid)
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">الْجِدَارُ</span> —
+                        AL-DŽIDĀR <span class="pron">(el-džidaar)</span> — DŽ je mjesečevo slovo
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">دَائِرَةٌ</span> (krug)
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">الدَّائِرَةُ</span> —
+                        AD-DĀʾIRA <span class="pron">(ed-daa'ira)</span> — D je sunčevo slovo
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">تَمْرٌ</span> (hurma)
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">التَّمْرُ</span> —
+                        AT-TAMR <span class="pron">(et-temr)</span> — T je sunčevo slovo
+                    </div>
+                </details>
+            </div>
+            <div class="exercise-row">
+                <span class="arabic" style="font-size:1.5em;">كُرَةٌ</span> (lopta)
+                <details>
+                    <summary>Odgovor</summary>
+                    <div class="exercise-answer"><span class="arabic" style="font-size:1.5em;">الْكُرَةُ</span> —
+                        AL-KURA <span class="pron">(el-kura)</span> — K je mjesečevo slovo
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ATRIBUTIVNA SINTAGMA (VEZA) - PRIDJEVSKI VID -->
+        <section class="section" id="attributive-phrase">
+            <h2>🔗 Atributivna sintagma (veza) - Pridjevski vid</h2>
+
+            <div class="info">
+                <strong>ATRIBUTIVNA SINTAGMA (VEZA) - PRIDJEVSKI VID</strong><br>
+                NIJE REČENICA - To je pridjev koji opisuje imenicu.
+            </div>
+
+            <h3>Vrste atributivnih sintagmi</h3>
+
+            <div class="card">
+                <h4 style="color: #059669; margin-bottom: 15px;">1. ODREĐENA Atributivna Sintagma</h4>
+                <div class="info">Imenica i pridjev su <strong>oba određena</strong> (imaju الـ)</div>
+
+                <div style="margin: 15px 0;">
+                    <div class="vocab-item">
+                        <span class="arabic" style="font-size:1.6em;">الْكِتَابُ الْكَبِيرُ</span>
+                        <span>AL-KITĀBU AL-KABĪRU — velika knjiga (određena)</span>
+                    </div>
+                    <div style="margin-left: 20px; color: #64748b; font-size: 0.9em;">
+                        M.R. (muški rod), NOM. (nominativ), JD. (jednina), ODREĐEN/ODREĐENA
+                    </div>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <div class="vocab-item">
+                        <span class="arabic" style="font-size:1.6em;">الْبَيْتُ الْكَبِيرُ</span>
+                        <span>AL-BAJTU AL-KABĪRU — velika kuća (određena)</span>
+                    </div>
+                    <div style="margin-left: 20px; color: #64748b; font-size: 0.9em;">
+                        M.R., NOM., JD., ODREĐEN/ODREĐENA
+                    </div>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <div class="vocab-item">
+                        <span class="arabic" style="font-size:1.6em;">الْوَرَقَةُ الْمَوْضُوعُ</span>
+                        <span>AL-WARAQA AL-MAWḌŪ' — vrijedna hartija/list</span>
+                    </div>
+                    <div style="margin-left: 20px; color: #64748b; font-size: 0.9em;">
+                        Ž.R. (ženski rod), JD., ODREĐ., NOM.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <h4 style="color: #dc2626; margin-bottom: 15px;">2. NEODREĐENA Atributivna Sintagma</h4>
+                <div class="warning">Imenica i pridjev su <strong>oba neodređena</strong> (nemaju الـ, imaju nunaciju)</div>
+
+                <div style="margin: 15px 0;">
+                    <div class="vocab-item">
+                        <span class="arabic" style="font-size:1.6em;">كِتَابُ كَبِيرُ</span>
+                        <span>KITĀBUN KABĪRUN — neka velika knjiga (neodređena)</span>
+                    </div>
+                    <div style="margin-left: 20px; color: #64748b; font-size: 0.9em;">
+                        M.R., M.A. (morfološka arapizacija), NOM., JD., NEODREĐ./NEODREĐA
+                    </div>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <div class="vocab-item">
+                        <span class="arabic" style="font-size:1.6em;">بَيْتُ كَبِيرُ</span>
+                        <span>BAJTUN KABĪRUN — neka velika kuća (neodređena)</span>
+                    </div>
+                    <div style="margin-left: 20px; color: #64748b; font-size: 0.9em;">
+                        M.R., NOM., NOM., JD., NEODREĐ./NEODREĐA
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Primjeri riječi</h3>
+            <div class="grid">
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْوَلَدُ</span>
+                    <span>AL-WALAD — dječak</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">مُسْتَقَلَّة</span>
+                    <span>MUSTAQALLA — vrijedna</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">وَرَقَةٌ</span>
+                    <span>WARAQATUN — list, hartija <span class="badge badge-blue">Ž.R., JD., NEOD., NOM.</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">صَغِيرَةٌ</span>
+                    <span>ṢAĠĪRATUN — mala <span class="badge badge-blue">Ž.R., JD., NEOD., NOM.</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">صَغِيرٌ</span>
+                    <span>ṢAĠĪRUN — mali <span class="badge badge-green">M.R., JD., NEOD., NOM.</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">وَرَقَةٌ صَغِيرَةٌ</span>
+                    <span>WARAQATUN ṢAĠĪRATUN — mali list (neodređeno)</span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Dodatni primjeri riječi</h3>
+            <div class="grid">
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">وَرَقَةٌ</span>
+                    <span>WARAQA — list <span class="badge badge-blue">Ž.R., JD., NEOD., NOM.</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">صَغِيرٌ</span>
+                    <span>ṢAĠĪR (M) — mali <span class="badge badge-green">M.R., JD., NEOD., NOM.</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْوَرَقَةُ</span>
+                    <span>AL-WARAQA — list (određeno) <span class="badge badge-blue">LIST (Ž.R.)</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- DODATNI VOKABULAR IZ ZADAĆA -->
+        <section class="section" id="additional-vocab">
+            <h2>📚 Dodatni vokabular - Nova zadaća</h2>
+
+            <h3>Osnovne riječi</h3>
+            <div class="grid">
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الشَّوْكَةُ</span>
+                    <span>AŠ-ŠAWKA — viljuška</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْقَلْبُ</span>
+                    <span>AL-QALB — srce</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْمَنْزِلُ</span>
+                    <span>AL-MANZIL — kuća</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">السَّيَّارَةُ</span>
+                    <span>AS-SAJJĀRA — auto</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْجِدَارُ</span>
+                    <span>AL-DŽIDĀR — zid</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الدَّائِرَةُ</span>
+                    <span>AD-DĀ'IRA — kružnica</span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Dodatne riječi 1</h3>
+            <div class="grid">
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْقَمِيصُ</span>
+                    <span>AL-QAMĪṢ — košulja <span class="badge badge-blue">T (oznaka za tip)</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الشَّمْسُ</span>
+                    <span>AŠ-ŠAMS — sunce <span class="badge badge-blue">UZLETNICA</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْقَلَمُ</span>
+                    <span>AL-QALAM — olovka</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الزَّهْرَةُ</span>
+                    <span>AZ-ZAHRA — cvijet <span class="badge badge-green">T</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْمُمْحَاةُ</span>
+                    <span>AL-MUMḤĀ — gumca <span class="badge badge-blue">T</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْأَدُ</span>
+                    <span>AL-AD — posao <span class="badge badge-blue">T</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْوِسَادَةُ</span>
+                    <span>AL-WISĀDA — jastuk <span class="badge badge-green">T</span></span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Dodatne riječi 2</h3>
+            <div class="grid">
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْبَرُّ</span>
+                    <span>AL-BARR — brdo <span class="badge badge-green">M</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْوَرَقَةُ</span>
+                    <span>AL-WARAQA — list <span class="badge badge-green">M</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الدَّرَجَةُ</span>
+                    <span>AD-DARADŽA — izvještaj <span class="badge badge-blue">S</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْحَافِلَةُ</span>
+                    <span>AL-ḤĀFILA — autobus</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">اللَّذِيذَةُ</span>
+                    <span>AL-LADHĪDHA — frizider <span class="badge badge-blue">S</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْأَسَدُ</span>
+                    <span>AL-ASAD — lav <span class="badge badge-green">M</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْمَطْبَخُ</span>
+                    <span>AL-MAṬBAḪ — kuhinja <span class="badge badge-green">M</span></span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Dodatne riječi 3</h3>
+            <div class="grid">
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْبَرُّ</span>
+                    <span>AL-BARR — brdo <span class="badge badge-green">M (muški rod)</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْوَرَقَةُ</span>
+                    <span>AL-WARAQA — list <span class="badge badge-green">M, LIST</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الدَّرَجَةُ</span>
+                    <span>AD-DARADŽA — školska klupa <span class="badge badge-blue">S</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْحَافِلَةُ</span>
+                    <span>AL-ḤĀFILA — autobus</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">اللَّذِيذَةُ</span>
+                    <span>AL-LADHĪDHA — frižider</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْأَسَدُ</span>
+                    <span>AL-ASAD — lav <span class="badge badge-green">M, LAV</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْمَطْبَخُ</span>
+                    <span>AL-MAṬBAḪ — kuhinja <span class="badge badge-green">M, KUHINJA</span></span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Posebni primjeri</h3>
+            <div class="grid">
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْقَمْصُ</span>
+                    <span>AL-QAMṢ — olovka <span class="badge badge-blue">N, T</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْقَلَعُ</span>
+                    <span>AL-QALA' — tvrđava <span class="badge badge-blue">T, J</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْأَلِدُّ</span>
+                    <span>AL-ALIDD — gumca, podloga <span class="badge badge-blue">T</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْوِسَادَةُ</span>
+                    <span>AL-WISĀDA — jastuk/posao <span class="badge badge-green">T, JASTUK</span></span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْأَلِدُّ</span>
+                    <span>AL-ALIDD — lopta <span class="badge badge-blue">LOPRA</span></span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Dodatne riječi iz vježbi</h3>
+            <div class="grid">
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">السَّيْتُ</span>
+                    <span>AS-SAJT — sajt, veb stranica</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْكُسْيُ</span>
+                    <span>AL-KUSJ — stolica</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْجَهْلُ</span>
+                    <span>AL-DŽAHL — neznanje</span>
+                </div>
+                <div class="vocab-item">
+                    <span class="arabic" style="font-size:1.5em;">الْمَعَدُّ</span>
+                    <span>AL-MA'AD — materijal</span>
+                </div>
+            </div>
+        </section>
+        <footer style="text-align: center; padding: 30px; color: #64748b;">
+            <p>Kurs arapskog jezika - Februar 2026</p>
+            <p style="font-size: 0.85em; margin-top: 10px;">Svih 28 slova + Hamza + Elif Maqṣūra | Gramatika padeža |
+                Član AL- | Sunčana/Mjesečeva slova | Atributivna sintagma | Vježbe</p>
+        </footer>
+    </div>
+
+    <script>
+        let allCollapsed = false;
+
+        function updateToggleBtn() {
+            const btn = document.getElementById('toggleAllBtn');
+            if (allCollapsed) {
+                btn.textContent = '▼ Proširi sve sekcije';
+            } else {
+                btn.textContent = '▲ Skupi sve sekcije';
+            }
+        }
+
+        function collapseAll() {
+            document.querySelectorAll('.section').forEach(s => s.classList.add('collapsed'));
+            allCollapsed = true;
+            updateToggleBtn();
+        }
+
+        function expandAll() {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('collapsed'));
+            allCollapsed = false;
+            updateToggleBtn();
+        }
+
+        function toggleAllSections() {
+            if (allCollapsed) {
+                expandAll();
+            } else {
+                collapseAll();
+            }
+        }
+
+        // Make sections collapsible
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all sections
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                const h2 = section.querySelector('h2');
+                if (!h2) return;
+
+                // Wrap all content after h2 in a div
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'section-content';
+
+                // Move all siblings after h2 into contentDiv
+                let nextElement = h2.nextElementSibling;
+                while (nextElement) {
+                    const elementToMove = nextElement;
+                    nextElement = nextElement.nextElementSibling;
+                    contentDiv.appendChild(elementToMove);
+                }
+
+                // Add contentDiv after h2
+                h2.parentNode.insertBefore(contentDiv, h2.nextSibling);
+
+                // Add click event to h2
+                h2.addEventListener('click', function(e) {
+                    // Don't toggle if clicking on a link inside h2
+                    if (e.target.tagName === 'A') return;
+
+                    section.classList.toggle('collapsed');
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                if (e.key === 'c' || e.key === 'C') {
+                    collapseAll();
+                } else if (e.key === 'e' || e.key === 'E') {
+                    expandAll();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
