@@ -6,7 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arapski I - Vježbe</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
@@ -71,7 +75,8 @@
       transition: all 0.2s;
     }
 
-    .tabs button:hover, .tabs button.active {
+    .tabs button:hover,
+    .tabs button.active {
       background: #c9a84c;
       color: #0a0f1a;
       border-color: #c9a84c;
@@ -87,7 +92,10 @@
       border-bottom: 1px solid #1e2a40;
     }
 
-    .score-bar span { color: #c9a84c; font-weight: bold; }
+    .score-bar span {
+      color: #c9a84c;
+      font-weight: bold;
+    }
 
     /* Sections */
     .exercise-section {
@@ -95,9 +103,19 @@
       animation: fadeIn 0.3s;
     }
 
-    .exercise-section.active { display: block; }
+    .exercise-section.active {
+      display: block;
+    }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
 
     .section-block {
       background: #131b2e;
@@ -326,7 +344,9 @@
       transition: all 0.2s;
     }
 
-    .check-btn:hover { background: #d4b65c; }
+    .check-btn:hover {
+      background: #d4b65c;
+    }
 
     /* Letter boxes */
     .letter-box {
@@ -344,7 +364,9 @@
       background: #131b2e;
     }
 
-    .letter-box:hover { border-color: #c9a84c; }
+    .letter-box:hover {
+      border-color: #c9a84c;
+    }
 
     .letter-box.selected {
       border-color: #dc2626;
@@ -378,8 +400,13 @@
       font-size: 0.9rem;
     }
 
-    .classify-box.attr h4 { color: #d8b4fe; }
-    .classify-box.sent h4 { color: #fca5a5; }
+    .classify-box.attr h4 {
+      color: #d8b4fe;
+    }
+
+    .classify-box.sent h4 {
+      color: #fca5a5;
+    }
 
     .draggable-item {
       display: inline-block;
@@ -393,9 +420,19 @@
       font-size: 0.95rem;
     }
 
-    .draggable-item:hover { border-color: #c9a84c; }
-    .draggable-item.placed-attr { border-color: #7c3aed; background: #1e0f30; }
-    .draggable-item.placed-sent { border-color: #dc2626; background: #1f0d0d; }
+    .draggable-item:hover {
+      border-color: #c9a84c;
+    }
+
+    .draggable-item.placed-attr {
+      border-color: #7c3aed;
+      background: #1e0f30;
+    }
+
+    .draggable-item.placed-sent {
+      border-color: #dc2626;
+      background: #1f0d0d;
+    }
 
     /* Progress bar */
     .progress-bar {
@@ -412,10 +449,22 @@
 
     /* Responsive */
     @media (max-width: 600px) {
-      .classify-container { grid-template-columns: 1fr; }
-      .quiz-grid { grid-template-columns: 1fr; }
-      .input-exercise { flex-direction: column; align-items: stretch; }
-      .input-exercise input { width: 100%; }
+      .classify-container {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-exercise {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .input-exercise input {
+        width: 100%;
+      }
     }
 
     footer {
@@ -434,7 +483,9 @@
 
 <body>
 
-  <div class="progress-bar"><div class="fill" id="progFill"></div></div>
+  <div class="progress-bar">
+    <div class="fill" id="progFill"></div>
+  </div>
 
   <header>
     <h1>Arapski I — Vježbe</h1>
@@ -464,75 +515,95 @@
     <div class="exercise-section active" id="tab-sastavi">
       <div class="section-block">
         <h2>Vježba 1: Sastavi slova u riječ</h2>
-        <div class="info-box">Data su rastavljena slova (samostalni oblik, zdesna nalijevo). Spoji ih u riječ i pokušaj pročitati naglas! Klikni "Odgovor" da provjeriš.</div>
+        <div class="info-box">Data su rastavljena slova (samostalni oblik, zdesna nalijevo). Spoji ih u riječ i pokušaj
+          pročitati naglas! Klikni "Odgovor" da provjeriš.</div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">كَ لْ بٌ</span></div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer"><span class="arabic">كَلْبٌ</span> — KALB <span class="pron">(kelb)</span> — pas</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">سَ لَ ا مٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">سَلَامٌ</span> — SALĀM <span class="pron">(selaam)</span> — mir</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">سَلَامٌ</span> — SALĀM <span class="pron">(selaam)</span> — mir
+            </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">كِ تَ ا بٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">كِتَابٌ</span> — KITĀB <span class="pron">(kitaab)</span> — knjiga</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">كِتَابٌ</span> — KITĀB <span class="pron">(kitaab)</span> — knjiga
+            </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">مَ دْ رَ سَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">مَدْرَسَةٌ</span> — MADRASA <span class="pron">(medresa)</span> — škola</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">مَدْرَسَةٌ</span> — MADRASA <span class="pron">(medresa)</span> —
+              škola</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">عُ صْ فُ و رٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">عُصْفُورٌ</span> — ʿUṢFŪR <span class="pron">('usfuur)</span> — vrabac</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">عُصْفُورٌ</span> — ʿUṢFŪR <span class="pron">('usfuur)</span> —
+              vrabac</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">اِ سْ تَ غْ فَ رَ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">اِسْتَغْفَرَ</span> — ISTAĠFARA <span class="pron">(istagfere)</span> — tražiti oprost</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">اِسْتَغْفَرَ</span> — ISTAĠFARA <span
+                class="pron">(istagfere)</span> — tražiti oprost</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">حَ قِ ي بَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">حَقِيبَةٌ</span> — ḤAQĪBA <span class="pron">(haqiiba)</span> — tašna/ruksak</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">حَقِيبَةٌ</span> — ḤAQĪBA <span class="pron">(haqiiba)</span> —
+              tašna/ruksak</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">مِ لْ عَ قَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">مِلْعَقَةٌ</span> — MILʿAQA <span class="pron">(mil'aqa)</span> — kašika</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">مِلْعَقَةٌ</span> — MILʿAQA <span class="pron">(mil'aqa)</span> —
+              kašika</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">فِ نْ جَ ا نٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">فِنْجَانٌ</span> — FINDŽĀN <span class="pron">(findžaan)</span> — šoljica (za kahvu)</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">فِنْجَانٌ</span> — FINDŽĀN <span class="pron">(findžaan)</span> —
+              šoljica (za kahvu)</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">قَ هْ وَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">قَهْوَةٌ</span> — QAHWA <span class="pron">(qahva)</span> — kahva</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">قَهْوَةٌ</span> — QAHWA <span class="pron">(qahva)</span> — kahva
+            </div>
           </details>
         </div>
       </div>
@@ -543,71 +614,91 @@
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">مُ سْ تَ شْ فَ ى</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">مُسْتَشْفَى</span> — MUSTAŠFĀ <span class="pron">(mustešfaa)</span> — bolnica</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">مُسْتَشْفَى</span> — MUSTAŠFĀ <span class="pron">(mustešfaa)</span>
+              — bolnica</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">رَ فِ ي قٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">رَفِيقٌ</span> — RAFĪQ <span class="pron">(refiiq)</span> — prijatelj/drug</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">رَفِيقٌ</span> — RAFĪQ <span class="pron">(refiiq)</span> —
+              prijatelj/drug</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">يَ عْ مَ لُ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">يَعْمَلُ</span> — JAʿMALU <span class="pron">(je'melu)</span> — on radi</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">يَعْمَلُ</span> — JAʿMALU <span class="pron">(je'melu)</span> — on
+              radi</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">مُ هَ نْ دِ سٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">مُهَنْدِسٌ</span> — MUHANDIS <span class="pron">(muhendis)</span> — inženjer</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">مُهَنْدِسٌ</span> — MUHANDIS <span class="pron">(muhendis)</span> —
+              inženjer</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">نَ جْ مَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">نَجْمَةٌ</span> — NADŽMA <span class="pron">(nedžma)</span> — zvijezda</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">نَجْمَةٌ</span> — NADŽMA <span class="pron">(nedžma)</span> —
+              zvijezda</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">فَ ا كِ هَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">فَاكِهَةٌ</span> — FĀKIHA <span class="pron">(faakiha)</span> — voće</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">فَاكِهَةٌ</span> — FĀKIHA <span class="pron">(faakiha)</span> —
+              voće</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">يَ تَ كَ لَّ مُ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">يَتَكَلَّمُ</span> — JATAKALLAMU <span class="pron">(jetekellemu)</span> — on govori</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">يَتَكَلَّمُ</span> — JATAKALLAMU <span
+                class="pron">(jetekellemu)</span> — on govori</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">مِ كْ نَ سَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">مِكْنَسَةٌ</span> — MIKNASA <span class="pron">(miknesa)</span> — metla</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">مِكْنَسَةٌ</span> — MIKNASA <span class="pron">(miknesa)</span> —
+              metla</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">جُ مْ جُ مَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">جُمْجُمَةٌ</span> — DŽUMDŽUMA <span class="pron">(džumdžuma)</span> — lubanja</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">جُمْجُمَةٌ</span> — DŽUMDŽUMA <span class="pron">(džumdžuma)</span>
+              — lubanja</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">صَ يْ دَ لِ يَّ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">صَيْدَلِيَّةٌ</span> — ṢAJDALIYYA <span class="pron">(sajdalijja)</span> — apoteka</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">صَيْدَلِيَّةٌ</span> — ṢAJDALIYYA <span
+                class="pron">(sajdalijja)</span> — apoteka</div>
           </details>
         </div>
       </div>
@@ -618,71 +709,89 @@
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">بِ نْ تٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">بِنْتٌ</span> — BINT <span class="pron">(bint)</span> — kćerka/djevojka</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">بِنْتٌ</span> — BINT <span class="pron">(bint)</span> —
+              kćerka/djevojka</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">ثِ يَ ا بٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">ثِيَابٌ</span> — ṮIJĀB <span class="pron">(sijab)</span> — odjeća (mn.)</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">ثِيَابٌ</span> — ṮIJĀB <span class="pron">(sijab)</span> — odjeća
+              (mn.)</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">دَ رَ سَ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">دَرَسَ</span> — DARASA <span class="pron">(derese)</span> — učio je</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">دَرَسَ</span> — DARASA <span class="pron">(derese)</span> — učio je
+            </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">كَ لَ ا مٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">كَلَامٌ</span> — KALĀM <span class="pron">(kelaam)</span> — govor/riječi</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">كَلَامٌ</span> — KALĀM <span class="pron">(kelaam)</span> —
+              govor/riječi</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">شُ رْ بَ ا تٌ</span></div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer"><span class="arabic">شُرْبَاتٌ</span> — ŠURBĀT — piće/napitak</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">يَ شْ رَ بُ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">يَشْرَبُ</span> — JAŠRABU <span class="pron">(ješrebu)</span> — on pije</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">يَشْرَبُ</span> — JAŠRABU <span class="pron">(ješrebu)</span> — on
+              pije</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">فَ ا لِ حَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer"><span class="arabic">فَالِحَةٌ</span> — FĀLIḤA — uspješna</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">خَ رِ يْ طَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">خَرِيطَةٌ</span> — ḪARĪṬA <span class="pron">(hariita)</span> — karta/mapa</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">خَرِيطَةٌ</span> — ḪARĪṬA <span class="pron">(hariita)</span> —
+              karta/mapa</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">حَ دِ يْ قَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">حَدِيقَةٌ</span> — ḤADĪQA <span class="pron">(hadiiqa)</span> — park/bašta</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">حَدِيقَةٌ</span> — ḤADĪQA <span class="pron">(hadiiqa)</span> —
+              park/bašta</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">صَ نْ دُ وْ قٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">صَنْدُوقٌ</span> — ṢANDŪQ <span class="pron">(sanduuq)</span> — sanduk/kutija</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">صَنْدُوقٌ</span> — ṢANDŪQ <span class="pron">(sanduuq)</span> —
+              sanduk/kutija</div>
           </details>
         </div>
       </div>
@@ -694,57 +803,73 @@
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">دَ رَّ ا جَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">دَرَّاجَةٌ</span> — DARRĀDŽA <span class="pron">(derraadže)</span> — bicikl</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">دَرَّاجَةٌ</span> — DARRĀDŽA <span class="pron">(derraadže)</span>
+              — bicikl</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">سَ بُّ و رَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">سَبُّورَةٌ</span> — SABBŪRA <span class="pron">(sabbuura)</span> — školska tabla</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">سَبُّورَةٌ</span> — SABBŪRA <span class="pron">(sabbuura)</span> —
+              školska tabla</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">ثَ لَّ ا جَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">ثَلَّاجَةٌ</span> — ṮALLĀDŽA <span class="pron">(sellaadže)</span> — frižider</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">ثَلَّاجَةٌ</span> — ṮALLĀDŽA <span class="pron">(sellaadže)</span>
+              — frižider</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">خَ بَّ ا زٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">خَبَّازٌ</span> — ḪABBĀZ <span class="pron">(habbaaz)</span> — pekar</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">خَبَّازٌ</span> — ḪABBĀZ <span class="pron">(habbaaz)</span> —
+              pekar</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">مُ دَ رِّ سَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">مُدَرِّسَةٌ</span> — MUDARRISA <span class="pron">(muderrisa)</span> — učiteljica</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">مُدَرِّسَةٌ</span> — MUDARRISA <span
+                class="pron">(muderrisa)</span> — učiteljica</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">تُ فَّ ا حَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">تُفَّاحَةٌ</span> — TUFFĀḤA <span class="pron">(tuffaaha)</span> — jabuka</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">تُفَّاحَةٌ</span> — TUFFĀḤA <span class="pron">(tuffaaha)</span> —
+              jabuka</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">سَ جَّ ا دَ ةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">سَجَّادَةٌ</span> — SADŽDŽĀDA <span class="pron">(sedždžaada)</span> — prostirka</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">سَجَّادَةٌ</span> — SADŽDŽĀDA <span
+                class="pron">(sedždžaada)</span> — prostirka</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic spaced">بُ رْ تُ قَ ا لٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">بُرْتُقَالٌ</span> — BURTUQĀL <span class="pron">(burtuqaal)</span> — naranča</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">بُرْتُقَالٌ</span> — BURTUQĀL <span class="pron">(burtuqaal)</span>
+              — naranča</div>
           </details>
         </div>
       </div>
@@ -756,47 +881,60 @@
     <div class="exercise-section" id="tab-rastavi">
       <div class="section-block">
         <h2>Vježba 1: Rastavi riječ na slova</h2>
-        <div class="info-box">Data je spojena riječ. Rastavi je na pojedinačna slova (samostalni oblik) i pročitaj svako slovo!</div>
+        <div class="info-box">Data je spojena riječ. Rastavi je na pojedinačna slova (samostalni oblik) i pročitaj svako
+          slovo!</div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">يَفْهَمُ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">يَ فْ هَ مُ</span><br>JĀ - FĀ - HĀʾ - MĪM → JAFHAMU <span class="pron">(jefhemu)</span> — on razumije</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">يَ فْ هَ مُ</span><br>JĀ - FĀ - HĀʾ - MĪM → JAFHAMU <span
+                class="pron">(jefhemu)</span> — on razumije</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">سِكِّينٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">سِ كِّ ي نٌ</span><br>SĪN - KĀF(×2) - JĀ - NŪN → SIKKĪN <span class="pron">(sikkiin)</span> — nož</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">سِ كِّ ي نٌ</span><br>SĪN - KĀF(×2) - JĀ - NŪN → SIKKĪN
+              <span class="pron">(sikkiin)</span> — nož</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">صَنْدُوقٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">صَ نْ دُ و قٌ</span><br>ṢĀD - NŪN - DĀL - WĀW - QĀF → ṢANDŪQ <span class="pron">(sanduuq)</span> — sanduk/kutija</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">صَ نْ دُ و قٌ</span><br>ṢĀD - NŪN - DĀL - WĀW - QĀF → ṢANDŪQ
+              <span class="pron">(sanduuq)</span> — sanduk/kutija</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">حَدِيقَةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">حَ دِ ي قَ ةٌ</span><br>ḤĀ - DĀL - JĀ - QĀF - TĀ MARBŪṬA → ḤADĪQA <span class="pron">(hadiiqa)</span> — park/bašta</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">حَ دِ ي قَ ةٌ</span><br>ḤĀ - DĀL - JĀ - QĀF - TĀ MARBŪṬA →
+              ḤADĪQA <span class="pron">(hadiiqa)</span> — park/bašta</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">رِجَالٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">رِ جَ ا لٌ</span><br>RĀ - DŽĪM - ELIF - LĀM → RIDŽĀL <span class="pron">(ridžaal)</span> — muškarci</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">رِ جَ ا لٌ</span><br>RĀ - DŽĪM - ELIF - LĀM → RIDŽĀL <span
+                class="pron">(ridžaal)</span> — muškarci</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">سِلْسِلَةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">سِ لْ سِ لَ ةٌ</span><br>SĪN - LĀM - SĪN - LĀM - TĀ MARBŪṬA → SILSILA <span class="pron">(silsila)</span> — lanac</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">سِ لْ سِ لَ ةٌ</span><br>SĪN - LĀM - SĪN - LĀM - TĀ MARBŪṬA
+              → SILSILA <span class="pron">(silsila)</span> — lanac</div>
           </details>
         </div>
       </div>
@@ -807,57 +945,73 @@
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">تَرْتِيبٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">تَ رْ تِ ي بٌ</span><br>TĀ - RĀ - TĀ - JĀ - BĀ → TARTĪB <span class="pron">(tertiib)</span> — redoslijed</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">تَ رْ تِ ي بٌ</span><br>TĀ - RĀ - TĀ - JĀ - BĀ → TARTĪB
+              <span class="pron">(tertiib)</span> — redoslijed</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">سِتَارَةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">سِ تَ ا رَ ةٌ</span><br>SĪN - TĀ - ELIF - RĀ - TĀ MARBŪṬA → SITĀRA <span class="pron">(sitaara)</span> — zavjesa</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">سِ تَ ا رَ ةٌ</span><br>SĪN - TĀ - ELIF - RĀ - TĀ MARBŪṬA →
+              SITĀRA <span class="pron">(sitaara)</span> — zavjesa</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">جَنَّةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">جَ نَّ ةٌ</span><br>DŽĪM - NŪN(×2) - TĀ MARBŪṬA → DŽANNA <span class="pron">(dženna)</span> — džennet/raj</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">جَ نَّ ةٌ</span><br>DŽĪM - NŪN(×2) - TĀ MARBŪṬA → DŽANNA
+              <span class="pron">(dženna)</span> — džennet/raj</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">تَسْبِيحٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">تَ سْ بِ ي حٌ</span><br>TĀ - SĪN - BĀ - JĀ - ḤĀ → TASBĪḤ <span class="pron">(tesbiih)</span> — veličanje Boga</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">تَ سْ بِ ي حٌ</span><br>TĀ - SĪN - BĀ - JĀ - ḤĀ → TASBĪḤ
+              <span class="pron">(tesbiih)</span> — veličanje Boga</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">مَدْرَسَةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">مَ دْ رَ سَ ةٌ</span><br>MĪM - DĀL - RĀ - SĪN - TĀ MARBŪṬA → MADRASA <span class="pron">(medresa)</span> — škola</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">مَ دْ رَ سَ ةٌ</span><br>MĪM - DĀL - RĀ - SĪN - TĀ MARBŪṬA →
+              MADRASA <span class="pron">(medresa)</span> — škola</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">سَكَنَ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">سَ كَ نَ</span><br>SĪN - KĀF - NŪN → SAKANA <span class="pron">(sekena)</span> — stanovati</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">سَ كَ نَ</span><br>SĪN - KĀF - NŪN → SAKANA <span
+                class="pron">(sekena)</span> — stanovati</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">قَهْوَةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">قَ هْ وَ ةٌ</span><br>QĀF - HĀ - WĀW - TĀ MARBŪṬA → QAHWA <span class="pron">(qahva)</span> — kahva</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">قَ هْ وَ ةٌ</span><br>QĀF - HĀ - WĀW - TĀ MARBŪṬA → QAHWA
+              <span class="pron">(qahva)</span> — kahva</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">فِنْجَانٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">فِ نْ جَ ا نٌ</span><br>FĀ - NŪN - DŽĪM - ELIF - NŪN → FINDŽĀN <span class="pron">(findžaan)</span> — šoljica</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">فِ نْ جَ ا نٌ</span><br>FĀ - NŪN - DŽĪM - ELIF - NŪN →
+              FINDŽĀN <span class="pron">(findžaan)</span> — šoljica</div>
           </details>
         </div>
       </div>
@@ -869,36 +1023,46 @@
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">طَبَاشِيرٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">طَ بَ ا شِ ي رٌ</span><br>ṬĀ - BĀ - ELIF - ŠĪN - JĀ - RĀ → ṬABĀŠĪR <span class="pron">(tabaašiir)</span> — kreda</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">طَ بَ ا شِ ي رٌ</span><br>ṬĀ - BĀ - ELIF - ŠĪN - JĀ - RĀ →
+              ṬABĀŠĪR <span class="pron">(tabaašiir)</span> — kreda</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">خُضْرَوَاتٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">خُ ضْ رَ وَ ا تٌ</span><br>ḪĀ - ḌĀD - RĀ - WĀW - ELIF - TĀ → ḪUḌRAWĀT <span class="pron">(hudrawaat)</span> — povrće</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">خُ ضْ رَ وَ ا تٌ</span><br>ḪĀ - ḌĀD - RĀ - WĀW - ELIF - TĀ →
+              ḪUḌRAWĀT <span class="pron">(hudrawaat)</span> — povrće</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">مِسْطَرَةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">مِ سْ طَ رَ ةٌ</span><br>MĪM - SĪN - ṬĀ - RĀ - TĀ MARBŪṬA → MISṬARA <span class="pron">(mistara)</span> — linijar</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">مِ سْ طَ رَ ةٌ</span><br>MĪM - SĪN - ṬĀ - RĀ - TĀ MARBŪṬA →
+              MISṬARA <span class="pron">(mistara)</span> — linijar</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">بَطَاطِسٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">بَ طَ ا طِ سٌ</span><br>BĀ - ṬĀ - ELIF - ṬĀ - SĪN → BAṬĀṬIS <span class="pron">(bataatis)</span> — krompir</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">بَ طَ ا طِ سٌ</span><br>BĀ - ṬĀ - ELIF - ṬĀ - SĪN → BAṬĀṬIS
+              <span class="pron">(bataatis)</span> — krompir</div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.8rem;">فَرَاوِلَةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic spaced">فَ رَ ا وِ لَ ةٌ</span><br>FĀ - RĀ - ELIF - WĀW - LĀM - TĀ MARBŪṬA → FARĀWILA <span class="pron">(feraawile)</span> — jagoda</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic spaced">فَ رَ ا وِ لَ ةٌ</span><br>FĀ - RĀ - ELIF - WĀW - LĀM - TĀ
+              MARBŪṬA → FARĀWILA <span class="pron">(feraawile)</span> — jagoda</div>
           </details>
         </div>
       </div>
@@ -910,7 +1074,8 @@
     <div class="exercise-section" id="tab-prevedi">
       <div class="section-block">
         <h2>Vježba 1: Pročitaj i prevedi</h2>
-        <div class="info-box">Pročitaj arapsku riječ naglas, pa provjeri prijevod! Klikni na karticu da vidiš odgovor.</div>
+        <div class="info-box">Pročitaj arapsku riječ naglas, pa provjeri prijevod! Klikni na karticu da vidiš odgovor.
+        </div>
 
         <div class="quiz-grid" id="quizGrid1">
           <div class="quiz-card" onclick="this.classList.toggle('revealed')">
@@ -966,7 +1131,8 @@
 
       <div class="section-block">
         <h2>Vježba 2: Pročitaj i prevedi — dugi vokali</h2>
-        <div class="info-box">Pročitaj ove riječi naglas. Obrati pažnju na duge vokale (ā, ī, ū)! Podvuci u glavi slova koja nose dugi vokal.</div>
+        <div class="info-box">Pročitaj ove riječi naglas. Obrati pažnju na duge vokale (ā, ī, ū)! Podvuci u glavi slova
+          koja nose dugi vokal.</div>
 
         <div class="quiz-grid">
           <div class="quiz-card" onclick="this.classList.toggle('revealed')">
@@ -1088,57 +1254,73 @@
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">شَوْكَةٌ</span> (viljuška)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الشَّوْكَةُ</span> — AŠ-ŠAWKA <span class="pron">(eš-ševka)</span> — <span class="badge badge-sun">Š = sunčevo slovo, lam se ne čita</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الشَّوْكَةُ</span> — AŠ-ŠAWKA <span class="pron">(eš-ševka)</span>
+              — <span class="badge badge-sun">Š = sunčevo slovo, lam se ne čita</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">قَلَمٌ</span> (olovka)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الْقَلَمُ</span> — AL-QALAM <span class="pron">(el-qalem)</span> — <span class="badge badge-moon">Q = mjesečevo slovo, lam se čita</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الْقَلَمُ</span> — AL-QALAM <span class="pron">(el-qalem)</span> —
+              <span class="badge badge-moon">Q = mjesečevo slovo, lam se čita</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">سَيَّارَةٌ</span> (automobil)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">السَّيَّارَةُ</span> — AS-SAJJĀRA <span class="pron">(es-sejjaara)</span> — <span class="badge badge-sun">S = sunčevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">السَّيَّارَةُ</span> — AS-SAJJĀRA <span
+                class="pron">(es-sejjaara)</span> — <span class="badge badge-sun">S = sunčevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">مَنْزِلٌ</span> (stan)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الْمَنْزِلُ</span> — AL-MANZIL <span class="pron">(el-menzil)</span> — <span class="badge badge-moon">M = mjesečevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الْمَنْزِلُ</span> — AL-MANZIL <span
+                class="pron">(el-menzil)</span> — <span class="badge badge-moon">M = mjesečevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">جِدَارٌ</span> (zid)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الْجِدَارُ</span> — AL-DŽIDĀR <span class="pron">(el-džidaar)</span> — <span class="badge badge-moon">DŽ = mjesečevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الْجِدَارُ</span> — AL-DŽIDĀR <span
+                class="pron">(el-džidaar)</span> — <span class="badge badge-moon">DŽ = mjesečevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">دَائِرَةٌ</span> (krug)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الدَّائِرَةُ</span> — AD-DĀʾIRA <span class="pron">(ed-daa'ira)</span> — <span class="badge badge-sun">D = sunčevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الدَّائِرَةُ</span> — AD-DĀʾIRA <span
+                class="pron">(ed-daa'ira)</span> — <span class="badge badge-sun">D = sunčevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">تَمْرٌ</span> (hurma)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">التَّمْرُ</span> — AT-TAMR <span class="pron">(et-temr)</span> — <span class="badge badge-sun">T = sunčevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">التَّمْرُ</span> — AT-TAMR <span class="pron">(et-temr)</span> —
+              <span class="badge badge-sun">T = sunčevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">كُرَةٌ</span> (lopta)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الْكُرَةُ</span> — AL-KURA <span class="pron">(el-kura)</span> — <span class="badge badge-moon">K = mjesečevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الْكُرَةُ</span> — AL-KURA <span class="pron">(el-kura)</span> —
+              <span class="badge badge-moon">K = mjesečevo slovo</span></div>
           </details>
         </div>
       </div>
@@ -1150,57 +1332,73 @@
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">زَهْرَةٌ</span> (cvijet)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الزَّهْرَةُ</span> — AZ-ZAHRA <span class="pron">(ez-zehra)</span> — <span class="badge badge-sun">Z = sunčevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الزَّهْرَةُ</span> — AZ-ZAHRA <span class="pron">(ez-zehra)</span>
+              — <span class="badge badge-sun">Z = sunčevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">غُرْفَةٌ</span> (soba)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الْغُرْفَةُ</span> — AL-ĠURFA <span class="pron">(el-gurfa)</span> — <span class="badge badge-moon">Ġ = mjesečevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الْغُرْفَةُ</span> — AL-ĠURFA <span class="pron">(el-gurfa)</span>
+              — <span class="badge badge-moon">Ġ = mjesečevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">نَهْرٌ</span> (rijeka)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">النَّهْرُ</span> — AN-NAHR <span class="pron">(en-nehr)</span> — <span class="badge badge-sun">N = sunčevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">النَّهْرُ</span> — AN-NAHR <span class="pron">(en-nehr)</span> —
+              <span class="badge badge-sun">N = sunčevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">بَابٌ</span> (vrata)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الْبَابُ</span> — AL-BĀB <span class="pron">(el-baab)</span> — <span class="badge badge-moon">B = mjesečevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الْبَابُ</span> — AL-BĀB <span class="pron">(el-baab)</span> —
+              <span class="badge badge-moon">B = mjesečevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">ثَلَّاجَةٌ</span> (frižider)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الثَّلَّاجَةُ</span> — AṮ-ṮALLĀDŽA <span class="pron">(es-sellaadže)</span> — <span class="badge badge-sun">Ṯ = sunčevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الثَّلَّاجَةُ</span> — AṮ-ṮALLĀDŽA <span
+                class="pron">(es-sellaadže)</span> — <span class="badge badge-sun">Ṯ = sunčevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">وِسَادَةٌ</span> (jastuk)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الْوِسَادَةُ</span> — AL-WISĀDA <span class="pron">(el-wisaada)</span> — <span class="badge badge-moon">W = mjesečevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الْوِسَادَةُ</span> — AL-WISĀDA <span
+                class="pron">(el-wisaada)</span> — <span class="badge badge-moon">W = mjesečevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">طَبِيبٌ</span> (ljekar)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الطَّبِيبُ</span> — AṬ-ṬABĪB <span class="pron">(et-tabiib)</span> — <span class="badge badge-sun">Ṭ = sunčevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الطَّبِيبُ</span> — AṬ-ṬABĪB <span class="pron">(et-tabiib)</span>
+              — <span class="badge badge-sun">Ṭ = sunčevo slovo</span></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.6rem;">فُسْتَانٌ</span> (haljina)</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic">الْفُسْتَانُ</span> — AL-FUSTĀN <span class="pron">(el-fustaan)</span> — <span class="badge badge-moon">F = mjesečevo slovo</span></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic">الْفُسْتَانُ</span> — AL-FUSTĀN <span
+                class="pron">(el-fustaan)</span> — <span class="badge badge-moon">F = mjesečevo slovo</span></div>
           </details>
         </div>
       </div>
@@ -1213,53 +1411,73 @@
       <div class="section-block">
         <h2>Pravilo: Sintagma vs. Rečenica</h2>
         <div class="info-box">
-          <strong>Atributivna sintagma (AS)</strong> = imenica + pridjev koji je OPISUJE (oba određena ILI oba neodređena)<br>
-          <span class="badge badge-attr">الْكِتَابُ الْكَبِيرُ</span> = velika knjiga | <span class="badge badge-attr">كِتَابٌ كَبِيرٌ</span> = neka velika knjiga<br><br>
-          <strong>Prosta imenska rečenica (PIR)</strong> = imenica (određena) + pridjev (neodređen) = REČENICA sa značenjem "X je Y"<br>
+          <strong>Atributivna sintagma (AS)</strong> = imenica + pridjev koji je OPISUJE (oba određena ILI oba
+          neodređena)<br>
+          <span class="badge badge-attr">الْكِتَابُ الْكَبِيرُ</span> = velika knjiga | <span
+            class="badge badge-attr">كِتَابٌ كَبِيرٌ</span> = neka velika knjiga<br><br>
+          <strong>Prosta imenska rečenica (PIR)</strong> = imenica (određena) + pridjev (neodređen) = REČENICA sa
+          značenjem "X je Y"<br>
           <span class="badge badge-sent">الْكِتَابُ كَبِيرٌ</span> = Knjiga je velika.
         </div>
       </div>
 
       <div class="section-block">
         <h2>Vježba 1: Napravi sintagmu, pa rečenicu</h2>
-        <div class="info-box">Od datih riječi napravi ATRIBUTIVNU SINTAGMU, a zatim PROSTU IMENSKU REČENICU. (Iz zadaće 16.2.2026)</div>
+        <div class="info-box">Od datih riječi napravi ATRIBUTIVNU SINTAGMU, a zatim PROSTU IMENSKU REČENICU. (Iz zadaće
+          16.2.2026)</div>
 
         <div class="ex-item">
           <div class="question">
-            <span class="arabic" style="font-size:1.5rem;">بَيْتٌ</span> (kuća) + <span class="arabic" style="font-size:1.5rem;">قَدِيمٌ</span> (star)
+            <span class="arabic" style="font-size:1.5rem;">بَيْتٌ</span> (kuća) + <span class="arabic"
+              style="font-size:1.5rem;">قَدِيمٌ</span> (star)
           </div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer">
-              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الْبَيْتُ الْقَدِيمُ</span> — AL-BAJTU AL-QADĪMU — stara kuća<br>
-              <span class="badge badge-attr">Sintagma (neodređena)</span> <span class="arabic">بَيْتٌ قَدِيمٌ</span> — BAJTUN QADĪMUN — neka stara kuća<br>
-              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الْبَيْتُ قَدِيمٌ</span> — AL-BAJTU QADĪMUN — Kuća je stara.
+              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الْبَيْتُ الْقَدِيمُ</span> — AL-BAJTU
+              AL-QADĪMU — stara kuća<br>
+              <span class="badge badge-attr">Sintagma (neodređena)</span> <span class="arabic">بَيْتٌ قَدِيمٌ</span> —
+              BAJTUN QADĪMUN — neka stara kuća<br>
+              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الْبَيْتُ قَدِيمٌ</span> — AL-BAJTU
+              QADĪMUN — Kuća je stara.
             </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question">
-            <span class="arabic" style="font-size:1.5rem;">رَجُلٌ</span> (čovjek) + <span class="arabic" style="font-size:1.5rem;">نَحِيفٌ</span> (mršav)
+            <span class="arabic" style="font-size:1.5rem;">رَجُلٌ</span> (čovjek) + <span class="arabic"
+              style="font-size:1.5rem;">نَحِيفٌ</span> (mršav)
           </div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer">
-              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الرَّجُلُ النَّحِيفُ</span> — AR-RADŽULU AN-NAḤĪFU — mršav čovjek<br>
-              <span class="badge badge-attr">Sintagma (neodređena)</span> <span class="arabic">رَجُلٌ نَحِيفٌ</span> — RADŽULUN NAḤĪFUN — neki mršav čovjek<br>
-              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الرَّجُلُ نَحِيفٌ</span> — AR-RADŽULU NAḤĪFUN — Čovjek je mršav.
+              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الرَّجُلُ النَّحِيفُ</span> —
+              AR-RADŽULU AN-NAḤĪFU — mršav čovjek<br>
+              <span class="badge badge-attr">Sintagma (neodređena)</span> <span class="arabic">رَجُلٌ نَحِيفٌ</span> —
+              RADŽULUN NAḤĪFUN — neki mršav čovjek<br>
+              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الرَّجُلُ نَحِيفٌ</span> — AR-RADŽULU
+              NAḤĪFUN — Čovjek je mršav.
             </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question">
-            <span class="arabic" style="font-size:1.5rem;">سَاعَةٌ</span> (sat) + <span class="arabic" style="font-size:1.5rem;">دَقِيقٌ</span> (precizan)
+            <span class="arabic" style="font-size:1.5rem;">سَاعَةٌ</span> (sat) + <span class="arabic"
+              style="font-size:1.5rem;">دَقِيقٌ</span> (precizan)
           </div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer">
-              <span class="badge badge-attr">Sintagma</span> <span class="arabic">السَّاعَةُ الدَّقِيقَةُ</span> — AS-SĀʿATU AD-DAQĪQATU — precizan sat<br>
-              <span class="badge badge-attr">Sintagma (neodređena)</span> <span class="arabic">سَاعَةٌ دَقِيقَةٌ</span> — SĀʿATUN DAQĪQATUN — neki precizan sat<br>
-              <span class="badge badge-sent">Rečenica</span> <span class="arabic">السَّاعَةُ دَقِيقَةٌ</span> — AS-SĀʿATU DAQĪQATUN — Sat je precizan.
-              <br><br><em>Napomena: Pridjev se slaže u rodu sa imenicom — ساعة je ženski rod, pa pridjev dobija tā' marbūṭu: دقيقة</em>
+              <span class="badge badge-attr">Sintagma</span> <span class="arabic">السَّاعَةُ الدَّقِيقَةُ</span> —
+              AS-SĀʿATU AD-DAQĪQATU — precizan sat<br>
+              <span class="badge badge-attr">Sintagma (neodređena)</span> <span class="arabic">سَاعَةٌ دَقِيقَةٌ</span>
+              — SĀʿATUN DAQĪQATUN — neki precizan sat<br>
+              <span class="badge badge-sent">Rečenica</span> <span class="arabic">السَّاعَةُ دَقِيقَةٌ</span> —
+              AS-SĀʿATU DAQĪQATUN — Sat je precizan.
+              <br><br><em>Napomena: Pridjev se slaže u rodu sa imenicom — ساعة je ženski rod, pa pridjev dobija tā'
+                marbūṭu: دقيقة</em>
             </div>
           </details>
         </div>
@@ -1267,47 +1485,62 @@
 
       <div class="section-block">
         <h2>Vježba 2: Razvrstaj — sintagma ili rečenica?</h2>
-        <div class="info-box">Klikni na izraze da ih razvrstaš. Odredi da li je svaki primjer ATRIBUTIVNA SINTAGMA ili PROSTA IMENSKA REČENICA. (Iz zadaće 16.2.2026)</div>
+        <div class="info-box">Klikni na izraze da ih razvrstaš. Odredi da li je svaki primjer ATRIBUTIVNA SINTAGMA ili
+          PROSTA IMENSKA REČENICA. (Iz zadaće 16.2.2026)</div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.5rem;">الْقَلْبُ مَرِيضٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="badge badge-sent">PROSTA IMENSKA REČENICA</span><br>AL-QALBU MARĪḌUN — Srce je bolesno.<br><em>الْقَلْبُ je određen (ima AL-), a مَرِيضٌ je neodređen (ima nunaciju) → rečenica</em></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="badge badge-sent">PROSTA IMENSKA REČENICA</span><br>AL-QALBU MARĪḌUN — Srce
+              je bolesno.<br><em>الْقَلْبُ je određen (ima AL-), a مَرِيضٌ je neodređen (ima nunaciju) → rečenica</em>
+            </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.5rem;">فُسْتَانٌ جَدِيدٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="badge badge-attr">ATRIBUTIVNA SINTAGMA (neodređena)</span><br>FUSTĀNUN DŽADĪDUN — neka nova haljina<br><em>Oba su neodređena (oba imaju nunaciju) → sintagma</em></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="badge badge-attr">ATRIBUTIVNA SINTAGMA (neodređena)</span><br>FUSTĀNUN
+              DŽADĪDUN — neka nova haljina<br><em>Oba su neodređena (oba imaju nunaciju) → sintagma</em></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.5rem;">الْمُعَلِّمُ الْمَاهِرُ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="badge badge-attr">ATRIBUTIVNA SINTAGMA (određena)</span><br>AL-MUʿALLIMU AL-MĀHIRU — vješti učitelj<br><em>Oba su određena (oba imaju AL-) → sintagma</em></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="badge badge-attr">ATRIBUTIVNA SINTAGMA (određena)</span><br>AL-MUʿALLIMU
+              AL-MĀHIRU — vješti učitelj<br><em>Oba su određena (oba imaju AL-) → sintagma</em></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.5rem;">كُرْسِيًّا مَتِينًا</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="badge badge-attr">ATRIBUTIVNA SINTAGMA (neodređena, akuzativ)</span><br>KURSIJJAN MATĪNAN — neku čvrstu stolicu<br><em>Oba su neodređena (akuzativ sa nunacijom -an) → sintagma</em></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="badge badge-attr">ATRIBUTIVNA SINTAGMA (neodređena,
+                akuzativ)</span><br>KURSIJJAN MATĪNAN — neku čvrstu stolicu<br><em>Oba su neodređena (akuzativ sa
+                nunacijom -an) → sintagma</em></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.5rem;">الْأُخْتُ صَغِيرَةٌ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="badge badge-sent">PROSTA IMENSKA REČENICA</span><br>AL-UḪTU ṢAĠĪRATUN — Sestra je mala.<br><em>الْأُخْتُ je određen, a صَغِيرَةٌ je neodređen → rečenica</em></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="badge badge-sent">PROSTA IMENSKA REČENICA</span><br>AL-UḪTU ṢAĠĪRATUN —
+              Sestra je mala.<br><em>الْأُخْتُ je određen, a صَغِيرَةٌ je neodređen → rečenica</em></div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question"><span class="arabic" style="font-size:1.5rem;">السَّيِّدُ الْأَنِيقُ</span></div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="badge badge-attr">ATRIBUTIVNA SINTAGMA (određena)</span><br>AS-SAJJIDU AL-ANĪQU — elegantni gospodin<br><em>Oba su određena (oba imaju AL-) → sintagma</em></div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="badge badge-attr">ATRIBUTIVNA SINTAGMA (određena)</span><br>AS-SAJJIDU
+              AL-ANĪQU — elegantni gospodin<br><em>Oba su određena (oba imaju AL-) → sintagma</em></div>
           </details>
         </div>
       </div>
@@ -1319,48 +1552,64 @@
 
         <div class="ex-item">
           <div class="question">
-            <span class="arabic" style="font-size:1.5rem;">كِتَابٌ</span> (knjiga) + <span class="arabic" style="font-size:1.5rem;">جَدِيدٌ</span> (nov)
+            <span class="arabic" style="font-size:1.5rem;">كِتَابٌ</span> (knjiga) + <span class="arabic"
+              style="font-size:1.5rem;">جَدِيدٌ</span> (nov)
           </div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer">
-              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الْكِتَابُ الْجَدِيدُ</span> — nova knjiga<br>
-              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الْكِتَابُ جَدِيدٌ</span> — Knjiga je nova.
+              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الْكِتَابُ الْجَدِيدُ</span> — nova
+              knjiga<br>
+              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الْكِتَابُ جَدِيدٌ</span> — Knjiga je
+              nova.
             </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question">
-            <span class="arabic" style="font-size:1.5rem;">طَالِبَةٌ</span> (studentica) + <span class="arabic" style="font-size:1.5rem;">ذَكِيَّةٌ</span> (pametna)
+            <span class="arabic" style="font-size:1.5rem;">طَالِبَةٌ</span> (studentica) + <span class="arabic"
+              style="font-size:1.5rem;">ذَكِيَّةٌ</span> (pametna)
           </div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer">
-              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الطَّالِبَةُ الذَّكِيَّةُ</span> — pametna studentica<br>
-              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الطَّالِبَةُ ذَكِيَّةٌ</span> — Studentica je pametna.
+              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الطَّالِبَةُ الذَّكِيَّةُ</span> —
+              pametna studentica<br>
+              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الطَّالِبَةُ ذَكِيَّةٌ</span> —
+              Studentica je pametna.
             </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question">
-            <span class="arabic" style="font-size:1.5rem;">مَسْجِدٌ</span> (džamija) + <span class="arabic" style="font-size:1.5rem;">كَبِيرٌ</span> (velik)
+            <span class="arabic" style="font-size:1.5rem;">مَسْجِدٌ</span> (džamija) + <span class="arabic"
+              style="font-size:1.5rem;">كَبِيرٌ</span> (velik)
           </div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer">
-              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الْمَسْجِدُ الْكَبِيرُ</span> — velika džamija<br>
-              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الْمَسْجِدُ كَبِيرٌ</span> — Džamija je velika.
+              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الْمَسْجِدُ الْكَبِيرُ</span> — velika
+              džamija<br>
+              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الْمَسْجِدُ كَبِيرٌ</span> — Džamija
+              je velika.
             </div>
           </details>
         </div>
 
         <div class="ex-item">
           <div class="question">
-            <span class="arabic" style="font-size:1.5rem;">غُرْفَةٌ</span> (soba) + <span class="arabic" style="font-size:1.5rem;">وَاسِعَةٌ</span> (prostrana)
+            <span class="arabic" style="font-size:1.5rem;">غُرْفَةٌ</span> (soba) + <span class="arabic"
+              style="font-size:1.5rem;">وَاسِعَةٌ</span> (prostrana)
           </div>
-          <details><summary>Odgovor</summary>
+          <details>
+            <summary>Odgovor</summary>
             <div class="answer">
-              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الْغُرْفَةُ الْوَاسِعَةُ</span> — prostrana soba<br>
-              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الْغُرْفَةُ وَاسِعَةٌ</span> — Soba je prostrana.
+              <span class="badge badge-attr">Sintagma</span> <span class="arabic">الْغُرْفَةُ الْوَاسِعَةُ</span> —
+              prostrana soba<br>
+              <span class="badge badge-sent">Rečenica</span> <span class="arabic">الْغُرْفَةُ وَاسِعَةٌ</span> — Soba je
+              prostrana.
             </div>
           </details>
         </div>
@@ -1383,33 +1632,48 @@
 
       <div class="section-block">
         <h2>Vježba 1: Promijeni rod rečenice</h2>
-        <div class="info-box">Promijeni rod svake rečenice — ako je muški, napravi ženski i obrnuto. (Iz zadaće 16.2.2026)</div>
+        <div class="info-box">Promijeni rod svake rečenice — ako je muški, napravi ženski i obrnuto. (Iz zadaće
+          16.2.2026)</div>
 
         <div class="ex-item">
-          <div class="question"><span class="arabic" style="font-size:1.5rem;">الطَّالِبُ مُجْتَهِدٌ</span><br>AṬ-ṬĀLIBU MUDŽTAHIDUN — Student je marljiv.</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الطَّالِبَةُ مُجْتَهِدَةٌ</span><br>AṬ-ṬĀLIBATU MUDŽTAHIDATUN — Studentica je marljiva.<br><em>طَالِبٌ → طَالِبَةٌ | مُجْتَهِدٌ → مُجْتَهِدَةٌ (dodata ة)</em></div>
+          <div class="question"><span class="arabic" style="font-size:1.5rem;">الطَّالِبُ مُجْتَهِدٌ</span><br>AṬ-ṬĀLIBU
+            MUDŽTAHIDUN — Student je marljiv.</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الطَّالِبَةُ
+                مُجْتَهِدَةٌ</span><br>AṬ-ṬĀLIBATU MUDŽTAHIDATUN — Studentica je marljiva.<br><em>طَالِبٌ → طَالِبَةٌ |
+                مُجْتَهِدٌ → مُجْتَهِدَةٌ (dodata ة)</em></div>
           </details>
         </div>
 
         <div class="ex-item">
-          <div class="question"><span class="arabic" style="font-size:1.5rem;">الطَّبِيبَةُ ذَكِيَّةٌ</span><br>AṬ-ṬABĪBATU ḎAKIJJATUN — Doktorica je pametna.</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الطَّبِيبُ ذَكِيٌّ</span><br>AṬ-ṬABĪBU ḎAKIJJUN — Doktor je pametan.<br><em>طَبِيبَةٌ → طَبِيبٌ | ذَكِيَّةٌ → ذَكِيٌّ (uklonjena ة)</em></div>
+          <div class="question"><span class="arabic" style="font-size:1.5rem;">الطَّبِيبَةُ
+              ذَكِيَّةٌ</span><br>AṬ-ṬABĪBATU ḎAKIJJATUN — Doktorica je pametna.</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الطَّبِيبُ ذَكِيٌّ</span><br>AṬ-ṬABĪBU
+              ḎAKIJJUN — Doktor je pametan.<br><em>طَبِيبَةٌ → طَبِيبٌ | ذَكِيَّةٌ → ذَكِيٌّ (uklonjena ة)</em></div>
           </details>
         </div>
 
         <div class="ex-item">
-          <div class="question"><span class="arabic" style="font-size:1.5rem;">الزَّوْجَةُ جَمِيلَةٌ</span><br>AZ-ZAWDŽATU DŽAMĪLATUN — Supruga je lijepa.</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الزَّوْجُ جَمِيلٌ</span><br>AZ-ZAWDŽU DŽAMĪLUN — Suprug je lijep.<br><em>زَوْجَةٌ → زَوْجٌ | جَمِيلَةٌ → جَمِيلٌ</em></div>
+          <div class="question"><span class="arabic" style="font-size:1.5rem;">الزَّوْجَةُ
+              جَمِيلَةٌ</span><br>AZ-ZAWDŽATU DŽAMĪLATUN — Supruga je lijepa.</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الزَّوْجُ جَمِيلٌ</span><br>AZ-ZAWDŽU
+              DŽAMĪLUN — Suprug je lijep.<br><em>زَوْجَةٌ → زَوْجٌ | جَمِيلَةٌ → جَمِيلٌ</em></div>
           </details>
         </div>
 
         <div class="ex-item">
-          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْجَدُّ عَجُوزٌ</span><br>AL-DŽADDU ʿADŽŪZUN — Djed je star.</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْجَدَّةُ عَجُوزٌ</span><br>AL-DŽADDATU ʿADŽŪZUN — Baka je stara.<br><em>جَدٌّ → جَدَّةٌ | عَجُوزٌ ostaje isto jer je zajednički oblik za oba roda!</em></div>
+          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْجَدُّ عَجُوزٌ</span><br>AL-DŽADDU
+            ʿADŽŪZUN — Djed je star.</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْجَدَّةُ عَجُوزٌ</span><br>AL-DŽADDATU
+              ʿADŽŪZUN — Baka je stara.<br><em>جَدٌّ → جَدَّةٌ | عَجُوزٌ ostaje isto jer je zajednički oblik za oba
+                roda!</em></div>
           </details>
         </div>
       </div>
@@ -1419,30 +1683,42 @@
         <h2>Vježba 2: Promijeni rod — dodatne vježbe</h2>
 
         <div class="ex-item">
-          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْمُعَلِّمُ مَاهِرٌ</span><br>Učitelj je vješt.</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْمُعَلِّمَةُ مَاهِرَةٌ</span><br>AL-MUʿALLIMATU MĀHIRATUN — Učiteljica je vješta.</div>
+          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْمُعَلِّمُ مَاهِرٌ</span><br>Učitelj je
+            vješt.</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْمُعَلِّمَةُ
+                مَاهِرَةٌ</span><br>AL-MUʿALLIMATU MĀHIRATUN — Učiteljica je vješta.</div>
           </details>
         </div>
 
         <div class="ex-item">
-          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْوَلَدُ شُجَاعٌ</span><br>Dječak je hrabar.</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْبِنْتُ شُجَاعَةٌ</span><br>AL-BINTU ŠUDŽĀʿATUN — Djevojka je hrabra.</div>
+          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْوَلَدُ شُجَاعٌ</span><br>Dječak je
+            hrabar.</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْبِنْتُ شُجَاعَةٌ</span><br>AL-BINTU
+              ŠUDŽĀʿATUN — Djevojka je hrabra.</div>
           </details>
         </div>
 
         <div class="ex-item">
-          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْمُهَنْدِسَةُ مَشْهُورَةٌ</span><br>Inženjerka je poznata.</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْمُهَنْدِسُ مَشْهُورٌ</span><br>AL-MUHANDISU MAŠHŪRUN — Inženjer je poznat.</div>
+          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْمُهَنْدِسَةُ
+              مَشْهُورَةٌ</span><br>Inženjerka je poznata.</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْمُهَنْدِسُ
+                مَشْهُورٌ</span><br>AL-MUHANDISU MAŠHŪRUN — Inženjer je poznat.</div>
           </details>
         </div>
 
         <div class="ex-item">
-          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْحَبِيبُ صَادِقٌ</span><br>Dragi je iskren.</div>
-          <details><summary>Odgovor</summary>
-            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْحَبِيبَةُ صَادِقَةٌ</span><br>AL-ḤABĪBATU ṢĀDIQATUN — Draga je iskrena.</div>
+          <div class="question"><span class="arabic" style="font-size:1.5rem;">الْحَبِيبُ صَادِقٌ</span><br>Dragi je
+            iskren.</div>
+          <details>
+            <summary>Odgovor</summary>
+            <div class="answer"><span class="arabic" style="font-size:1.5rem;">الْحَبِيبَةُ
+                صَادِقَةٌ</span><br>AL-ḤABĪBATU ṢĀDIQATUN — Draga je iskrena.</div>
           </details>
         </div>
       </div>
@@ -1455,7 +1731,8 @@
       <div class="section-block">
         <h2>Vježba 1: Koji suglasnici se NE spajaju s lijeve strane?</h2>
         <div class="info-box">
-          U arapskom pismu 6 slova se NE spajaju s lijeve strane (sa slovom poslije njih). Ova slova se samo spajaju zdesna (sa slovom ispred njih). Klikni na slova ispod koja se NE spajaju s lijeve strane!
+          U arapskom pismu 6 slova se NE spajaju s lijeve strane (sa slovom poslije njih). Ova slova se samo spajaju
+          zdesna (sa slovom ispred njih). Klikni na slova ispod koja se NE spajaju s lijeve strane!
         </div>
 
         <div style="text-align: center; padding: 20px 0;" id="letterExercise">
@@ -1495,7 +1772,8 @@
 
       <div class="section-block">
         <h2>Vježba 2: Prepoznaj sunčeva i mjesečeva slova</h2>
-        <div class="info-box">Klikni na slovo i odredi da li je sunčevo (Š) ili mjesečevo (M). Sunčeva slova asimiliraju LAM u članu الـ.</div>
+        <div class="info-box">Klikni na slovo i odredi da li je sunčevo (Š) ili mjesečevo (M). Sunčeva slova asimiliraju
+          LAM u članu الـ.</div>
 
         <div class="ex-item">
           <div class="question">Za svako slovo odredi: Sunčevo ili Mjesečevo?</div>
@@ -1565,8 +1843,11 @@
         <div id="quizContainer"></div>
 
         <div style="text-align: center; margin-top: 20px;">
-          <button class="check-btn" onclick="checkQuiz()" style="padding: 12px 30px; font-size: 1rem;">Provjeri sve odgovore</button>
-          <button class="check-btn" onclick="newQuiz()" style="padding: 12px 30px; font-size: 1rem; background: #2d6a4f; color: #e0d5c1; margin-left: 10px;">Novi kviz</button>
+          <button class="check-btn" onclick="checkQuiz()" style="padding: 12px 30px; font-size: 1rem;">Provjeri sve
+            odgovore</button>
+          <button class="check-btn" onclick="newQuiz()"
+            style="padding: 12px 30px; font-size: 1rem; background: #2d6a4f; color: #e0d5c1; margin-left: 10px;">Novi
+            kviz</button>
         </div>
         <div id="quizResult" style="text-align: center; margin-top: 16px; font-size: 1.1rem;"></div>
       </div>
@@ -1578,8 +1859,11 @@
         <div id="reverseQuizContainer"></div>
 
         <div style="text-align: center; margin-top: 20px;">
-          <button class="check-btn" onclick="checkReverseQuiz()" style="padding: 12px 30px; font-size: 1rem;">Provjeri</button>
-          <button class="check-btn" onclick="newReverseQuiz()" style="padding: 12px 30px; font-size: 1rem; background: #2d6a4f; color: #e0d5c1; margin-left: 10px;">Novi kviz</button>
+          <button class="check-btn" onclick="checkReverseQuiz()"
+            style="padding: 12px 30px; font-size: 1rem;">Provjeri</button>
+          <button class="check-btn" onclick="newReverseQuiz()"
+            style="padding: 12px 30px; font-size: 1rem; background: #2d6a4f; color: #e0d5c1; margin-left: 10px;">Novi
+            kviz</button>
         </div>
         <div id="reverseQuizResult" style="text-align: center; margin-top: 16px; font-size: 1.1rem;"></div>
       </div>
@@ -1674,34 +1958,43 @@
     }
 
     // ===== QUIZ: Arabic → Bosnian =====
+    // Normalizacija bosanskih dijakritika (š→s, č→c, ć→c, ž→z, đ→d)
+    function normalizeBs(str) {
+      return str
+        .replace(/[šŠ]/g, m => m === 'š' ? 's' : 'S')
+        .replace(/[čČćĆ]/g, m => 'cčć'.includes(m) ? 'c' : 'C')
+        .replace(/[žŽ]/g, m => m === 'ž' ? 'z' : 'Z')
+        .replace(/[đĐ]/g, m => m === 'đ' ? 'd' : 'D');
+    }
+
     const quizWords = [
       { ar: "كِتَابٌ", ans: ["knjiga"] },
-      { ar: "بَيْتٌ", ans: ["kuća", "kuca"] },
+      { ar: "بَيْتٌ", ans: ["kuća", "dom"] },
       { ar: "قَلَمٌ", ans: ["olovka"] },
       { ar: "مَاءٌ", ans: ["voda"] },
       { ar: "كَلْبٌ", ans: ["pas"] },
       { ar: "شَمْسٌ", ans: ["sunce"] },
       { ar: "بَابٌ", ans: ["vrata"] },
       { ar: "كُرَةٌ", ans: ["lopta"] },
-      { ar: "سَيَّارَةٌ", ans: ["automobil", "auto"] },
-      { ar: "مَدْرَسَةٌ", ans: ["škola", "skola", "medresa"] },
-      { ar: "طَبِيبٌ", ans: ["ljekar", "doktor", "liječnik"] },
-      { ar: "جَمِيلٌ", ans: ["lijep"] },
-      { ar: "كَبِيرٌ", ans: ["velik", "veliki"] },
-      { ar: "صَغِيرٌ", ans: ["malen", "mali"] },
-      { ar: "جَدِيدٌ", ans: ["nov", "novi"] },
+      { ar: "سَيَّارَةٌ", ans: ["automobil", "auto", "kola"] },
+      { ar: "مَدْرَسَةٌ", ans: ["škola", "medresa"] },
+      { ar: "طَبِيبٌ", ans: ["ljekar", "doktor", "liječnik", "ljekar"] },
+      { ar: "جَمِيلٌ", ans: ["lijep", "lijepa", "lijepo"] },
+      { ar: "كَبِيرٌ", ans: ["velik", "veliki", "velika", "veliko"] },
+      { ar: "صَغِيرٌ", ans: ["malen", "mali", "mala", "malo"] },
+      { ar: "جَدِيدٌ", ans: ["nov", "novi", "nova", "novo"] },
       { ar: "خُبْزٌ", ans: ["hljeb", "kruh"] },
       { ar: "صُورَةٌ", ans: ["slika"] },
       { ar: "غُرْفَةٌ", ans: ["soba"] },
-      { ar: "وَلَدٌ", ans: ["dijete", "dječak"] },
-      { ar: "مُعَلِّمٌ", ans: ["učitelj", "ucitelj"] },
-      { ar: "نُورٌ", ans: ["svjetlo", "nur"] },
-      { ar: "صَبْرٌ", ans: ["strpljenje"] },
+      { ar: "وَلَدٌ", ans: ["dijete", "dječak", "dečko"] },
+      { ar: "مُعَلِّمٌ", ans: ["učitelj", "nastavnik"] },
+      { ar: "نُورٌ", ans: ["svjetlo", "nur", "svjetlost"] },
+      { ar: "صَبْرٌ", ans: ["strpljenje", "sabur"] },
       { ar: "أَسَدٌ", ans: ["lav"] },
-      { ar: "حَافِلَةٌ", ans: ["autobus"] },
+      { ar: "حَافِلَةٌ", ans: ["autobus", "bus"] },
       { ar: "مَطْبَخٌ", ans: ["kuhinja"] },
       { ar: "وِسَادَةٌ", ans: ["jastuk"] },
-      { ar: "شَوْكَةٌ", ans: ["viljuška", "viljuska"] },
+      { ar: "شَوْكَةٌ", ans: ["viljuška"] },
       { ar: "جِدَارٌ", ans: ["zid"] },
     ];
 
@@ -1737,7 +2030,12 @@
         const input = document.getElementById('quizInput' + i);
         const fb = document.getElementById('quizFeedback' + i);
         const val = input.value.trim().toLowerCase();
-        const isCorrect = w.ans.some(a => val === a.toLowerCase());
+        const valNorm = normalizeBs(val);
+        // Accept if input matches any answer (original or without diacritics)
+        const isCorrect = w.ans.some(a => {
+          const aLow = a.toLowerCase();
+          return val === aLow || valNorm === normalizeBs(aLow);
+        });
         if (isCorrect) {
           input.classList.remove('wrong');
           input.classList.add('correct');
@@ -1747,7 +2045,7 @@
         } else {
           input.classList.remove('correct');
           input.classList.add('wrong');
-          fb.innerHTML = w.ans[0];
+          fb.innerHTML = w.ans.join(' / ');
           fb.style.color = '#fca5a5';
         }
       });
@@ -1829,4 +2127,5 @@
   </script>
 
 </body>
+
 </html>
