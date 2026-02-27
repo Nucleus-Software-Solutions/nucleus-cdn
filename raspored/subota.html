@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subota — Sedmicni raspored</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #f0f0f5; color: #1a1a2e; line-height: 1.6; }
+        .container { max-width: 720px; margin: 0 auto; padding: 24px 16px 40px; }
+
+        .hero {
+            background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 50%, #9C27B0 100%);
+            color: white; border-radius: 20px; padding: 40px 28px 32px;
+            margin-bottom: 24px; text-align: center; position: relative; overflow: hidden;
+        }
+        .ramadan-label {
+            display: inline-block; background: rgba(255,255,255,0.15); color: #E1BEE7;
+            padding: 4px 16px; border-radius: 20px; font-size: 0.82em; font-weight: 500;
+            letter-spacing: 0.05em; margin-bottom: 12px;
+        }
+        .hero h1 { font-size: 2.4em; font-weight: 700; letter-spacing: -0.02em; }
+        .hero .subtitle { opacity: 0.8; font-size: 0.95em; font-weight: 300; margin-top: 4px; }
+        .stats { display: flex; justify-content: center; gap: 32px; margin-top: 24px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat .num { display: block; font-size: 1.6em; font-weight: 700; }
+        .stat .label { font-size: 0.78em; opacity: 0.65; }
+
+        .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78em; color: #666; background: white; padding: 4px 10px; border-radius: 6px; }
+        .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+        .schedule { display: flex; flex-direction: column; gap: 6px; }
+        .time-block {
+            display: flex; gap: 16px; background: white; border-radius: 12px;
+            padding: 14px 18px; border-left: 4px solid #ddd; transition: transform 0.15s;
+        }
+        .time-block:hover { transform: translateX(4px); }
+        .time { font-size: 0.85em; font-weight: 600; color: #888; min-width: 90px; padding-top: 2px; }
+        .block-title { font-weight: 600; font-size: 0.95em; }
+        .block-desc { font-size: 0.82em; color: #777; margin-top: 2px; }
+
+        .prayer { border-left-color: #2E7D32; } .prayer .block-title { color: #2E7D32; }
+        .food { border-left-color: #F9A825; } .food .block-title { color: #D4930A; }
+        .work-es { border-left-color: #7B1FA2; } .work-es .block-title { color: #7B1FA2; }
+        .arabic { border-left-color: #00897B; } .arabic .block-title { color: #00897B; }
+        .training { border-left-color: #E65100; } .training .block-title { color: #E65100; }
+        .rest { border-left-color: #90A4AE; } .rest .block-title { color: #607D8B; }
+        .free { border-left-color: #AD1457; } .free .block-title { color: #AD1457; }
+        .prep { border-left-color: #5D4037; } .prep .block-title { color: #5D4037; }
+
+        .section-label { font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; padding: 16px 0 8px 4px; font-weight: 600; }
+
+        .tips-card { background: white; border-radius: 14px; padding: 20px 24px; margin-top: 20px; }
+        .tips-card h3 { font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.06em; color: #999; margin-bottom: 12px; }
+        .tips-card ul { list-style: none; padding: 0; }
+        .tips-card li { padding: 6px 0; font-size: 0.88em; color: #555; border-bottom: 1px solid #f5f5f5; }
+        .tips-card li:last-child { border-bottom: none; }
+        .tips-card li::before { content: '\2192 '; color: #7B1FA2; font-weight: 600; }
+
+        .day-nav { display: flex; justify-content: center; gap: 6px; margin-top: 24px; flex-wrap: wrap; }
+        .day-nav a {
+            padding: 8px 14px; border-radius: 10px; background: white; color: #555;
+            text-decoration: none; font-size: 0.85em; font-weight: 500; transition: all 0.15s;
+        }
+        .day-nav a:hover, .day-nav a.active { background: #4A148C; color: white; }
+
+        .footer { text-align: center; padding: 20px; font-size: 0.78em; color: #bbb; }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8em; }
+            .stats { gap: 16px; }
+            .time-block { padding: 10px 14px; gap: 12px; }
+            .time { min-width: 75px; font-size: 0.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="hero">
+            <div class="ramadan-label">Ramazan 2026</div>
+            <h1>Subota</h1>
+            <p class="subtitle">eStanar dan — glavni rad na projektu + trening</p>
+            <div class="stats">
+                <div class="stat"><span class="num">~5h</span><span class="label">eStanar</span></div>
+                <div class="stat"><span class="num">~1.5h</span><span class="label">Arapski</span></div>
+                <div class="stat"><span class="num">~1h</span><span class="label">Trening</span></div>
+                <div class="stat"><span class="num">5</span><span class="label">Namaza</span></div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#F9A825"></div> Sehur / Iftar</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#2E7D32"></div> Namaz</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#7B1FA2"></div> eStanar</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#00897B"></div> Arapski</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#E65100"></div> Trening</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#AD1457"></div> Slobodno</div>
+        </div>
+
+        <!-- SEHUR I SABAH -->
+        <div class="section-label">Sehur i sabah</div>
+        <div class="schedule">
+            <div class="time-block food">
+                <div class="time">04:15 — 04:45</div>
+                <div class="content">
+                    <div class="block-title">Sehur</div>
+                    <div class="block-desc">Jak obrok — danas je trening. Jaja, zobena kasa, banana, orasi, puno vode.</div>
+                </div>
+            </div>
+            <div class="time-block prayer">
+                <div class="time">04:54</div>
+                <div class="content">
+                    <div class="block-title">Imsak — kraj sehura</div>
+                    <div class="block-desc">Nijjet za post. Istigfar i dova.</div>
+                </div>
+            </div>
+            <div class="time-block prayer">
+                <div class="time">05:13</div>
+                <div class="content">
+                    <div class="block-title">Sabah namaz</div>
+                    <div class="block-desc">Klanjaj sabah. Vikend — posveti vise vremena zikru.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JUTRO -->
+        <div class="section-label">Jutro — odmor i priprema</div>
+        <div class="schedule">
+            <div class="time-block rest">
+                <div class="time">05:30 — 09:00</div>
+                <div class="content">
+                    <div class="block-title">Spavanje — duzi odmor</div>
+                    <div class="block-desc">Vikend odmor. Tijelo se oporavlja od radne sedmice i treninga cetvrtak.</div>
+                </div>
+            </div>
+            <div class="time-block prep">
+                <div class="time">09:00 — 09:15</div>
+                <div class="content">
+                    <div class="block-title">Priprema za dan</div>
+                    <div class="block-desc">Brza priprema. Pripremi radno mjesto za eStanar sesiju.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARAPSKI -->
+        <div class="section-label">Jutarnje ucenje</div>
+        <div class="schedule">
+            <div class="time-block arabic">
+                <div class="time">09:15 — 10:45</div>
+                <div class="content">
+                    <div class="block-title">Ucenje arapskog — duza sesija</div>
+                    <div class="block-desc">Subota je dan za dublji rad na arapskom. Nova gramatika, pisanje, slusanje. 1.5 sata fokusiranog ucenja.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- eSTANAR -->
+        <div class="section-label">Glavni rad — eStanar</div>
+        <div class="schedule">
+            <div class="time-block work-es">
+                <div class="time">10:45 — 12:15</div>
+                <div class="content">
+                    <div class="block-title">eStanar — fokus blok 1</div>
+                    <div class="block-desc">Pocni sa najvaznijim zadatkom. Planiranje ili implementacija feature-a.</div>
+                </div>
+            </div>
+            <div class="time-block prayer">
+                <div class="time">12:20 — 12:35</div>
+                <div class="content">
+                    <div class="block-title">Podne namaz</div>
+                    <div class="block-desc">Namaz + kratka pauza.</div>
+                </div>
+            </div>
+            <div class="time-block work-es">
+                <div class="time">12:35 — 15:00</div>
+                <div class="content">
+                    <div class="block-title">eStanar — fokus blok 2</div>
+                    <div class="block-desc">Glavni razvojni blok. Deep work na backendu ili frontendu. Bez distrakcija.</div>
+                </div>
+            </div>
+            <div class="time-block prayer">
+                <div class="time">15:00 — 15:15</div>
+                <div class="content">
+                    <div class="block-title">Ikindija namaz</div>
+                    <div class="block-desc">Namaz + istezanje.</div>
+                </div>
+            </div>
+            <div class="time-block work-es">
+                <div class="time">15:15 — 16:30</div>
+                <div class="content">
+                    <div class="block-title">eStanar — fokus blok 3</div>
+                    <div class="block-desc">Zavrsi dnevni zadatak. Commit, push, dokumentuj progres.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRENING + IFTAR -->
+        <div class="section-label">Trening + iftar</div>
+        <div class="schedule">
+            <div class="time-block training">
+                <div class="time">16:30 — 17:30</div>
+                <div class="content">
+                    <div class="block-title">Trening — pred iftar</div>
+                    <div class="block-desc">Idealno vrijeme za trening — jedes odmah nakon. Snaga + kardio. Umjeren do visok intenzitet.</div>
+                </div>
+            </div>
+            <div class="time-block rest">
+                <div class="time">17:30 — 17:55</div>
+                <div class="content">
+                    <div class="block-title">Odmor pred iftar</div>
+                    <div class="block-desc">Opusti se nakon treninga. Dova pred iftar.</div>
+                </div>
+            </div>
+            <div class="time-block prayer">
+                <div class="time">~17:55</div>
+                <div class="content">
+                    <div class="block-title">Aksam namaz</div>
+                    <div class="block-desc">Klanjaj aksam. Provjeri vaktiju.</div>
+                </div>
+            </div>
+            <div class="time-block food">
+                <div class="time">18:00 — 19:00</div>
+                <div class="content">
+                    <div class="block-title">Iftar — veci obrok</div>
+                    <div class="block-desc">Nakon treninga tijelo treba vise. Hurme, voda, protein (piletina/riba), riza/krompir, salata. Protein sejk.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VECER -->
+        <div class="section-label">Vecer</div>
+        <div class="schedule">
+            <div class="time-block prayer">
+                <div class="time">19:15 — 19:30</div>
+                <div class="content">
+                    <div class="block-title">Jacija namaz</div>
+                    <div class="block-desc">Klanjaj jaciju.</div>
+                </div>
+            </div>
+            <div class="time-block free">
+                <div class="time">19:30 — 22:00</div>
+                <div class="content">
+                    <div class="block-title">Slobodno vrijeme</div>
+                    <div class="block-desc">Druzenje, porodica, citanje, hobi. Opusti se nakon produktivnog dana.</div>
+                </div>
+            </div>
+            <div class="time-block rest">
+                <div class="time">22:00 — 22:15</div>
+                <div class="content">
+                    <div class="block-title">Priprema za spavanje</div>
+                    <div class="block-desc">Vecernja dova. Alarm za sehur.</div>
+                </div>
+            </div>
+            <div class="time-block rest">
+                <div class="time">22:15</div>
+                <div class="content">
+                    <div class="block-title">Spavanje</div>
+                    <div class="block-desc">~6 sati sna. Sutra je nedjelja — odmor i priprema.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-card">
+            <h3>Savjeti za subotu — eStanar dan</h3>
+            <ul>
+                <li>Subota je tvoj glavni dan za eStanar — planiraj unaprijed sta ces raditi</li>
+                <li>Trening pred iftar je idealan — tijelo koristi masne rezerve, a odmah nakon jedes</li>
+                <li>Nakon treninga pojedi veci obrok sa dovoljno proteina za oporavak misica</li>
+                <li>Arapski ujutro dok si odmoran — kvalitetnije ucenje nego uvece</li>
+                <li>Commit i push eStanar promjene prije treninga da ne zaboravis</li>
+            </ul>
+        </div>
+
+        <nav class="day-nav">
+            <a href="ponedjeljak.html">Pon</a>
+            <a href="utorak.html">Uto</a>
+            <a href="srijeda.html">Sri</a>
+            <a href="cetvrtak.html">Cet</a>
+            <a href="petak.html">Pet</a>
+            <a href="subota.html" class="active">Sub</a>
+            <a href="nedjelja.html">Ned</a>
+        </nav>
+
+        <div class="footer">Ramazan 2026 — do 19. marta. Provjeri tacna vremena namaza na lokalnoj vaktiji.</div>
+    </div>
+</body>
+</html>
