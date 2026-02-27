@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="YsulNFCL4Ojtdpe40o3Y-xwxzXxEHmfwrn8q-kuftrs" />
     <title>Nucleus - Software Development Company</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,54 +17,87 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #0052b4;
+            --primary-dark: #003d87;
+            --primary-light: #e8f0fe;
+            --accent: #00c2ff;
+            --accent-2: #7c3aed;
+            --dark: #0f172a;
+            --dark-2: #1e293b;
+            --gray: #64748b;
+            --gray-light: #f1f5f9;
+            --white: #ffffff;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 50px -12px rgba(0,0,0,0.15);
+            --shadow-xl: 0 25px 60px -12px rgba(0,0,0,0.25);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #00428a 0%, #003366 100%);
-            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
-        /* Header */
+        /* ===== HEADER ===== */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
-        .logo svg {
-            width: 40px;
-            height: 40px;
+        .logo img {
+            width: 36px;
+            height: 36px;
         }
 
         .logo-text {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #00428a;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
         }
 
         .nav-center {
@@ -72,184 +109,622 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 0.5rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: var(--gray);
             font-weight: 500;
-            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
 
         .nav-links a:hover {
-            color: #00428a;
+            color: var(--primary);
+            background: var(--primary-light);
         }
 
         .language-toggle {
             display: flex;
             align-items: center;
-            background: #f8f9fa;
-            border-radius: 25px;
-            padding: 5px;
-            border: 2px solid #e9ecef;
+            background: var(--gray-light);
+            border-radius: 10px;
+            padding: 3px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
         }
 
         .lang-btn {
             background: transparent;
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 500;
-            color: #666;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--gray);
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
         }
 
         .lang-btn.active {
-            background: #00428a;
-            color: white;
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .lang-btn:hover:not(.active) {
-            color: #00428a;
+            color: var(--primary);
         }
 
-        /* Hero Section */
+        /* ===== HERO ===== */
         .hero {
-            padding: 120px 0 80px;
-            text-align: center;
-            color: white;
+            position: relative;
+            padding: 160px 0 120px;
+            background: linear-gradient(135deg, #0a1628 0%, #0f2847 40%, #0052b4 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 194, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-40px); }
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero-badge span {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .hero h1 {
             font-size: 4rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
             opacity: 0;
-            animation: fadeInUp 1s ease forwards;
+            animation: fadeInUp 0.8s ease 0.15s forwards;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent), #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 540px;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
             opacity: 0;
-            animation: fadeInUp 1s ease 0.3s forwards;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 15px 30px;
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.45s forwards;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            color: var(--primary);
+            padding: 14px 28px;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 12px;
             font-weight: 600;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.95rem;
             transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
+            border: none;
+            cursor: pointer;
         }
 
-        .cta-button:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* Services Section */
-        .services {
-            background: white;
-            padding: 80px 0;
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .hero-stat h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-stat p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+            animation: none;
+            opacity: 1;
+        }
+
+        /* ===== ABOUT / WHY US ===== */
+        .about {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
         }
 
         .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .about-feature {
+            background: var(--gray-light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .about-feature:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            background: var(--white);
+        }
+
+        .about-feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-feature h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .about-feature p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .icon-blue { background: #dbeafe; }
+        .icon-purple { background: #ede9fe; }
+        .icon-green { background: #dcfce7; }
+        .icon-orange { background: #fff7ed; }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .services-header {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
+            margin-bottom: 4rem;
+        }
+
+        .services-header .section-subtitle {
+            margin: 0 auto;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .service-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
         }
 
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #00428a;
+        .service-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            background: var(--primary-light);
         }
 
-        /* Projects Section */
+        .service-icon-wrapper svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .service-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+
+        .service-tag {
+            background: var(--gray-light);
+            color: var(--gray);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+
+        /* ===== PROCESS ===== */
+        .process {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .process-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .process-grid::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary), var(--primary-light));
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover .process-number {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .process-step h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.6;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        /* ===== PROJECTS ===== */
         .projects {
-            background: #f8f9fa;
-            padding: 80px 0;
+            padding: 100px 0;
+            background: var(--dark);
+        }
+
+        .projects .section-label {
+            color: var(--accent);
+        }
+
+        .projects .section-label::before {
+            background: var(--accent);
+        }
+
+        .projects .section-title {
+            color: var(--white);
+        }
+
+        .projects .section-subtitle {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .projects-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .projects-header .section-subtitle {
+            margin: 0 auto;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
         }
 
         .project-card {
-            background: white;
-            border-radius: 15px;
+            background: var(--dark-2);
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s ease;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.12);
         }
 
         .project-image {
-            height: 200px;
-            background: linear-gradient(45deg, #00428a, #003366);
+            height: 220px;
+            background: linear-gradient(135deg, #0052b4, #003d87);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3));
         }
 
         .project-logo {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            z-index: 2;
         }
 
-        .project-logo svg {
-            width: 50px;
-            height: 50px;
-            fill: white;
+        .project-logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
         }
 
         .project-content {
@@ -257,15 +732,17 @@
         }
 
         .project-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.75rem;
         }
 
         .project-description {
-            color: #666;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.95rem;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
-            line-height: 1.6;
         }
 
         .project-tech {
@@ -276,105 +753,377 @@
         }
 
         .tech-tag {
-            background: #00428a;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            background: rgba(0, 194, 255, 0.1);
+            color: var(--accent);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 194, 255, 0.15);
         }
 
         .store-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
         }
 
         .store-button {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            background: #333;
-            color: white;
-            padding: 0.7rem 1.2rem;
-            border-radius: 8px;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--white);
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             transition: all 0.3s ease;
             flex: 1;
             min-width: 140px;
             justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .store-button:hover {
-            background: #555;
+            background: rgba(255, 255, 255, 0.12);
             transform: translateY(-2px);
         }
 
         .store-button svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
         }
 
-        /* Contact Section */
-        .contact {
-            background: white;
-            padding: 80px 0;
+        /* ===== STATS BANNER ===== */
+        .stats-banner {
+            padding: 60px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .contact-info {
+        .stats-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
             text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-item p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-text h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .contact-text p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 1.8;
+        }
+
+        .contact-item-text h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item-text p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .contact-item-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .contact-item-text a:hover {
+            color: var(--primary-dark);
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card > p {
+            color: var(--gray);
+            font-size: 0.95rem;
             margin-bottom: 1.5rem;
         }
 
-        .contact-item h3 {
-            color: #00428a;
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .contact-item p {
-            color: #666;
-            font-size: 1.1rem;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
         }
 
-        .contact-item a {
-            color: #00428a;
-            text-decoration: none;
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
         }
 
-        .contact-item a:hover {
-            text-decoration: underline;
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            outline: none;
+            color: var(--dark);
         }
 
-        /* Footer */
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 82, 180, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit {
+            background: var(--primary);
+            color: var(--white);
+            padding: 14px 28px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-submit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 82, 180, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
         footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 0 30px;
         }
 
-        /* Animations */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .logo-text {
+            font-size: 1.3rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 280px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Mobile Menu */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== MOBILE MENU ===== */
         .mobile-menu {
             display: none;
             flex-direction: column;
@@ -383,8 +1132,9 @@
             left: 0;
             right: 0;
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
         }
 
         .mobile-menu.active {
@@ -392,10 +1142,17 @@
         }
 
         .mobile-menu a {
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             text-decoration: none;
-            color: #333;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: background 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            background: var(--gray-light);
         }
 
         .hamburger {
@@ -403,24 +1160,63 @@
             flex-direction: column;
             cursor: pointer;
             padding: 5px;
+            gap: 5px;
         }
 
         .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: #333;
-            margin: 3px 0;
+            width: 22px;
+            height: 2px;
+            background: var(--dark);
+            border-radius: 2px;
             transition: 0.3s;
         }
 
-        /* Responsive */
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+
+            .process-grid::before {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            .hero {
+                padding: 130px 0 80px;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
 
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1.05rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .hero-stat h3 {
+                font-size: 1.8rem;
             }
 
             .nav-center {
@@ -439,6 +1235,20 @@
                 grid-template-columns: 1fr;
             }
 
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
             .store-buttons {
                 flex-direction: column;
             }
@@ -448,23 +1258,26 @@
             }
 
             .logo-text {
-                font-size: 1.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
+                font-size: 1.3rem;
             }
 
             .container {
-                padding: 0 15px;
+                padding: 0 16px;
             }
 
-            nav {
-                justify-content: space-between;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
             }
 
             .mobile-menu .language-toggle {
-                margin: 1rem 2rem;
+                margin: 1rem 1.5rem;
                 width: fit-content;
             }
         }
@@ -472,6 +1285,27 @@
         @media (max-width: 480px) {
             .hero h1 {
                 font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
             }
 
             .project-content {
@@ -486,16 +1320,18 @@
 </head>
 
 <body>
+    <!-- HEADER -->
     <header>
         <nav class="container">
             <div class="logo">
                 <img src="https://nucleus-software-solutions.github.io/nucleus-cdn/Nucleus/logo.png" alt="Nucleus Logo"
-                    width="40" height="40">
+                    width="36" height="36">
                 <span class="logo-text">Nucleus</span>
             </div>
             <div class="nav-center">
                 <ul class="nav-links">
                     <li><a href="#home" data-key="nav-home">Početna</a></li>
+                    <li><a href="#about" data-key="nav-about">O nama</a></li>
                     <li><a href="#services" data-key="nav-services">Usluge</a></li>
                     <li><a href="#projects" data-key="nav-projects">Projekti</a></li>
                     <li><a href="#contact" data-key="nav-contact">Kontakt</a></li>
@@ -512,6 +1348,7 @@
             </div>
             <div class="mobile-menu" id="mobileMenu">
                 <a href="#home" onclick="toggleMobileMenu()" data-key="nav-home">Početna</a>
+                <a href="#about" onclick="toggleMobileMenu()" data-key="nav-about">O nama</a>
                 <a href="#services" onclick="toggleMobileMenu()" data-key="nav-services">Usluge</a>
                 <a href="#projects" onclick="toggleMobileMenu()" data-key="nav-projects">Projekti</a>
                 <a href="#contact" onclick="toggleMobileMenu()" data-key="nav-contact">Kontakt</a>
@@ -523,50 +1360,181 @@
         </nav>
     </header>
 
+    <!-- HERO -->
     <section class="hero" id="home">
+        <div class="hero-grid"></div>
         <div class="container">
-            <h1>Nucleus</h1>
-            <p data-key="hero-description">Kreiramo inovativna softverska rješenja koja pokreću digitalnu budućnost</p>
-            <a href="#projects" class="cta-button" data-key="cta-button">Pogledajte naš rad</a>
-        </div>
-    </section>
-
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title" data-key="services-title">Naša ekspertiza</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <h3 data-key="service-mobile-title">Mobilni razvoj</h3>
-                    <p data-key="service-mobile-desc">Native i cross-platform mobilne aplikacije koristeći Flutter i
-                        moderne razvojne prakse</p>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <div class="hero-badge-dot"></div>
+                    <span data-key="hero-badge">Dostupni za nove projekte</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🌐</div>
-                    <h3 data-key="service-web-title">Web rješenja</h3>
-                    <p data-key="service-web-desc">Skalabilne web aplikacije izgrađene s najmodernijim tehnologijama i
-                        robusnim backend sistemima</p>
+                <h1 data-key="hero-title">Gradimo softver koji <span class="gradient-text" data-key="hero-highlight">pokreće budućnost</span></h1>
+                <p data-key="hero-description">Od ideje do gotovog proizvoda — kreiramo mobilne i web aplikacije koje rješavaju stvarne probleme i pružaju izvanredno korisničko iskustvo.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn-primary" data-key="cta-projects">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                        Pogledajte projekte
+                    </a>
+                    <a href="#contact" class="btn-secondary" data-key="cta-contact">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        Kontaktirajte nas
+                    </a>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">⚡</div>
-                    <h3 data-key="service-integration-title">Integracija sistema</h3>
-                    <p data-key="service-integration-desc">Besprijekorna integracija složenih sistema s PostgreSQL,
-                        MSSQL i .NET tehnologijama</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <h3 data-key="stat-projects">5+</h3>
+                        <p data-key="stat-projects-label">Završenih projekata</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3 data-key="stat-platforms">3</h3>
+                        <p data-key="stat-platforms-label">Platforme</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>100%</h3>
+                        <p data-key="stat-satisfaction-label">Zadovoljstvo klijenata</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <div class="section-label" data-key="about-label">O nama</div>
+                    <h2 class="section-title" data-key="about-title">Tehnologija u službi vaših ideja</h2>
+                    <p data-key="about-desc-1">Nucleus je softverska agencija specijalizirana za razvoj mobilnih i web aplikacija. Kombinujemo najnovije tehnologije s pažljivim dizajnom kako bismo kreirali proizvode koji korisnici vole.</p>
+                    <p data-key="about-desc-2">Svaki projekat pristupamo s punom posvećenošću — od razumijevanja vaših potreba, kroz dizajn i razvoj, do lansiranja i podrške.</p>
+                </div>
+                <div class="about-features reveal">
+                    <div class="about-feature">
+                        <div class="about-feature-icon icon-blue">🎯</div>
+                        <h4 data-key="about-feat-1-title">Fokus na kvalitetu</h4>
+                        <p data-key="about-feat-1-desc">Čist kod, testirane funkcionalnosti i optimalne performanse</p>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon icon-purple">⚡</div>
+                        <h4 data-key="about-feat-2-title">Brza isporuka</h4>
+                        <p data-key="about-feat-2-desc">Agilni pristup s redovnim isporukama i transparentnom komunikacijom</p>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon icon-green">🔒</div>
+                        <h4 data-key="about-feat-3-title">Sigurnost</h4>
+                        <p data-key="about-feat-3-desc">Najbolje prakse za zaštitu podataka i sigurnost aplikacija</p>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon icon-orange">🤝</div>
+                        <h4 data-key="about-feat-4-title">Partnerski odnos</h4>
+                        <p data-key="about-feat-4-desc">Vaš uspjeh je naš uspjeh — podrška i nakon lansiranja</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header reveal">
+                <div class="section-label" data-key="services-label">Usluge</div>
+                <h2 class="section-title" data-key="services-title">Naša ekspertiza</h2>
+                <p class="section-subtitle" data-key="services-subtitle">Pružamo kompletna softverska rješenja prilagođena vašim potrebama</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    </div>
+                    <h3 data-key="service-mobile-title">Mobilni razvoj</h3>
+                    <p data-key="service-mobile-desc">Native i cross-platform mobilne aplikacije koristeći Flutter i moderne razvojne prakse za iOS i Android platforme</p>
+                    <div class="service-tags">
+                        <span class="service-tag">Flutter</span>
+                        <span class="service-tag">iOS</span>
+                        <span class="service-tag">Android</span>
+                        <span class="service-tag">Dart</span>
+                    </div>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3 data-key="service-web-title">Web rješenja</h3>
+                    <p data-key="service-web-desc">Skalabilne web aplikacije izgrađene s najmodernijim tehnologijama i robusnim backend sistemima</p>
+                    <div class="service-tags">
+                        <span class="service-tag">React</span>
+                        <span class="service-tag">ASP.NET</span>
+                        <span class="service-tag">Node.js</span>
+                        <span class="service-tag">HTML/CSS</span>
+                    </div>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3 data-key="service-integration-title">Integracija sistema</h3>
+                    <p data-key="service-integration-desc">Besprijekorna integracija složenih sistema s PostgreSQL, MSSQL i .NET tehnologijama</p>
+                    <div class="service-tags">
+                        <span class="service-tag">PostgreSQL</span>
+                        <span class="service-tag">MSSQL</span>
+                        <span class="service-tag">.NET</span>
+                        <span class="service-tag">REST API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process">
+        <div class="container">
+            <div class="process-header reveal">
+                <div class="section-label" data-key="process-label">Proces</div>
+                <h2 class="section-title" data-key="process-title">Kako radimo</h2>
+                <p class="section-subtitle" data-key="process-subtitle">Sistematičan pristup koji garantuje kvalitetu i transparentnost</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step reveal">
+                    <div class="process-number">1</div>
+                    <h4 data-key="process-step-1-title">Analiza</h4>
+                    <p data-key="process-step-1-desc">Razumijevanje vaših potreba, ciljeva i zahtjeva projekta</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-number">2</div>
+                    <h4 data-key="process-step-2-title">Dizajn</h4>
+                    <p data-key="process-step-2-desc">Kreiranje intuitivnog korisničkog interfejsa i arhitekture</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-number">3</div>
+                    <h4 data-key="process-step-3-title">Razvoj</h4>
+                    <p data-key="process-step-3-desc">Implementacija s redovnim ažuriranjima i testiranjem</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-number">4</div>
+                    <h4 data-key="process-step-4-title">Lansiranje</h4>
+                    <p data-key="process-step-4-desc">Deployment, optimizacija i kontinuirana podrška</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
     <section class="projects" id="projects">
         <div class="container">
-            <h2 class="section-title" data-key="projects-title">Izdvojeni projekti</h2>
+            <div class="projects-header reveal">
+                <div class="section-label" data-key="projects-label">Portfolio</div>
+                <h2 class="section-title" data-key="projects-title">Izdvojeni projekti</h2>
+                <p class="section-subtitle" data-key="projects-subtitle">Aplikacije koje smo razvili i koje su dostupne korisnicima širom svijeta</p>
+            </div>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card reveal">
                     <div class="project-image"
                         style="background-image: url('https://nucleus-software-solutions.github.io/nucleus-cdn/Origin/screenshot.png'); background-size: cover; background-position: center;">
                         <div class="project-logo">
                             <img src="https://nucleus-software-solutions.github.io/nucleus-cdn/Origin/logo.png"
-                                alt="Origin Logo" style="width: 50px; height: 50px; border-radius: 10px;">
+                                alt="Origin Logo">
                         </div>
                     </div>
                     <div class="project-content">
@@ -602,16 +1570,16 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card reveal">
                     <div class="project-image"
                         style="background-image: url('https://nucleus-software-solutions.github.io/nucleus-cdn/Quranbs/screenshot.png'); background-size: cover; background-position: center;">
                         <div class="project-logo">
                             <img src="https://nucleus-software-solutions.github.io/nucleus-cdn/Quranbs/logo.png"
-                                alt="Quran Logo" style="width: 50px; height: 50px; border-radius: 10px;">
+                                alt="Quran Logo">
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Kur'an sa prijevodom</h3>
+                        <h3 class="project-title" data-key="project-quran-title">Kur'an sa prijevodom</h3>
                         <p class="project-description" data-key="project-quran-desc">
                             Mobilna aplikacija koja pruža Kur'an s mogućnostima prevoda, sadrži intuitivnu
                             navigaciju, funkciju pretrage i offline pristup za poboljšano korisničko iskustvo.
@@ -646,26 +1614,128 @@
         </div>
     </section>
 
-    <section class="contact" id="contact">
+    <!-- STATS BANNER -->
+    <section class="stats-banner">
         <div class="container">
-            <h2 class="section-title" data-key="contact-title">Kontaktirajte nas</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h3 data-key="contact-email">Email</h3>
-                    <p><a href="mailto:salih.agic@outlook.com">salih.agic@outlook.com</a></p>
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <h3 data-key="stats-apps">2+</h3>
+                    <p data-key="stats-apps-label">Objavljenih aplikacija</p>
                 </div>
-                <div class="contact-item">
-                    <h3 data-key="contact-address">Adresa</h3>
-                    <p>Šehovina 20, broj 13<br>88108 Mostar<br>Bosna i Hercegovina</p>
+                <div class="stat-item reveal">
+                    <h3 data-key="stats-downloads">3K+</h3>
+                    <p data-key="stats-downloads-label">Preuzimanja</p>
+                </div>
+                <div class="stat-item reveal">
+                    <h3 data-key="stats-tech">10+</h3>
+                    <p data-key="stats-tech-label">Tehnologija</p>
+                </div>
+                <div class="stat-item reveal">
+                    <h3 data-key="stats-platforms">3</h3>
+                    <p data-key="stats-platforms-label">Platforme (iOS, Android, Web)</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-label" data-key="contact-label">Kontakt</div>
+            <h2 class="section-title" data-key="contact-title">Kontaktirajte nas</h2>
+            <div class="contact-grid">
+                <div class="contact-text reveal">
+                    <h3 data-key="contact-heading">Imate ideju? Hajde da razgovaramo.</h3>
+                    <p data-key="contact-desc">Bez obzira da li vam treba mobilna aplikacija, web platforma ili integracija sistema — tu smo da pomognemo. Javite nam se i zajedno ćemo pronaći najbolje rješenje.</p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Email</h4>
+                                <p><a href="mailto:salih.agic@outlook.com">salih.agic@outlook.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4 data-key="contact-address">Adresa</h4>
+                                <p>Šehovina 20, broj 13<br>88108 Mostar<br data-key="contact-country">Bosna i Hercegovina</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-card reveal">
+                    <h3 data-key="form-title">Pošaljite upit</h3>
+                    <p data-key="form-desc">Popunite formu i javit ćemo vam se u najkraćem roku.</p>
+                    <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label data-key="form-name">Ime i prezime</label>
+                            <input type="text" required placeholder="Vaše ime">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" required placeholder="vas@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label data-key="form-message">Poruka</label>
+                            <textarea required placeholder="" data-key-placeholder="form-message-placeholder"></textarea>
+                        </div>
+                        <button type="submit" class="form-submit" data-key="form-submit">Pošaljite poruku</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p data-key="footer-text">&copy; 2025 Nucleus Software Development Company. Gradimo budućnost, jednu
-                aplikaciju po jednu.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img src="https://nucleus-software-solutions.github.io/nucleus-cdn/Nucleus/logo.png"
+                            alt="Nucleus Logo" width="32" height="32">
+                        <span class="logo-text">Nucleus</span>
+                    </div>
+                    <p data-key="footer-desc">Softverska agencija specijalizirana za razvoj mobilnih i web aplikacija koje rješavaju stvarne probleme.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-key="footer-nav">Navigacija</h4>
+                    <ul>
+                        <li><a href="#home" data-key="nav-home">Početna</a></li>
+                        <li><a href="#about" data-key="nav-about">O nama</a></li>
+                        <li><a href="#services" data-key="nav-services">Usluge</a></li>
+                        <li><a href="#projects" data-key="nav-projects">Projekti</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-key="footer-services">Usluge</h4>
+                    <ul>
+                        <li><a href="#services" data-key="service-mobile-title">Mobilni razvoj</a></li>
+                        <li><a href="#services" data-key="service-web-title">Web rješenja</a></li>
+                        <li><a href="#services" data-key="service-integration-title">Integracija sistema</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-key="footer-contact">Kontakt</h4>
+                    <ul>
+                        <li><a href="mailto:salih.agic@outlook.com">salih.agic@outlook.com</a></li>
+                        <li><a href="#contact">Mostar, BiH</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-key="footer-text">&copy; 2025 Nucleus Software Solutions. Sva prava zadržana.</p>
+                <div class="social-links">
+                    <a href="https://github.com/nucleus-software-solutions" target="_blank" class="social-link" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -674,57 +1744,175 @@
         const translations = {
             bs: {
                 'nav-home': 'Početna',
+                'nav-about': 'O nama',
                 'nav-services': 'Usluge',
                 'nav-projects': 'Projekti',
                 'nav-contact': 'Kontakt',
-                'hero-description': 'Kreiramo inovativna softverska rješenja koja pokreću digitalnu budućnost',
-                'cta-button': 'Pogledajte naš rad',
+                'hero-badge': 'Dostupni za nove projekte',
+                'hero-title': 'Gradimo softver koji pokreće budućnost',
+                'hero-highlight': 'pokreće budućnost',
+                'hero-description': 'Od ideje do gotovog proizvoda — kreiramo mobilne i web aplikacije koje rješavaju stvarne probleme i pružaju izvanredno korisničko iskustvo.',
+                'cta-projects': 'Pogledajte projekte',
+                'cta-contact': 'Kontaktirajte nas',
+                'stat-projects': '5+',
+                'stat-projects-label': 'Završenih projekata',
+                'stat-platforms': '3',
+                'stat-platforms-label': 'Platforme',
+                'stat-satisfaction-label': 'Zadovoljstvo klijenata',
+                'about-label': 'O nama',
+                'about-title': 'Tehnologija u službi vaših ideja',
+                'about-desc-1': 'Nucleus je softverska agencija specijalizirana za razvoj mobilnih i web aplikacija. Kombinujemo najnovije tehnologije s pažljivim dizajnom kako bismo kreirali proizvode koje korisnici vole.',
+                'about-desc-2': 'Svaki projekat pristupamo s punom posvećenošću — od razumijevanja vaših potreba, kroz dizajn i razvoj, do lansiranja i podrške.',
+                'about-feat-1-title': 'Fokus na kvalitetu',
+                'about-feat-1-desc': 'Čist kod, testirane funkcionalnosti i optimalne performanse',
+                'about-feat-2-title': 'Brza isporuka',
+                'about-feat-2-desc': 'Agilni pristup s redovnim isporukama i transparentnom komunikacijom',
+                'about-feat-3-title': 'Sigurnost',
+                'about-feat-3-desc': 'Najbolje prakse za zaštitu podataka i sigurnost aplikacija',
+                'about-feat-4-title': 'Partnerski odnos',
+                'about-feat-4-desc': 'Vaš uspjeh je naš uspjeh — podrška i nakon lansiranja',
+                'services-label': 'Usluge',
                 'services-title': 'Naša ekspertiza',
+                'services-subtitle': 'Pružamo kompletna softverska rješenja prilagođena vašim potrebama',
                 'service-mobile-title': 'Mobilni razvoj',
-                'service-mobile-desc': 'Native i cross-platform mobilne aplikacije koristeći Flutter i moderne razvojne prakse',
+                'service-mobile-desc': 'Native i cross-platform mobilne aplikacije koristeći Flutter i moderne razvojne prakse za iOS i Android platforme',
                 'service-web-title': 'Web rješenja',
                 'service-web-desc': 'Skalabilne web aplikacije izgrađene s najmodernijim tehnologijama i robusnim backend sistemima',
                 'service-integration-title': 'Integracija sistema',
                 'service-integration-desc': 'Besprijekorna integracija složenih sistema s PostgreSQL, MSSQL i .NET tehnologijama',
+                'process-label': 'Proces',
+                'process-title': 'Kako radimo',
+                'process-subtitle': 'Sistematičan pristup koji garantuje kvalitetu i transparentnost',
+                'process-step-1-title': 'Analiza',
+                'process-step-1-desc': 'Razumijevanje vaših potreba, ciljeva i zahtjeva projekta',
+                'process-step-2-title': 'Dizajn',
+                'process-step-2-desc': 'Kreiranje intuitivnog korisničkog interfejsa i arhitekture',
+                'process-step-3-title': 'Razvoj',
+                'process-step-3-desc': 'Implementacija s redovnim ažuriranjima i testiranjem',
+                'process-step-4-title': 'Lansiranje',
+                'process-step-4-desc': 'Deployment, optimizacija i kontinuirana podrška',
+                'projects-label': 'Portfolio',
                 'projects-title': 'Izdvojeni projekti',
+                'projects-subtitle': 'Aplikacije koje smo razvili i koje su dostupne korisnicima širom svijeta',
                 'project-origin-desc': 'Sveobuhvatna mobilna aplikacija koja omogućava korisnicima da otkriju zemlju porijekla proizvoda kroz napredne mogućnosti pretrage i opsežne baze podataka proizvoda.',
+                'project-quran-title': 'Kur\'an sa prijevodom',
                 'project-quran-desc': 'Mobilna aplikacija koja pruža Kur\'an s mogućnostima prevoda, sadrži intuitivnu navigaciju, funkciju pretrage i offline pristup za poboljšano korisničko iskustvo.',
                 'tech-mobile': 'Mobilno',
                 'tech-search': 'Pretraga',
                 'tech-database': 'Baza podataka',
                 'tech-translation': 'Prevod',
                 'tech-offline': 'Offline',
+                'stats-apps': '2+',
+                'stats-apps-label': 'Objavljenih aplikacija',
+                'stats-downloads': '3K+',
+                'stats-downloads-label': 'Preuzimanja',
+                'stats-tech': '10+',
+                'stats-tech-label': 'Tehnologija',
+                'stats-platforms': '3',
+                'stats-platforms-label': 'Platforme (iOS, Android, Web)',
+                'contact-label': 'Kontakt',
                 'contact-title': 'Kontaktirajte nas',
-                'contact-email': 'Email',
+                'contact-heading': 'Imate ideju? Hajde da razgovaramo.',
+                'contact-desc': 'Bez obzira da li vam treba mobilna aplikacija, web platforma ili integracija sistema — tu smo da pomognemo. Javite nam se i zajedno ćemo pronaći najbolje rješenje.',
                 'contact-address': 'Adresa',
-                'footer-text': '© 2025 Nucleus Software Development Company. Gradimo budućnost, jednu aplikaciju po jednu.'
+                'contact-country': 'Bosna i Hercegovina',
+                'form-title': 'Pošaljite upit',
+                'form-desc': 'Popunite formu i javit ćemo vam se u najkraćem roku.',
+                'form-name': 'Ime i prezime',
+                'form-message': 'Poruka',
+                'form-message-placeholder': 'Opišite svoju ideju ili projekat...',
+                'form-submit': 'Pošaljite poruku',
+                'footer-desc': 'Softverska agencija specijalizirana za razvoj mobilnih i web aplikacija koje rješavaju stvarne probleme.',
+                'footer-nav': 'Navigacija',
+                'footer-services': 'Usluge',
+                'footer-contact': 'Kontakt',
+                'footer-text': '© 2025 Nucleus Software Solutions. Sva prava zadržana.'
             },
             en: {
                 'nav-home': 'Home',
+                'nav-about': 'About',
                 'nav-services': 'Services',
                 'nav-projects': 'Projects',
                 'nav-contact': 'Contact',
-                'hero-description': 'Crafting innovative software solutions that power tomorrow\'s digital landscape',
-                'cta-button': 'View Our Work',
+                'hero-badge': 'Available for new projects',
+                'hero-title': 'We build software that powers the future',
+                'hero-highlight': 'powers the future',
+                'hero-description': 'From idea to finished product — we create mobile and web applications that solve real problems and deliver outstanding user experiences.',
+                'cta-projects': 'View Projects',
+                'cta-contact': 'Contact Us',
+                'stat-projects': '5+',
+                'stat-projects-label': 'Completed projects',
+                'stat-platforms': '3',
+                'stat-platforms-label': 'Platforms',
+                'stat-satisfaction-label': 'Client satisfaction',
+                'about-label': 'About Us',
+                'about-title': 'Technology in service of your ideas',
+                'about-desc-1': 'Nucleus is a software agency specializing in mobile and web application development. We combine the latest technologies with thoughtful design to create products that users love.',
+                'about-desc-2': 'We approach every project with full dedication — from understanding your needs, through design and development, to launch and support.',
+                'about-feat-1-title': 'Quality Focus',
+                'about-feat-1-desc': 'Clean code, tested features, and optimal performance',
+                'about-feat-2-title': 'Fast Delivery',
+                'about-feat-2-desc': 'Agile approach with regular deliveries and transparent communication',
+                'about-feat-3-title': 'Security',
+                'about-feat-3-desc': 'Best practices for data protection and application security',
+                'about-feat-4-title': 'Partnership',
+                'about-feat-4-desc': 'Your success is our success — support even after launch',
+                'services-label': 'Services',
                 'services-title': 'Our Expertise',
+                'services-subtitle': 'We provide complete software solutions tailored to your needs',
                 'service-mobile-title': 'Mobile Development',
-                'service-mobile-desc': 'Native and cross-platform mobile applications using Flutter and modern development practices',
+                'service-mobile-desc': 'Native and cross-platform mobile applications using Flutter and modern development practices for iOS and Android platforms',
                 'service-web-title': 'Web Solutions',
                 'service-web-desc': 'Scalable web applications built with cutting-edge technologies and robust backend systems',
                 'service-integration-title': 'System Integration',
                 'service-integration-desc': 'Seamless integration of complex systems with PostgreSQL, MSSQL, and .NET technologies',
+                'process-label': 'Process',
+                'process-title': 'How We Work',
+                'process-subtitle': 'A systematic approach that guarantees quality and transparency',
+                'process-step-1-title': 'Analysis',
+                'process-step-1-desc': 'Understanding your needs, goals, and project requirements',
+                'process-step-2-title': 'Design',
+                'process-step-2-desc': 'Creating an intuitive user interface and architecture',
+                'process-step-3-title': 'Development',
+                'process-step-3-desc': 'Implementation with regular updates and testing',
+                'process-step-4-title': 'Launch',
+                'process-step-4-desc': 'Deployment, optimization, and continuous support',
+                'projects-label': 'Portfolio',
                 'projects-title': 'Featured Projects',
+                'projects-subtitle': 'Applications we developed that are available to users worldwide',
                 'project-origin-desc': 'A comprehensive mobile application that enables users to discover the origin country of products through advanced search capabilities and extensive product databases.',
+                'project-quran-title': 'Quran with Translation',
                 'project-quran-desc': 'A mobile application providing the Quran with translation capabilities, featuring intuitive navigation, search functionality, and offline access for enhanced user experience.',
                 'tech-mobile': 'Mobile',
                 'tech-search': 'Search',
                 'tech-database': 'Database',
                 'tech-translation': 'Translation',
                 'tech-offline': 'Offline',
+                'stats-apps': '2+',
+                'stats-apps-label': 'Published apps',
+                'stats-downloads': '3K+',
+                'stats-downloads-label': 'Downloads',
+                'stats-tech': '10+',
+                'stats-tech-label': 'Technologies',
+                'stats-platforms': '3',
+                'stats-platforms-label': 'Platforms (iOS, Android, Web)',
+                'contact-label': 'Contact',
                 'contact-title': 'Contact Us',
-                'contact-email': 'Email',
+                'contact-heading': 'Have an idea? Let\'s talk.',
+                'contact-desc': 'Whether you need a mobile app, web platform, or system integration — we\'re here to help. Get in touch and we\'ll find the best solution together.',
                 'contact-address': 'Address',
-                'footer-text': '© 2025 Nucleus Software Development Company. Building the future, one application at a time.'
+                'contact-country': 'Bosnia and Herzegovina',
+                'form-title': 'Send an inquiry',
+                'form-desc': 'Fill out the form and we\'ll get back to you shortly.',
+                'form-name': 'Full name',
+                'form-message': 'Message',
+                'form-message-placeholder': 'Describe your idea or project...',
+                'form-submit': 'Send message',
+                'footer-desc': 'Software agency specializing in mobile and web application development that solves real problems.',
+                'footer-nav': 'Navigation',
+                'footer-services': 'Services',
+                'footer-contact': 'Contact',
+                'footer-text': '© 2025 Nucleus Software Solutions. All rights reserved.'
             }
         };
 
@@ -741,7 +1929,7 @@
                 btn.classList.add('active');
             });
 
-            // Update content
+            // Update text content
             const langData = translations[lang];
             Object.keys(langData).forEach(key => {
                 const elements = document.querySelectorAll(`[data-key="${key}"]`);
@@ -750,9 +1938,18 @@
                 });
             });
 
+            // Update placeholders
+            const msgPlaceholder = translations[lang]['form-message-placeholder'];
+            document.querySelectorAll('textarea[data-key-placeholder]').forEach(el => {
+                el.placeholder = msgPlaceholder;
+            });
+
             // Update HTML lang attribute
             document.documentElement.lang = lang;
         }
+
+        // Initialize placeholders
+        switchLanguage('bs');
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -768,13 +1965,13 @@
             });
         });
 
-        // Add scroll effect to header
+        // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
             } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.classList.remove('scrolled');
             }
         });
 
@@ -788,11 +1985,37 @@
         document.addEventListener('click', function (event) {
             const nav = document.querySelector('nav');
             const mobileMenu = document.getElementById('mobileMenu');
-
             if (!nav.contains(event.target)) {
                 mobileMenu.classList.remove('active');
             }
         });
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const revealPoint = 100;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Form handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const subject = encodeURIComponent('Upit sa web stranice');
+            const body = encodeURIComponent('Poruka poslana putem kontakt forme na nucleus web stranici.');
+            window.location.href = `mailto:salih.agic@outlook.com?subject=${subject}&body=${body}`;
+        }
     </script>
 </body>
 
