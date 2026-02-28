@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls -d \"d:/Development/Nucleus/Projects/nucleus-cdn/arapski_I\"/*/)",
+      "Bash(ls -d \"d:/Development/Nucleus/Projects/nucleus-cdn/arapski_A0\"/*/)",
       "Bash(python3 -c \":*)",
       "Bash(python -c \":*)",
       "Bash(node -e \":*)"

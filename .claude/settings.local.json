@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python build_index.py)",
+      "Bash(where python3)",
+      "Bash(where py)",
+      "Bash(python3 build_index.py)",
+      "Bash(node build_index.js)"
+    ]
+  }
+}
