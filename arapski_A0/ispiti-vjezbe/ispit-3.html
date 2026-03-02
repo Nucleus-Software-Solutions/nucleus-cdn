@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="bs" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ispit 3 — Arapski A0</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #fff;
+      color: #111;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 30px 40px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .ar {
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      direction: rtl;
+      text-align: right;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    h1 .ar { font-size: 1.6rem; }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .student-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding: 8px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .student-info span { font-size: 0.85rem; }
+
+    .student-info .line {
+      display: inline-block;
+      width: 180px;
+      border-bottom: 1px solid #333;
+      margin-left: 4px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+      page-break-inside: avoid;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 6px;
+    }
+
+    .section-header .num { font-weight: 700; font-size: 0.95rem; }
+    .section-header .ar { font-size: 1.25rem; flex: 1; margin-right: 8px; }
+    .section-header .pts { font-size: 0.8rem; color: #666; white-space: nowrap; }
+
+    .pronoun-table {
+      width: 100%;
+      border-collapse: collapse;
+      direction: rtl;
+      margin-bottom: 8px;
+    }
+
+    .pronoun-table td {
+      border: 1px solid #999;
+      text-align: center;
+      padding: 10px 6px;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.2rem;
+      vertical-align: middle;
+      width: 33.33%;
+    }
+
+    .pronoun-table .word-cell {
+      font-weight: 700;
+      font-size: 1.3rem;
+      background: #f9f9f9;
+    }
+
+    .pronoun-table .pronoun-options {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .demo-line {
+      direction: rtl;
+      text-align: right;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      line-height: 2;
+    }
+
+    .blank {
+      display: inline-block;
+      width: 80px;
+      border-bottom: 1.5px solid #333;
+      margin: 0 4px;
+    }
+
+    .alpha-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+      direction: rtl;
+      border: 1.5px solid #333;
+      margin-bottom: 8px;
+    }
+
+    .alpha-grid .cell {
+      border: 1px solid #999;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .alpha-grid .cell.empty { background: #fafafa; }
+
+    .exercise-line {
+      direction: rtl;
+      text-align: right;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .exercise-line .prompt { white-space: nowrap; }
+
+    .exercise-line .answer-line {
+      flex: 1;
+      border-bottom: 1.5px solid #333;
+      min-height: 1.2em;
+    }
+
+    .choose-row {
+      direction: rtl;
+      text-align: right;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .choose-row .option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .choose-row .circle {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid #333;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dict-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 30px;
+      direction: rtl;
+    }
+
+    .dict-grid .dict-cell {
+      border-bottom: 1.5px solid #333;
+      height: 48px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-size: 0.88rem;
+      color: #555;
+      font-style: italic;
+      padding-top: 4px;
+    }
+
+    @media print {
+      body { padding: 20px 30px; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>
+    <span class="ar">الإمْتِحَانُ التَّحْرِيرِيُّ لِلْمُسْتَوَى الأَوَّلِ</span>
+  </h1>
+  <div class="subtitle">Pismeni ispit — Nivo A0 — Ispit 3</div>
+
+  <div class="student-info">
+    <span>Ime i prezime: <span class="line"></span></span>
+    <span>Datum: <span class="line" style="width:120px"></span></span>
+  </div>
+
+  <!-- 1. Pronouns -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">1 -</span>
+      <span class="ar">صِلْ بَيْنَ الْكَلِمَةِ وَالضَّمِيرِ الْمُنَاسِبِ:</span>
+      <span class="pts">(12)</span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Poveži riječ sa odgovarajućom zamjenicom:</p>
+    <table class="pronoun-table">
+      <tr>
+        <td>
+          <div class="pronoun-options">أَنْتَ &nbsp; هِيَ</div>
+          <div class="word-cell">طَبَّاخٌ</div>
+          <div class="pronoun-options">هُوَ &nbsp; أَنَا</div>
+        </td>
+        <td>
+          <div class="pronoun-options">هِيَ &nbsp; أَنْتَ</div>
+          <div class="word-cell">مُغَنِّيَةٌ</div>
+          <div class="pronoun-options">أَنْتِ &nbsp; هُوَ</div>
+        </td>
+        <td>
+          <div class="pronoun-options">أَنْتِ &nbsp; هُوَ</div>
+          <div class="word-cell">حَارِسٌ</div>
+          <div class="pronoun-options">أَنْتَ &nbsp; أَنَا</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="pronoun-options">هِيَ &nbsp; أَنْتَ</div>
+          <div class="word-cell">رَسَّامَةٌ</div>
+          <div class="pronoun-options">أَنْتِ &nbsp; أَنَا</div>
+        </td>
+        <td>
+          <div class="pronoun-options">أَنْتَ &nbsp; هِيَ</div>
+          <div class="word-cell">نَجَّارٌ</div>
+          <div class="pronoun-options">هُوَ &nbsp; أَنَا</div>
+        </td>
+        <td>
+          <div class="pronoun-options">أَنْتِ &nbsp; هُوَ</div>
+          <div class="word-cell">سَبَّاحَةٌ</div>
+          <div class="pronoun-options">هِيَ &nbsp; أَنَا</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 2. Demonstratives -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">2 -</span>
+      <span class="ar">ضَعْ اسْمَ الإشَارَةِ الْمُنَاسِبَ فِي الْجُمَلِ التَّالِيَة (هٰذَا — هٰذِهِ):</span>
+      <span class="pts">(10)</span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Stavi odgovarajuću pokaznu zamjenicu (هٰذَا — هٰذِهِ) u sljedeće rečenice:</p>
+    <div class="demo-line"><span class="blank"></span> شَارِعٌ طَوِيلٌ.</div>
+    <div class="demo-line"><span class="blank"></span> الطَّالِبَةُ.</div>
+    <div class="demo-line"><span class="blank"></span> مِفْتَاحٌ.</div>
+    <div class="demo-line"><span class="blank"></span> فَلَّاحَةٌ وَ <span class="blank"></span> فَلَّاحٌ.</div>
+    <div class="demo-line"><span class="blank"></span> الدَّرْسُ سَهْلٌ.</div>
+    <div class="demo-line"><span class="blank"></span> مُحَاسِبٌ وَ <span class="blank"></span> مُحَاسِبَةٌ.</div>
+  </div>
+
+  <!-- 3. Alphabet -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">3 -</span>
+      <span class="ar">اكْتُبِ الْحُرُوفَ النَّاقِصَةَ فِي الْجَدْوَلِ التَّالِي:</span>
+      <span class="pts">(22)</span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Napiši slova koja nedostaju u tabeli:</p>
+    <div class="alpha-grid">
+      <div class="cell empty"></div><div class="cell empty"></div><div class="cell">ت</div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell">خ</div>
+      <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell">ز</div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+      <div class="cell empty"></div><div class="cell empty"></div><div class="cell">ظ</div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell">ق</div>
+      <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell">و</div><div class="cell empty"></div>
+    </div>
+  </div>
+
+  <!-- 4. Add AL -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">4 -</span>
+      <span class="ar">ضَعْ "ال" التَّعْرِيفِ عَلَى الأَسْمَاءِ التَّالِيَة:</span>
+      <span class="pts"></span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Dodaj određeni član "ال" na sljedeće imenice:</p>
+    <div class="exercise-line"><span class="answer-line"></span><span class="prompt">سَيَّارَةٌ</span></div>
+    <div class="exercise-line"><span class="answer-line"></span><span class="prompt">لَيْلٌ</span></div>
+    <div class="exercise-line"><span class="answer-line"></span><span class="prompt">وَرْدَةٌ</span></div>
+    <div class="exercise-line"><span class="answer-line"></span><span class="prompt">ثَوْبٌ</span></div>
+    <div class="exercise-line"><span class="answer-line"></span><span class="prompt">ذَهَبٌ</span></div>
+  </div>
+
+  <!-- 5. Nominal sentences -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">5 -</span>
+      <span class="ar">حَوِّلِ الْعِبَارَاتِ التَّالِيَةَ إِلَى الْجُمَلِ الإِسْمِيَّة:</span>
+      <span class="pts"></span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Pretvori sljedeće izraze u imenske rečenice:</p>
+    <div class="exercise-line"><span class="prompt">شَارِعٌ طَوِيلٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">زَهْرَةٌ جَمِيلَةٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">مَاءٌ بَارِدٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">شَجَرَةٌ كَبِيرَةٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">جَوٌّ حَارٌّ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">وَلَدٌ ذَكِيٌّ</span><span class="answer-line"></span></div>
+  </div>
+
+  <!-- 6. Join letters -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">6 -</span>
+      <span class="ar">صِلْ بَيْنَ الْحُرُوفِ لِتُصْبِحَ الْكَلِمَات:</span>
+      <span class="pts"></span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Spoji slova da dobiješ riječi:</p>
+    <div class="exercise-line"><span class="prompt">طَ - بَّ - ا - خٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">مُ - غَ - نِّ - يَ - ةٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">شَ - جَ - رَ - ةٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">مِ - فْ - تَ - ا - حٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">حَ - ا - رِ - سٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">مَ - كْ - تَ - بَ - ةٌ</span><span class="answer-line"></span></div>
+  </div>
+
+  <!-- 7. Decompose -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">7 -</span>
+      <span class="ar">حَلِّلِ الْكَلِمَةَ إِلَى الْحُرُوفِ الْمُنْفَصِلَة:</span>
+      <span class="pts">(5)</span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Rastavi riječ na pojedinačna slova:</p>
+    <div class="exercise-line"><span class="prompt">كَبِيرٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">سَرِيرٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">مِنْشَفَةٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">ثَلَّاجَةٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">غَسَّالَةٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">مُحَاسِبٌ</span><span class="answer-line"></span></div>
+    <div class="exercise-line"><span class="prompt">مُسْتَشْفَى</span><span class="answer-line"></span></div>
+  </div>
+
+  <!-- 8. Choose correct -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">8 -</span>
+      <span class="ar">اِخْتَرِ الْكَلِمَةَ الصَّحِيحَة:</span>
+      <span class="pts"></span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Izaberi tačan oblik riječi:</p>
+    <div class="choose-row">
+      <div class="option"><span class="circle"></span> اَلْذَهَبُ</div>
+      <div class="option"><span class="circle"></span> الذَّهَبُ</div>
+    </div>
+    <div class="choose-row">
+      <div class="option"><span class="circle"></span> اَلْوَرْدَةُ</div>
+      <div class="option"><span class="circle"></span> الوَّرْدَةُ</div>
+    </div>
+    <div class="choose-row">
+      <div class="option"><span class="circle"></span> اَلْثَوْبُ</div>
+      <div class="option"><span class="circle"></span> الثَّوْبُ</div>
+    </div>
+    <div class="choose-row">
+      <div class="option"><span class="circle"></span> اَلْعِنَبُ</div>
+      <div class="option"><span class="circle"></span> العِّنَبُ</div>
+    </div>
+  </div>
+
+  <!-- 9. Dictation -->
+  <div class="section">
+    <div class="section-header">
+      <span class="num">9 -</span>
+      <span class="ar">اكْتُبْ كَمَا تَسْمَعُ!</span>
+      <span class="pts">(12)</span>
+    </div>
+    <p style="font-size:0.9rem;color:#444;margin-bottom:12px;font-style:italic">Napiši riječ na arapskom pismu na osnovu transliteracije:</p>
+    <div class="dict-grid">
+      <div class="dict-cell">ṣadīq</div>
+      <div class="dict-cell">ṭabīb</div>
+      <div class="dict-cell">masjid</div>
+      <div class="dict-cell">shāriʿ</div>
+      <div class="dict-cell">ṭaʿām</div>
+      <div class="dict-cell">layl</div>
+      <div class="dict-cell">thawb</div>
+      <div class="dict-cell">rajul</div>
+      <div class="dict-cell">imra'ah</div>
+      <div class="dict-cell">jannah</div>
+      <div class="dict-cell">dhahab</div>
+      <div class="dict-cell">ḥiṣān</div>
+    </div>
+  </div>
+
+</body>
+
+</html>

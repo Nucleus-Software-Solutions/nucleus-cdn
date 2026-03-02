@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="bs" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arapski A0 - Ispiti</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0f1a;
+      color: #e0d5c1;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 28px 20px 20px;
+      text-align: center;
+      border-bottom: 2px solid #c9a84c;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      color: #c9a84c;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 0.85rem;
+      color: #a89b80;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: #7a8baa;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: #c9a84c;
+    }
+
+    .arabic {
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      direction: rtl;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      padding: 14px 16px;
+      background: #0f1525;
+      border-bottom: 1px solid #1e2a40;
+    }
+
+    .tabs button {
+      padding: 8px 14px;
+      border: 1px solid #2a3550;
+      border-radius: 20px;
+      background: #131b2e;
+      color: #a89b80;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .tabs button:hover,
+    .tabs button.active {
+      background: #c9a84c;
+      color: #0a0f1a;
+      border-color: #c9a84c;
+      font-weight: 600;
+    }
+
+    .section {
+      background: #131b2e;
+      border: 1px solid #1e2a40;
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      color: #c9a84c;
+      margin-bottom: 6px;
+    }
+
+    .section-title-ar {
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.4rem;
+      color: #c9a84c;
+      direction: rtl;
+      text-align: right;
+      margin-bottom: 16px;
+    }
+
+    .points {
+      font-size: 0.8rem;
+      color: #7a8baa;
+      margin-bottom: 16px;
+    }
+
+    .exercise-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      direction: rtl;
+    }
+
+    .exercise-row .word {
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.5rem;
+      color: #e0d5c1;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    select,
+    input[type="text"] {
+      padding: 8px 12px;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      background: #0a0f1a;
+      color: #e0d5c1;
+      font-size: 1rem;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      direction: rtl;
+      transition: border-color 0.2s;
+    }
+
+    select:focus,
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #c9a84c;
+    }
+
+    input[type="text"] {
+      width: 180px;
+      text-align: center;
+    }
+
+    input[type="text"].wide {
+      width: 280px;
+    }
+
+    .correct {
+      border-color: #4caf50 !important;
+      background: rgba(76, 175, 80, 0.1) !important;
+    }
+
+    .incorrect {
+      border-color: #f44336 !important;
+      background: rgba(244, 67, 54, 0.1) !important;
+    }
+
+    .check-btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 24px;
+      background: #c9a84c;
+      color: #0a0f1a;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .check-btn:hover {
+      background: #d4b65e;
+      transform: translateY(-1px);
+    }
+
+    .score {
+      display: inline-block;
+      margin-left: 16px;
+      font-size: 0.95rem;
+      color: #c9a84c;
+      font-weight: 600;
+    }
+
+    .alphabet-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      direction: rtl;
+      margin-bottom: 12px;
+    }
+
+    .alphabet-grid .cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      border: 1px solid #2a3550;
+      border-radius: 6px;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.4rem;
+      color: #c9a84c;
+      background: #1a1a2e;
+    }
+
+    .alphabet-grid input {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #2a3550;
+      border-radius: 6px;
+      background: #0a0f1a;
+      color: #e0d5c1;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.4rem;
+      text-align: center;
+      direction: rtl;
+      padding: 0;
+    }
+
+    .alphabet-grid input:focus {
+      outline: none;
+      border-color: #c9a84c;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 14px;
+      direction: rtl;
+      flex-wrap: wrap;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.3rem;
+      padding: 6px 14px;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .radio-group label:hover {
+      border-color: #c9a84c;
+    }
+
+    .radio-group input[type="radio"] {
+      accent-color: #c9a84c;
+      width: 18px;
+      height: 18px;
+    }
+
+    .demo-sentence {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      direction: rtl;
+      flex-wrap: wrap;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.4rem;
+    }
+
+    .demo-sentence select {
+      font-size: 1.2rem;
+      padding: 6px 10px;
+      min-width: 80px;
+    }
+
+    .dictation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      direction: rtl;
+    }
+
+    .dictation-grid input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      background: #0a0f1a;
+      color: #e0d5c1;
+      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-size: 1.2rem;
+      text-align: center;
+      direction: rtl;
+    }
+
+    .dictation-grid input:focus {
+      outline: none;
+      border-color: #c9a84c;
+    }
+
+    .total-score {
+      text-align: center;
+      font-size: 1.3rem;
+      color: #c9a84c;
+      padding: 20px;
+      background: #131b2e;
+      border: 2px solid #c9a84c;
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-bottom: 20px;
+      font-size: 0.78rem;
+      color: #555;
+    }
+
+    @media (max-width: 600px) {
+      .alphabet-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+      }
+
+      .alphabet-grid .cell,
+      .alphabet-grid input {
+        height: 42px;
+        font-size: 1.1rem;
+      }
+
+      input[type="text"] {
+        width: 140px;
+      }
+
+      input[type="text"].wide {
+        width: 200px;
+      }
+
+      .exercise-row .word {
+        font-size: 1.3rem;
+        min-width: 90px;
+      }
+
+      .dictation-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="../index.html" class="back-link">&larr; Nazad na početnu</a>
+    <h1>Ispiti</h1>
+    <p>Testovi za provjeru znanja — Nivo A0</p>
+  </header>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="container" id="exam-content"></div>
+  <footer>Kurs arapskog jezika — Arapski A0</footer>
+
+  <script>
+    const ALPHABET = ['ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه', 'و', 'ي'];
+    const PRONOUNS = ['هُوَ', 'هِيَ', 'أَنْتَ', 'أَنْتِ'];
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function poolSelect(id, pool, placeholder) {
+      const opts = shuffle(pool);
+      return `<select id="${id}" style="font-family:'Traditional Arabic','Scheherazade','Arial',serif;font-size:1.2rem;direction:rtl;min-width:160px;padding:8px 12px;border:1px solid #2a3550;border-radius:8px;background:#0a0f1a;color:#e0d5c1;">
+        <option value="">${placeholder || 'Odaberi'}</option>
+        ${opts.map(o => `<option value="${o}">${o}</option>`).join('')}
+      </select>`;
+    }
+
+    const exams = [
+      {
+        title: 'Ispit 1',
+        pronouns: [
+          { word: 'طَبِيبٌ', answer: [0, 2] },
+          { word: 'مُهَنْدِسَةٌ', answer: [1, 3] },
+          { word: 'سَائِقٌ', answer: [0, 2] },
+          { word: 'كَاتِبَةٌ', answer: [1, 3] },
+          { word: 'فَلَّاحٌ', answer: [0, 2] },
+          { word: 'خَيَّاطَةٌ', answer: [1, 3] },
+        ],
+        demonstratives: [
+          { parts: [{ sel: true }, { t: ' مَسْجِدٌ كَبِيرٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' البِنْتُ.' }], answers: ['هذه'] },
+          { parts: [{ sel: true }, { t: ' كِتَابٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' طَبِيبَةٌ وَ ' }, { sel: true }, { t: ' طَبِيبٌ.' }], answers: ['هذه', 'هذا'] },
+          { parts: [{ sel: true }, { t: ' البَيْتُ جَمِيلٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' مُدَرِّسٌ وَ ' }, { sel: true }, { t: ' مُدَرِّسَةٌ.' }], answers: ['هذا', 'هذه'] },
+        ],
+        alphabetShown: [0, 3, 9, 14, 17, 22],
+        addAl: [
+          { word: 'كِتَابٌ', answer: 'الكِتَابُ' },
+          { word: 'شَمْسٌ', answer: 'الشَّمْسُ' },
+          { word: 'قَمَرٌ', answer: 'القَمَرُ' },
+          { word: 'بَابٌ', answer: 'البَابُ' },
+          { word: 'دَرْسٌ', answer: 'الدَّرْسُ' },
+        ],
+        nominal: [
+          { expr: 'وَلَدٌ صَغِيرٌ', answer: 'الوَلَدُ صَغِيرٌ' },
+          { expr: 'بَيْتٌ جَدِيدٌ', answer: 'البَيْتُ جَدِيدٌ' },
+          { expr: 'سَيَّارَةٌ سَرِيعَةٌ', answer: 'السَّيَّارَةُ سَرِيعَةٌ' },
+          { expr: 'حَدِيقَةٌ وَاسِعَةٌ', answer: 'الحَدِيقَةُ وَاسِعَةٌ' },
+          { expr: 'كِتَابٌ مُفِيدٌ', answer: 'الكِتَابُ مُفِيدٌ' },
+          { expr: 'قَلَمٌ جَدِيدٌ', answer: 'القَلَمُ جَدِيدٌ' },
+        ],
+        joinLetters: [
+          { sep: 'مَ - دْ - رَ - سَ - ةٌ', answer: 'مَدْرَسَةٌ' },
+          { sep: 'حَ - دِ - يْ - قَ - ةٌ', answer: 'حَدِيقَةٌ' },
+          { sep: 'سَ - يَّ - ا - رَ - ةٌ', answer: 'سَيَّارَةٌ' },
+          { sep: 'مُ - سْ - تَ - شْ - فَ - ى', answer: 'مُسْتَشْفَى' },
+          { sep: 'كُ - رْ - سِ - يٌّ', answer: 'كُرْسِيٌّ' },
+          { sep: 'صَ - حِ - يْ - فَ - ةٌ', answer: 'صَحِيفَةٌ' },
+        ],
+        decompose: [
+          { word: 'جَمِيلٌ', answer: 'ج - م - ي - ل' },
+          { word: 'مَكْتَبَةٌ', answer: 'م - ك - ت - ب - ة' },
+          { word: 'حَاسُوبٌ', answer: 'ح - ا - س - و - ب' },
+          { word: 'دَفْتَرٌ', answer: 'د - ف - ت - ر' },
+          { word: 'فُسْتَانٌ', answer: 'ف - س - ت - ا - ن' },
+          { word: 'تِلْفَازٌ', answer: 'ت - ل - ف - ا - ز' },
+          { word: 'جَامِعَةٌ', answer: 'ج - ا - م - ع - ة' },
+        ],
+        chooseCorrect: [
+          { a: 'الدَّرْسُ', b: 'اَلْدَرْسُ', correct: 'a' },
+          { a: 'القَّمَرُ', b: 'اَلْقَمَرُ', correct: 'b' },
+          { a: 'الرَّجُلُ', b: 'اَلْرَجُلُ', correct: 'a' },
+          { a: 'البَّيْتُ', b: 'اَلْبَيْتُ', correct: 'b' },
+        ],
+        dictation: [
+          { translit: 'kitāb', answer: 'كِتَابٌ' },
+          { translit: 'bayt', answer: 'بَيْتٌ' },
+          { translit: 'walad', answer: 'وَلَدٌ' },
+          { translit: 'bint', answer: 'بِنْتٌ' },
+          { translit: 'qalam', answer: 'قَلَمٌ' },
+          { translit: 'bāb', answer: 'بَابٌ' },
+          { translit: 'shams', answer: 'شَمْسٌ' },
+          { translit: 'qamar', answer: 'قَمَرٌ' },
+          { translit: "mā'", answer: 'مَاءٌ' },
+          { translit: "samā'", answer: 'سَمَاءٌ' },
+          { translit: 'arḍ', answer: 'أَرْضٌ' },
+          { translit: 'najm', answer: 'نَجْمٌ' },
+        ],
+      },
+      {
+        title: 'Ispit 2',
+        pronouns: [
+          { word: 'مُحَامٍ', answer: [0, 2] },
+          { word: 'صَحَفِيَّةٌ', answer: [1, 3] },
+          { word: 'جُنْدِيٌّ', answer: [0, 2] },
+          { word: 'مُمَثِّلَةٌ', answer: [1, 3] },
+          { word: 'بَائِعٌ', answer: [0, 2] },
+          { word: 'مُدِيرَةٌ', answer: [1, 3] },
+        ],
+        demonstratives: [
+          { parts: [{ sel: true }, { t: ' قَلَمٌ جَدِيدٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' المَدْرَسَةُ.' }], answers: ['هذه'] },
+          { parts: [{ sel: true }, { t: ' بَابٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' مُمَرِّضَةٌ وَ ' }, { sel: true }, { t: ' مُمَرِّضٌ.' }], answers: ['هذه', 'هذا'] },
+          { parts: [{ sel: true }, { t: ' الكِتَابُ كَبِيرٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' طَالِبٌ وَ ' }, { sel: true }, { t: ' طَالِبَةٌ.' }], answers: ['هذا', 'هذه'] },
+        ],
+        alphabetShown: [1, 5, 12, 15, 19, 23],
+        addAl: [
+          { word: 'مَدْرَسَةٌ', answer: 'المَدْرَسَةُ' },
+          { word: 'تُفَّاحَةٌ', answer: 'التُّفَّاحَةُ' },
+          { word: 'كَلْبٌ', answer: 'الكَلْبُ' },
+          { word: 'نَافِذَةٌ', answer: 'النَّافِذَةُ' },
+          { word: 'رَجُلٌ', answer: 'الرَّجُلُ' },
+        ],
+        nominal: [
+          { expr: 'قَلَمٌ جَدِيدٌ', answer: 'القَلَمُ جَدِيدٌ' },
+          { expr: 'مَدِينَةٌ كَبِيرَةٌ', answer: 'المَدِينَةُ كَبِيرَةٌ' },
+          { expr: 'طَعَامٌ لَذِيذٌ', answer: 'الطَّعَامُ لَذِيذٌ' },
+          { expr: 'غُرْفَةٌ نَظِيفَةٌ', answer: 'الغُرْفَةُ نَظِيفَةٌ' },
+          { expr: 'بَابٌ مَفْتُوحٌ', answer: 'البَابُ مَفْتُوحٌ' },
+          { expr: 'نَافِذَةٌ مَفْتُوحَةٌ', answer: 'النَّافِذَةُ مَفْتُوحَةٌ' },
+        ],
+        joinLetters: [
+          { sep: 'بَ - قَ - ا - لَ - ةٌ', answer: 'بَقَالَةٌ' },
+          { sep: 'مَ - طْ - بَ - خٌ', answer: 'مَطْبَخٌ' },
+          { sep: 'حِ - صَ - ا - نٌ', answer: 'حِصَانٌ' },
+          { sep: 'شُ - رْ - طِ - يٌّ', answer: 'شُرْطِيٌّ' },
+          { sep: 'ثَ - لَّ - ا - جَ - ةٌ', answer: 'ثَلَّاجَةٌ' },
+          { sep: 'مِ - فْ - تَ - ا - حٌ', answer: 'مِفْتَاحٌ' },
+        ],
+        decompose: [
+          { word: 'سَعِيدٌ', answer: 'س - ع - ي - د' },
+          { word: 'مَطْبَخٌ', answer: 'م - ط - ب - خ' },
+          { word: 'تِلْمِيذٌ', answer: 'ت - ل - م - ي - ذ' },
+          { word: 'شُرْطِيٌّ', answer: 'ش - ر - ط - ي' },
+          { word: 'حِصَانٌ', answer: 'ح - ص - ا - ن' },
+          { word: 'مُسْلِمٌ', answer: 'م - س - ل - م' },
+          { word: 'بَقَالَةٌ', answer: 'ب - ق - ا - ل - ة' },
+        ],
+        chooseCorrect: [
+          { a: 'اَلْشَمْسُ', b: 'الشَّمْسُ', correct: 'b' },
+          { a: 'اَلْكِتَابُ', b: 'الكِّتَابُ', correct: 'a' },
+          { a: 'النَّافِذَةُ', b: 'اَلْنَافِذَةُ', correct: 'a' },
+          { a: 'الجَّبَلُ', b: 'اَلْجَبَلُ', correct: 'b' },
+        ],
+        dictation: [
+          { translit: 'madrasah', answer: 'مَدْرَسَةٌ' },
+          { translit: 'ṭālib', answer: 'طَالِبٌ' },
+          { translit: 'muʿallim', answer: 'مُعَلِّمٌ' },
+          { translit: 'sayyārah', answer: 'سَيَّارَةٌ' },
+          { translit: 'ḥadīqah', answer: 'حَدِيقَةٌ' },
+          { translit: 'kursī', answer: 'كُرْسِيٌّ' },
+          { translit: 'ṭāwilah', answer: 'طَاوِلَةٌ' },
+          { translit: 'ghurfah', answer: 'غُرْفَةٌ' },
+          { translit: 'dars', answer: 'دَرْسٌ' },
+          { translit: 'kalb', answer: 'كَلْبٌ' },
+          { translit: 'qiṭṭah', answer: 'قِطَّةٌ' },
+          { translit: 'wardah', answer: 'وَرْدَةٌ' },
+        ],
+      },
+      {
+        title: 'Ispit 3',
+        pronouns: [
+          { word: 'طَبَّاخٌ', answer: [0, 2] },
+          { word: 'مُغَنِّيَةٌ', answer: [1, 3] },
+          { word: 'حَارِسٌ', answer: [0, 2] },
+          { word: 'رَسَّامَةٌ', answer: [1, 3] },
+          { word: 'نَجَّارٌ', answer: [0, 2] },
+          { word: 'سَبَّاحَةٌ', answer: [1, 3] },
+        ],
+        demonstratives: [
+          { parts: [{ sel: true }, { t: ' شَارِعٌ طَوِيلٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' الطَّالِبَةُ.' }], answers: ['هذه'] },
+          { parts: [{ sel: true }, { t: ' مِفْتَاحٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' فَلَّاحَةٌ وَ ' }, { sel: true }, { t: ' فَلَّاحٌ.' }], answers: ['هذه', 'هذا'] },
+          { parts: [{ sel: true }, { t: ' الدَّرْسُ سَهْلٌ.' }], answers: ['هذا'] },
+          { parts: [{ sel: true }, { t: ' مُحَاسِبٌ وَ ' }, { sel: true }, { t: ' مُحَاسِبَةٌ.' }], answers: ['هذا', 'هذه'] },
+        ],
+        alphabetShown: [2, 6, 10, 16, 20, 25],
+        addAl: [
+          { word: 'سَيَّارَةٌ', answer: 'السَّيَّارَةُ' },
+          { word: 'لَيْلٌ', answer: 'اللَّيْلُ' },
+          { word: 'وَرْدَةٌ', answer: 'الوَرْدَةُ' },
+          { word: 'ثَوْبٌ', answer: 'الثَّوْبُ' },
+          { word: 'ذَهَبٌ', answer: 'الذَّهَبُ' },
+        ],
+        nominal: [
+          { expr: 'شَارِعٌ طَوِيلٌ', answer: 'الشَّارِعُ طَوِيلٌ' },
+          { expr: 'زَهْرَةٌ جَمِيلَةٌ', answer: 'الزَّهْرَةُ جَمِيلَةٌ' },
+          { expr: 'مَاءٌ بَارِدٌ', answer: 'المَاءُ بَارِدٌ' },
+          { expr: 'شَجَرَةٌ كَبِيرَةٌ', answer: 'الشَّجَرَةُ كَبِيرَةٌ' },
+          { expr: 'جَوٌّ حَارٌّ', answer: 'الجَوُّ حَارٌّ' },
+          { expr: 'وَلَدٌ ذَكِيٌّ', answer: 'الوَلَدُ ذَكِيٌّ' },
+        ],
+        joinLetters: [
+          { sep: 'طَ - بَّ - ا - خٌ', answer: 'طَبَّاخٌ' },
+          { sep: 'مُ - غَ - نِّ - يَ - ةٌ', answer: 'مُغَنِّيَةٌ' },
+          { sep: 'شَ - جَ - رَ - ةٌ', answer: 'شَجَرَةٌ' },
+          { sep: 'مِ - فْ - تَ - ا - حٌ', answer: 'مِفْتَاحٌ' },
+          { sep: 'حَ - ا - رِ - سٌ', answer: 'حَارِسٌ' },
+          { sep: 'مَ - كْ - تَ - بَ - ةٌ', answer: 'مَكْتَبَةٌ' },
+        ],
+        decompose: [
+          { word: 'كَبِيرٌ', answer: 'ك - ب - ي - ر' },
+          { word: 'سَرِيرٌ', answer: 'س - ر - ي - ر' },
+          { word: 'مِنْشَفَةٌ', answer: 'م - ن - ش - ف - ة' },
+          { word: 'ثَلَّاجَةٌ', answer: 'ث - ل - ا - ج - ة' },
+          { word: 'غَسَّالَةٌ', answer: 'غ - س - ا - ل - ة' },
+          { word: 'مُحَاسِبٌ', answer: 'م - ح - ا - س - ب' },
+          { word: 'مُسْتَشْفَى', answer: 'م - س - ت - ش - ف - ى' },
+        ],
+        chooseCorrect: [
+          { a: 'اَلْذَهَبُ', b: 'الذَّهَبُ', correct: 'b' },
+          { a: 'اَلْوَرْدَةُ', b: 'الوَّرْدَةُ', correct: 'a' },
+          { a: 'اَلْثَوْبُ', b: 'الثَّوْبُ', correct: 'b' },
+          { a: 'اَلْعِنَبُ', b: 'العِّنَبُ', correct: 'a' },
+        ],
+        dictation: [
+          { translit: 'ṣadīq', answer: 'صَدِيقٌ' },
+          { translit: 'ṭabīb', answer: 'طَبِيبٌ' },
+          { translit: 'masjid', answer: 'مَسْجِدٌ' },
+          { translit: 'shāriʿ', answer: 'شَارِعٌ' },
+          { translit: 'ṭaʿām', answer: 'طَعَامٌ' },
+          { translit: 'layl', answer: 'لَيْلٌ' },
+          { translit: 'thawb', answer: 'ثَوْبٌ' },
+          { translit: 'rajul', answer: 'رَجُلٌ' },
+          { translit: "imra'ah", answer: 'اِمْرَأَةٌ' },
+          { translit: 'jannah', answer: 'جَنَّةٌ' },
+          { translit: 'dhahab', answer: 'ذَهَبٌ' },
+          { translit: 'ḥiṣān', answer: 'حِصَانٌ' },
+        ],
+      },
+    ];
+
+    let currentExam = 0;
+
+    function normalize(str) {
+      return str
+        .replace(/[\u064B-\u0652\u0670\u0640\u0671]/g, '')
+        .replace(/[ٱإأآ]/g, 'ا')
+        .replace(/ى/g, 'ي')
+        .replace(/ة/g, 'ة')
+        .replace(/[-–—ـ\s]/g, '')
+        .trim();
+    }
+
+    function normalizeKeepSpaces(str) {
+      return str
+        .replace(/[\u064B-\u0652\u0670\u0640\u0671]/g, '')
+        .replace(/[ٱإأآ]/g, 'ا')
+        .replace(/ى/g, 'ي')
+        .replace(/[-–—ـ]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function renderTabs() {
+      const tabs = document.getElementById('tabs');
+      tabs.innerHTML = exams.map((e, i) =>
+        `<button class="${i === currentExam ? 'active' : ''}" onclick="switchExam(${i})">${e.title}</button>`
+      ).join('');
+    }
+
+    function switchExam(i) {
+      currentExam = i;
+      renderTabs();
+      renderExam();
+    }
+
+    function renderExam() {
+      const exam = exams[currentExam];
+      const el = document.getElementById('exam-content');
+      const eid = `e${currentExam}`;
+      el.innerHTML = `
+        <div class="total-score" id="${eid}-total" style="display:none"></div>
+
+        ${renderSection1(exam, eid)}
+        ${renderSection2(exam, eid)}
+        ${renderSection3(exam, eid)}
+        ${renderSection4(exam, eid)}
+        ${renderSection5(exam, eid)}
+        ${renderSection6(exam, eid)}
+        ${renderSection7(exam, eid)}
+        ${renderSection8(exam, eid)}
+        ${renderSection9(exam, eid)}
+      `;
+    }
+
+    /* Section 1: Pronouns */
+    function renderSection1(exam, eid) {
+      const rows = exam.pronouns.map((p, i) => `
+        <div class="exercise-row">
+          <select id="${eid}-s1-${i}">
+            <option value="">Odaberi</option>
+            ${PRONOUNS.map((pr, pi) => `<option value="${pi}">${pr}</option>`).join('')}
+          </select>
+          <span class="word">${p.word}</span>
+        </div>
+      `).join('');
+      return `
+        <div class="section">
+          <div class="section-title">1. Poveži riječ sa odgovarajućom zamjenicom</div>
+          <div class="section-title-ar">صِلْ بَيْنَ الْكَلِمَةِ وَالضَّمِيرِ الْمُنَاسِبِ</div>
+          <div class="points">12 bodova</div>
+          ${rows}
+          <button class="check-btn" onclick="checkSection1('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s1-score"></span>
+        </div>`;
+    }
+
+    function checkSection1(eid) {
+      const exam = exams[currentExam];
+      let correct = 0;
+      exam.pronouns.forEach((p, i) => {
+        const sel = document.getElementById(`${eid}-s1-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (p.answer.includes(parseInt(sel.value))) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s1-score`).textContent = `${correct * 2}/${exam.pronouns.length * 2}`;
+      updateTotal(eid);
+    }
+
+    /* Section 2: Demonstratives */
+    function renderSection2(exam, eid) {
+      let selIdx = 0;
+      const rows = exam.demonstratives.map((d, i) => {
+        const html = d.parts.map(part => {
+          if (part.sel) {
+            const id = `${eid}-s2-${selIdx++}`;
+            return `<select id="${id}">
+              <option value="">Odaberi</option>
+              <option value="هذا">هٰذَا</option>
+              <option value="هذه">هٰذِهِ</option>
+            </select>`;
+          }
+          return `<span class="arabic" style="font-size:1.4rem">${part.t}</span>`;
+        }).join('');
+        return `<div class="demo-sentence">${html}</div>`;
+      }).join('');
+      return `
+        <div class="section">
+          <div class="section-title">2. Stavi odgovarajuću pokaznu zamjenicu (هٰذَا – هٰذِهِ)</div>
+          <div class="section-title-ar">ضَعْ اسْمَ الإشَارَةِ الْمُنَاسِبَ فِي الْجُمَلِ التَّالِيَة</div>
+          <div class="points">10 bodova</div>
+          ${rows}
+          <button class="check-btn" onclick="checkSection2('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s2-score"></span>
+        </div>`;
+    }
+
+    function checkSection2(eid) {
+      const exam = exams[currentExam];
+      let correct = 0, total = 0, idx = 0;
+      exam.demonstratives.forEach(d => {
+        d.answers.forEach(ans => {
+          const sel = document.getElementById(`${eid}-s2-${idx++}`);
+          sel.classList.remove('correct', 'incorrect');
+          total++;
+          if (normalize(sel.value) === normalize(ans)) { sel.classList.add('correct'); correct++; }
+          else if (sel.value !== '') { sel.classList.add('incorrect'); }
+        });
+      });
+      document.getElementById(`${eid}-s2-score`).textContent = `${correct}/${total}`;
+      updateTotal(eid);
+    }
+
+    /* Section 3: Alphabet Grid (dropdowns) */
+    function renderSection3(exam, eid) {
+      const shown = new Set(exam.alphabetShown);
+      let cells = '';
+      ALPHABET.forEach((letter, i) => {
+        if (shown.has(i)) {
+          cells += `<div class="cell">${letter}</div>`;
+        } else {
+          const opts = shuffle([...ALPHABET]);
+          cells += `<select id="${eid}-s3-${i}" data-answer="${letter}" style="width:100%;height:100%;border:1px solid #2a3550;border-radius:6px;background:#0a0f1a;color:#e0d5c1;font-family:'Traditional Arabic','Scheherazade','Arial',serif;font-size:1.2rem;text-align:center;direction:rtl;padding:0;appearance:none;-webkit-appearance:none;text-align-last:center;">
+            <option value="">—</option>
+            ${opts.map(l => `<option value="${l}">${l}</option>`).join('')}
+          </select>`;
+        }
+      });
+      return `
+        <div class="section">
+          <div class="section-title">3. Napiši slova koja nedostaju u tabeli</div>
+          <div class="section-title-ar">اكْتُبِ الْحُرُوفَ النَّاقِصَةَ فِي الْجَدْوَلِ التَّالِي</div>
+          <div class="points">22 boda</div>
+          <div class="alphabet-grid">${cells}</div>
+          <button class="check-btn" onclick="checkSection3('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s3-score"></span>
+        </div>`;
+    }
+
+    function checkSection3(eid) {
+      const exam = exams[currentExam];
+      const shown = new Set(exam.alphabetShown);
+      let correct = 0, total = 0;
+      ALPHABET.forEach((letter, i) => {
+        if (shown.has(i)) return;
+        total++;
+        const sel = document.getElementById(`${eid}-s3-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === letter) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s3-score`).textContent = `${correct}/${total}`;
+      updateTotal(eid);
+    }
+
+    /* Section 4: Add AL (dropdown pool) */
+    function renderSection4(exam, eid) {
+      const pool = exam.addAl.map(item => item.answer);
+      const rows = exam.addAl.map((item, i) => `
+        <div class="exercise-row">
+          <span class="word">${item.word}</span>
+          <span style="color:#7a8baa;font-size:1.2rem">\u2190</span>
+          ${poolSelect(`${eid}-s4-${i}`, pool, 'Odaberi')}
+        </div>
+      `).join('');
+      return `
+        <div class="section">
+          <div class="section-title">4. Dodaj "\u0627\u0644" na sljedeće imenice</div>
+          <div class="section-title-ar">ضَعْ "ال" التَّعْرِيفِ عَلَى الأَسْمَاءِ التَّالِيَة</div>
+          ${rows}
+          <button class="check-btn" onclick="checkSection4('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s4-score"></span>
+        </div>`;
+    }
+
+    function checkSection4(eid) {
+      const exam = exams[currentExam];
+      let correct = 0;
+      exam.addAl.forEach((item, i) => {
+        const sel = document.getElementById(`${eid}-s4-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === item.answer) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s4-score`).textContent = `${correct}/${exam.addAl.length}`;
+      updateTotal(eid);
+    }
+
+    /* Section 5: Nominal Sentences (dropdown pool) */
+    function renderSection5(exam, eid) {
+      const pool = exam.nominal.map(item => item.answer);
+      const rows = exam.nominal.map((item, i) => `
+        <div class="exercise-row">
+          <span class="word">${item.expr}</span>
+          <span style="color:#7a8baa;font-size:1.2rem">\u2190</span>
+          ${poolSelect(`${eid}-s5-${i}`, pool, 'Odaberi')}
+        </div>
+      `).join('');
+      return `
+        <div class="section">
+          <div class="section-title">5. Pretvori u imensku rečenicu</div>
+          <div class="section-title-ar">حَوِّلِ الْعِبَارَاتِ التَّالِيَةَ إِلَى الْجُمَلِ الإِسْمِيَّة</div>
+          ${rows}
+          <button class="check-btn" onclick="checkSection5('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s5-score"></span>
+        </div>`;
+    }
+
+    function checkSection5(eid) {
+      const exam = exams[currentExam];
+      let correct = 0;
+      exam.nominal.forEach((item, i) => {
+        const sel = document.getElementById(`${eid}-s5-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === item.answer) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s5-score`).textContent = `${correct}/${exam.nominal.length}`;
+      updateTotal(eid);
+    }
+
+    /* Section 6: Join Letters (dropdown pool) */
+    function renderSection6(exam, eid) {
+      const pool = exam.joinLetters.map(item => item.answer);
+      const rows = exam.joinLetters.map((item, i) => `
+        <div class="exercise-row">
+          <span class="word" style="font-size:1.3rem">${item.sep}</span>
+          <span style="color:#7a8baa;font-size:1.2rem">\u2190</span>
+          ${poolSelect(`${eid}-s6-${i}`, pool, 'Odaberi')}
+        </div>
+      `).join('');
+      return `
+        <div class="section">
+          <div class="section-title">6. Spoji slova da dobiješ riječ</div>
+          <div class="section-title-ar">صِلْ بَيْنَ الْحُرُوفِ لِتُصْبِحَ الْكَلِمَات</div>
+          ${rows}
+          <button class="check-btn" onclick="checkSection6('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s6-score"></span>
+        </div>`;
+    }
+
+    function checkSection6(eid) {
+      const exam = exams[currentExam];
+      let correct = 0;
+      exam.joinLetters.forEach((item, i) => {
+        const sel = document.getElementById(`${eid}-s6-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === item.answer) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s6-score`).textContent = `${correct}/${exam.joinLetters.length}`;
+      updateTotal(eid);
+    }
+
+    /* Section 7: Decompose (dropdown pool) */
+    function renderSection7(exam, eid) {
+      const pool = exam.decompose.map(item => item.answer);
+      const rows = exam.decompose.map((item, i) => `
+        <div class="exercise-row">
+          <span class="word">${item.word}</span>
+          <span style="color:#7a8baa;font-size:1.2rem">\u2190</span>
+          ${poolSelect(`${eid}-s7-${i}`, pool, 'Odaberi')}
+        </div>
+      `).join('');
+      return `
+        <div class="section">
+          <div class="section-title">7. Rastavi riječ na pojedinačna slova</div>
+          <div class="section-title-ar">حَلِّلِ الْكَلِمَةَ إِلَى الْحُرُوفِ الْمُنْفَصِلَة</div>
+          <div class="points">5 bodova</div>
+          ${rows}
+          <button class="check-btn" onclick="checkSection7('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s7-score"></span>
+        </div>`;
+    }
+
+    function checkSection7(eid) {
+      const exam = exams[currentExam];
+      let correct = 0;
+      exam.decompose.forEach((item, i) => {
+        const sel = document.getElementById(`${eid}-s7-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === item.answer) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s7-score`).textContent = `${correct}/${exam.decompose.length}`;
+      updateTotal(eid);
+    }
+
+    /* Section 8: Choose Correct */
+    function renderSection8(exam, eid) {
+      const rows = exam.chooseCorrect.map((item, i) => `
+        <div class="radio-group" id="${eid}-s8-${i}">
+          <label><input type="radio" name="${eid}-s8-${i}" value="a"> ${item.a}</label>
+          <label><input type="radio" name="${eid}-s8-${i}" value="b"> ${item.b}</label>
+        </div>
+      `).join('');
+      return `
+        <div class="section">
+          <div class="section-title">8. Izaberi tačan oblik riječi</div>
+          <div class="section-title-ar">اِخْتَرِ الْكَلِمَةَ الصَّحِيحَة</div>
+          ${rows}
+          <button class="check-btn" onclick="checkSection8('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s8-score"></span>
+        </div>`;
+    }
+
+    function checkSection8(eid) {
+      const exam = exams[currentExam];
+      let correct = 0;
+      exam.chooseCorrect.forEach((item, i) => {
+        const group = document.getElementById(`${eid}-s8-${i}`);
+        const labels = group.querySelectorAll('label');
+        labels.forEach(l => l.style.borderColor = '#2a3550');
+        const checked = group.querySelector('input:checked');
+        if (checked) {
+          const parentLabel = checked.closest('label');
+          if (checked.value === item.correct) {
+            parentLabel.style.borderColor = '#4caf50';
+            correct++;
+          } else {
+            parentLabel.style.borderColor = '#f44336';
+          }
+        }
+      });
+      document.getElementById(`${eid}-s8-score`).textContent = `${correct}/${exam.chooseCorrect.length}`;
+      updateTotal(eid);
+    }
+
+    /* Section 9: Dictation (dropdown pool) */
+    function renderSection9(exam, eid) {
+      const pool = exam.dictation.map(item => item.answer);
+      const cells = exam.dictation.map((item, i) => `
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px;border:1px solid #1e2a40;border-radius:8px;background:#0f1525;">
+          <span style="font-size:1.1rem;color:#c9a84c;font-family:'Segoe UI',system-ui,sans-serif;direction:ltr;">${item.translit}</span>
+          ${poolSelect(`${eid}-s9-${i}`, pool, 'Odaberi')}
+        </div>
+      `).join('');
+      return `
+        <div class="section">
+          <div class="section-title">9. Diktat — odaberi odgovarajuću arapsku riječ</div>
+          <div class="section-title-ar">اكْتُبْ كَمَا تَسْمَعُ!</div>
+          <div class="points">12 bodova</div>
+          <div class="dictation-grid">${cells}</div>
+          <button class="check-btn" onclick="checkSection9('${eid}')">Provjeri</button>
+          <span class="score" id="${eid}-s9-score"></span>
+        </div>`;
+    }
+
+    function checkSection9(eid) {
+      const exam = exams[currentExam];
+      let correct = 0;
+      exam.dictation.forEach((item, i) => {
+        const sel = document.getElementById(`${eid}-s9-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === item.answer) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s9-score`).textContent = `${correct}/${exam.dictation.length}`;
+      updateTotal(eid);
+    }
+
+    /* Total Score */
+    function updateTotal(eid) {
+      let total = 0, max = 0;
+      for (let s = 1; s <= 9; s++) {
+        const scoreEl = document.getElementById(`${eid}-s${s}-score`);
+        if (scoreEl && scoreEl.textContent) {
+          const parts = scoreEl.textContent.split('/');
+          total += parseInt(parts[0]) || 0;
+          max += parseInt(parts[1]) || 0;
+        }
+      }
+      if (max > 0) {
+        const totalEl = document.getElementById(`${eid}-total`);
+        totalEl.style.display = 'block';
+        const pct = Math.round((total / max) * 100);
+        totalEl.innerHTML = `Ukupan rezultat: <strong>${total} / ${max}</strong> (${pct}%)`;
+      }
+    }
+
+    renderTabs();
+    renderExam();
+  </script>
+</body>
+
+</html>
