@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arapski A0 - Kurs arapskog jezika</title>
+  <title>Arapski A1 - Kurs arapskog jezika</title>
   <style>
     * {
       margin: 0;
@@ -78,6 +78,32 @@
       box-shadow: 0 8px 25px rgba(201, 168, 76, 0.12);
     }
 
+    a.card.back {
+      border-color: #1e2a40;
+      padding: 14px 20px;
+      margin-bottom: 32px;
+      border-radius: 10px;
+    }
+
+    a.card.back:hover {
+      border-color: #5a6a88;
+      transform: none;
+      box-shadow: none;
+    }
+
+    a.card.back .card-icon {
+      font-size: 1rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    a.card.back .card-text h2 {
+      font-size: 0.88rem;
+      color: #7a8baa;
+      margin-bottom: 0;
+    }
+
     .card-icon {
       font-size: 2.2rem;
       flex-shrink: 0;
@@ -128,8 +154,15 @@
 
 <body>
   <div class="container">
+    <a class="card back" href="../index.html">
+      <div class="card-icon">←</div>
+      <div class="card-text">
+        <h2>Svi nivoi kursa</h2>
+      </div>
+    </a>
+
     <div class="arabic-title">العَرَبِيَّةُ</div>
-    <h1>Arapski A0</h1>
+    <h1>Arapski A1</h1>
     <p class="subtitle">Kurs arapskog jezika</p>
 
     <div class="cards">
@@ -139,7 +172,7 @@
         <div class="card-icon">📚</div>
         <div class="card-text">
           <h2>Gradivo</h2>
-          <p>Abeceda, slova, samoglasnici, gramatika, član AL-, sintagme, rečenice, zamjenice, konverzacija</p>
+          <p>Porodica, glagoli za učionicu, rastavljene i spojene lične zamjenice, pronominalni sufiksi</p>
         </div>
       </a>
 
@@ -147,7 +180,7 @@
         <div class="card-icon">✏️</div>
         <div class="card-text">
           <h2>Vježbe</h2>
-          <p>Sastavi slova, rastavi riječ, prevedi, član AL-, sintagma i rečenica, rod, zamjenice, kviz</p>
+          <p>Prevedi na arapski, prevedi s arapskog, sufiksi na imenicama, kviz kartice</p>
         </div>
       </a>
 
@@ -155,62 +188,12 @@
         <div class="card-icon">📖</div>
         <div class="card-text">
           <h2>Vokabular</h2>
-          <p>400+ riječi iz 17 kategorija — označi naučene, pretraži, filtriraj</p>
-        </div>
-      </a>
-
-      <a class="card" href="ispiti-vjezbe/ispiti.html">
-        <div class="card-icon">📝</div>
-        <div class="card-text">
-          <h2>Ispiti</h2>
-          <p>3 interaktivna testa — zamjenice, pokazne zamjenice, abeceda, član AL-, rečenice, slova</p>
-        </div>
-      </a>
-
-      <div class="section-label">PDF dokumenti</div>
-
-      <a class="card" href="gradivo.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Gradivo (PDF)</h2>
-          <p>Kompletno gradivo u PDF formatu — za preuzimanje ili printanje</p>
-        </div>
-      </a>
-
-      <a class="card" href="vokabular.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Vokabular (PDF)</h2>
-          <p>Lista vokabulara u PDF formatu — za preuzimanje ili printanje</p>
-        </div>
-      </a>
-
-      <a class="card" href="ispiti-vjezbe/ispit-1.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Ispit 1 (PDF)</h2>
-          <p>Prvi ispit u PDF formatu — za preuzimanje ili printanje</p>
-        </div>
-      </a>
-
-      <a class="card" href="ispiti-vjezbe/ispit-2.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Ispit 2 (PDF)</h2>
-          <p>Drugi ispit u PDF formatu — za preuzimanje ili printanje</p>
-        </div>
-      </a>
-
-      <a class="card" href="ispiti-vjezbe/ispit-3.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Ispit 3 (PDF)</h2>
-          <p>Treći ispit u PDF formatu — za preuzimanje ili printanje</p>
+          <p>Sve riječi iz kursa — označi naučene, pretraži, filtriraj po kategoriji</p>
         </div>
       </a>
     </div>
 
-    <footer>Kurs arapskog jezika — Arapski A0</footer>
+    <footer>Kurs arapskog jezika — Arapski A1</footer>
   </div>
 </body>
 

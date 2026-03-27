@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="bs" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arapski jezik — Kurs</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0f1a;
+      color: #e0d5c1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 560px;
+      width: 100%;
+    }
+
+    .arabic-title {
+      text-align: center;
+      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      font-size: 2.6rem;
+      color: #c9a84c;
+      direction: rtl;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #c9a84c;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #a89b80;
+      margin-bottom: 48px;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    a.card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #131b2e;
+      border: 1px solid #1e2a40;
+      border-radius: 14px;
+      padding: 26px 28px;
+      text-decoration: none;
+      color: #e0d5c1;
+      transition: all 0.25s;
+    }
+
+    a.card:hover {
+      border-color: #c9a84c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.12);
+    }
+
+    .card-badge {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #c9a84c;
+      background: #1a1a2e;
+      border: 1px solid #2a3550;
+      border-radius: 10px;
+      padding: 10px 16px;
+      flex-shrink: 0;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .card-text h2 {
+      font-size: 1.2rem;
+      color: #c9a84c;
+      margin-bottom: 5px;
+    }
+
+    .card-text p {
+      font-size: 0.85rem;
+      color: #7a8baa;
+      line-height: 1.4;
+    }
+
+    .card-text .tag {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: #1e2a40;
+      color: #a89b80;
+    }
+
+    .tag.done {
+      background: #1a2e1a;
+      color: #4caf50;
+    }
+
+    .tag.active {
+      background: #2e2010;
+      color: #c9a84c;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.78rem;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="arabic-title">تَعَلَّمِ الْعَرَبِيَّةَ</div>
+    <h1>Kurs arapskog jezika</h1>
+    <p class="subtitle">Odaberi nivo kursa</p>
+
+    <div class="cards">
+      <a class="card" href="A0/index.html">
+        <div class="card-badge">A0</div>
+        <div class="card-text">
+          <h2>Arapski A0</h2>
+          <p>Abeceda, slova, samoglasnici, gramatika, zamjenice, konverzacija — 14+ lekcija</p>
+        </div>
+      </a>
+
+      <a class="card" href="A1/index.html">
+        <div class="card-badge">A1</div>
+        <div class="card-text">
+          <h2>Arapski A1</h2>
+          <p>Porodica, pronominalni sufiksi, glagoli, lične zamjenice</p>
+        </div>
+      </a>
+    </div>
+
+    <footer>Kurs arapskog jezika</footer>
+  </div>
+</body>
+
+</html>
