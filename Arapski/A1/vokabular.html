@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="bs" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arapski A0 - Vokabular</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0f1a;
+      color: #e0d5c1;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 28px 20px 20px;
+      text-align: center;
+      border-bottom: 2px solid #c9a84c;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      color: #c9a84c;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 0.85rem;
+      color: #a89b80;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 14px 16px;
+      background: #0f1525;
+      border-bottom: 1px solid #1e2a40;
+    }
+
+    .controls button {
+      padding: 7px 14px;
+      border: 1px solid #2a3550;
+      border-radius: 20px;
+      background: #131b2e;
+      color: #a89b80;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .controls button:hover,
+    .controls button.active {
+      background: #c9a84c;
+      color: #0a0f1a;
+      border-color: #c9a84c;
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px 0;
+      background: #0f1525;
+    }
+
+    .toggle-btn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #2d6a4f;
+      background: #0d1f15;
+      color: #4da87a;
+    }
+
+    .toggle-btn:hover {
+      background: #143d28;
+    }
+
+    .toggle-btn.hiding {
+      border-color: #8b3a3a;
+      background: #1f0d0d;
+      color: #d46a6a;
+    }
+
+    .toggle-btn.hiding:hover {
+      background: #2a1515;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 340px;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid #2a3550;
+      background: #131b2e;
+      color: #e0d5c1;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .search-box::placeholder {
+      color: #555;
+    }
+
+    .search-box:focus {
+      border-color: #c9a84c;
+    }
+
+    .stats {
+      text-align: center;
+      padding: 8px;
+      font-size: 0.78rem;
+      color: #666;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+      padding: 12px 16px 30px;
+    }
+
+    .card {
+      background: #131b2e;
+      border: 1px solid #1e2a40;
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card:hover {
+      border-color: #c9a84c;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.1);
+    }
+
+    .card.learned {
+      border-color: #2d6a4f;
+      background: #0d1f15;
+    }
+
+    .card.hidden-learned {
+      display: none;
+    }
+
+    .card .left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card .arabic {
+      font-size: 1.55rem;
+      color: #c9a84c;
+      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      direction: rtl;
+      line-height: 1.4;
+    }
+
+    .card .trans {
+      font-size: 0.82rem;
+      color: #7a8baa;
+      margin-top: 2px;
+    }
+
+    .card .bs {
+      font-size: 0.92rem;
+      color: #d0c5a9;
+      margin-top: 1px;
+    }
+
+    .card .cat-tag {
+      font-size: 0.65rem;
+      color: #555;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card .check {
+      font-size: 1.2rem;
+      color: #2a3550;
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid #2a3550;
+      transition: all 0.2s;
+    }
+
+    .card.learned .check {
+      color: #2d6a4f;
+      border-color: #2d6a4f;
+      background: #143d28;
+    }
+
+    .progress-bar {
+      height: 3px;
+      background: #1e2a40;
+    }
+
+    .progress-bar .fill {
+      height: 100%;
+      background: #c9a84c;
+      transition: width 0.3s;
+    }
+
+    .loading-msg {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="progress-bar">
+    <div class="fill" id="progFill"></div>
+  </div>
+  <header>
+    <h1>Arapski A0 — Vokabular</h1>
+    <p>Sve riječi iz kursa · Klikni karticu da označiš kao naučeno</p>
+  </header>
+
+  <div class="controls">
+    <input type="text" class="search-box" id="search" placeholder="Pretraži (bosanski ili arapski)...">
+    <button class="active" data-cat="all">Sve</button>
+    <button data-cat="vjera">Vjera</button>
+    <button data-cat="ljudi">Ljudi</button>
+    <button data-cat="vlast">Vlast/rat</button>
+    <button data-cat="svakodnevno">Svakodnevno</button>
+    <button data-cat="glagoli">Glagoli</button>
+    <button data-cat="pridjevi">Pridjevi</button>
+    <button data-cat="fraze">Fraze</button>
+    <button data-cat="pozdravi">Pozdravi</button>
+    <button data-cat="predmeti">Predmeti</button>
+    <button data-cat="porodica">Porodica</button>
+    <button data-cat="hrana">Hrana/Priroda</button>
+    <button data-cat="životinje">Životinje</button>
+    <button data-cat="odjeća">Odjeća</button>
+    <button data-cat="pojmovi">Pojmovi</button>
+    <button data-cat="zanimanja">Zanimanja</button>
+    <button data-cat="brojevi">Brojevi/Pridjevi</button>
+    <button data-cat="zamjenice">Zamjenice</button>
+  </div>
+  <div class="toggle-row">
+    <button class="toggle-btn" id="toggleLearned">👁 Sakrij naučene</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="grid" id="grid">
+    <div class="loading-msg">Učitavanje...</div>
+  </div>
+
+  <script>
+    const words = [
+      { ar: "اللَّهُ", tr: "Allāh", bs: "Bog/Allah", cat: "vjera" },
+      { ar: "الرَّسُولُ", tr: "ar-rasūl", bs: "poslanik", cat: "vjera" },
+      { ar: "النَّبِيُّ", tr: "an-nabiyy", bs: "vjerovjesnik", cat: "vjera" },
+      { ar: "الْإِسْلَامُ", tr: "al-islām", bs: "islam", cat: "vjera" },
+      { ar: "الْقُرْآنُ", tr: "al-qur'ān", bs: "Kur'an", cat: "vjera" },
+      { ar: "الصَّلَاةُ", tr: "aṣ-ṣalāh", bs: "namaz/molitva", cat: "vjera" },
+      { ar: "الْإِيمَانُ", tr: "al-īmān", bs: "vjera/vjerovanje", cat: "vjera" },
+      { ar: "الْمُسْلِمُونَ", tr: "al-muslimūn", bs: "muslimani", cat: "vjera" },
+      { ar: "الْكُفَّارُ", tr: "al-kuffār", bs: "nevjernici", cat: "vjera" },
+      { ar: "الشِّرْكُ", tr: "aš-širk", bs: "mnogoboštvo", cat: "vjera" },
+      { ar: "الْحَقُّ", tr: "al-ḥaqq", bs: "istina/pravo", cat: "vjera" },
+      { ar: "الدِّينُ", tr: "ad-dīn", bs: "vjera/religija", cat: "vjera" },
+      { ar: "الْمَسْجِدُ", tr: "al-masjid", bs: "džamija", cat: "vjera" },
+      { ar: "الشَّهَادَةُ", tr: "aš-šahādah", bs: "svjedočanstvo", cat: "vjera" },
+      { ar: "الْجَنَّةُ", tr: "al-jannah", bs: "džennet/raj", cat: "vjera" },
+      { ar: "النَّارُ", tr: "an-nār", bs: "vatra/džehennem", cat: "vjera" },
+      { ar: "التَّوْبَةُ", tr: "at-tawbah", bs: "pokajanje", cat: "vjera" },
+      { ar: "رَجُلٌ", tr: "rajul", bs: "čovjek/muškarac", cat: "ljudi" },
+      { ar: "اِمْرَأَةٌ", tr: "imra'ah", bs: "žena", cat: "ljudi" },
+      { ar: "أَخٌ", tr: "akh", bs: "brat", cat: "ljudi" },
+      { ar: "أُخْتٌ", tr: "ukht", bs: "sestra", cat: "ljudi" },
+      { ar: "اِبْنٌ", tr: "ibn", bs: "sin", cat: "ljudi" },
+      { ar: "فَتَاةٌ", tr: "FATĀT", bs: "Djevojka", cat: "ljudi" },
+      { ar: "بِنْتٌ", tr: "bint", bs: "kćerka", cat: "ljudi" },
+      { ar: "أَبٌ", tr: "ab", bs: "otac", cat: "ljudi" },
+      { ar: "أُمٌّ", tr: "umm", bs: "majka", cat: "ljudi" },
+      { ar: "قَوْمٌ", tr: "qawm", bs: "narod/pleme", cat: "ljudi" },
+      { ar: "صَاحِبٌ", tr: "ṣāḥib", bs: "drug/prijatelj", cat: "ljudi" },
+      { ar: "عَدُوٌّ", tr: "'aduww", bs: "neprijatelj", cat: "ljudi" },
+      { ar: "النَّاسُ", tr: "an-nās", bs: "ljudi", cat: "ljudi" },
+      { ar: "قَبِيلَةٌ", tr: "qabīlah", bs: "pleme", cat: "ljudi" },
+      { ar: "عَبْدٌ", tr: "'abd", bs: "rob/sluga", cat: "ljudi" },
+      { ar: "حُرٌّ", tr: "ḥurr", bs: "slobodan čovjek", cat: "ljudi" },
+      { ar: "تَاجِرٌ", tr: "tājir", bs: "trgovac", cat: "ljudi" },
+      { ar: "الْخَلِيفَةُ", tr: "al-khalīfah", bs: "halifa", cat: "vlast" },
+      { ar: "أَمِيرٌ", tr: "amīr", bs: "vođa/emir", cat: "vlast" },
+      { ar: "الْمُلْكُ", tr: "al-mulk", bs: "vlast/kraljevstvo", cat: "vlast" },
+      { ar: "الْجَيْشُ", tr: "al-jayš", bs: "vojska", cat: "vlast" },
+      { ar: "الْحَرْبُ", tr: "al-ḥarb", bs: "rat", cat: "vlast" },
+      { ar: "السَّيْفُ", tr: "as-sayf", bs: "sablja/mač", cat: "vlast" },
+      { ar: "الْجِهَادُ", tr: "al-jihād", bs: "borba (na Božijem putu)", cat: "vlast" },
+      { ar: "النَّصْرُ", tr: "an-naṣr", bs: "pobjeda", cat: "vlast" },
+      { ar: "الْهَزِيمَةُ", tr: "al-hazīmah", bs: "poraz", cat: "vlast" },
+      { ar: "الصُّلْحُ", tr: "aṣ-ṣulḥ", bs: "mir/pomirenje", cat: "vlast" },
+      { ar: "الْعَدْلُ", tr: "al-'adl", bs: "pravda", cat: "vlast" },
+      { ar: "الظُّلْمُ", tr: "aẓ-ẓulm", bs: "nepravda/tiranija", cat: "vlast" },
+      { ar: "الشُّورَى", tr: "aš-šūrā", bs: "savjetovanje/vijeće", cat: "vlast" },
+      { ar: "الْبَيْعَةُ", tr: "al-bay'ah", bs: "prisega/zakletva", cat: "vlast" },
+      { ar: "الرَّايَةُ", tr: "ar-rāyah", bs: "zastava", cat: "vlast" },
+      { ar: "فَارِسٌ", tr: "fāris", bs: "konjanik/vitez", cat: "vlast" },
+      { ar: "السِّلَاحُ", tr: "as-silāḥ", bs: "oružje", cat: "vlast" },
+      { ar: "الْأَرْضُ", tr: "al-arḍ", bs: "zemlja", cat: "vlast" },
+      { ar: "بَيْتٌ", tr: "bayt", bs: "kuća", cat: "svakodnevno" },
+      { ar: "مَاءٌ", tr: "mā'", bs: "voda", cat: "svakodnevno" },
+      { ar: "طَعَامٌ", tr: "ṭa'ām", bs: "hrana", cat: "svakodnevno" },
+      { ar: "تَمْرٌ", tr: "tamr", bs: "hurme/datule", cat: "svakodnevno" },
+      { ar: "لَبَنٌ", tr: "laban", bs: "mlijeko", cat: "svakodnevno" },
+      { ar: "خُبْزٌ", tr: "khubz", bs: "hljeb", cat: "svakodnevno" },
+      { ar: "سُوقٌ", tr: "sūq", bs: "pijaca/tržnica", cat: "svakodnevno" },
+      { ar: "مَالٌ", tr: "māl", bs: "imetak/novac", cat: "svakodnevno" },
+      { ar: "طَرِيقٌ", tr: "ṭarīq", bs: "put/cesta", cat: "svakodnevno" },
+      { ar: "شَارِعٌ", tr: "ŠĀRIʿ", bs: "Ulica", cat: "svakodnevno" },
+      { ar: "بِنَايَةٌ", tr: "BINĀJA", bs: "Zgrada", cat: "svakodnevno" },
+      { ar: "قَرْيَةٌ", tr: "QARJA", bs: "Selo", cat: "svakodnevno" },
+      { ar: "مَدِينَةٌ", tr: "MADĪNA", bs: "Grad", cat: "svakodnevno" },
+      { ar: "فَصْلٌ", tr: "FAṢL", bs: "Učionica/Razred", cat: "svakodnevno" },
+      { ar: "لَيْلٌ", tr: "layl", bs: "noć", cat: "svakodnevno" },
+      { ar: "نَهَارٌ", tr: "nahār", bs: "dan", cat: "svakodnevno" },
+      { ar: "يَوْمٌ", tr: "yawm", bs: "dan", cat: "svakodnevno" },
+      { ar: "وَقْتٌ", tr: "waqt", bs: "vrijeme", cat: "svakodnevno" },
+      { ar: "مَوْتٌ", tr: "mawt", bs: "smrt", cat: "svakodnevno" },
+      { ar: "حَيَاةٌ", tr: "ḥayāh", bs: "život", cat: "svakodnevno" },
+      { ar: "دَمٌ", tr: "dam", bs: "krv", cat: "svakodnevno" },
+      { ar: "قَلْبٌ", tr: "qalb", bs: "srce", cat: "svakodnevno" },
+      { ar: "كَلَامٌ", tr: "kalām", bs: "govor/riječi", cat: "svakodnevno" },
+      { ar: "قَالَ", tr: "qāla", bs: "rekao je", cat: "glagoli" },
+      { ar: "جَاءَ", tr: "jā'a", bs: "došao je", cat: "glagoli" },
+      { ar: "ذَهَبَ", tr: "dhahaba", bs: "otišao je", cat: "glagoli" },
+      { ar: "عَلِمَ", tr: "'alima", bs: "znao je/saznao", cat: "glagoli" },
+      { ar: "أَرَادَ", tr: "arāda", bs: "htio je/želio", cat: "glagoli" },
+      { ar: "رَأَى", tr: "ra'ā", bs: "vidio je", cat: "glagoli" },
+      { ar: "سَمِعَ", tr: "sami'a", bs: "čuo je", cat: "glagoli" },
+      { ar: "أَمَرَ", tr: "amara", bs: "naredio je", cat: "glagoli" },
+      { ar: "قَتَلَ", tr: "qatala", bs: "ubio je", cat: "glagoli" },
+      { ar: "أَسْلَمَ", tr: "aslama", bs: "primio islam", cat: "glagoli" },
+      { ar: "خَافَ", tr: "khāfa", bs: "bojao se", cat: "glagoli" },
+      { ar: "وَعَدَ", tr: "wa'ada", bs: "obećao je", cat: "glagoli" },
+      { ar: "حَمِدَ", tr: "ḥamida", bs: "zahvalio/hvalio", cat: "glagoli" },
+      { ar: "صَبَرَ", tr: "ṣabara", bs: "strpio se", cat: "glagoli" },
+      { ar: "دَعَا", tr: "da'ā", bs: "pozvao/molio (dovu)", cat: "glagoli" },
+      { ar: "كَبِيرٌ", tr: "kabīr", bs: "velik", cat: "pridjevi" },
+      { ar: "صَغِيرٌ", tr: "ṣaghīr", bs: "mali", cat: "pridjevi" },
+      { ar: "قَوِيٌّ", tr: "qawiyy", bs: "jak/moćan", cat: "pridjevi" },
+      { ar: "ضَعِيفٌ", tr: "ḍa'īf", bs: "slab", cat: "pridjevi" },
+      { ar: "كَثِيرٌ", tr: "kathīr", bs: "mnogo/brojan", cat: "pridjevi" },
+      { ar: "قَلِيلٌ", tr: "qalīl", bs: "malo/malobrojan", cat: "pridjevi" },
+      { ar: "عَظِيمٌ", tr: "'aẓīm", bs: "veličanstven", cat: "pridjevi" },
+      { ar: "جَدِيدٌ", tr: "jadīd", bs: "novi", cat: "pridjevi" },
+      { ar: "صَادِقٌ", tr: "ṣādiq", bs: "iskren/istinit", cat: "pridjevi" },
+      { ar: "شُجَاعٌ", tr: "šujā'", bs: "hrabar", cat: "pridjevi" },
+      { ar: "بِسْمِ اللَّهِ", tr: "bismi-llāh", bs: "u ime Boga", cat: "fraze" },
+      { ar: "إِنْ شَاءَ اللَّهُ", tr: "in šā'a-llāh", bs: "ako Bog da", cat: "fraze" },
+      { ar: "الْحَمْدُ لِلَّهِ", tr: "al-ḥamdu li-llāh", bs: "hvala Bogu", cat: "fraze" },
+      { ar: "سُبْحَانَ اللَّهِ", tr: "subḥāna-llāh", bs: "slavljen neka je Bog", cat: "fraze" },
+      { ar: "اللَّهُ أَكْبَرُ", tr: "Allāhu akbar", bs: "Bog je najveći", cat: "fraze" },
+      { ar: "لَا إِلٰهَ إِلَّا اللَّهُ", tr: "lā ilāha illā-llāh", bs: "nema boga osim Boga", cat: "fraze" },
+      { ar: "أَسْتَغْفِرُ اللَّهَ", tr: "astaghfiru-llāh", bs: "tražim oprost od Boga", cat: "fraze" },
+      { ar: "السَّلَامُ عَلَيْكُمْ", tr: "as-salāmu 'alaykum", bs: "mir s vama (pozdrav)", cat: "fraze" },
+      { ar: "يَا أَيُّهَا النَّاسُ", tr: "yā ayyuha-n-nās", bs: "o ljudi!", cat: "fraze" },
+      { ar: "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ", tr: "ṣallā-llāhu 'alayhi wa sallam", bs: "neka su Božiji mir i blagoslov na njega", cat: "fraze" },
+      { ar: "وَاللَّهِ", tr: "wa-llāhi", bs: "tako mi Boga", cat: "fraze" },
+      { ar: "مَا شَاءَ اللَّهُ", tr: "mā šā'a-llāh", bs: "kako Bog htjede (divljenje)", cat: "fraze" },
+      // --- Vokabular iz kursa ---
+      // Pozdravi
+      { ar: "شُكْرًا", tr: "ŠUKRAN", bs: "Hvala", cat: "pozdravi" },
+      { ar: "عَفْوًا", tr: "ʿAFWAN", bs: "Nema na čemu", cat: "pozdravi" },
+      { ar: "سَلَامٌ", tr: "SALĀM", bs: "Mir/Pozdrav", cat: "pozdravi" },
+      { ar: "السَّلَامُ عَلَيْكُمْ", tr: "AS-SALĀMU ʿALAJKUM", bs: "Mir vama", cat: "pozdravi" },
+      { ar: "وَعَلَيْكُمُ السَّلَامُ", tr: "WA ʿALAJKUMU AS-SALĀM", bs: "I vama mir", cat: "pozdravi" },
+      { ar: "مَرْحَبًا", tr: "MARḤABAN", bs: "Zdravo", cat: "pozdravi" },
+      { ar: "أَهْلًا وَسَهْلًا", tr: "AHLAN WA SAHLAN", bs: "Dobrodošao/la", cat: "pozdravi" },
+      { ar: "كَيْفَ حَالُكَ؟", tr: "KAJFA ḤĀLUKA?", bs: "Kako si?", cat: "pozdravi" },
+      { ar: "بِخَيْرٍ", tr: "BIḪAJRIN", bs: "Dobro (sam)", cat: "pozdravi" },
+      { ar: "تَفَضَّلْ", tr: "TAFAḌḌAL", bs: "Izvoli", cat: "pozdravi" },
+      { ar: "نَعَمْ", tr: "NAʿAM", bs: "Da", cat: "pozdravi" },
+      // Predmeti
+      { ar: "بَيْتٌ", tr: "BAJT", bs: "Kuća", cat: "predmeti" },
+      { ar: "بَابٌ", tr: "BĀB", bs: "Vrata", cat: "predmeti" },
+      { ar: "شَاشَةٌ", tr: "ŠĀŠA", bs: "Ekran", cat: "predmeti" },
+      { ar: "سَبُّورَةٌ", tr: "SABBŪRA", bs: "Školska tabla", cat: "predmeti" },
+      { ar: "صُورَةٌ", tr: "ṢŪRA", bs: "Slika", cat: "predmeti" },
+      { ar: "سَجَّادَةٌ", tr: "SADŽDŽĀDA", bs: "Prostirka", cat: "predmeti" },
+      { ar: "سِتَارَةٌ", tr: "SITĀRA", bs: "Zavjesa", cat: "predmeti" },
+      { ar: "غُرْفَةٌ", tr: "ĠURFA", bs: "Soba", cat: "predmeti" },
+      { ar: "خَرِيطَةٌ", tr: "ḪARĪṬA", bs: "Karta/Mapa", cat: "predmeti" },
+      { ar: "طَبَاشِيرٌ", tr: "ṬABĀŠĪR", bs: "Kreda", cat: "predmeti" },
+      { ar: "كِتَابٌ", tr: "KITĀB", bs: "Knjiga", cat: "predmeti" },
+      { ar: "ثَلَّاجَةٌ", tr: "ṮALLĀDŽA", bs: "Frižider", cat: "predmeti" },
+      { ar: "دُولَابٌ", tr: "DŪLĀB", bs: "Ormar/Dolap", cat: "predmeti" },
+      { ar: "مِلْعَقَةٌ", tr: "MILʿAQA", bs: "Kašika", cat: "predmeti" },
+      { ar: "حَقِيبَةٌ", tr: "ḤAQĪBA", bs: "Tašna/Ruksak", cat: "predmeti" },
+      { ar: "قَلَمٌ", tr: "QALAM", bs: "Olovka", cat: "predmeti" },
+      { ar: "دَفْتَرٌ", tr: "DAFTAR", bs: "Sveska/Bilježnica", cat: "predmeti" },
+      { ar: "مِمْحَاةٌ", tr: "MIMḤĀ", bs: "Gumica", cat: "predmeti" },
+      { ar: "مِكْنَسَةٌ", tr: "MIKNASA", bs: "Metla", cat: "predmeti" },
+      { ar: "وِسَادَةٌ", tr: "WISĀDA", bs: "Jastuk", cat: "predmeti" },
+      { ar: "قُفْلٌ", tr: "QUFL", bs: "Brava/Katanac", cat: "predmeti" },
+      { ar: "شَوْكَةٌ", tr: "ŠAWKA", bs: "Viljuška", cat: "predmeti" },
+      { ar: "كُرَةٌ", tr: "KURA", bs: "Lopta", cat: "predmeti" },
+      { ar: "وَرَقَةٌ", tr: "WARAQA", bs: "Papir/List", cat: "predmeti" },
+      { ar: "مَنْزِلٌ", tr: "MANZIL", bs: "Stan/Kuća", cat: "predmeti" },
+      { ar: "مَلْعَبٌ", tr: "MALʿAB", bs: "Stadion/Igralište", cat: "predmeti" },
+      { ar: "مِسْطَرَةٌ", tr: "MISṬARA", bs: "Linijar", cat: "predmeti" },
+      { ar: "جِدَارٌ", tr: "DŽIDĀR", bs: "Zid", cat: "predmeti" },
+      { ar: "مَطْبَخٌ", tr: "MAṬBAḪ", bs: "Kuhinja", cat: "predmeti" },
+      // Porodica
+      { ar: "أَبٌ", tr: "AB", bs: "Otac", cat: "porodica" },
+      { ar: "جَدٌّ", tr: "DŽADD", bs: "Djed", cat: "porodica" },
+      { ar: "جَدَّةٌ", tr: "DŽADDA", bs: "Baka/Nena", cat: "porodica" },
+      { ar: "حَبِيبٌ", tr: "ḤABĪB", bs: "Dragi (m)", cat: "porodica" },
+      { ar: "حَبِيبَةٌ", tr: "ḤABĪBA", bs: "Draga (ž)", cat: "porodica" },
+      { ar: "وَلَدٌ", tr: "WALAD", bs: "Dijete", cat: "porodica" },
+      { ar: "زَوْجَةٌ", tr: "ZAWDŽA", bs: "Supruga", cat: "porodica" },
+      { ar: "زَوْجٌ", tr: "ZAWDŽ", bs: "Suprug", cat: "porodica" },
+      // Hrana i priroda
+      { ar: "تُفَّاحَةٌ", tr: "TUFFĀḤA", bs: "Jabuka", cat: "hrana" },
+      { ar: "خُبْزٌ", tr: "ḪUBZ", bs: "Hljeb", cat: "hrana" },
+      { ar: "زَيْتٌ", tr: "ZAJT", bs: "Ulje", cat: "hrana" },
+      { ar: "دَجَاجٌ", tr: "DADŽĀDŽ", bs: "Piletina", cat: "hrana" },
+      { ar: "ذُرَّةٌ", tr: "ḎURRA", bs: "Kukuruz", cat: "hrana" },
+      { ar: "بُذُورٌ", tr: "BUḎŪR", bs: "Sjeme", cat: "hrana" },
+      { ar: "شَجَرَةٌ", tr: "ŠADŽARA", bs: "Stablo", cat: "hrana" },
+      { ar: "حَشِيشٌ", tr: "ḤAŠĪŠ", bs: "Trava", cat: "hrana" },
+      { ar: "تُوتٌ", tr: "TŪT", bs: "Dud/Murva", cat: "hrana" },
+      { ar: "بَطَاطِسٌ", tr: "BAṬĀṬIS", bs: "Krompir", cat: "hrana" },
+      { ar: "حِمْصٌ", tr: "ḤIMṢ", bs: "Hummus", cat: "hrana" },
+      { ar: "بَيْضَةٌ", tr: "BAJḌA", bs: "Jaje", cat: "hrana" },
+      { ar: "بَطِّيخٌ", tr: "BAṬṬĪḪ", bs: "Lubenica", cat: "hrana" },
+      { ar: "خُضْرَوَاتٌ", tr: "ḪUḌRAWĀT", bs: "Povrće", cat: "hrana" },
+      { ar: "غَابَةٌ", tr: "ĠĀBA", bs: "Šuma", cat: "hrana" },
+      { ar: "مَاءٌ", tr: "MĀʾ", bs: "Voda", cat: "hrana" },
+      { ar: "أَنَانَاسٌ", tr: "ANĀNĀS", bs: "Ananas", cat: "hrana" },
+      { ar: "نَهْرٌ", tr: "NAHR", bs: "Rijeka", cat: "hrana" },
+      { ar: "بُرْتُقَالٌ", tr: "BURTUQĀL", bs: "Naranča", cat: "hrana" },
+      { ar: "مِلْحٌ", tr: "MILḤ", bs: "So", cat: "hrana" },
+      { ar: "تَمْرٌ", tr: "TAMR", bs: "Hurma/Datula", cat: "hrana" },
+      { ar: "فَاكِهَةٌ", tr: "FĀKIHA", bs: "Voće", cat: "hrana" },
+      { ar: "نَجْمَةٌ", tr: "NADŽMA", bs: "Zvijezda", cat: "hrana" },
+      { ar: "لَيْمُونٌ", tr: "LAJMŪN", bs: "Limun", cat: "hrana" },
+      { ar: "فَرَاوِلَةٌ", tr: "FARĀWILA", bs: "Jagoda", cat: "hrana" },
+      { ar: "غَدَاءٌ", tr: "ĠADĀ'", bs: "Ručak", cat: "hrana" },
+      // Životinje
+      { ar: "دُبٌّ", tr: "DUBB", bs: "Medvjed", cat: "životinje" },
+      { ar: "حُوتٌ", tr: "ḤŪT", bs: "Kit", cat: "životinje" },
+      { ar: "ذُبَابَةٌ", tr: "ḎUBĀBA", bs: "Muha", cat: "životinje" },
+      { ar: "أَوَزَّةٌ", tr: "AWAZZA", bs: "Guska", cat: "životinje" },
+      { ar: "بَطَّةٌ", tr: "BAṬṬA", bs: "Patka", cat: "životinje" },
+      { ar: "طَاوُوسٌ", tr: "ṬĀWŪS", bs: "Paun", cat: "životinje" },
+      { ar: "صُرْصُورٌ", tr: "ṢURṢŪR", bs: "Žohar", cat: "životinje" },
+      { ar: "ظَبْيٌ", tr: "ẒABJ", bs: "Gazela", cat: "životinje" },
+      { ar: "غُرَابٌ", tr: "ĠURĀB", bs: "Vrana", cat: "životinje" },
+      { ar: "فَرَاشَةٌ", tr: "FARĀŠA", bs: "Leptir", cat: "životinje" },
+      { ar: "بَقَرَةٌ", tr: "BAQARA", bs: "Krava", cat: "životinje" },
+      { ar: "عَقْرَبٌ", tr: "ʿAQRAB", bs: "Škorpija", cat: "životinje" },
+      { ar: "ضِفْدَعٌ", tr: "ḌIFDAʿ", bs: "Žaba", cat: "životinje" },
+      { ar: "كَلْبٌ", tr: "KALB", bs: "Pas", cat: "životinje" },
+      { ar: "عُصْفُورٌ", tr: "ʿUṢFŪR", bs: "Vrabac", cat: "životinje" },
+      { ar: "حَيَوَانٌ", tr: "ḤAYAWĀN", bs: "Životinja", cat: "životinje" },
+      { ar: "ذِئْبٌ", tr: "ḎIʾB", bs: "Vuk", cat: "životinje" },
+      { ar: "أَسَدٌ", tr: "ASAD", bs: "Lav", cat: "životinje" },
+      { ar: "خَيْلٌ", tr: "ḪAJL", bs: "Konji", cat: "životinje" },
+      // Odjeća
+      { ar: "ثَوْبٌ", tr: "ṮAWB", bs: "Odjeća", cat: "odjeća" },
+      { ar: "جِيبَةٌ", tr: "DŽĪBA", bs: "Suknja", cat: "odjeća" },
+      { ar: "جَوَارِبٌ", tr: "DŽAWĀRIB", bs: "Čarape", cat: "odjeća" },
+      { ar: "ثِيَابٌ", tr: "ṮIJĀB", bs: "Odjeća pl.", cat: "odjeća" },
+      { ar: "خَيْطٌ", tr: "ḪAJṬ", bs: "Konac", cat: "odjeća" },
+      { ar: "فُسْتَانٌ", tr: "FUSTĀN", bs: "Haljina", cat: "odjeća" },
+      // Apstraktni pojmovi
+      { ar: "جَوَابٌ", tr: "DŽAWĀB", bs: "Odgovor", cat: "pojmovi" },
+      { ar: "إِجَابَةٌ", tr: "IDŽĀBA", bs: "Odgovor", cat: "pojmovi" },
+      { ar: "تَوْبَةٌ", tr: "TAWBA", bs: "Pokajanje", cat: "pojmovi" },
+      { ar: "ثُبُوتٌ", tr: "ṮUBŪT", bs: "Stabilnost", cat: "pojmovi" },
+      { ar: "وُجُودٌ", tr: "WUDŽŪD", bs: "Prisutnost", cat: "pojmovi" },
+      { ar: "بَحْثٌ", tr: "BAḤṮ", bs: "Istraživanje", cat: "pojmovi" },
+      { ar: "حَدِيثٌ", tr: "ḤADĪṮ", bs: "Govor", cat: "pojmovi" },
+      { ar: "حَرْبٌ", tr: "ḤARB", bs: "Rat", cat: "pojmovi" },
+      { ar: "حِسَابٌ", tr: "ḤISĀB", bs: "Račun", cat: "pojmovi" },
+      { ar: "ضَرْبَةٌ", tr: "ḌARBA", bs: "Udarac", cat: "pojmovi" },
+      { ar: "دَرْسٌ", tr: "DARS", bs: "Lekcija", cat: "pojmovi" },
+      { ar: "دُرُوسٌ", tr: "DURŪS", bs: "Lekcije pl.", cat: "pojmovi" },
+      { ar: "تَرْتِيبٌ", tr: "TARTĪB", bs: "Redoslijed", cat: "pojmovi" },
+      { ar: "رَغْبَةٌ", tr: "RAĠBA", bs: "Želja", cat: "pojmovi" },
+      { ar: "دِفَاعٌ", tr: "DIFĀʿ", bs: "Odbrana", cat: "pojmovi" },
+      { ar: "حُقُوقٌ", tr: "ḤUQŪQ", bs: "Prava", cat: "pojmovi" },
+      { ar: "نُورٌ", tr: "NŪR", bs: "Svjetlo", cat: "pojmovi" },
+      { ar: "لَيْلٌ", tr: "LAJL", bs: "Noć", cat: "pojmovi" },
+      { ar: "حَقِيقَةٌ", tr: "ḤAQĪQA", bs: "Istina", cat: "pojmovi" },
+      { ar: "عَطْفٌ", tr: "ʿAṬF", bs: "Osjećaj/Suosjećanje", cat: "pojmovi" },
+      { ar: "أَخْبَارٌ", tr: "AḪBĀR", bs: "Vijesti", cat: "pojmovi" },
+      { ar: "أَمْنٌ", tr: "AMN", bs: "Sigurnost", cat: "pojmovi" },
+      { ar: "كَلَامٌ", tr: "KALĀM", bs: "Govor/Riječ", cat: "pojmovi" },
+      { ar: "قِرَاءَةٌ", tr: "QIRĀʾA", bs: "Čitanje", cat: "pojmovi" },
+      { ar: "شَيْءٌ", tr: "ŠAJʾ", bs: "Stvar/Predmet", cat: "pojmovi" },
+      { ar: "خَطَأٌ", tr: "ḪAṬA'", bs: "Greška", cat: "pojmovi" },
+      { ar: "شَرْقٌ", tr: "ŠARQ", bs: "Istok", cat: "pojmovi" },
+      { ar: "إِمْلَاءٌ", tr: "IMLĀ'", bs: "Diktat", cat: "pojmovi" },
+      { ar: "أَلَمٌ", tr: "ALAM", bs: "Bol", cat: "pojmovi" },
+      { ar: "خَبَرٌ", tr: "ḪABAR", bs: "Vijest", cat: "pojmovi" },
+      { ar: "تَرْحِيبٌ", tr: "TARḤĪB", bs: "Pozdrav/Dobrodošlica", cat: "pojmovi" },
+      { ar: "عَمَلٌ", tr: "ʿAMAL", bs: "Posao/Rad", cat: "pojmovi" },
+      { ar: "رَحْلَةٌ", tr: "RAḤLA", bs: "Putovanje", cat: "pojmovi" },
+      { ar: "خَيْرٌ", tr: "ḪAJR", bs: "Dobro", cat: "pojmovi" },
+      // Zanimanja i ostalo
+      { ar: "خَبَّازٌ", tr: "ḪABBĀZ", bs: "Pekar", cat: "zanimanja" },
+      { ar: "جَيْشٌ", tr: "DŽAJŠ", bs: "Vojska", cat: "zanimanja" },
+      { ar: "سَيَّارَةٌ", tr: "SAJJĀRA", bs: "Automobil", cat: "zanimanja" },
+      { ar: "دَرَّاجَةٌ", tr: "DARRĀDŽA", bs: "Bicikl", cat: "zanimanja" },
+      { ar: "جِسْرٌ", tr: "DŽISR", bs: "Most", cat: "zanimanja" },
+      { ar: "عَسْكَرِيٌّ", tr: "ʿASKARĪ", bs: "Vojnik", cat: "zanimanja" },
+      { ar: "بَحْرٌ", tr: "BAḤR", bs: "More", cat: "zanimanja" },
+      { ar: "سِبَاحَةٌ", tr: "SIBĀḤA", bs: "Plivanje", cat: "zanimanja" },
+      { ar: "رِيشَةٌ", tr: "RĪŠA", bs: "Pero", cat: "zanimanja" },
+      { ar: "حُبُوبٌ", tr: "ḤUBŪB", bs: "Pilule", cat: "zanimanja" },
+      { ar: "طَبِيبٌ", tr: "ṬABĪB", bs: "Ljekar", cat: "zanimanja" },
+      { ar: "خَيَّاطٌ", tr: "ḪAJJĀṬ", bs: "Krojač", cat: "zanimanja" },
+      { ar: "ضَابِطٌ", tr: "ḌĀBIṬ", bs: "Oficir", cat: "zanimanja" },
+      { ar: "حَارِسٌ", tr: "ḤĀRIS", bs: "Čuvar", cat: "zanimanja" },
+      { ar: "صَارُوخٌ", tr: "ṢĀRŪḪ", bs: "Raketa", cat: "zanimanja" },
+      { ar: "صَبَّارٌ", tr: "ṢABBĀR", bs: "Kaktus", cat: "zanimanja" },
+      { ar: "أَرْضٌ", tr: "ARḌ", bs: "Zemlja", cat: "zanimanja" },
+      { ar: "تَاجٌ", tr: "TĀDŽ", bs: "Kruna", cat: "zanimanja" },
+      { ar: "طَبَّاخٌ", tr: "ṬABBĀḪ", bs: "Kuhar", cat: "zanimanja" },
+      { ar: "ثَرْثَارٌ", tr: "ṮARṮĀR", bs: "Pričalica", cat: "zanimanja" },
+      { ar: "رَصَاصَةٌ", tr: "RAṢĀṢA", bs: "Metak", cat: "zanimanja" },
+      { ar: "حَظِيرَةٌ", tr: "ḤAẒĪRA", bs: "Štala", cat: "zanimanja" },
+      { ar: "قَبْرٌ", tr: "QABR", bs: "Kabur/Grob", cat: "zanimanja" },
+      { ar: "جَسَدٌ", tr: "DŽASAD", bs: "Tijelo", cat: "zanimanja" },
+      { ar: "صَبْرٌ", tr: "ṢABR", bs: "Strpljenje", cat: "zanimanja" },
+      { ar: "مُسْلِمٌ", tr: "MUSLIM", bs: "Musliman", cat: "zanimanja" },
+      { ar: "مُمَثِّلٌ", tr: "MUMAṮṮIL", bs: "Glumac", cat: "zanimanja" },
+      { ar: "لَاعِبَةٌ", tr: "LĀʿIBA", bs: "Igračica/Sportistkinja", cat: "zanimanja" },
+      { ar: "هَرَمٌ", tr: "HARAM", bs: "Piramida", cat: "zanimanja" },
+      { ar: "قَصْرٌ", tr: "QAṢR", bs: "Dvorac", cat: "zanimanja" },
+      { ar: "وَجْهٌ", tr: "WADŽH", bs: "Lice", cat: "zanimanja" },
+      { ar: "رَضِيعٌ", tr: "RAḌĪʿ", bs: "Dojenče", cat: "zanimanja" },
+      { ar: "مُدَرِّسَةٌ", tr: "MUDARRISA", bs: "Učiteljica", cat: "zanimanja" },
+      { ar: "مُهَنْدِسٌ", tr: "MUHANDIS", bs: "Inženjer", cat: "zanimanja" },
+      { ar: "مُؤْمِنٌ", tr: "MUʾMIN", bs: "Vjernik", cat: "zanimanja" },
+      { ar: "طَالِبٌ", tr: "ṬĀLIB", bs: "Student", cat: "zanimanja" },
+      { ar: "طَالِبَةٌ", tr: "ṬĀLIBA", bs: "Studentica", cat: "zanimanja" },
+      { ar: "طَبِيبَةٌ", tr: "ṬABĪBA", bs: "Liječnica", cat: "zanimanja" },
+      { ar: "مُعَلِّمٌ", tr: "MUʿALLIM", bs: "Učitelj", cat: "zanimanja" },
+      { ar: "سَيِّدٌ", tr: "SAJJID", bs: "Gospodin", cat: "zanimanja" },
+      { ar: "رَفِيقٌ", tr: "RAFĪQ", bs: "Prijatelj/Drug", cat: "zanimanja" },
+      { ar: "صَيْدَلِيَّةٌ", tr: "ṢAJDALIYYA", bs: "Apoteka", cat: "zanimanja" },
+      { ar: "مُسْتَشْفَى", tr: "MUSTAŠFĀ", bs: "Bolnica", cat: "zanimanja" },
+      { ar: "كُلِّيَّةٌ", tr: "KULLIYYA", bs: "Fakultet", cat: "zanimanja" },
+      { ar: "حَافِلَةٌ", tr: "ḤĀFILA", bs: "Autobus", cat: "zanimanja" },
+      { ar: "جُمْجُمَةٌ", tr: "DŽUMDŽUMA", bs: "Lubanja", cat: "zanimanja" },
+      { ar: "دَوَاءٌ", tr: "DAWĀʾ", bs: "Lijek", cat: "zanimanja" },
+      { ar: "كُتُبٌ", tr: "KUTUB", bs: "Knjige (pl.)", cat: "zanimanja" },
+      // Brojevi i pridjevi
+      { ar: "وَاحِدٌ", tr: "WĀḤID", bs: "Jedan", cat: "brojevi" },
+      { ar: "سَبْعٌ", tr: "SABʿ", bs: "Sedam", cat: "brojevi" },
+      { ar: "جَدِيدٌ", tr: "DŽADĪD", bs: "Nov", cat: "brojevi" },
+      { ar: "ثَابِتٌ", tr: "ṮĀBIT", bs: "Miran (m)", cat: "brojevi" },
+      { ar: "ثَابِتَةٌ", tr: "ṮĀBITA", bs: "Mirna (ž)", cat: "brojevi" },
+      { ar: "أَخْضَرُ", tr: "AḪḌAR", bs: "Zelen", cat: "brojevi" },
+      { ar: "صَغِيرٌ", tr: "ṢAĠĪR", bs: "Malen", cat: "brojevi" },
+      { ar: "قَرِيبَةٌ", tr: "QARĪBA", bs: "Bliska", cat: "brojevi" },
+      { ar: "كَبِيرٌ", tr: "KABĪR", bs: "Velik", cat: "brojevi" },
+      { ar: "جَمِيلٌ", tr: "DŽAMĪL", bs: "Lijep", cat: "brojevi" },
+      { ar: "مَجْنُونٌ", tr: "MADŽNŪN", bs: "Lud", cat: "brojevi" },
+      { ar: "غَاضِبٌ", tr: "ĠĀḌIB", bs: "Ljut", cat: "brojevi" },
+      { ar: "ثَمَانِيَةٌ", tr: "ṮAMĀNIYA", bs: "Osam", cat: "brojevi" },
+      { ar: "شَدِيدٌ", tr: "ŠADĪD", bs: "Jak/Žestok", cat: "brojevi" },
+      { ar: "وَاسِعٌ", tr: "WĀSIʿ", bs: "Prostran/Širok", cat: "brojevi" },
+      { ar: "ضَيِّقٌ", tr: "ḌAJJIQ", bs: "Uzak/Tijesan", cat: "brojevi" },
+      { ar: "نَحِيفٌ", tr: "NAḤĪF", bs: "Mršav/Hršav", cat: "brojevi" },
+      { ar: "دَقِيقٌ", tr: "DAQĪQ", bs: "Precizan/Tačan", cat: "brojevi" },
+      { ar: "قَدِيمٌ", tr: "QADĪM", bs: "Star", cat: "brojevi" },
+      { ar: "مَاهِرٌ", tr: "MĀHIR", bs: "Vješt/Spretan", cat: "brojevi" },
+      { ar: "مَرِيضٌ", tr: "MARĪḌ", bs: "Bolestan", cat: "brojevi" },
+      { ar: "أَنِيقٌ", tr: "ANĪQ", bs: "Elegantan", cat: "brojevi" },
+      { ar: "مَتِينٌ", tr: "MATĪN", bs: "Čvrst/Solidan", cat: "brojevi" },
+      { ar: "مُجْتَهِدٌ", tr: "MUDŽTAHID", bs: "Marljiv/Vrijedan", cat: "brojevi" },
+      { ar: "ذَكِيٌّ", tr: "ḎAKĪ", bs: "Pametan", cat: "brojevi" },
+      { ar: "عَجُوزٌ", tr: "ʿADŽŪZ", bs: "Star/Ostarjeli", cat: "brojevi" },
+      { ar: "مَشْهُورٌ", tr: "MAŠHŪR", bs: "Poznat/Slavan", cat: "brojevi" },
+      { ar: "طَوِيلٌ", tr: "ṬAWĪL", bs: "Dugačak/Visok", cat: "brojevi" },
+      { ar: "قَصِيرٌ", tr: "QAṢĪR", bs: "Kratak/Nizak", cat: "brojevi" },
+      { ar: "ثَقِيلٌ", tr: "ṮAQĪL", bs: "Težak", cat: "brojevi" },
+      { ar: "لَذِيذٌ", tr: "LAḎĪḎ", bs: "Ukusan", cat: "brojevi" },
+      // Glagoli (kurs)
+      { ar: "تَابَ", tr: "TĀBA", bs: "Pokajati se", cat: "glagoli" },
+      { ar: "يَتُوبُ", tr: "JATŪBU", bs: "On se kaje", cat: "glagoli" },
+      { ar: "ثَبَتَ", tr: "ṮABATA", bs: "Mirovati", cat: "glagoli" },
+      { ar: "يُحِبُّ", tr: "JUḤIBBU", bs: "On voli", cat: "glagoli" },
+      { ar: "أَجَابَ", tr: "ADŽĀBA", bs: "Odgovoriti", cat: "glagoli" },
+      { ar: "خَرَجَ", tr: "ḪARADŽA", bs: "Izaći", cat: "glagoli" },
+      { ar: "يَشْرَبُ", tr: "JAŠRABU", bs: "On pije", cat: "glagoli" },
+      { ar: "شَرِبَ", tr: "ŠARIBA", bs: "Piti", cat: "glagoli" },
+      { ar: "سَبَحَ", tr: "SABAḤA", bs: "Plivati", cat: "glagoli" },
+      { ar: "ذَبَحَ", tr: "ḎABAḤA", bs: "Zaklati", cat: "glagoli" },
+      { ar: "جَحَظَ", tr: "DŽAḤAẒA", bs: "Iskočiti", cat: "glagoli" },
+      { ar: "يَغُوصُ", tr: "JAĠŪṢ", bs: "Roniti", cat: "glagoli" },
+      { ar: "ضَحِكَ", tr: "ḌAḤIKA", bs: "Smijati se", cat: "glagoli" },
+      { ar: "لَعِبَ", tr: "LAʿIBA", bs: "Igrati", cat: "glagoli" },
+      { ar: "فَتَحَ", tr: "FATAḤA", bs: "Otvoriti/Osvojiti", cat: "glagoli" },
+      { ar: "اِسْتَغْفَرَ", tr: "ISTAĠFARA", bs: "Tražiti oprost", cat: "glagoli" },
+      { ar: "قَرَأَ", tr: "QARAʾA", bs: "Čitati", cat: "glagoli" },
+      { ar: "يَعْمَلُ", tr: "JAʿMALU", bs: "On radi", cat: "glagoli" },
+      { ar: "يَتَكَلَّمُ", tr: "JATAKALLAMU", bs: "On govori", cat: "glagoli" },
+      { ar: "سَكَنَ", tr: "SAKANA", bs: "Stanovati", cat: "glagoli" },
+      { ar: "يَفْهَمُ", tr: "JAFHAMU", bs: "On razumije", cat: "glagoli" },
+      // Zamjenice i čestice
+      { ar: "أَنَا", tr: "ANA", bs: "Ja", cat: "zamjenice" },
+      { ar: "أَنْتَ", tr: "ANTA", bs: "Ti (m.r.)", cat: "zamjenice" },
+      { ar: "أَنْتِ", tr: "ANTI", bs: "Ti (ž.r.)", cat: "zamjenice" },
+      { ar: "هُوَ", tr: "HUWA", bs: "On", cat: "zamjenice" },
+      { ar: "هِيَ", tr: "HIJA", bs: "Ona", cat: "zamjenice" },
+      { ar: "نَعَمْ", tr: "NAʿAM", bs: "Da", cat: "zamjenice" },
+      { ar: "لَا", tr: "LĀ", bs: "Ne", cat: "zamjenice" },
+      { ar: "هَلْ", tr: "HAL", bs: "Da li (upitna čestica)", cat: "zamjenice" },
+      { ar: "هَذَا", tr: "HĀḎĀ", bs: "Ovaj/Ovo (m.r.)", cat: "zamjenice" },
+      { ar: "هَذِهِ", tr: "HĀḎIHI", bs: "Ova/Ovo (ž.r.)", cat: "zamjenice" },
+      { ar: "مَا", tr: "MĀ", bs: "Šta (upitna zam.)", cat: "zamjenice" },
+      { ar: "مَنْ", tr: "MAN", bs: "Ko (upitna zam.)", cat: "zamjenice" },
+      { ar: "وَ", tr: "WA", bs: "I/A (veznik)", cat: "zamjenice" },
+      { ar: "كَيْفَ", tr: "KAJFA", bs: "Kako", cat: "zamjenice" },
+      { ar: "عَلَى", tr: "ʿALĀ", bs: "Na", cat: "zamjenice" },
+      //
+      { ar: "دَائِرَةٌ", tr: "DĀʾIRA", bs: "Krug/Kružnica", cat: "predmeti" },
+      { ar: "قَمِيصٌ", tr: "QAMĪṢ", bs: "Košulja", cat: "odjeća" },
+      { ar: "شَمْسٌ", tr: "ŠAMS", bs: "Sunce", cat: "hrana" },
+      { ar: "زَهْرَةٌ", tr: "ZAHRA", bs: "Cvijet", cat: "hrana" },
+      { ar: "كُرْسِيٌّ", tr: "KURSĪ", bs: "Stolica", cat: "predmeti" },
+      { ar: "جَهْلٌ", tr: "DŽAHL", bs: "Neznanje", cat: "pojmovi" },
+      { ar: "دَرَجَةٌ", tr: "DARADŽA", bs: "Stepenica/Ocjena", cat: "pojmovi" },
+      { ar: "قَلْعَةٌ", tr: "QALʿA", bs: "Tvrđava", cat: "predmeti" },
+      { ar: "سِكِّينٌ", tr: "SIKKĪN", bs: "Nož", cat: "predmeti" },
+      { ar: "فِنْجَانٌ", tr: "FINDŽĀN", bs: "Šoljica", cat: "predmeti" },
+      { ar: "قَهْوَةٌ", tr: "QAHWA", bs: "Kahva", cat: "hrana" },
+      //
+      { ar: "مَكَانٌ", tr: "MAKĀN", bs: "Mjesto", cat: "predmeti" },
+      { ar: "شَقَّةٌ", tr: "ŠAQQA", bs: "Stan", cat: "predmeti" },
+      { ar: "طَاوِلَةٌ", tr: "ṬĀWILA", bs: "Sto/Stol", cat: "predmeti" },
+      { ar: "نَافِذَةٌ", tr: "NĀFIḎA", bs: "Prozor", cat: "predmeti" },
+      { ar: "هَاتِفٌ", tr: "HĀTIF", bs: "Telefon", cat: "predmeti" },
+      { ar: "صُنْدُوقٌ", tr: "ṢUNDŪQ", bs: "Sanduk/Kutija", cat: "predmeti" },
+      { ar: "طِفْلٌ", tr: "ṬIFL", bs: "Dijete", cat: "ljudi" },
+      { ar: "جَزَّارٌ", tr: "DŽAZZĀR", bs: "Mesar", cat: "zanimanja" },
+      { ar: "شُرْطِيٌّ", tr: "ŠURṬĪ", bs: "Policajac", cat: "zanimanja" },
+      { ar: "مُفِيدٌ", tr: "MUFĪD", bs: "Koristan", cat: "brojevi" },
+      { ar: "مُرِيحٌ", tr: "MURĪḤ", bs: "Udoban/Opuštajuće", cat: "brojevi" },
+      { ar: "مُعَطَّرٌ", tr: "MUʿAṬṬAR", bs: "Mirisan", cat: "brojevi" },
+      { ar: "سَرِيعٌ", tr: "SARĪʿ", bs: "Brz", cat: "brojevi" },
+      { ar: "اِسْمٌ", tr: "ISM", bs: "Ime", cat: "pojmovi" },
+      // Brojevi
+      { ar: "صِفْرٌ", tr: "ṢIFR", bs: "Nula", cat: "brojevi" },
+      { ar: "اِثْنَانِ", tr: "IṮNĀNI", bs: "Dva", cat: "brojevi" },
+      { ar: "ثَلَاثَةٌ", tr: "ṮALĀṮA", bs: "Tri", cat: "brojevi" },
+      { ar: "أَرْبَعَةٌ", tr: "ARBAʿA", bs: "Četiri", cat: "brojevi" },
+      { ar: "خَمْسَةٌ", tr: "ḪAMSA", bs: "Pet", cat: "brojevi" },
+      { ar: "سِتَّةٌ", tr: "SITTA", bs: "Šest", cat: "brojevi" },
+      { ar: "تِسْعَةٌ", tr: "TISʿA", bs: "Devet", cat: "brojevi" },
+      { ar: "عَشَرَةٌ", tr: "ʿAŠARA", bs: "Deset", cat: "brojevi" },
+      // Pridjevi
+      { ar: "نَافِعٌ", tr: "NĀFIʿ", bs: "Koristan", cat: "brojevi" },
+      { ar: "جَيِّدٌ", tr: "DŽAJJID", bs: "Dobar", cat: "brojevi" },
+      { ar: "مَفْتُوحٌ", tr: "MAFTŪḤ", bs: "Otvoren", cat: "brojevi" },
+      { ar: "حَزِينٌ", tr: "ḤAZĪN", bs: "Tužan", cat: "brojevi" },
+      { ar: "مُسْتَحِيلٌ", tr: "MUSTAḤĪL", bs: "Nemoguć", cat: "brojevi" },
+      { ar: "قَرِيبٌ", tr: "QARĪB", bs: "Blizak (m)", cat: "brojevi" },
+      // Imenice i zanimanja
+      { ar: "صَدِيقٌ", tr: "ṢADĪQ", bs: "Prijatelj", cat: "ljudi" },
+      { ar: "مُمَرِّضٌ", tr: "MUMARRIḌ", bs: "Medicinar (m)", cat: "zanimanja" },
+      { ar: "مُمَرِّضَةٌ", tr: "MUMARRIḌA", bs: "Medicinska sestra", cat: "zanimanja" },
+      { ar: "رَاسِمٌ", tr: "RĀSIM", bs: "Crtač/Slikar", cat: "zanimanja" },
+      { ar: "طَيَّارٌ", tr: "ṬAJJĀR", bs: "Pilot", cat: "zanimanja" },
+      { ar: "سَاعَةٌ", tr: "SĀʿA", bs: "Sat/Ura", cat: "predmeti" },
+      { ar: "سَفِينَةٌ", tr: "SAFĪNA", bs: "Brod", cat: "predmeti" },
+      { ar: "قِطَارٌ", tr: "QIṬĀR", bs: "Voz", cat: "predmeti" },
+      { ar: "صِنَاعَةٌ", tr: "ṢINĀʿA", bs: "Industrija/Zanat", cat: "pojmovi" },
+      { ar: "مَصَارِيفٌ", tr: "MAṢĀRĪF", bs: "Troškovi", cat: "pojmovi" },
+      { ar: "مُرَاجَعَاتٌ", tr: "MURĀDŽAʿĀT", bs: "Ponavljanja/Recenzije", cat: "pojmovi" },
+      { ar: "إِرَادَةٌ", tr: "IRĀDA", bs: "Volja/Odlučnost", cat: "pojmovi" },
+      { ar: "قَرْيَةٌ", tr: "QARJA", bs: "Selo", cat: "svakodnevno" },
+      { ar: "شَارِعٌ", tr: "ŠĀRIʿ", bs: "Ulica", cat: "svakodnevno" },
+    ];
+
+    let learned = {};
+    let activeCategory = "all";
+    let hideLearned = false;
+    let storageAvailable = false;
+
+    function loadLearned() {
+      try {
+        const data = localStorage.getItem('arapski-vocab-learned');
+        if (data) {
+          learned = JSON.parse(data);
+        }
+        storageAvailable = true;
+      } catch (e) {
+        storageAvailable = false;
+      }
+      render();
+    }
+
+    function saveLearned() {
+      if (!storageAvailable) return;
+      try {
+        localStorage.setItem('arapski-vocab-learned', JSON.stringify(learned));
+      } catch (e) { /* silent */ }
+    }
+
+    function render(filter) {
+      if (filter === undefined) filter = document.getElementById("search").value;
+      const grid = document.getElementById("grid");
+      const f = filter.toLowerCase();
+      const filtered = words.filter(w => {
+        const catOk = activeCategory === "all" || w.cat === activeCategory;
+        const searchOk = !f || w.ar.includes(f) || w.bs.toLowerCase().includes(f) || w.tr.toLowerCase().includes(f);
+        return catOk && searchOk;
+      });
+
+      let visibleCount = 0;
+      grid.innerHTML = filtered.map((w) => {
+        const idx = words.indexOf(w);
+        const isLearned = learned[idx];
+        const shouldHide = hideLearned && isLearned;
+        if (!shouldHide) visibleCount++;
+        return `<div class="card ${isLearned ? 'learned' : ''} ${shouldHide ? 'hidden-learned' : ''}" onclick="toggle(${idx})">
+      <div class="left">
+        <div class="arabic">${w.ar}</div>
+        <div class="trans">${w.tr}</div>
+        <div class="bs">${w.bs}</div>
+        <div class="cat-tag">${w.cat}</div>
+      </div>
+      <div class="check">${isLearned ? '✓' : ''}</div>
+    </div>`;
+      }).join('');
+
+      const total = words.length;
+      const learnedCount = Object.keys(learned).length;
+      document.getElementById("stats").textContent = `${learnedCount}/${total} naučeno · Prikazano: ${visibleCount}`;
+      document.getElementById("progFill").style.width = `${(learnedCount / total) * 100}%`;
+
+      const btn = document.getElementById("toggleLearned");
+      if (hideLearned) {
+        btn.textContent = "👁 Prikaži naučene";
+        btn.classList.add("hiding");
+      } else {
+        btn.textContent = "👁 Sakrij naučene";
+        btn.classList.remove("hiding");
+      }
+    }
+
+    function toggle(idx) {
+      if (learned[idx]) delete learned[idx];
+      else learned[idx] = true;
+      saveLearned();
+      render();
+    }
+
+    document.getElementById("search").addEventListener("input", e => render(e.target.value));
+
+    document.querySelectorAll(".controls button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".controls button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeCategory = btn.dataset.cat;
+        render();
+      });
+    });
+
+    document.getElementById("toggleLearned").addEventListener("click", () => {
+      hideLearned = !hideLearned;
+      render();
+    });
+
+    loadLearned();
+  </script>
+  <footer style="text-align:center;padding:30px;color:#555;font-size:0.8rem;">
+    <a href="index.html" style="color:#c9a84c;text-decoration:none;">Početna</a> &middot;
+    <a href="gradivo.html" style="color:#c9a84c;text-decoration:none;">Gradivo</a> &middot;
+    <a href="vjezbe.html" style="color:#c9a84c;text-decoration:none;">Vježbe</a>
+  </footer>
+</body>
+
+</html>

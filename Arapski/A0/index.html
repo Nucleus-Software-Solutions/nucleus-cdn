@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="bs" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arapski A0 - Kurs arapskog jezika</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0f1a;
+      color: #e0d5c1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #c9a84c;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #a89b80;
+      margin-bottom: 40px;
+    }
+
+    .arabic-title {
+      text-align: center;
+      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      font-size: 2.2rem;
+      color: #c9a84c;
+      direction: rtl;
+      margin-bottom: 8px;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    a.card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #131b2e;
+      border: 1px solid #1e2a40;
+      border-radius: 14px;
+      padding: 24px 28px;
+      text-decoration: none;
+      color: #e0d5c1;
+      transition: all 0.25s;
+    }
+
+    a.card:hover {
+      border-color: #c9a84c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.12);
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a2e;
+      border-radius: 12px;
+      border: 1px solid #2a3550;
+    }
+
+    .card-text h2 {
+      font-size: 1.15rem;
+      color: #c9a84c;
+      margin-bottom: 4px;
+    }
+
+    .card-text p {
+      font-size: 0.85rem;
+      color: #7a8baa;
+      line-height: 1.4;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #5a6a88;
+      margin-top: 32px;
+      margin-bottom: 4px;
+      padding-left: 4px;
+    }
+
+    .section-label:first-child {
+      margin-top: 0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.78rem;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="arabic-title">العَرَبِيَّةُ</div>
+    <h1>Arapski A0</h1>
+    <p class="subtitle">Kurs arapskog jezika</p>
+
+    <div class="cards">
+      <div class="section-label">Interaktivno</div>
+
+      <a class="card" href="gradivo.html">
+        <div class="card-icon">📚</div>
+        <div class="card-text">
+          <h2>Gradivo</h2>
+          <p>Abeceda, slova, samoglasnici, gramatika, član AL-, sintagme, rečenice, zamjenice, konverzacija</p>
+        </div>
+      </a>
+
+      <a class="card" href="vjezbe.html">
+        <div class="card-icon">✏️</div>
+        <div class="card-text">
+          <h2>Vježbe</h2>
+          <p>Sastavi slova, rastavi riječ, prevedi, član AL-, sintagma i rečenica, rod, zamjenice, kviz</p>
+        </div>
+      </a>
+
+      <a class="card" href="vokabular.html">
+        <div class="card-icon">📖</div>
+        <div class="card-text">
+          <h2>Vokabular</h2>
+          <p>400+ riječi iz 17 kategorija — označi naučene, pretraži, filtriraj</p>
+        </div>
+      </a>
+
+      <a class="card" href="ispiti-vjezbe/ispiti.html">
+        <div class="card-icon">📝</div>
+        <div class="card-text">
+          <h2>Ispiti</h2>
+          <p>3 interaktivna testa — zamjenice, pokazne zamjenice, abeceda, član AL-, rečenice, slova</p>
+        </div>
+      </a>
+
+      <div class="section-label">PDF dokumenti</div>
+
+      <a class="card" href="gradivo.pdf" target="_blank">
+        <div class="card-icon">📄</div>
+        <div class="card-text">
+          <h2>Gradivo (PDF)</h2>
+          <p>Kompletno gradivo u PDF formatu — za preuzimanje ili printanje</p>
+        </div>
+      </a>
+
+      <a class="card" href="vokabular.pdf" target="_blank">
+        <div class="card-icon">📄</div>
+        <div class="card-text">
+          <h2>Vokabular (PDF)</h2>
+          <p>Lista vokabulara u PDF formatu — za preuzimanje ili printanje</p>
+        </div>
+      </a>
+
+      <a class="card" href="ispiti-vjezbe/ispit-1.pdf" target="_blank">
+        <div class="card-icon">📄</div>
+        <div class="card-text">
+          <h2>Ispit 1 (PDF)</h2>
+          <p>Prvi ispit u PDF formatu — za preuzimanje ili printanje</p>
+        </div>
+      </a>
+
+      <a class="card" href="ispiti-vjezbe/ispit-2.pdf" target="_blank">
+        <div class="card-icon">📄</div>
+        <div class="card-text">
+          <h2>Ispit 2 (PDF)</h2>
+          <p>Drugi ispit u PDF formatu — za preuzimanje ili printanje</p>
+        </div>
+      </a>
+
+      <a class="card" href="ispiti-vjezbe/ispit-3.pdf" target="_blank">
+        <div class="card-icon">📄</div>
+        <div class="card-text">
+          <h2>Ispit 3 (PDF)</h2>
+          <p>Treći ispit u PDF formatu — za preuzimanje ili printanje</p>
+        </div>
+      </a>
+    </div>
+
+    <footer>Kurs arapskog jezika — Arapski A0</footer>
+  </div>
+</body>
+
+</html>
