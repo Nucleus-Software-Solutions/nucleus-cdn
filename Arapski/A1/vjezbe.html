@@ -322,13 +322,15 @@
 <body>
   <header>
     <h1>Arapski A1 — Vježbe</h1>
-    <p>Lekcija 1</p>
+    <p>Lekcija 1 &amp; 2</p>
   </header>
 
   <div class="tabs">
     <button class="active" onclick="showTab('prevedi-bs-ar', this)">Prevedi (BS→AR)</button>
     <button onclick="showTab('prevedi-ar-bs', this)">Prevedi (AR→BS)</button>
     <button onclick="showTab('sufiksi', this)">Sufiksi</button>
+    <button onclick="showTab('prijedlozi', this)">Prijedlozi</button>
+    <button onclick="showTab('recenice', this)">Rečenice</button>
     <button onclick="showTab('kviz', this)">Kviz kartice</button>
   </div>
 
@@ -371,7 +373,29 @@
       <div class="result-banner" id="result-suffix"></div>
     </div>
 
-    <!-- TAB 4: Kviz kartice -->
+    <!-- TAB 4: Prijedlozi -->
+    <div class="exercise-section" id="tab-prijedlozi">
+      <div class="section-title">Prevedi prijedložne izraze na arapski</div>
+      <div class="section-desc">Prevedi bosanski izraz u arapski. Prijedlog + imenica (ili zamjenički sufiks).</div>
+
+      <div id="prep-exercises"></div>
+      <button class="check-all-btn" onclick="checkAllPrep()">Provjeri sve</button>
+      <button class="reset-btn" onclick="resetPrep()">Resetuj</button>
+      <div class="result-banner" id="result-prep"></div>
+    </div>
+
+    <!-- TAB 5: Rečenice -->
+    <div class="exercise-section" id="tab-recenice">
+      <div class="section-title">Prevedi rečenice na arapski</div>
+      <div class="section-desc">Prevedi kompletne imenske rečenice. Koristi prijedloge i prisvojne sufikse.</div>
+
+      <div id="sent-exercises"></div>
+      <button class="check-all-btn" onclick="checkAllSent()">Provjeri sve</button>
+      <button class="reset-btn" onclick="resetSent()">Resetuj</button>
+      <div class="result-banner" id="result-sent"></div>
+    </div>
+
+    <!-- TAB 6: Kviz kartice -->
     <div class="exercise-section" id="tab-kviz">
       <div class="section-title">Kviz kartice</div>
       <div class="section-desc">Klikni na karticu da otkriješ odgovor. Misli prije nego klikneš!</div>
@@ -409,6 +433,21 @@
       { bs: 'oženjen', ar: 'مُتَزَوِّج', alt: ['متزوج'] },
       { bs: 'udata', ar: 'مُتَزَوِّجَة', alt: ['متزوجة'] },
       { bs: 'neoženjen', ar: 'أَعْزَب', alt: ['أعزب'] },
+      // Lekcija 2
+      { bs: 'veliki', ar: 'كَبِيرٌ', alt: ['كبير'] },
+      { bs: 'stol', ar: 'طَاوِلَةٌ', alt: ['طاولة'] },
+      { bs: 'koristan', ar: 'مُفِيدٌ', alt: ['مفيد'] },
+      { bs: 'mačka', ar: 'قِطَّةٌ', alt: ['قطة'] },
+      { bs: 'igračka', ar: 'لُعْبَةٌ', alt: ['لعبة'] },
+      { bs: 'voz', ar: 'قِطَارٌ', alt: ['قطار'] },
+      { bs: 'knjiga', ar: 'كِتَابٌ', alt: ['كتاب'] },
+      { bs: 'teka / sveska', ar: 'دَفْتَرٌ', alt: ['دفتر'] },
+      { bs: 'grad', ar: 'مَدِينَةٌ', alt: ['مدينة'] },
+      { bs: 'lekcija', ar: 'دَرْسٌ', alt: ['درس'] },
+      { bs: 'prijateljica', ar: 'صَدِيقَةٌ', alt: ['صديقة'] },
+      { bs: 'učiteljica', ar: 'مُعَلِّمَةٌ', alt: ['معلمة'] },
+      { bs: 'visok / dugačak', ar: 'طَوِيلٌ', alt: ['طويل'] },
+      { bs: 'razred', ar: 'صَفٌّ', alt: ['صف'] },
     ];
 
     const arBsWords = [
@@ -424,6 +463,19 @@
       { ar: 'مُسْتَشْفَى', bs: 'bolnica', alt: [] },
       { ar: 'شَهْر', bs: 'mjesec', alt: [] },
       { ar: 'سَنَة', bs: 'godina', alt: [] },
+      // Lekcija 2
+      { ar: 'كَبِيرٌ', bs: 'veliki', alt: ['velik'] },
+      { ar: 'طَاوِلَةٌ', bs: 'stol', alt: [] },
+      { ar: 'مُفِيدٌ', bs: 'koristan', alt: [] },
+      { ar: 'صَغِيرَةٌ', bs: 'mala', alt: ['mali'] },
+      { ar: 'طَوِيلٌ', bs: 'visok', alt: ['dugačak', 'visoki'] },
+      { ar: 'قِطَّةٌ', bs: 'mačka', alt: [] },
+      { ar: 'مَدِينَةٌ', bs: 'grad', alt: [] },
+      { ar: 'دَرْسٌ', bs: 'lekcija', alt: [] },
+      { ar: 'دَفْتَرٌ', bs: 'teka', alt: ['sveska'] },
+      { ar: 'صَدِيقَةٌ', bs: 'prijateljica', alt: [] },
+      { ar: 'أَدْرُسُ', bs: 'ja učim', alt: ['učim'] },
+      { ar: 'صَفٌّ', bs: 'razred', alt: ['red'] },
     ];
 
     // Suffix data: noun (display), root (no tanwin), answers for moj/m/ž/on/ona
@@ -497,6 +549,28 @@
       { ar: 'سَنَة', bs: 'godina' },
       { ar: 'مَطْبَخ', bs: 'kuhinja' },
       { ar: 'مُسْتَشْفَى', bs: 'bolnica' },
+      // Lekcija 2 — prijedlozi
+      { ar: 'فِي', bs: 'u' },
+      { ar: 'مِنْ', bs: 'iz, od' },
+      { ar: 'إِلَى', bs: 'do, ka, prema' },
+      { ar: 'عَلَى', bs: 'na' },
+      { ar: 'مَعَ', bs: 's, sa (društvo)' },
+      { ar: 'لِـ', bs: 'za' },
+      { ar: 'بِـ', bs: 's, sa (sredstvo)' },
+      { ar: 'كَـ', bs: 'kao, poput' },
+      // Lekcija 2 — ostalo
+      { ar: 'كَبِيرٌ', bs: 'veliki' },
+      { ar: 'صَغِيرَةٌ', bs: 'mala' },
+      { ar: 'طَوِيلٌ', bs: 'visok / dugačak' },
+      { ar: 'مُفِيدٌ', bs: 'koristan' },
+      { ar: 'طَاوِلَةٌ', bs: 'stol' },
+      { ar: 'قِطَّةٌ', bs: 'mačka' },
+      { ar: 'دَفْتَرٌ', bs: 'teka / sveska' },
+      { ar: 'مَدِينَةٌ', bs: 'grad' },
+      { ar: 'صَدِيقَةٌ', bs: 'prijateljica' },
+      { ar: 'دَرْسٌ', bs: 'lekcija' },
+      { ar: 'أَوَّلُ', bs: 'prvi' },
+      { ar: 'رَابِعٌ', bs: 'četvrti' },
     ];
 
     // ─── Scoring ─────────────────────────────────────────────────────────────
@@ -754,11 +828,156 @@
       document.querySelectorAll('.quiz-card').forEach(c => c.classList.remove('revealed'));
     }
 
+    // ─── Preposition exercises ──────────────────────────────────────────────
+
+    const prepWords = [
+      { bs: 'u kući', ar: 'فِي الْبَيْتِ', alt: ['في البيت', 'فِي البَيْتِ'] },
+      { bs: 'za mene', ar: 'لِي', alt: ['لي'] },
+      { bs: 'za tebe (m.)', ar: 'لَكَ', alt: ['لك'] },
+      { bs: 'za njega', ar: 'لَهُ', alt: ['له'] },
+      { bs: 'za nju', ar: 'لَهَا', alt: ['لها'] },
+      { bs: '(s) olovkom', ar: 'بِالْقَلَمِ', alt: ['بالقلم'] },
+      { bs: 'u gradu', ar: 'فِي مَدِينَةٍ', alt: ['في مدينة', 'فِي مَدِينَةٍ'] },
+      { bs: 'na stolu', ar: 'عَلَى طَاوِلَةٍ', alt: ['على طاولة'] },
+      { bs: 's ocem', ar: 'مَعَ الْأَبِ', alt: ['مع الأب'] },
+      { bs: 'za učiteljicu (odr.)', ar: 'لِلْمُعَلِّمَةِ', alt: ['للمعلمة'] },
+      { bs: 'iz kuće', ar: 'مِنَ الْبَيْتِ', alt: ['من البيت'] },
+      { bs: 'ka školi', ar: 'إِلَى الْمَدْرَسَةِ', alt: ['إلى المدرسة'] },
+    ];
+
+    function buildPrep() {
+      const container = document.getElementById('prep-exercises');
+      container.innerHTML = '';
+      prepWords.forEach((w, i) => {
+        const div = document.createElement('div');
+        div.className = 'exercise-item';
+        div.innerHTML = `
+          <span class="prompt">${w.bs}</span>
+          <input type="text" id="prep-${i}" placeholder="اكتب هنا" autocomplete="off" spellcheck="false">
+          <button class="check-btn" onclick="checkPrep(${i})">Provjeri</button>
+          <div class="feedback" id="fb-prep-${i}"></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function checkPrep(i) {
+      const input = document.getElementById(`prep-${i}`);
+      const fb = document.getElementById(`fb-prep-${i}`);
+      const val = input.value.trim();
+      if (!val) return;
+      const w = prepWords[i];
+      const accepted = [w.ar, ...w.alt];
+      const isCorrect = accepted.includes(val) || accepted.some(a => normalize(a) === normalize(val));
+      input.classList.remove('correct', 'wrong');
+      fb.classList.remove('correct-msg', 'wrong-msg');
+      if (isCorrect) {
+        input.classList.add('correct');
+        fb.classList.add('correct-msg');
+        fb.textContent = '✓ Tačno!';
+      } else {
+        input.classList.add('wrong');
+        fb.classList.add('wrong-msg');
+        fb.textContent = `✗ Netačno. Tačan odgovor: ${w.ar}`;
+      }
+    }
+
+    function checkAllPrep() {
+      let ok = 0;
+      prepWords.forEach((_, i) => {
+        checkPrep(i);
+        if (document.getElementById(`prep-${i}`).classList.contains('correct')) ok++;
+      });
+      const banner = document.getElementById('result-prep');
+      banner.innerHTML = `Rezultat: <span class="score">${ok} / ${prepWords.length}</span>`;
+      banner.classList.add('visible');
+    }
+
+    function resetPrep() {
+      prepWords.forEach((_, i) => {
+        const input = document.getElementById(`prep-${i}`);
+        if (input) { input.value = ''; input.classList.remove('correct', 'wrong'); }
+        const fb = document.getElementById(`fb-prep-${i}`);
+        if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+      });
+      document.getElementById('result-prep').classList.remove('visible');
+    }
+
+    // ─── Sentence exercises ──────────────────────────────────────────────────
+
+    const sentWords = [
+      { bs: 'Kuća je velika.', ar: 'اَلْبَيْتُ كَبِيرٌ', alt: ['البيت كبير', 'الْبَيْتُ كَبِيرٌ'] },
+      { bs: 'Moja kuća je velika.', ar: 'بَيْتِي كَبِيرٌ', alt: ['بيتي كبير'] },
+      { bs: 'Kuća je u gradu.', ar: 'اَلْبَيْتُ فِي مَدِينَةٍ', alt: ['البيت في مدينة'] },
+      { bs: 'Majka je u kuhinji.', ar: 'اَلْأُمُّ فِي مَطْبَخٍ', alt: ['الأم في مطبخ', 'الأمّ في مطبخ'] },
+      { bs: 'Veliki brat je s ocem.', ar: 'اَلْأَخُ الْكَبِيرُ مَعَ الْأَبِ', alt: ['الأخ الكبير مع الأب'] },
+    ];
+
+    function buildSent() {
+      const container = document.getElementById('sent-exercises');
+      container.innerHTML = '';
+      sentWords.forEach((w, i) => {
+        const div = document.createElement('div');
+        div.className = 'exercise-item';
+        div.innerHTML = `
+          <span class="prompt">${w.bs}</span>
+          <input type="text" id="sent-${i}" placeholder="اكتب هنا" autocomplete="off" spellcheck="false">
+          <button class="check-btn" onclick="checkSent(${i})">Provjeri</button>
+          <div class="feedback" id="fb-sent-${i}"></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function checkSent(i) {
+      const input = document.getElementById(`sent-${i}`);
+      const fb = document.getElementById(`fb-sent-${i}`);
+      const val = input.value.trim();
+      if (!val) return;
+      const w = sentWords[i];
+      const accepted = [w.ar, ...w.alt];
+      const isCorrect = accepted.includes(val) || accepted.some(a => normalize(a) === normalize(val));
+      input.classList.remove('correct', 'wrong');
+      fb.classList.remove('correct-msg', 'wrong-msg');
+      if (isCorrect) {
+        input.classList.add('correct');
+        fb.classList.add('correct-msg');
+        fb.textContent = '✓ Tačno!';
+      } else {
+        input.classList.add('wrong');
+        fb.classList.add('wrong-msg');
+        fb.textContent = `✗ Netačno. Tačan odgovor: ${w.ar}`;
+      }
+    }
+
+    function checkAllSent() {
+      let ok = 0;
+      sentWords.forEach((_, i) => {
+        checkSent(i);
+        if (document.getElementById(`sent-${i}`).classList.contains('correct')) ok++;
+      });
+      const banner = document.getElementById('result-sent');
+      banner.innerHTML = `Rezultat: <span class="score">${ok} / ${sentWords.length}</span>`;
+      banner.classList.add('visible');
+    }
+
+    function resetSent() {
+      sentWords.forEach((_, i) => {
+        const input = document.getElementById(`sent-${i}`);
+        if (input) { input.value = ''; input.classList.remove('correct', 'wrong'); }
+        const fb = document.getElementById(`fb-sent-${i}`);
+        if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+      });
+      document.getElementById('result-sent').classList.remove('visible');
+    }
+
     // ─── Init ─────────────────────────────────────────────────────────────────
 
     buildBsAr();
     buildArBs();
     buildSuffix();
+    buildPrep();
+    buildSent();
     buildQuiz();
     updateScore();
   </script>

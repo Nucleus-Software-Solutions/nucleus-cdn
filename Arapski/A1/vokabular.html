@@ -254,6 +254,8 @@
     <button data-cat="zamjenice">Zamjenice</button>
     <button data-cat="pitanja">Pitanja/Prijedlozi</button>
     <button data-cat="vrijeme">Vrijeme</button>
+    <button data-cat="predmeti">Predmeti</button>
+    <button data-cat="brojevi">Redni brojevi</button>
   </div>
   <div class="toggle-row">
     <button class="toggle-btn" id="toggleLearned">👁 Sakrij naučene</button>
@@ -310,6 +312,41 @@
       { ar: 'أَشْهُر', tr: 'ašhur', bs: 'mjeseci (množina)', cat: 'vrijeme' },
       { ar: 'سَنَة', tr: 'sana', bs: 'godina', cat: 'vrijeme' },
       { ar: 'سَنَوَات', tr: 'sanawāt', bs: 'godine (množina)', cat: 'vrijeme' },
+      // Pridjevi (novi)
+      { ar: 'كَبِيرٌ', tr: 'kabīr', bs: 'veliki', cat: 'pridjevi' },
+      { ar: 'صَغِيرَةٌ', tr: 'ṣaghīra', bs: 'mala', cat: 'pridjevi' },
+      { ar: 'طَوِيلٌ', tr: 'ṭawīl', bs: 'visok / dugačak', cat: 'pridjevi' },
+      { ar: 'مُفِيدٌ', tr: 'mufīd', bs: 'koristan', cat: 'pridjevi' },
+      // Glagoli (novi)
+      { ar: 'دَرَسَ', tr: 'darasa', bs: 'učio je (perfekt)', cat: 'glagoli' },
+      { ar: 'يَدْرُسُ', tr: 'yadrusu', bs: 'uči (prezent)', cat: 'glagoli' },
+      { ar: 'أَدْرُسُ', tr: 'adrusu', bs: 'ja učim', cat: 'glagoli' },
+      // Prijedlozi (novi)
+      { ar: 'مِنْ', tr: 'min', bs: 'iz, od', cat: 'pitanja' },
+      { ar: 'إِلَى', tr: 'ilā', bs: 'do, ka, prema', cat: 'pitanja' },
+      { ar: 'عَلَى', tr: "'alā", bs: 'na', cat: 'pitanja' },
+      { ar: 'مَعَ', tr: "ma'a", bs: 's, sa (društvo)', cat: 'pitanja' },
+      { ar: 'لِـ', tr: 'li-', bs: 'za', cat: 'pitanja' },
+      { ar: 'بِـ', tr: 'bi-', bs: 's, sa (sredstvo)', cat: 'pitanja' },
+      { ar: 'كَـ', tr: 'ka-', bs: 'kao, poput', cat: 'pitanja' },
+      // Predmeti
+      { ar: 'طَاوِلَةٌ', tr: 'ṭāwila', bs: 'stol', cat: 'predmeti' },
+      { ar: 'دَفْتَرٌ', tr: 'daftar', bs: 'teka / sveska', cat: 'predmeti' },
+      { ar: 'لُعْبَةٌ', tr: "lu'ba", bs: 'igračka', cat: 'predmeti' },
+      { ar: 'قِطَارٌ', tr: 'qiṭār', bs: 'voz', cat: 'predmeti' },
+      // Porodica (novi)
+      { ar: 'صَدِيقَةٌ', tr: 'ṣadīqa', bs: 'prijateljica', cat: 'porodica' },
+      { ar: 'قِطَّةٌ', tr: 'qiṭṭa', bs: 'mačka', cat: 'porodica' },
+      { ar: 'مُعَلِّمَةٌ', tr: "mu'allima", bs: 'učiteljica', cat: 'porodica' },
+      // Mjesta (novo)
+      { ar: 'مَدِينَةٌ', tr: 'madīna', bs: 'grad', cat: 'mjesta' },
+      // Redni brojevi
+      { ar: 'أَوَّلُ', tr: 'awwal', bs: 'prvi', cat: 'brojevi' },
+      { ar: 'رَابِعٌ', tr: "rābi'", bs: 'četvrti', cat: 'brojevi' },
+      // Ostalo
+      { ar: 'صَفٌّ', tr: 'ṣaff', bs: 'red / razred', cat: 'mjesta' },
+      { ar: 'دَرْسٌ', tr: 'dars', bs: 'lekcija', cat: 'predmeti' },
+      { ar: 'كِتَابٌ', tr: 'kitāb', bs: 'knjiga', cat: 'predmeti' },
     ];
 
     let learned = {};
