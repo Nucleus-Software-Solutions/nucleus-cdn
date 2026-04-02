@@ -4,13 +4,14 @@
 
 ```
 Arapski/
-├── index.html              ← root navigacija (A0 / A1)
+├── index.html              ← root navigacija (A0 / A1 / Vokabular)
+├── vokabular.html          ← OBJEDINJENI vokabular (A0 + A1, dark theme)
 ├── A0/                     ← završeni A0 level
 └── A1/
     ├── index.html          ← A1 navigacijska stranica
     ├── gradivo.html        ← gradivo (light theme, sekcije po lekcijama)
     ├── vjezbe.html         ← vježbe (dark theme, tabovi)
-    ├── vokabular.html      ← vokabular (dark theme, filter + pretraga)
+    ├── (vokabular.html obrisan — koristiti root vokabular.html)
     ├── .claude/
     │   └── CLAUDE.md       ← ovaj fajl
     └── DD.MM.YYYY/         ← folderi sa slikama table sa časa
@@ -36,8 +37,10 @@ Korisnik će reći nešto kao: "Dodao sam novu lekciju", "Imam novi čas", ili "
    - `arBsWords[]` — riječi za AR→BS prevod
    - `quizCards[]` — kartice za kviz
    - Za nova gramatička pravila možda treba novi tab
-6. **Ažuriraj `vokabular.html`** — dodaj nove objekte u `const words = [...]`:
-   - Format: `{ ar: 'عَرَبِيٌّ', tr: 'transliteracija', bs: 'bosanski', cat: 'kategorija' }`
+6. **Ažuriraj `../vokabular.html`** (root objedinjeni vokabular) — dodaj nove objekte u `const words = [...]`:
+   - Format: `{ ar: 'عَرَبِيٌّ', tr: 'transliteracija', bs: 'bosanski', cat: 'kategorija', lvl: 'A1' }`
+   - **OBAVEZNO** dodaj `lvl: 'A1'` na svaku novu riječ
+   - Dodaj riječi na kraj A1 sekcije u nizu (označena komentarom `// ===== A1 =====`)
    - Provjeri da ne dodaješ duplikate
    - Ako treba nova kategorija, dodaj button u `<div class="controls">` i odgovarajući label
 
@@ -153,17 +156,21 @@ Na dnu svake podstranice (unutar `.footer-nav`) stoje linkovi na sve ostale stra
 - A1: Početna · Gradivo · Vježbe · Vokabular
 - A0: Početna · Gradivo · Vježbe · Vokabular · Ispiti
 
-## Kategorije vokabulara (A1)
+## Kategorije vokabulara (objedinjeni vokabular u `Arapski/vokabular.html`)
 
-- `porodica` — Porodica
-- `glagoli` — Glagoli
-- `pridjevi` — Pridjevi
-- `mjesta` — Mjesta
-- `zamjenice` — Zamjenice
-- `pitanja` — Pitanja/Prijedlozi
-- `vrijeme` — Vrijeme
+Fajl se nalazi u **`Arapski/vokabular.html`** (NE u A1/ folderu).
+Svaka riječ ima `lvl` polje (`'A0'` ili `'A1'`) za filtriranje po nivou.
 
-Dodaj novu kategoriju po potrebi (nova lekcija može donijeti npr. `hrana`, `boje`, `brojevi`...).
+Postojeće kategorije:
+- `vjera`, `ljudi`, `vlast`, `svakodnevno` — A0
+- `glagoli`, `pridjevi`, `zamjenice` — A0 + A1
+- `fraze`, `pozdravi` — A0
+- `predmeti`, `porodica` — A0 + A1
+- `hrana`, `zivotinje`, `odjeca`, `pojmovi`, `zanimanja` — A0
+- `brojevi` — A0 + A1
+- `mjesta`, `pitanja`, `vrijeme` — A1
+
+Dodaj novu kategoriju po potrebi (nova lekcija može donijeti npr. `boje`, `tijelo`...).
 
 ## Slike lekcija
 

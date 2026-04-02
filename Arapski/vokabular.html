@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="bs" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arapski — Vokabular</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0f1a;
+      color: #e0d5c1;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 28px 20px 20px;
+      text-align: center;
+      border-bottom: 2px solid #c9a84c;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      color: #c9a84c;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 0.85rem;
+      color: #a89b80;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 14px 16px;
+      background: #0f1525;
+      border-bottom: 1px solid #1e2a40;
+    }
+
+    .controls button {
+      padding: 7px 14px;
+      border: 1px solid #2a3550;
+      border-radius: 20px;
+      background: #131b2e;
+      color: #a89b80;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .controls button:hover,
+    .controls button.active {
+      background: #c9a84c;
+      color: #0a0f1a;
+      border-color: #c9a84c;
+    }
+
+    .level-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px 0;
+      background: #0f1525;
+    }
+
+    .level-btn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #2a3550;
+      background: #131b2e;
+      color: #a89b80;
+    }
+
+    .level-btn:hover {
+      border-color: #c9a84c;
+    }
+
+    .level-btn.active {
+      background: #c9a84c;
+      color: #0a0f1a;
+      border-color: #c9a84c;
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px 0;
+      background: #0f1525;
+    }
+
+    .toggle-btn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #2d6a4f;
+      background: #0d1f15;
+      color: #4da87a;
+    }
+
+    .toggle-btn:hover {
+      background: #143d28;
+    }
+
+    .toggle-btn.hiding {
+      border-color: #8b3a3a;
+      background: #1f0d0d;
+      color: #d46a6a;
+    }
+
+    .toggle-btn.hiding:hover {
+      background: #2a1515;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 340px;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid #2a3550;
+      background: #131b2e;
+      color: #e0d5c1;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .search-box::placeholder {
+      color: #555;
+    }
+
+    .search-box:focus {
+      border-color: #c9a84c;
+    }
+
+    .stats {
+      text-align: center;
+      padding: 8px;
+      font-size: 0.78rem;
+      color: #666;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+      padding: 12px 16px 30px;
+    }
+
+    .card {
+      background: #131b2e;
+      border: 1px solid #1e2a40;
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card:hover {
+      border-color: #c9a84c;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.1);
+    }
+
+    .card.learned {
+      border-color: #2d6a4f;
+      background: #0d1f15;
+    }
+
+    .card.hidden-learned {
+      display: none;
+    }
+
+    .card .left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card .arabic {
+      font-size: 1.55rem;
+      color: #c9a84c;
+      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      direction: rtl;
+      line-height: 1.4;
+    }
+
+    .card .trans {
+      font-size: 0.82rem;
+      color: #7a8baa;
+      margin-top: 2px;
+    }
+
+    .card .bs {
+      font-size: 0.92rem;
+      color: #d0c5a9;
+      margin-top: 1px;
+    }
+
+    .card .meta {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+      align-items: center;
+    }
+
+    .card .cat-tag {
+      font-size: 0.65rem;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card .level-tag {
+      font-size: 0.6rem;
+      padding: 1px 6px;
+      border-radius: 8px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .card .level-tag.a0 {
+      background: #1a2e1a;
+      color: #4da87a;
+    }
+
+    .card .level-tag.a1 {
+      background: #2e2010;
+      color: #c9a84c;
+    }
+
+    .card .check {
+      font-size: 1.2rem;
+      color: #2a3550;
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid #2a3550;
+      transition: all 0.2s;
+    }
+
+    .card.learned .check {
+      color: #2d6a4f;
+      border-color: #2d6a4f;
+      background: #143d28;
+    }
+
+    .progress-bar {
+      height: 3px;
+      background: #1e2a40;
+    }
+
+    .progress-bar .fill {
+      height: 100%;
+      background: #c9a84c;
+      transition: width 0.3s;
+    }
+
+    .loading-msg {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar">
+    <div class="fill" id="progFill"></div>
+  </div>
+  <header>
+    <h1>Arapski — Vokabular</h1>
+    <p>Sve riječi iz kursa (A0 + A1) · Klikni karticu da oznacis kao nauceno</p>
+  </header>
+
+  <div class="controls">
+    <input type="text" class="search-box" id="search" placeholder="Pretrazi (bosanski ili arapski)...">
+    <button class="active" data-cat="all">Sve</button>
+    <button data-cat="vjera">Vjera</button>
+    <button data-cat="ljudi">Ljudi</button>
+    <button data-cat="vlast">Vlast/rat</button>
+    <button data-cat="svakodnevno">Svakodnevno</button>
+    <button data-cat="glagoli">Glagoli</button>
+    <button data-cat="pridjevi">Pridjevi</button>
+    <button data-cat="fraze">Fraze</button>
+    <button data-cat="pozdravi">Pozdravi</button>
+    <button data-cat="predmeti">Predmeti</button>
+    <button data-cat="porodica">Porodica</button>
+    <button data-cat="hrana">Hrana/Priroda</button>
+    <button data-cat="zivotinje">Zivotinje</button>
+    <button data-cat="odjeca">Odjeca</button>
+    <button data-cat="pojmovi">Pojmovi</button>
+    <button data-cat="zanimanja">Zanimanja</button>
+    <button data-cat="brojevi">Brojevi/Pridjevi</button>
+    <button data-cat="zamjenice">Zamjenice</button>
+    <button data-cat="mjesta">Mjesta</button>
+    <button data-cat="pitanja">Pitanja/Prijedlozi</button>
+    <button data-cat="vrijeme">Vrijeme</button>
+  </div>
+  <div class="level-row">
+    <button class="level-btn active" data-level="all">Svi nivoi</button>
+    <button class="level-btn" data-level="A0">A0</button>
+    <button class="level-btn" data-level="A1">A1</button>
+  </div>
+  <div class="toggle-row">
+    <button class="toggle-btn" id="toggleLearned">&#128065; Sakrij naucene</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="grid" id="grid">
+    <div class="loading-msg">Ucitavanje...</div>
+  </div>
+
+  <script>
+    const words = [
+      // ===== A0 =====
+      // Vjera
+      { ar: "اللَّهُ", tr: "Allah", bs: "Bog/Allah", cat: "vjera", lvl: "A0" },
+      { ar: "الرَّسُولُ", tr: "ar-rasul", bs: "poslanik", cat: "vjera", lvl: "A0" },
+      { ar: "النَّبِيُّ", tr: "an-nabiyy", bs: "vjerovjesnik", cat: "vjera", lvl: "A0" },
+      { ar: "الْإِسْلَامُ", tr: "al-islam", bs: "islam", cat: "vjera", lvl: "A0" },
+      { ar: "الْقُرْآنُ", tr: "al-qur'an", bs: "Kur'an", cat: "vjera", lvl: "A0" },
+      { ar: "الصَّلَاةُ", tr: "as-salah", bs: "namaz/molitva", cat: "vjera", lvl: "A0" },
+      { ar: "الْإِيمَانُ", tr: "al-iman", bs: "vjera/vjerovanje", cat: "vjera", lvl: "A0" },
+      { ar: "الْمُسْلِمُونَ", tr: "al-muslimun", bs: "muslimani", cat: "vjera", lvl: "A0" },
+      { ar: "الْكُفَّارُ", tr: "al-kuffar", bs: "nevjernici", cat: "vjera", lvl: "A0" },
+      { ar: "الشِّرْكُ", tr: "as-sirk", bs: "mnogobostvo", cat: "vjera", lvl: "A0" },
+      { ar: "الْحَقُّ", tr: "al-haqq", bs: "istina/pravo", cat: "vjera", lvl: "A0" },
+      { ar: "الدِّينُ", tr: "ad-din", bs: "vjera/religija", cat: "vjera", lvl: "A0" },
+      { ar: "الْمَسْجِدُ", tr: "al-masjid", bs: "dzamija", cat: "vjera", lvl: "A0" },
+      { ar: "الشَّهَادَةُ", tr: "as-sahadah", bs: "svjedocanstvo", cat: "vjera", lvl: "A0" },
+      { ar: "الْجَنَّةُ", tr: "al-jannah", bs: "dzennet/raj", cat: "vjera", lvl: "A0" },
+      { ar: "النَّارُ", tr: "an-nar", bs: "vatra/dzehennem", cat: "vjera", lvl: "A0" },
+      { ar: "التَّوْبَةُ", tr: "at-tawbah", bs: "pokajanje", cat: "vjera", lvl: "A0" },
+      // Ljudi
+      { ar: "رَجُلٌ", tr: "rajul", bs: "covjek/muskarac", cat: "ljudi", lvl: "A0" },
+      { ar: "اِمْرَأَةٌ", tr: "imra'ah", bs: "zena", cat: "ljudi", lvl: "A0" },
+      { ar: "أَخٌ", tr: "akh", bs: "brat", cat: "ljudi", lvl: "A0" },
+      { ar: "أُخْتٌ", tr: "ukht", bs: "sestra", cat: "ljudi", lvl: "A0" },
+      { ar: "اِبْنٌ", tr: "ibn", bs: "sin", cat: "ljudi", lvl: "A0" },
+      { ar: "فَتَاةٌ", tr: "fatat", bs: "djevojka", cat: "ljudi", lvl: "A0" },
+      { ar: "بِنْتٌ", tr: "bint", bs: "kcerka", cat: "ljudi", lvl: "A0" },
+      { ar: "أَبٌ", tr: "ab", bs: "otac", cat: "ljudi", lvl: "A0" },
+      { ar: "أُمٌّ", tr: "umm", bs: "majka", cat: "ljudi", lvl: "A0" },
+      { ar: "قَوْمٌ", tr: "qawm", bs: "narod/pleme", cat: "ljudi", lvl: "A0" },
+      { ar: "صَاحِبٌ", tr: "sahib", bs: "drug/prijatelj", cat: "ljudi", lvl: "A0" },
+      { ar: "عَدُوٌّ", tr: "'aduww", bs: "neprijatelj", cat: "ljudi", lvl: "A0" },
+      { ar: "النَّاسُ", tr: "an-nas", bs: "ljudi", cat: "ljudi", lvl: "A0" },
+      { ar: "قَبِيلَةٌ", tr: "qabilah", bs: "pleme", cat: "ljudi", lvl: "A0" },
+      { ar: "عَبْدٌ", tr: "'abd", bs: "rob/sluga", cat: "ljudi", lvl: "A0" },
+      { ar: "حُرٌّ", tr: "hurr", bs: "slobodan covjek", cat: "ljudi", lvl: "A0" },
+      { ar: "تَاجِرٌ", tr: "tajir", bs: "trgovac", cat: "ljudi", lvl: "A0" },
+      { ar: "طِفْلٌ", tr: "tifl", bs: "dijete", cat: "ljudi", lvl: "A0" },
+      { ar: "صَدِيقٌ", tr: "sadiq", bs: "prijatelj", cat: "ljudi", lvl: "A0" },
+      // Vlast/rat
+      { ar: "الْخَلِيفَةُ", tr: "al-khalifah", bs: "halifa", cat: "vlast", lvl: "A0" },
+      { ar: "أَمِيرٌ", tr: "amir", bs: "vodja/emir", cat: "vlast", lvl: "A0" },
+      { ar: "الْمُلْكُ", tr: "al-mulk", bs: "vlast/kraljevstvo", cat: "vlast", lvl: "A0" },
+      { ar: "الْجَيْشُ", tr: "al-jays", bs: "vojska", cat: "vlast", lvl: "A0" },
+      { ar: "الْحَرْبُ", tr: "al-harb", bs: "rat", cat: "vlast", lvl: "A0" },
+      { ar: "السَّيْفُ", tr: "as-sayf", bs: "sablja/mac", cat: "vlast", lvl: "A0" },
+      { ar: "الْجِهَادُ", tr: "al-jihad", bs: "borba (na Bozijem putu)", cat: "vlast", lvl: "A0" },
+      { ar: "النَّصْرُ", tr: "an-nasr", bs: "pobjeda", cat: "vlast", lvl: "A0" },
+      { ar: "الْهَزِيمَةُ", tr: "al-hazimah", bs: "poraz", cat: "vlast", lvl: "A0" },
+      { ar: "الصُّلْحُ", tr: "as-sulh", bs: "mir/pomirenje", cat: "vlast", lvl: "A0" },
+      { ar: "الْعَدْلُ", tr: "al-'adl", bs: "pravda", cat: "vlast", lvl: "A0" },
+      { ar: "الظُّلْمُ", tr: "az-zulm", bs: "nepravda/tiranija", cat: "vlast", lvl: "A0" },
+      { ar: "الشُّورَى", tr: "as-sura", bs: "savjetovanje/vijece", cat: "vlast", lvl: "A0" },
+      { ar: "الْبَيْعَةُ", tr: "al-bay'ah", bs: "prisega/zakletva", cat: "vlast", lvl: "A0" },
+      { ar: "الرَّايَةُ", tr: "ar-rayah", bs: "zastava", cat: "vlast", lvl: "A0" },
+      { ar: "فَارِسٌ", tr: "faris", bs: "konjanik/vitez", cat: "vlast", lvl: "A0" },
+      { ar: "السِّلَاحُ", tr: "as-silah", bs: "oruzje", cat: "vlast", lvl: "A0" },
+      { ar: "الْأَرْضُ", tr: "al-ard", bs: "zemlja", cat: "vlast", lvl: "A0" },
+      // Svakodnevno
+      { ar: "بَيْتٌ", tr: "bayt", bs: "kuca", cat: "svakodnevno", lvl: "A0" },
+      { ar: "مَاءٌ", tr: "ma'", bs: "voda", cat: "svakodnevno", lvl: "A0" },
+      { ar: "طَعَامٌ", tr: "ta'am", bs: "hrana", cat: "svakodnevno", lvl: "A0" },
+      { ar: "تَمْرٌ", tr: "tamr", bs: "hurme/datule", cat: "svakodnevno", lvl: "A0" },
+      { ar: "لَبَنٌ", tr: "laban", bs: "mlijeko", cat: "svakodnevno", lvl: "A0" },
+      { ar: "خُبْزٌ", tr: "khubz", bs: "hljeb", cat: "svakodnevno", lvl: "A0" },
+      { ar: "سُوقٌ", tr: "suq", bs: "pijaca/trznica", cat: "svakodnevno", lvl: "A0" },
+      { ar: "مَالٌ", tr: "mal", bs: "imetak/novac", cat: "svakodnevno", lvl: "A0" },
+      { ar: "طَرِيقٌ", tr: "tariq", bs: "put/cesta", cat: "svakodnevno", lvl: "A0" },
+      { ar: "شَارِعٌ", tr: "sari'", bs: "ulica", cat: "svakodnevno", lvl: "A0" },
+      { ar: "بِنَايَةٌ", tr: "binaya", bs: "zgrada", cat: "svakodnevno", lvl: "A0" },
+      { ar: "قَرْيَةٌ", tr: "qarja", bs: "selo", cat: "svakodnevno", lvl: "A0" },
+      { ar: "مَدِينَةٌ", tr: "madina", bs: "grad", cat: "svakodnevno", lvl: "A0" },
+      { ar: "فَصْلٌ", tr: "fasl", bs: "ucionica/razred", cat: "svakodnevno", lvl: "A0" },
+      { ar: "لَيْلٌ", tr: "layl", bs: "noc", cat: "svakodnevno", lvl: "A0" },
+      { ar: "نَهَارٌ", tr: "nahar", bs: "dan", cat: "svakodnevno", lvl: "A0" },
+      { ar: "يَوْمٌ", tr: "yawm", bs: "dan", cat: "svakodnevno", lvl: "A0" },
+      { ar: "وَقْتٌ", tr: "waqt", bs: "vrijeme", cat: "svakodnevno", lvl: "A0" },
+      { ar: "مَوْتٌ", tr: "mawt", bs: "smrt", cat: "svakodnevno", lvl: "A0" },
+      { ar: "حَيَاةٌ", tr: "hayah", bs: "zivot", cat: "svakodnevno", lvl: "A0" },
+      { ar: "دَمٌ", tr: "dam", bs: "krv", cat: "svakodnevno", lvl: "A0" },
+      { ar: "قَلْبٌ", tr: "qalb", bs: "srce", cat: "svakodnevno", lvl: "A0" },
+      { ar: "كَلَامٌ", tr: "kalam", bs: "govor/rijeci", cat: "svakodnevno", lvl: "A0" },
+      // Glagoli (A0)
+      { ar: "قَالَ", tr: "qala", bs: "rekao je", cat: "glagoli", lvl: "A0" },
+      { ar: "جَاءَ", tr: "ja'a", bs: "dosao je", cat: "glagoli", lvl: "A0" },
+      { ar: "ذَهَبَ", tr: "dhahaba", bs: "otisao je", cat: "glagoli", lvl: "A0" },
+      { ar: "عَلِمَ", tr: "'alima", bs: "znao je/saznao", cat: "glagoli", lvl: "A0" },
+      { ar: "أَرَادَ", tr: "arada", bs: "htio je/zelio", cat: "glagoli", lvl: "A0" },
+      { ar: "رَأَى", tr: "ra'a", bs: "vidio je", cat: "glagoli", lvl: "A0" },
+      { ar: "سَمِعَ", tr: "sami'a", bs: "cuo je", cat: "glagoli", lvl: "A0" },
+      { ar: "أَمَرَ", tr: "amara", bs: "naredio je", cat: "glagoli", lvl: "A0" },
+      { ar: "قَتَلَ", tr: "qatala", bs: "ubio je", cat: "glagoli", lvl: "A0" },
+      { ar: "أَسْلَمَ", tr: "aslama", bs: "primio islam", cat: "glagoli", lvl: "A0" },
+      { ar: "خَافَ", tr: "khafa", bs: "bojao se", cat: "glagoli", lvl: "A0" },
+      { ar: "وَعَدَ", tr: "wa'ada", bs: "obecao je", cat: "glagoli", lvl: "A0" },
+      { ar: "حَمِدَ", tr: "hamida", bs: "zahvalio/hvalio", cat: "glagoli", lvl: "A0" },
+      { ar: "صَبَرَ", tr: "sabara", bs: "strpio se", cat: "glagoli", lvl: "A0" },
+      { ar: "دَعَا", tr: "da'a", bs: "pozvao/molio (dovu)", cat: "glagoli", lvl: "A0" },
+      { ar: "تَابَ", tr: "taba", bs: "pokajati se", cat: "glagoli", lvl: "A0" },
+      { ar: "يَتُوبُ", tr: "yatubu", bs: "on se kaje", cat: "glagoli", lvl: "A0" },
+      { ar: "ثَبَتَ", tr: "thabata", bs: "mirovati", cat: "glagoli", lvl: "A0" },
+      { ar: "يُحِبُّ", tr: "yuhibbu", bs: "on voli", cat: "glagoli", lvl: "A0" },
+      { ar: "أَجَابَ", tr: "ajaba", bs: "odgovoriti", cat: "glagoli", lvl: "A0" },
+      { ar: "خَرَجَ", tr: "kharadja", bs: "izaci", cat: "glagoli", lvl: "A0" },
+      { ar: "يَشْرَبُ", tr: "yasrabu", bs: "on pije", cat: "glagoli", lvl: "A0" },
+      { ar: "شَرِبَ", tr: "sariba", bs: "piti", cat: "glagoli", lvl: "A0" },
+      { ar: "سَبَحَ", tr: "sabaha", bs: "plivati", cat: "glagoli", lvl: "A0" },
+      { ar: "ذَبَحَ", tr: "dhabaha", bs: "zaklati", cat: "glagoli", lvl: "A0" },
+      { ar: "جَحَظَ", tr: "djahaza", bs: "iskociti", cat: "glagoli", lvl: "A0" },
+      { ar: "يَغُوصُ", tr: "yaghusu", bs: "roniti", cat: "glagoli", lvl: "A0" },
+      { ar: "ضَحِكَ", tr: "dahika", bs: "smijati se", cat: "glagoli", lvl: "A0" },
+      { ar: "لَعِبَ", tr: "la'iba", bs: "igrati", cat: "glagoli", lvl: "A0" },
+      { ar: "فَتَحَ", tr: "fataha", bs: "otvoriti/osvojiti", cat: "glagoli", lvl: "A0" },
+      { ar: "اِسْتَغْفَرَ", tr: "istaghfara", bs: "traziti oprost", cat: "glagoli", lvl: "A0" },
+      { ar: "قَرَأَ", tr: "qara'a", bs: "citati", cat: "glagoli", lvl: "A0" },
+      { ar: "يَعْمَلُ", tr: "ya'malu", bs: "on radi", cat: "glagoli", lvl: "A0" },
+      { ar: "يَتَكَلَّمُ", tr: "yatakallamu", bs: "on govori", cat: "glagoli", lvl: "A0" },
+      { ar: "سَكَنَ", tr: "sakana", bs: "stanovati", cat: "glagoli", lvl: "A0" },
+      { ar: "يَفْهَمُ", tr: "yafhamu", bs: "on razumije", cat: "glagoli", lvl: "A0" },
+      // Pridjevi (A0)
+      { ar: "كَبِيرٌ", tr: "kabir", bs: "velik", cat: "pridjevi", lvl: "A0" },
+      { ar: "صَغِيرٌ", tr: "saghir", bs: "mali", cat: "pridjevi", lvl: "A0" },
+      { ar: "قَوِيٌّ", tr: "qawiyy", bs: "jak/mocan", cat: "pridjevi", lvl: "A0" },
+      { ar: "ضَعِيفٌ", tr: "da'if", bs: "slab", cat: "pridjevi", lvl: "A0" },
+      { ar: "كَثِيرٌ", tr: "kathir", bs: "mnogo/brojan", cat: "pridjevi", lvl: "A0" },
+      { ar: "قَلِيلٌ", tr: "qalil", bs: "malo/malobrojan", cat: "pridjevi", lvl: "A0" },
+      { ar: "عَظِيمٌ", tr: "'azim", bs: "velicanstven", cat: "pridjevi", lvl: "A0" },
+      { ar: "جَدِيدٌ", tr: "jadid", bs: "novi", cat: "pridjevi", lvl: "A0" },
+      { ar: "صَادِقٌ", tr: "sadiq", bs: "iskren/istinit", cat: "pridjevi", lvl: "A0" },
+      { ar: "شُجَاعٌ", tr: "suja'", bs: "hrabar", cat: "pridjevi", lvl: "A0" },
+      // Fraze
+      { ar: "بِسْمِ اللَّهِ", tr: "bismi-llah", bs: "u ime Boga", cat: "fraze", lvl: "A0" },
+      { ar: "إِنْ شَاءَ اللَّهُ", tr: "in sa'a-llah", bs: "ako Bog da", cat: "fraze", lvl: "A0" },
+      { ar: "الْحَمْدُ لِلَّهِ", tr: "al-hamdu li-llah", bs: "hvala Bogu", cat: "fraze", lvl: "A0" },
+      { ar: "سُبْحَانَ اللَّهِ", tr: "subhana-llah", bs: "slavljen neka je Bog", cat: "fraze", lvl: "A0" },
+      { ar: "اللَّهُ أَكْبَرُ", tr: "Allahu akbar", bs: "Bog je najveci", cat: "fraze", lvl: "A0" },
+      { ar: "لَا إِلٰهَ إِلَّا اللَّهُ", tr: "la ilaha illa-llah", bs: "nema boga osim Boga", cat: "fraze", lvl: "A0" },
+      { ar: "أَسْتَغْفِرُ اللَّهَ", tr: "astaghfiru-llah", bs: "trazim oprost od Boga", cat: "fraze", lvl: "A0" },
+      { ar: "السَّلَامُ عَلَيْكُمْ", tr: "as-salamu 'alaykum", bs: "mir s vama (pozdrav)", cat: "fraze", lvl: "A0" },
+      { ar: "يَا أَيُّهَا النَّاسُ", tr: "ya ayyuha-n-nas", bs: "o ljudi!", cat: "fraze", lvl: "A0" },
+      { ar: "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ", tr: "salla-llahu 'alayhi wa sallam", bs: "neka su Boziji mir i blagoslov na njega", cat: "fraze", lvl: "A0" },
+      { ar: "وَاللَّهِ", tr: "wa-llahi", bs: "tako mi Boga", cat: "fraze", lvl: "A0" },
+      { ar: "مَا شَاءَ اللَّهُ", tr: "ma sa'a-llah", bs: "kako Bog htjede (divljenje)", cat: "fraze", lvl: "A0" },
+      // Pozdravi
+      { ar: "شُكْرًا", tr: "sukran", bs: "hvala", cat: "pozdravi", lvl: "A0" },
+      { ar: "عَفْوًا", tr: "'afwan", bs: "nema na cemu", cat: "pozdravi", lvl: "A0" },
+      { ar: "سَلَامٌ", tr: "salam", bs: "mir/pozdrav", cat: "pozdravi", lvl: "A0" },
+      { ar: "السَّلَامُ عَلَيْكُمْ", tr: "as-salamu 'alaykum", bs: "mir vama", cat: "pozdravi", lvl: "A0" },
+      { ar: "وَعَلَيْكُمُ السَّلَامُ", tr: "wa 'alaykumu as-salam", bs: "i vama mir", cat: "pozdravi", lvl: "A0" },
+      { ar: "مَرْحَبًا", tr: "marhaban", bs: "zdravo", cat: "pozdravi", lvl: "A0" },
+      { ar: "أَهْلًا وَسَهْلًا", tr: "ahlan wa sahlan", bs: "dobrodosao/la", cat: "pozdravi", lvl: "A0" },
+      { ar: "كَيْفَ حَالُكَ؟", tr: "kayfa haluka?", bs: "kako si?", cat: "pozdravi", lvl: "A0" },
+      { ar: "بِخَيْرٍ", tr: "bikhayrin", bs: "dobro (sam)", cat: "pozdravi", lvl: "A0" },
+      { ar: "تَفَضَّلْ", tr: "tafaddal", bs: "izvoli", cat: "pozdravi", lvl: "A0" },
+      { ar: "نَعَمْ", tr: "na'am", bs: "da", cat: "pozdravi", lvl: "A0" },
+      // Predmeti (A0)
+      { ar: "بَيْتٌ", tr: "bayt", bs: "kuca", cat: "predmeti", lvl: "A0" },
+      { ar: "بَابٌ", tr: "bab", bs: "vrata", cat: "predmeti", lvl: "A0" },
+      { ar: "شَاشَةٌ", tr: "sasa", bs: "ekran", cat: "predmeti", lvl: "A0" },
+      { ar: "سَبُّورَةٌ", tr: "sabbura", bs: "skolska tabla", cat: "predmeti", lvl: "A0" },
+      { ar: "صُورَةٌ", tr: "sura", bs: "slika", cat: "predmeti", lvl: "A0" },
+      { ar: "سَجَّادَةٌ", tr: "sadzdada", bs: "prostirka", cat: "predmeti", lvl: "A0" },
+      { ar: "سِتَارَةٌ", tr: "sitara", bs: "zavjesa", cat: "predmeti", lvl: "A0" },
+      { ar: "غُرْفَةٌ", tr: "ghurfa", bs: "soba", cat: "predmeti", lvl: "A0" },
+      { ar: "خَرِيطَةٌ", tr: "kharita", bs: "karta/mapa", cat: "predmeti", lvl: "A0" },
+      { ar: "طَبَاشِيرٌ", tr: "tabasir", bs: "kreda", cat: "predmeti", lvl: "A0" },
+      { ar: "كِتَابٌ", tr: "kitab", bs: "knjiga", cat: "predmeti", lvl: "A0" },
+      { ar: "ثَلَّاجَةٌ", tr: "thalladza", bs: "frizider", cat: "predmeti", lvl: "A0" },
+      { ar: "دُولَابٌ", tr: "dulab", bs: "ormar/dolap", cat: "predmeti", lvl: "A0" },
+      { ar: "مِلْعَقَةٌ", tr: "mil'aqa", bs: "kasika", cat: "predmeti", lvl: "A0" },
+      { ar: "حَقِيبَةٌ", tr: "haqiba", bs: "tasna/ruksak", cat: "predmeti", lvl: "A0" },
+      { ar: "قَلَمٌ", tr: "qalam", bs: "olovka", cat: "predmeti", lvl: "A0" },
+      { ar: "دَفْتَرٌ", tr: "daftar", bs: "sveska/bilježnica", cat: "predmeti", lvl: "A0" },
+      { ar: "مِمْحَاةٌ", tr: "mimha", bs: "gumica", cat: "predmeti", lvl: "A0" },
+      { ar: "مِكْنَسَةٌ", tr: "miknasa", bs: "metla", cat: "predmeti", lvl: "A0" },
+      { ar: "وِسَادَةٌ", tr: "wisada", bs: "jastuk", cat: "predmeti", lvl: "A0" },
+      { ar: "قُفْلٌ", tr: "qufl", bs: "brava/katanac", cat: "predmeti", lvl: "A0" },
+      { ar: "شَوْكَةٌ", tr: "sawka", bs: "viljuska", cat: "predmeti", lvl: "A0" },
+      { ar: "كُرَةٌ", tr: "kura", bs: "lopta", cat: "predmeti", lvl: "A0" },
+      { ar: "وَرَقَةٌ", tr: "waraqa", bs: "papir/list", cat: "predmeti", lvl: "A0" },
+      { ar: "مَنْزِلٌ", tr: "manzil", bs: "stan/kuca", cat: "predmeti", lvl: "A0" },
+      { ar: "مَلْعَبٌ", tr: "mal'ab", bs: "stadion/igraliste", cat: "predmeti", lvl: "A0" },
+      { ar: "مِسْطَرَةٌ", tr: "mistara", bs: "linijar", cat: "predmeti", lvl: "A0" },
+      { ar: "جِدَارٌ", tr: "djidar", bs: "zid", cat: "predmeti", lvl: "A0" },
+      { ar: "مَطْبَخٌ", tr: "matbakh", bs: "kuhinja", cat: "predmeti", lvl: "A0" },
+      { ar: "دَائِرَةٌ", tr: "da'ira", bs: "krug/kruznica", cat: "predmeti", lvl: "A0" },
+      { ar: "كُرْسِيٌّ", tr: "kursi", bs: "stolica", cat: "predmeti", lvl: "A0" },
+      { ar: "قَلْعَةٌ", tr: "qal'a", bs: "tvrdjava", cat: "predmeti", lvl: "A0" },
+      { ar: "سِكِّينٌ", tr: "sikkin", bs: "noz", cat: "predmeti", lvl: "A0" },
+      { ar: "فِنْجَانٌ", tr: "findzan", bs: "soljica", cat: "predmeti", lvl: "A0" },
+      { ar: "مَكَانٌ", tr: "makan", bs: "mjesto", cat: "predmeti", lvl: "A0" },
+      { ar: "شَقَّةٌ", tr: "saqqa", bs: "stan", cat: "predmeti", lvl: "A0" },
+      { ar: "طَاوِلَةٌ", tr: "tawila", bs: "sto/stol", cat: "predmeti", lvl: "A0" },
+      { ar: "نَافِذَةٌ", tr: "nafidha", bs: "prozor", cat: "predmeti", lvl: "A0" },
+      { ar: "هَاتِفٌ", tr: "hatif", bs: "telefon", cat: "predmeti", lvl: "A0" },
+      { ar: "صُنْدُوقٌ", tr: "sunduq", bs: "sanduk/kutija", cat: "predmeti", lvl: "A0" },
+      { ar: "سَاعَةٌ", tr: "sa'a", bs: "sat/ura", cat: "predmeti", lvl: "A0" },
+      { ar: "سَفِينَةٌ", tr: "safina", bs: "brod", cat: "predmeti", lvl: "A0" },
+      { ar: "قِطَارٌ", tr: "qitar", bs: "voz", cat: "predmeti", lvl: "A0" },
+      // Porodica (A0)
+      { ar: "أَبٌ", tr: "ab", bs: "otac", cat: "porodica", lvl: "A0" },
+      { ar: "جَدٌّ", tr: "djadd", bs: "djed", cat: "porodica", lvl: "A0" },
+      { ar: "جَدَّةٌ", tr: "djadda", bs: "baka/nena", cat: "porodica", lvl: "A0" },
+      { ar: "حَبِيبٌ", tr: "habib", bs: "dragi (m)", cat: "porodica", lvl: "A0" },
+      { ar: "حَبِيبَةٌ", tr: "habiba", bs: "draga (z)", cat: "porodica", lvl: "A0" },
+      { ar: "وَلَدٌ", tr: "walad", bs: "dijete", cat: "porodica", lvl: "A0" },
+      { ar: "زَوْجَةٌ", tr: "zawdja", bs: "supruga", cat: "porodica", lvl: "A0" },
+      { ar: "زَوْجٌ", tr: "zawdj", bs: "suprug", cat: "porodica", lvl: "A0" },
+      // Hrana/Priroda
+      { ar: "تُفَّاحَةٌ", tr: "tuffaha", bs: "jabuka", cat: "hrana", lvl: "A0" },
+      { ar: "خُبْزٌ", tr: "khubz", bs: "hljeb", cat: "hrana", lvl: "A0" },
+      { ar: "زَيْتٌ", tr: "zayt", bs: "ulje", cat: "hrana", lvl: "A0" },
+      { ar: "دَجَاجٌ", tr: "dadajdj", bs: "piletina", cat: "hrana", lvl: "A0" },
+      { ar: "ذُرَّةٌ", tr: "dhurra", bs: "kukuruz", cat: "hrana", lvl: "A0" },
+      { ar: "بُذُورٌ", tr: "budhur", bs: "sjeme", cat: "hrana", lvl: "A0" },
+      { ar: "شَجَرَةٌ", tr: "sadjara", bs: "stablo", cat: "hrana", lvl: "A0" },
+      { ar: "حَشِيشٌ", tr: "hasis", bs: "trava", cat: "hrana", lvl: "A0" },
+      { ar: "تُوتٌ", tr: "tut", bs: "dud/murva", cat: "hrana", lvl: "A0" },
+      { ar: "بَطَاطِسٌ", tr: "batatis", bs: "krompir", cat: "hrana", lvl: "A0" },
+      { ar: "حِمْصٌ", tr: "hims", bs: "hummus", cat: "hrana", lvl: "A0" },
+      { ar: "بَيْضَةٌ", tr: "bayda", bs: "jaje", cat: "hrana", lvl: "A0" },
+      { ar: "بَطِّيخٌ", tr: "battikh", bs: "lubenica", cat: "hrana", lvl: "A0" },
+      { ar: "خُضْرَوَاتٌ", tr: "khudrawat", bs: "povrce", cat: "hrana", lvl: "A0" },
+      { ar: "غَابَةٌ", tr: "ghaba", bs: "suma", cat: "hrana", lvl: "A0" },
+      { ar: "مَاءٌ", tr: "ma'", bs: "voda", cat: "hrana", lvl: "A0" },
+      { ar: "أَنَانَاسٌ", tr: "ananas", bs: "ananas", cat: "hrana", lvl: "A0" },
+      { ar: "نَهْرٌ", tr: "nahr", bs: "rijeka", cat: "hrana", lvl: "A0" },
+      { ar: "بُرْتُقَالٌ", tr: "burtuqal", bs: "naranca", cat: "hrana", lvl: "A0" },
+      { ar: "مِلْحٌ", tr: "milh", bs: "so", cat: "hrana", lvl: "A0" },
+      { ar: "تَمْرٌ", tr: "tamr", bs: "hurma/datula", cat: "hrana", lvl: "A0" },
+      { ar: "فَاكِهَةٌ", tr: "fakiha", bs: "voce", cat: "hrana", lvl: "A0" },
+      { ar: "نَجْمَةٌ", tr: "nadjma", bs: "zvijezda", cat: "hrana", lvl: "A0" },
+      { ar: "لَيْمُونٌ", tr: "laymun", bs: "limun", cat: "hrana", lvl: "A0" },
+      { ar: "فَرَاوِلَةٌ", tr: "farawila", bs: "jagoda", cat: "hrana", lvl: "A0" },
+      { ar: "غَدَاءٌ", tr: "ghada'", bs: "rucak", cat: "hrana", lvl: "A0" },
+      { ar: "شَمْسٌ", tr: "sams", bs: "sunce", cat: "hrana", lvl: "A0" },
+      { ar: "زَهْرَةٌ", tr: "zahra", bs: "cvijet", cat: "hrana", lvl: "A0" },
+      { ar: "قَهْوَةٌ", tr: "qahwa", bs: "kahva", cat: "hrana", lvl: "A0" },
+      // Zivotinje
+      { ar: "دُبٌّ", tr: "dubb", bs: "medvjed", cat: "zivotinje", lvl: "A0" },
+      { ar: "حُوتٌ", tr: "hut", bs: "kit", cat: "zivotinje", lvl: "A0" },
+      { ar: "ذُبَابَةٌ", tr: "dhubaba", bs: "muha", cat: "zivotinje", lvl: "A0" },
+      { ar: "أَوَزَّةٌ", tr: "awazza", bs: "guska", cat: "zivotinje", lvl: "A0" },
+      { ar: "بَطَّةٌ", tr: "batta", bs: "patka", cat: "zivotinje", lvl: "A0" },
+      { ar: "طَاوُوسٌ", tr: "tawus", bs: "paun", cat: "zivotinje", lvl: "A0" },
+      { ar: "صُرْصُورٌ", tr: "sursur", bs: "zohar", cat: "zivotinje", lvl: "A0" },
+      { ar: "ظَبْيٌ", tr: "zaby", bs: "gazela", cat: "zivotinje", lvl: "A0" },
+      { ar: "غُرَابٌ", tr: "ghurab", bs: "vrana", cat: "zivotinje", lvl: "A0" },
+      { ar: "فَرَاشَةٌ", tr: "farasa", bs: "leptir", cat: "zivotinje", lvl: "A0" },
+      { ar: "بَقَرَةٌ", tr: "baqara", bs: "krava", cat: "zivotinje", lvl: "A0" },
+      { ar: "عَقْرَبٌ", tr: "'aqrab", bs: "skorpija", cat: "zivotinje", lvl: "A0" },
+      { ar: "ضِفْدَعٌ", tr: "difda'", bs: "zaba", cat: "zivotinje", lvl: "A0" },
+      { ar: "كَلْبٌ", tr: "kalb", bs: "pas", cat: "zivotinje", lvl: "A0" },
+      { ar: "عُصْفُورٌ", tr: "'usfur", bs: "vrabac", cat: "zivotinje", lvl: "A0" },
+      { ar: "حَيَوَانٌ", tr: "hayawan", bs: "zivotinja", cat: "zivotinje", lvl: "A0" },
+      { ar: "ذِئْبٌ", tr: "dhi'b", bs: "vuk", cat: "zivotinje", lvl: "A0" },
+      { ar: "أَسَدٌ", tr: "asad", bs: "lav", cat: "zivotinje", lvl: "A0" },
+      { ar: "خَيْلٌ", tr: "khayl", bs: "konji", cat: "zivotinje", lvl: "A0" },
+      // Odjeca
+      { ar: "ثَوْبٌ", tr: "thawb", bs: "odjeca", cat: "odjeca", lvl: "A0" },
+      { ar: "جِيبَةٌ", tr: "djiba", bs: "suknja", cat: "odjeca", lvl: "A0" },
+      { ar: "جَوَارِبٌ", tr: "djwarib", bs: "carape", cat: "odjeca", lvl: "A0" },
+      { ar: "ثِيَابٌ", tr: "thiyab", bs: "odjeca pl.", cat: "odjeca", lvl: "A0" },
+      { ar: "خَيْطٌ", tr: "khayt", bs: "konac", cat: "odjeca", lvl: "A0" },
+      { ar: "فُسْتَانٌ", tr: "fustan", bs: "haljina", cat: "odjeca", lvl: "A0" },
+      { ar: "قَمِيصٌ", tr: "qamis", bs: "kosulja", cat: "odjeca", lvl: "A0" },
+      // Pojmovi
+      { ar: "جَوَابٌ", tr: "djawab", bs: "odgovor", cat: "pojmovi", lvl: "A0" },
+      { ar: "إِجَابَةٌ", tr: "idjaba", bs: "odgovor", cat: "pojmovi", lvl: "A0" },
+      { ar: "تَوْبَةٌ", tr: "tawba", bs: "pokajanje", cat: "pojmovi", lvl: "A0" },
+      { ar: "ثُبُوتٌ", tr: "thubut", bs: "stabilnost", cat: "pojmovi", lvl: "A0" },
+      { ar: "وُجُودٌ", tr: "wudjud", bs: "prisutnost", cat: "pojmovi", lvl: "A0" },
+      { ar: "بَحْثٌ", tr: "bahth", bs: "istrazivanje", cat: "pojmovi", lvl: "A0" },
+      { ar: "حَدِيثٌ", tr: "hadith", bs: "govor", cat: "pojmovi", lvl: "A0" },
+      { ar: "حَرْبٌ", tr: "harb", bs: "rat", cat: "pojmovi", lvl: "A0" },
+      { ar: "حِسَابٌ", tr: "hisab", bs: "racun", cat: "pojmovi", lvl: "A0" },
+      { ar: "ضَرْبَةٌ", tr: "darba", bs: "udarac", cat: "pojmovi", lvl: "A0" },
+      { ar: "دَرْسٌ", tr: "dars", bs: "lekcija", cat: "pojmovi", lvl: "A0" },
+      { ar: "دُرُوسٌ", tr: "durus", bs: "lekcije pl.", cat: "pojmovi", lvl: "A0" },
+      { ar: "تَرْتِيبٌ", tr: "tartib", bs: "redoslijed", cat: "pojmovi", lvl: "A0" },
+      { ar: "رَغْبَةٌ", tr: "raghba", bs: "zelja", cat: "pojmovi", lvl: "A0" },
+      { ar: "دِفَاعٌ", tr: "difa'", bs: "odbrana", cat: "pojmovi", lvl: "A0" },
+      { ar: "حُقُوقٌ", tr: "huquq", bs: "prava", cat: "pojmovi", lvl: "A0" },
+      { ar: "نُورٌ", tr: "nur", bs: "svjetlo", cat: "pojmovi", lvl: "A0" },
+      { ar: "لَيْلٌ", tr: "layl", bs: "noc", cat: "pojmovi", lvl: "A0" },
+      { ar: "حَقِيقَةٌ", tr: "haqiqa", bs: "istina", cat: "pojmovi", lvl: "A0" },
+      { ar: "عَطْفٌ", tr: "'atf", bs: "osjecaj/suosjecanje", cat: "pojmovi", lvl: "A0" },
+      { ar: "أَخْبَارٌ", tr: "akhbar", bs: "vijesti", cat: "pojmovi", lvl: "A0" },
+      { ar: "أَمْنٌ", tr: "amn", bs: "sigurnost", cat: "pojmovi", lvl: "A0" },
+      { ar: "كَلَامٌ", tr: "kalam", bs: "govor/rijec", cat: "pojmovi", lvl: "A0" },
+      { ar: "قِرَاءَةٌ", tr: "qira'a", bs: "citanje", cat: "pojmovi", lvl: "A0" },
+      { ar: "شَيْءٌ", tr: "say'", bs: "stvar/predmet", cat: "pojmovi", lvl: "A0" },
+      { ar: "خَطَأٌ", tr: "khata'", bs: "greska", cat: "pojmovi", lvl: "A0" },
+      { ar: "شَرْقٌ", tr: "sarq", bs: "istok", cat: "pojmovi", lvl: "A0" },
+      { ar: "إِمْلَاءٌ", tr: "imla'", bs: "diktat", cat: "pojmovi", lvl: "A0" },
+      { ar: "أَلَمٌ", tr: "alam", bs: "bol", cat: "pojmovi", lvl: "A0" },
+      { ar: "خَبَرٌ", tr: "khabar", bs: "vijest", cat: "pojmovi", lvl: "A0" },
+      { ar: "تَرْحِيبٌ", tr: "tarhib", bs: "pozdrav/dobrodoslica", cat: "pojmovi", lvl: "A0" },
+      { ar: "عَمَلٌ", tr: "'amal", bs: "posao/rad", cat: "pojmovi", lvl: "A0" },
+      { ar: "رَحْلَةٌ", tr: "rahla", bs: "putovanje", cat: "pojmovi", lvl: "A0" },
+      { ar: "خَيْرٌ", tr: "khayr", bs: "dobro", cat: "pojmovi", lvl: "A0" },
+      { ar: "جَهْلٌ", tr: "djahl", bs: "neznanje", cat: "pojmovi", lvl: "A0" },
+      { ar: "دَرَجَةٌ", tr: "daradja", bs: "stepenica/ocjena", cat: "pojmovi", lvl: "A0" },
+      { ar: "اِسْمٌ", tr: "ism", bs: "ime", cat: "pojmovi", lvl: "A0" },
+      { ar: "صِنَاعَةٌ", tr: "sina'a", bs: "industrija/zanat", cat: "pojmovi", lvl: "A0" },
+      { ar: "مَصَارِيفٌ", tr: "masarif", bs: "troskovi", cat: "pojmovi", lvl: "A0" },
+      { ar: "مُرَاجَعَاتٌ", tr: "muradja'at", bs: "ponavljanja/recenzije", cat: "pojmovi", lvl: "A0" },
+      { ar: "إِرَادَةٌ", tr: "irada", bs: "volja/odlucnost", cat: "pojmovi", lvl: "A0" },
+      // Zanimanja
+      { ar: "خَبَّازٌ", tr: "khabbaz", bs: "pekar", cat: "zanimanja", lvl: "A0" },
+      { ar: "جَيْشٌ", tr: "djays", bs: "vojska", cat: "zanimanja", lvl: "A0" },
+      { ar: "سَيَّارَةٌ", tr: "sayyara", bs: "automobil", cat: "zanimanja", lvl: "A0" },
+      { ar: "دَرَّاجَةٌ", tr: "darradja", bs: "bicikl", cat: "zanimanja", lvl: "A0" },
+      { ar: "جِسْرٌ", tr: "djisr", bs: "most", cat: "zanimanja", lvl: "A0" },
+      { ar: "عَسْكَرِيٌّ", tr: "'askari", bs: "vojnik", cat: "zanimanja", lvl: "A0" },
+      { ar: "بَحْرٌ", tr: "bahr", bs: "more", cat: "zanimanja", lvl: "A0" },
+      { ar: "سِبَاحَةٌ", tr: "sibaha", bs: "plivanje", cat: "zanimanja", lvl: "A0" },
+      { ar: "رِيشَةٌ", tr: "risa", bs: "pero", cat: "zanimanja", lvl: "A0" },
+      { ar: "حُبُوبٌ", tr: "hubub", bs: "pilule", cat: "zanimanja", lvl: "A0" },
+      { ar: "طَبِيبٌ", tr: "tabib", bs: "ljekar", cat: "zanimanja", lvl: "A0" },
+      { ar: "خَيَّاطٌ", tr: "khayyat", bs: "krojac", cat: "zanimanja", lvl: "A0" },
+      { ar: "ضَابِطٌ", tr: "dabit", bs: "oficir", cat: "zanimanja", lvl: "A0" },
+      { ar: "حَارِسٌ", tr: "haris", bs: "cuvar", cat: "zanimanja", lvl: "A0" },
+      { ar: "صَارُوخٌ", tr: "sarukh", bs: "raketa", cat: "zanimanja", lvl: "A0" },
+      { ar: "صَبَّارٌ", tr: "sabbar", bs: "kaktus", cat: "zanimanja", lvl: "A0" },
+      { ar: "أَرْضٌ", tr: "ard", bs: "zemlja", cat: "zanimanja", lvl: "A0" },
+      { ar: "تَاجٌ", tr: "tadj", bs: "kruna", cat: "zanimanja", lvl: "A0" },
+      { ar: "طَبَّاخٌ", tr: "tabbakh", bs: "kuhar", cat: "zanimanja", lvl: "A0" },
+      { ar: "ثَرْثَارٌ", tr: "tharthar", bs: "pricalica", cat: "zanimanja", lvl: "A0" },
+      { ar: "رَصَاصَةٌ", tr: "rasasa", bs: "metak", cat: "zanimanja", lvl: "A0" },
+      { ar: "حَظِيرَةٌ", tr: "hazira", bs: "stala", cat: "zanimanja", lvl: "A0" },
+      { ar: "قَبْرٌ", tr: "qabr", bs: "kabur/grob", cat: "zanimanja", lvl: "A0" },
+      { ar: "جَسَدٌ", tr: "djasad", bs: "tijelo", cat: "zanimanja", lvl: "A0" },
+      { ar: "صَبْرٌ", tr: "sabr", bs: "strpljenje", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُسْلِمٌ", tr: "muslim", bs: "musliman", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُمَثِّلٌ", tr: "mumaththil", bs: "glumac", cat: "zanimanja", lvl: "A0" },
+      { ar: "لَاعِبَةٌ", tr: "la'iba", bs: "igracica/sportistkinja", cat: "zanimanja", lvl: "A0" },
+      { ar: "هَرَمٌ", tr: "haram", bs: "piramida", cat: "zanimanja", lvl: "A0" },
+      { ar: "قَصْرٌ", tr: "qasr", bs: "dvorac", cat: "zanimanja", lvl: "A0" },
+      { ar: "وَجْهٌ", tr: "wadjh", bs: "lice", cat: "zanimanja", lvl: "A0" },
+      { ar: "رَضِيعٌ", tr: "radi'", bs: "dojence", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُدَرِّسَةٌ", tr: "mudarrisa", bs: "uciteljica", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُهَنْدِسٌ", tr: "muhandis", bs: "inzenjer", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُؤْمِنٌ", tr: "mu'min", bs: "vjernik", cat: "zanimanja", lvl: "A0" },
+      { ar: "طَالِبٌ", tr: "talib", bs: "student", cat: "zanimanja", lvl: "A0" },
+      { ar: "طَالِبَةٌ", tr: "taliba", bs: "studentica", cat: "zanimanja", lvl: "A0" },
+      { ar: "طَبِيبَةٌ", tr: "tabiba", bs: "lijecnica", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُعَلِّمٌ", tr: "mu'allim", bs: "ucitelj", cat: "zanimanja", lvl: "A0" },
+      { ar: "سَيِّدٌ", tr: "sayyid", bs: "gospodin", cat: "zanimanja", lvl: "A0" },
+      { ar: "رَفِيقٌ", tr: "rafiq", bs: "prijatelj/drug", cat: "zanimanja", lvl: "A0" },
+      { ar: "صَيْدَلِيَّةٌ", tr: "saydaliyya", bs: "apoteka", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُسْتَشْفَى", tr: "mustasfa", bs: "bolnica", cat: "zanimanja", lvl: "A0" },
+      { ar: "كُلِّيَّةٌ", tr: "kulliyya", bs: "fakultet", cat: "zanimanja", lvl: "A0" },
+      { ar: "حَافِلَةٌ", tr: "hafila", bs: "autobus", cat: "zanimanja", lvl: "A0" },
+      { ar: "جُمْجُمَةٌ", tr: "djumdjuma", bs: "lubanja", cat: "zanimanja", lvl: "A0" },
+      { ar: "دَوَاءٌ", tr: "dawa'", bs: "lijek", cat: "zanimanja", lvl: "A0" },
+      { ar: "كُتُبٌ", tr: "kutub", bs: "knjige (pl.)", cat: "zanimanja", lvl: "A0" },
+      { ar: "جَزَّارٌ", tr: "djazzar", bs: "mesar", cat: "zanimanja", lvl: "A0" },
+      { ar: "شُرْطِيٌّ", tr: "surti", bs: "policajac", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُمَرِّضٌ", tr: "mumarrid", bs: "medicinar (m)", cat: "zanimanja", lvl: "A0" },
+      { ar: "مُمَرِّضَةٌ", tr: "mumarrida", bs: "medicinska sestra", cat: "zanimanja", lvl: "A0" },
+      { ar: "رَاسِمٌ", tr: "rasim", bs: "crtac/slikar", cat: "zanimanja", lvl: "A0" },
+      { ar: "طَيَّارٌ", tr: "tayyar", bs: "pilot", cat: "zanimanja", lvl: "A0" },
+      // Brojevi/Pridjevi (A0)
+      { ar: "وَاحِدٌ", tr: "wahid", bs: "jedan", cat: "brojevi", lvl: "A0" },
+      { ar: "اِثْنَانِ", tr: "ithnani", bs: "dva", cat: "brojevi", lvl: "A0" },
+      { ar: "ثَلَاثَةٌ", tr: "thalatha", bs: "tri", cat: "brojevi", lvl: "A0" },
+      { ar: "أَرْبَعَةٌ", tr: "arba'a", bs: "cetiri", cat: "brojevi", lvl: "A0" },
+      { ar: "خَمْسَةٌ", tr: "khamsa", bs: "pet", cat: "brojevi", lvl: "A0" },
+      { ar: "سِتَّةٌ", tr: "sitta", bs: "sest", cat: "brojevi", lvl: "A0" },
+      { ar: "سَبْعٌ", tr: "sab'", bs: "sedam", cat: "brojevi", lvl: "A0" },
+      { ar: "ثَمَانِيَةٌ", tr: "thamaniya", bs: "osam", cat: "brojevi", lvl: "A0" },
+      { ar: "تِسْعَةٌ", tr: "tis'a", bs: "devet", cat: "brojevi", lvl: "A0" },
+      { ar: "عَشَرَةٌ", tr: "'asara", bs: "deset", cat: "brojevi", lvl: "A0" },
+      { ar: "صِفْرٌ", tr: "sifr", bs: "nula", cat: "brojevi", lvl: "A0" },
+      { ar: "جَدِيدٌ", tr: "djadid", bs: "nov", cat: "brojevi", lvl: "A0" },
+      { ar: "ثَابِتٌ", tr: "thabit", bs: "miran (m)", cat: "brojevi", lvl: "A0" },
+      { ar: "ثَابِتَةٌ", tr: "thabita", bs: "mirna (z)", cat: "brojevi", lvl: "A0" },
+      { ar: "أَخْضَرُ", tr: "akhdar", bs: "zelen", cat: "brojevi", lvl: "A0" },
+      { ar: "صَغِيرٌ", tr: "saghir", bs: "malen", cat: "brojevi", lvl: "A0" },
+      { ar: "قَرِيبَةٌ", tr: "qariba", bs: "bliska", cat: "brojevi", lvl: "A0" },
+      { ar: "كَبِيرٌ", tr: "kabir", bs: "velik", cat: "brojevi", lvl: "A0" },
+      { ar: "جَمِيلٌ", tr: "djamil", bs: "lijep", cat: "brojevi", lvl: "A0" },
+      { ar: "مَجْنُونٌ", tr: "madjnun", bs: "lud", cat: "brojevi", lvl: "A0" },
+      { ar: "غَاضِبٌ", tr: "ghadib", bs: "ljut", cat: "brojevi", lvl: "A0" },
+      { ar: "شَدِيدٌ", tr: "sadid", bs: "jak/zestok", cat: "brojevi", lvl: "A0" },
+      { ar: "وَاسِعٌ", tr: "wasi'", bs: "prostran/sirok", cat: "brojevi", lvl: "A0" },
+      { ar: "ضَيِّقٌ", tr: "dayyiq", bs: "uzak/tijesan", cat: "brojevi", lvl: "A0" },
+      { ar: "نَحِيفٌ", tr: "nahif", bs: "mrsav", cat: "brojevi", lvl: "A0" },
+      { ar: "دَقِيقٌ", tr: "daqiq", bs: "precizan/tacan", cat: "brojevi", lvl: "A0" },
+      { ar: "قَدِيمٌ", tr: "qadim", bs: "star", cat: "brojevi", lvl: "A0" },
+      { ar: "مَاهِرٌ", tr: "mahir", bs: "vjest/spretan", cat: "brojevi", lvl: "A0" },
+      { ar: "مَرِيضٌ", tr: "marid", bs: "bolestan", cat: "brojevi", lvl: "A0" },
+      { ar: "أَنِيقٌ", tr: "aniq", bs: "elegantan", cat: "brojevi", lvl: "A0" },
+      { ar: "مَتِينٌ", tr: "matin", bs: "cvrst/solidan", cat: "brojevi", lvl: "A0" },
+      { ar: "مُجْتَهِدٌ", tr: "mudjtahid", bs: "marljiv/vrijedan", cat: "brojevi", lvl: "A0" },
+      { ar: "ذَكِيٌّ", tr: "dhaki", bs: "pametan", cat: "brojevi", lvl: "A0" },
+      { ar: "عَجُوزٌ", tr: "'adjuz", bs: "star/ostarjeli", cat: "brojevi", lvl: "A0" },
+      { ar: "مَشْهُورٌ", tr: "mashur", bs: "poznat/slavan", cat: "brojevi", lvl: "A0" },
+      { ar: "طَوِيلٌ", tr: "tawil", bs: "dugacak/visok", cat: "brojevi", lvl: "A0" },
+      { ar: "قَصِيرٌ", tr: "qasir", bs: "kratak/nizak", cat: "brojevi", lvl: "A0" },
+      { ar: "ثَقِيلٌ", tr: "thaqil", bs: "tezak", cat: "brojevi", lvl: "A0" },
+      { ar: "لَذِيذٌ", tr: "ladhidh", bs: "ukusan", cat: "brojevi", lvl: "A0" },
+      { ar: "نَافِعٌ", tr: "nafi'", bs: "koristan", cat: "brojevi", lvl: "A0" },
+      { ar: "جَيِّدٌ", tr: "djayyid", bs: "dobar", cat: "brojevi", lvl: "A0" },
+      { ar: "مَفْتُوحٌ", tr: "maftuh", bs: "otvoren", cat: "brojevi", lvl: "A0" },
+      { ar: "حَزِينٌ", tr: "hazin", bs: "tuzan", cat: "brojevi", lvl: "A0" },
+      { ar: "مُسْتَحِيلٌ", tr: "mustahil", bs: "nemoguc", cat: "brojevi", lvl: "A0" },
+      { ar: "قَرِيبٌ", tr: "qarib", bs: "blizak (m)", cat: "brojevi", lvl: "A0" },
+      { ar: "مُفِيدٌ", tr: "mufid", bs: "koristan", cat: "brojevi", lvl: "A0" },
+      { ar: "مُرِيحٌ", tr: "murih", bs: "udoban/opustajuce", cat: "brojevi", lvl: "A0" },
+      { ar: "مُعَطَّرٌ", tr: "mu'attar", bs: "mirisan", cat: "brojevi", lvl: "A0" },
+      { ar: "سَرِيعٌ", tr: "sari'", bs: "brz", cat: "brojevi", lvl: "A0" },
+      // Zamjenice (A0)
+      { ar: "أَنَا", tr: "ana", bs: "ja", cat: "zamjenice", lvl: "A0" },
+      { ar: "أَنْتَ", tr: "anta", bs: "ti (m.r.)", cat: "zamjenice", lvl: "A0" },
+      { ar: "أَنْتِ", tr: "anti", bs: "ti (z.r.)", cat: "zamjenice", lvl: "A0" },
+      { ar: "هُوَ", tr: "huwa", bs: "on", cat: "zamjenice", lvl: "A0" },
+      { ar: "هِيَ", tr: "hiya", bs: "ona", cat: "zamjenice", lvl: "A0" },
+      { ar: "نَعَمْ", tr: "na'am", bs: "da", cat: "zamjenice", lvl: "A0" },
+      { ar: "لَا", tr: "la", bs: "ne", cat: "zamjenice", lvl: "A0" },
+      { ar: "هَلْ", tr: "hal", bs: "da li (upitna cestica)", cat: "zamjenice", lvl: "A0" },
+      { ar: "هَذَا", tr: "hadha", bs: "ovaj/ovo (m.r.)", cat: "zamjenice", lvl: "A0" },
+      { ar: "هَذِهِ", tr: "hadhihi", bs: "ova/ovo (z.r.)", cat: "zamjenice", lvl: "A0" },
+      { ar: "مَا", tr: "ma", bs: "sta (upitna zam.)", cat: "zamjenice", lvl: "A0" },
+      { ar: "مَنْ", tr: "man", bs: "ko (upitna zam.)", cat: "zamjenice", lvl: "A0" },
+      { ar: "وَ", tr: "wa", bs: "i/a (veznik)", cat: "zamjenice", lvl: "A0" },
+      { ar: "كَيْفَ", tr: "kayfa", bs: "kako", cat: "zamjenice", lvl: "A0" },
+      { ar: "عَلَى", tr: "'ala", bs: "na", cat: "zamjenice", lvl: "A0" },
+
+      // ===== A1 =====
+      // Porodica (A1)
+      { ar: 'أُسْرَة', tr: 'usra', bs: 'porodica', cat: 'porodica', lvl: 'A1' },
+      { ar: 'عَائِلَة', tr: "'a'ila", bs: 'porodica (alt.)', cat: 'porodica', lvl: 'A1' },
+      { ar: 'أَب', tr: 'ab', bs: 'otac', cat: 'porodica', lvl: 'A1' },
+      { ar: 'أُم', tr: 'umm', bs: 'majka', cat: 'porodica', lvl: 'A1' },
+      { ar: 'اِبْن', tr: 'ibn', bs: 'sin', cat: 'porodica', lvl: 'A1' },
+      { ar: 'بِنْت', tr: 'bint', bs: 'kcerka / djevojcica', cat: 'porodica', lvl: 'A1' },
+      { ar: 'أَخ', tr: 'akh', bs: 'brat', cat: 'porodica', lvl: 'A1' },
+      { ar: 'أُخْت', tr: 'ukht', bs: 'sestra', cat: 'porodica', lvl: 'A1' },
+      { ar: 'زَوْج', tr: 'zawj', bs: 'suprug', cat: 'porodica', lvl: 'A1' },
+      { ar: 'زَوْجَة', tr: 'zawja', bs: 'supruga', cat: 'porodica', lvl: 'A1' },
+      { ar: 'جَد', tr: 'jadd', bs: 'djed', cat: 'porodica', lvl: 'A1' },
+      { ar: 'جَدَّة', tr: 'jadda', bs: 'nena', cat: 'porodica', lvl: 'A1' },
+      { ar: 'عَمَّة', tr: "'amma", bs: 'tetka (strina)', cat: 'porodica', lvl: 'A1' },
+      { ar: 'خَال', tr: 'khal', bs: 'daidza', cat: 'porodica', lvl: 'A1' },
+      { ar: 'خَالَة', tr: 'khala', bs: 'tetka (dainica)', cat: 'porodica', lvl: 'A1' },
+      { ar: 'شَجَرَة', tr: 'sajara', bs: 'stablo', cat: 'porodica', lvl: 'A1' },
+      { ar: 'صَدِيقَةٌ', tr: 'sadiqa', bs: 'prijateljica', cat: 'porodica', lvl: 'A1' },
+      { ar: 'قِطَّةٌ', tr: 'qitta', bs: 'macka', cat: 'porodica', lvl: 'A1' },
+      { ar: 'مُعَلِّمَةٌ', tr: "mu'allima", bs: 'uciteljica', cat: 'porodica', lvl: 'A1' },
+      // Pridjevi (A1)
+      { ar: 'مُتَزَوِّج', tr: 'mutazawwidj', bs: 'ozenjen', cat: 'pridjevi', lvl: 'A1' },
+      { ar: 'مُتَزَوِّجَة', tr: 'mutazawwidja', bs: 'udata', cat: 'pridjevi', lvl: 'A1' },
+      { ar: 'أَعْزَب', tr: "a'zab", bs: 'neozenjen', cat: 'pridjevi', lvl: 'A1' },
+      { ar: 'كَبِيرٌ', tr: 'kabir', bs: 'veliki', cat: 'pridjevi', lvl: 'A1' },
+      { ar: 'صَغِيرَةٌ', tr: 'saghira', bs: 'mala', cat: 'pridjevi', lvl: 'A1' },
+      { ar: 'طَوِيلٌ', tr: 'tawil', bs: 'visok / dugacak', cat: 'pridjevi', lvl: 'A1' },
+      { ar: 'مُفِيدٌ', tr: 'mufid', bs: 'koristan', cat: 'pridjevi', lvl: 'A1' },
+      // Glagoli (A1)
+      { ar: 'أُنْظُرْ', tr: 'unzur', bs: 'gledaj! (imperativ)', cat: 'glagoli', lvl: 'A1' },
+      { ar: 'اِسْتَمِعْ', tr: "istami'", bs: 'slusaj! (imperativ)', cat: 'glagoli', lvl: 'A1' },
+      { ar: 'اِقْرَأْ', tr: "iqra'", bs: 'citaj! (imperativ)', cat: 'glagoli', lvl: 'A1' },
+      { ar: 'زَارَ', tr: 'zara', bs: 'posjetio je (perfekt)', cat: 'glagoli', lvl: 'A1' },
+      { ar: 'يَزُورُ', tr: 'yazuru', bs: 'posjecuje (prezent)', cat: 'glagoli', lvl: 'A1' },
+      { ar: 'دَرَسَ', tr: 'darasa', bs: 'ucio je (perfekt)', cat: 'glagoli', lvl: 'A1' },
+      { ar: 'يَدْرُسُ', tr: 'yadrusu', bs: 'uci (prezent)', cat: 'glagoli', lvl: 'A1' },
+      { ar: 'أَدْرُسُ', tr: 'adrusu', bs: 'ja ucim', cat: 'glagoli', lvl: 'A1' },
+      // Mjesta (A1)
+      { ar: 'مَطْبَخ', tr: 'matbakh', bs: 'kuhinja', cat: 'mjesta', lvl: 'A1' },
+      { ar: 'مُسْتَشْفَى', tr: 'mustasfa', bs: 'bolnica', cat: 'mjesta', lvl: 'A1' },
+      { ar: 'مَدِينَةٌ', tr: 'madina', bs: 'grad', cat: 'mjesta', lvl: 'A1' },
+      { ar: 'صَفٌّ', tr: 'saff', bs: 'red / razred', cat: 'mjesta', lvl: 'A1' },
+      // Zamjenice (A1)
+      { ar: 'أَنَا', tr: 'ana', bs: 'ja', cat: 'zamjenice', lvl: 'A1' },
+      { ar: 'أَنْتَ', tr: 'anta', bs: 'ti (m.r.)', cat: 'zamjenice', lvl: 'A1' },
+      { ar: 'أَنْتِ', tr: 'anti', bs: 'ti (z.r.)', cat: 'zamjenice', lvl: 'A1' },
+      { ar: 'هُوَ', tr: 'huwa', bs: 'on', cat: 'zamjenice', lvl: 'A1' },
+      { ar: 'هِيَ', tr: 'hiya', bs: 'ona', cat: 'zamjenice', lvl: 'A1' },
+      // Pitanja i prijedlozi (A1)
+      { ar: 'أَيْنَ', tr: 'ayna', bs: 'gdje', cat: 'pitanja', lvl: 'A1' },
+      { ar: 'فِي', tr: 'fi', bs: 'u (prijedlog)', cat: 'pitanja', lvl: 'A1' },
+      { ar: 'مِنْ', tr: 'min', bs: 'iz, od', cat: 'pitanja', lvl: 'A1' },
+      { ar: 'إِلَى', tr: 'ila', bs: 'do, ka, prema', cat: 'pitanja', lvl: 'A1' },
+      { ar: 'عَلَى', tr: "'ala", bs: 'na', cat: 'pitanja', lvl: 'A1' },
+      { ar: 'مَعَ', tr: "ma'a", bs: 's, sa (drustvo)', cat: 'pitanja', lvl: 'A1' },
+      { ar: 'لِـ', tr: 'li-', bs: 'za', cat: 'pitanja', lvl: 'A1' },
+      { ar: 'بِـ', tr: 'bi-', bs: 's, sa (sredstvo)', cat: 'pitanja', lvl: 'A1' },
+      { ar: 'كَـ', tr: 'ka-', bs: 'kao, poput', cat: 'pitanja', lvl: 'A1' },
+      // Vrijeme (A1)
+      { ar: 'عُمْر', tr: "'umr", bs: 'dob, starost', cat: 'vrijeme', lvl: 'A1' },
+      { ar: 'شَهْر', tr: 'sahr', bs: 'mjesec', cat: 'vrijeme', lvl: 'A1' },
+      { ar: 'أَشْهُر', tr: 'ashur', bs: 'mjeseci (mnozina)', cat: 'vrijeme', lvl: 'A1' },
+      { ar: 'سَنَة', tr: 'sana', bs: 'godina', cat: 'vrijeme', lvl: 'A1' },
+      { ar: 'سَنَوَات', tr: 'sanawat', bs: 'godine (mnozina)', cat: 'vrijeme', lvl: 'A1' },
+      // Predmeti (A1)
+      { ar: 'طَاوِلَةٌ', tr: 'tawila', bs: 'stol', cat: 'predmeti', lvl: 'A1' },
+      { ar: 'دَفْتَرٌ', tr: 'daftar', bs: 'teka / sveska', cat: 'predmeti', lvl: 'A1' },
+      { ar: 'لُعْبَةٌ', tr: "lu'ba", bs: 'igracka', cat: 'predmeti', lvl: 'A1' },
+      { ar: 'قِطَارٌ', tr: 'qitar', bs: 'voz', cat: 'predmeti', lvl: 'A1' },
+      { ar: 'دَرْسٌ', tr: 'dars', bs: 'lekcija', cat: 'predmeti', lvl: 'A1' },
+      { ar: 'كِتَابٌ', tr: 'kitab', bs: 'knjiga', cat: 'predmeti', lvl: 'A1' },
+      // Redni brojevi (A1)
+      { ar: 'أَوَّلُ', tr: 'awwal', bs: 'prvi', cat: 'brojevi', lvl: 'A1' },
+      { ar: 'رَابِعٌ', tr: "rabi'", bs: 'cetvrti', cat: 'brojevi', lvl: 'A1' },
+    ];
+
+    let learned = {};
+    let activeCategory = 'all';
+    let activeLevel = 'all';
+    let hideLearned = false;
+    let storageAvailable = false;
+
+    function loadLearned() {
+      try {
+        const data = localStorage.getItem('arapski-vokabular-all');
+        if (data) learned = JSON.parse(data);
+        storageAvailable = true;
+      } catch (e) {
+        storageAvailable = false;
+      }
+      render();
+    }
+
+    function saveLearned() {
+      if (!storageAvailable) return;
+      try {
+        localStorage.setItem('arapski-vokabular-all', JSON.stringify(learned));
+      } catch (e) { /* silent */ }
+    }
+
+    function render(filter) {
+      if (filter === undefined) filter = document.getElementById('search').value;
+      const grid = document.getElementById('grid');
+      const f = filter.toLowerCase();
+      const filtered = words.filter(w => {
+        const catOk = activeCategory === 'all' || w.cat === activeCategory;
+        const lvlOk = activeLevel === 'all' || w.lvl === activeLevel;
+        const searchOk = !f || w.ar.includes(f) || w.bs.toLowerCase().includes(f) || w.tr.toLowerCase().includes(f);
+        return catOk && lvlOk && searchOk;
+      });
+
+      let visibleCount = 0;
+      grid.innerHTML = filtered.map(w => {
+        const idx = words.indexOf(w);
+        const isLearned = learned[idx];
+        const shouldHide = hideLearned && isLearned;
+        if (!shouldHide) visibleCount++;
+        return `<div class="card ${isLearned ? 'learned' : ''} ${shouldHide ? 'hidden-learned' : ''}" onclick="toggle(${idx})">
+  <div class="left">
+    <div class="arabic">${w.ar}</div>
+    <div class="trans">${w.tr}</div>
+    <div class="bs">${w.bs}</div>
+    <div class="meta">
+      <span class="cat-tag">${w.cat}</span>
+      <span class="level-tag ${w.lvl.toLowerCase()}">${w.lvl}</span>
+    </div>
+  </div>
+  <div class="check">${isLearned ? '\u2713' : ''}</div>
+</div>`;
+      }).join('');
+
+      const total = words.length;
+      const learnedCount = Object.keys(learned).length;
+      document.getElementById('stats').textContent = `${learnedCount}/${total} nauceno \u00b7 Prikazano: ${visibleCount}`;
+      document.getElementById('progFill').style.width = `${(learnedCount / total) * 100}%`;
+
+      const btn = document.getElementById('toggleLearned');
+      if (hideLearned) {
+        btn.textContent = '\ud83d\udc41 Prikazi naucene';
+        btn.classList.add('hiding');
+      } else {
+        btn.textContent = '\ud83d\udc41 Sakrij naucene';
+        btn.classList.remove('hiding');
+      }
+    }
+
+    function toggle(idx) {
+      if (learned[idx]) delete learned[idx];
+      else learned[idx] = true;
+      saveLearned();
+      render();
+    }
+
+    document.getElementById('search').addEventListener('input', e => render(e.target.value));
+
+    document.querySelectorAll('.controls button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCategory = btn.dataset.cat;
+        render();
+      });
+    });
+
+    document.querySelectorAll('.level-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeLevel = btn.dataset.level;
+        render();
+      });
+    });
+
+    document.getElementById('toggleLearned').addEventListener('click', () => {
+      hideLearned = !hideLearned;
+      render();
+    });
+
+    loadLearned();
+  </script>
+
+  <footer style="text-align:center;padding:30px;color:#555;font-size:0.8rem;">
+    <a href="index.html" style="color:#c9a84c;text-decoration:none;">Pocetna</a> &middot;
+    <a href="A0/index.html" style="color:#c9a84c;text-decoration:none;">A0</a> &middot;
+    <a href="A1/index.html" style="color:#c9a84c;text-decoration:none;">A1</a>
+  </footer>
+</body>
+
+</html>
