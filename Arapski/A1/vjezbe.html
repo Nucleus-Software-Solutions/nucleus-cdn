@@ -322,7 +322,7 @@
 <body>
   <header>
     <h1>Arapski A1 — Vježbe</h1>
-    <p>Lekcija 1 &amp; 2</p>
+    <p>Lekcija 1, 2 &amp; 3</p>
   </header>
 
   <div class="tabs">
@@ -448,6 +448,24 @@
       { bs: 'učiteljica', ar: 'مُعَلِّمَةٌ', alt: ['معلمة'] },
       { bs: 'visok / dugačak', ar: 'طَوِيلٌ', alt: ['طويل'] },
       { bs: 'razred', ar: 'صَفٌّ', alt: ['صف'] },
+      // Lekcija 3
+      { bs: 'doktor / ljekar', ar: 'طَبِيبٌ', alt: ['طبيب'] },
+      { bs: 'med. sestra', ar: 'مُمَرِّضَةٌ', alt: ['ممرضة'] },
+      { bs: 'inženjer', ar: 'مُهَنْدِسٌ', alt: ['مهندس'] },
+      { bs: 'umjetnica', ar: 'فَنَّانَةٌ', alt: ['فنانة'] },
+      { bs: 'frizer', ar: 'حَلَّاقٌ', alt: ['حلاق'] },
+      { bs: 'kuhar', ar: 'طَبَّاخٌ', alt: ['طباخ'] },
+      { bs: 'programer', ar: 'بَرْنَامِجِيٌّ', alt: ['برنامجي'] },
+      { bs: 'farmer / zemljoradnik', ar: 'مُزَارِعٌ', alt: ['مزارع'] },
+      { bs: 'bolnica', ar: 'مُسْتَشْفَى', alt: ['مستشفى'] },
+      { bs: 'firma', ar: 'شِرْكَةٌ', alt: ['شركة'] },
+      { bs: 'fabrika', ar: 'مَصْنَعٌ', alt: ['مصنع'] },
+      { bs: 'salon', ar: 'صَالُونٌ', alt: ['صالون'] },
+      { bs: 'restoran', ar: 'مَطْعَمٌ', alt: ['مطعم'] },
+      { bs: 'bolestan', ar: 'مَرِيضٌ', alt: ['مريض'] },
+      { bs: 'lijep', ar: 'جَمِيلٌ', alt: ['جميل'] },
+      { bs: 'star', ar: 'قَدِيمٌ', alt: ['قديم'] },
+      { bs: 'vrijedan / marljiv', ar: 'مُجْتَهِدٌ', alt: ['مجتهد'] },
     ];
 
     const arBsWords = [
@@ -476,6 +494,23 @@
       { ar: 'صَدِيقَةٌ', bs: 'prijateljica', alt: [] },
       { ar: 'أَدْرُسُ', bs: 'ja učim', alt: ['učim'] },
       { ar: 'صَفٌّ', bs: 'razred', alt: ['red'] },
+      // Lekcija 3
+      { ar: 'طَبِيبٌ', bs: 'doktor', alt: ['ljekar'] },
+      { ar: 'مُمَرِّضَةٌ', bs: 'med. sestra', alt: ['medicinska sestra'] },
+      { ar: 'مُهَنْدِسٌ', bs: 'inženjer', alt: [] },
+      { ar: 'فَنَّانَةٌ', bs: 'umjetnica', alt: [] },
+      { ar: 'حَلَّاقٌ', bs: 'frizer', alt: [] },
+      { ar: 'طَبَّاخٌ', bs: 'kuhar', alt: [] },
+      { ar: 'بَرْنَامِجِيٌّ', bs: 'programer', alt: [] },
+      { ar: 'مُزَارِعٌ', bs: 'farmer', alt: ['zemljoradnik'] },
+      { ar: 'شِرْكَةٌ', bs: 'firma', alt: ['kompanija'] },
+      { ar: 'مَصْنَعٌ', bs: 'fabrika', alt: [] },
+      { ar: 'صَالُونٌ', bs: 'salon', alt: [] },
+      { ar: 'مَطْعَمٌ', bs: 'restoran', alt: [] },
+      { ar: 'مَرِيضٌ', bs: 'bolestan', alt: [] },
+      { ar: 'جَمِيلٌ', bs: 'lijep', alt: [] },
+      { ar: 'قَدِيمٌ', bs: 'star', alt: [] },
+      { ar: 'مُجْتَهِدٌ', bs: 'vrijedan', alt: ['marljiv'] },
     ];
 
     // Suffix data: noun (display), root (no tanwin), answers for moj/m/ž/on/ona
@@ -571,6 +606,25 @@
       { ar: 'دَرْسٌ', bs: 'lekcija' },
       { ar: 'أَوَّلُ', bs: 'prvi' },
       { ar: 'رَابِعٌ', bs: 'četvrti' },
+      // Lekcija 3 — zanimanja
+      { ar: 'طَبِيبٌ', bs: 'doktor / ljekar' },
+      { ar: 'مُمَرِّضَةٌ', bs: 'med. sestra' },
+      { ar: 'مُهَنْدِسٌ', bs: 'inženjer' },
+      { ar: 'فَنَّانَةٌ', bs: 'umjetnica' },
+      { ar: 'حَلَّاقٌ', bs: 'frizer' },
+      { ar: 'طَبَّاخٌ', bs: 'kuhar' },
+      { ar: 'بَرْنَامِجِيٌّ', bs: 'programer' },
+      { ar: 'مُزَارِعٌ', bs: 'farmer' },
+      // Lekcija 3 — mjesta
+      { ar: 'شِرْكَةٌ', bs: 'firma' },
+      { ar: 'مَصْنَعٌ', bs: 'fabrika' },
+      { ar: 'صَالُونٌ', bs: 'salon' },
+      { ar: 'مَطْعَمٌ', bs: 'restoran' },
+      // Lekcija 3 — pridjevi
+      { ar: 'مَرِيضٌ', bs: 'bolestan' },
+      { ar: 'جَمِيلٌ', bs: 'lijep' },
+      { ar: 'قَدِيمٌ', bs: 'star' },
+      { ar: 'مُجْتَهِدٌ', bs: 'vrijedan / marljiv' },
     ];
 
     // ─── Scoring ─────────────────────────────────────────────────────────────
@@ -911,6 +965,11 @@
       { bs: 'Kuća je u gradu.', ar: 'اَلْبَيْتُ فِي مَدِينَةٍ', alt: ['البيت في مدينة'] },
       { bs: 'Majka je u kuhinji.', ar: 'اَلْأُمُّ فِي مَطْبَخٍ', alt: ['الأم في مطبخ', 'الأمّ في مطبخ'] },
       { bs: 'Veliki brat je s ocem.', ar: 'اَلْأَخُ الْكَبِيرُ مَعَ الْأَبِ', alt: ['الأخ الكبير مع الأب'] },
+      // Lekcija 3
+      { bs: 'Ja sam doktor.', ar: 'أَنَا طَبِيبٌ', alt: ['انا طبيب'] },
+      { bs: 'On je vrijedan farmer.', ar: 'هُوَ مُزَارِعٌ مُجْتَهِدٌ', alt: ['هو مزارع مجتهد'] },
+      { bs: 'Ona je doktorica u bolnici.', ar: 'هِيَ طَبِيبَةٌ فِي الْمُسْتَشْفَى', alt: ['هي طبيبة في المستشفى'] },
+      { bs: 'Ti si učenik u školi.', ar: 'أَنْتَ طَالِبٌ فِي الْمَدْرَسَةِ', alt: ['أنت طالب في المدرسة'] },
     ];
 
     function buildSent() {
