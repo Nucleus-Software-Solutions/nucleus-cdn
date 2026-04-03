@@ -51,6 +51,8 @@ If no type-checker is configured, state that explicitly instead of claiming succ
 Arapski/
 ├── index.html              ← root navigacija (A0 / A1 / Vokabular)
 ├── vokabular.html          ← OBJEDINJENI vokabular (A0 + A1, dark theme)
+├── brzi-pregled.html       ← brzi pregled ključne gramatike (light theme, kolapsibilne sekcije)
+├── brzi-pregled.pdf        ← PDF verzija brzog pregleda
 ├── A0/                     ← završeni A0 level
 └── A1/
     ├── index.html          ← A1 navigacijska stranica
@@ -88,6 +90,12 @@ Korisnik će reći nešto kao: "Dodao sam novu lekciju", "Imam novi čas", ili "
    - Dodaj riječi na kraj A1 sekcije u nizu (označena komentarom `// ===== A1 =====`)
    - Provjeri da ne dodaješ duplikate
    - Ako treba nova kategorija, dodaj button u `<div class="controls">` i odgovarajući label
+7. **Ažuriraj `../brzi-pregled.html`** (root brzi pregled gramatike) — **samo ako lekcija sadrži ključnu gramatiku** (zamjenice, sufiksi, prijedlozi, glagolske konjugacije, padežna pravila, nova vrsta rečenice i sl.):
+   - Dodaj novu `<div class="lesson">` sekciju s istim šablonom kao postojeće sekcije (lesson-header + lesson-body + sub-section)
+   - Dodaj level tag `<span class="level-tag a1">A1</span>` u naslov
+   - Dodaj anchor link u `<nav class="nav"> .nav-links`
+   - Koristi iste CSS klase: `.ar` za arapski tekst, `.ar-sm` za manji, `.info-box` za napomene, `.rule-box` za pravila, `.table-wrap > table` za tabele
+   - **Ne dodavaj** vokabular/rječničke liste — samo gramatička pravila i šablone
 
 ## Kad korisnik doda PDF
 
