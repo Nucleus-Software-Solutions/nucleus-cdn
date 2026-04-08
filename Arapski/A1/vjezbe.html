@@ -322,7 +322,7 @@
 <body>
   <header>
     <h1>Arapski A1 — Vježbe</h1>
-    <p>Lekcija 1, 2 &amp; 3</p>
+    <p>Lekcija 1, 2, 3 &amp; 4</p>
   </header>
 
   <div class="tabs">
@@ -466,6 +466,21 @@
       { bs: 'lijep', ar: 'جَمِيلٌ', alt: ['جميل'] },
       { bs: 'star', ar: 'قَدِيمٌ', alt: ['قديم'] },
       { bs: 'vrijedan / marljiv', ar: 'مُجْتَهِدٌ', alt: ['مجتهد'] },
+      // Lekcija 4
+      { bs: 'također', ar: 'أَيْضًا', alt: ['ايضا'] },
+      { bs: 'samo', ar: 'فَقَطْ', alt: ['فقط'] },
+      { bs: 'ili (izjavna)', ar: 'أَوْ', alt: ['او'] },
+      { bs: 'ili (upitna)', ar: 'أَمْ', alt: ['ام'] },
+      { bs: 'kada (veznik)', ar: 'عِنْدَمَا', alt: ['عندما'] },
+      { bs: 'šta', ar: 'مَاذَا', alt: ['ماذا'] },
+      { bs: 'ko', ar: 'مَنْ', alt: ['من'] },
+      { bs: 'koliko', ar: 'كَمْ', alt: ['كم'] },
+      { bs: 'kada (upitna)', ar: 'مَتَى', alt: ['متى'] },
+      { bs: 'djevojka', ar: 'فَتَاةٌ', alt: ['فتاة'] },
+      { bs: 'radnik', ar: 'عَامِلٌ', alt: ['عامل'] },
+      { bs: 'uspješan', ar: 'نَاجِحٌ', alt: ['ناجح'] },
+      { bs: 'mjesec (nebesko tijelo)', ar: 'قَمَرٌ', alt: ['قمر'] },
+      { bs: 'programer (alt.)', ar: 'مُبَرْمِجٌ', alt: ['مبرمج'] },
     ];
 
     const arBsWords = [
@@ -511,6 +526,21 @@
       { ar: 'جَمِيلٌ', bs: 'lijep', alt: [] },
       { ar: 'قَدِيمٌ', bs: 'star', alt: [] },
       { ar: 'مُجْتَهِدٌ', bs: 'vrijedan', alt: ['marljiv'] },
+      // Lekcija 4
+      { ar: 'أَيْضًا', bs: 'također', alt: ['takodjer'] },
+      { ar: 'فَقَطْ', bs: 'samo', alt: [] },
+      { ar: 'أَوْ', bs: 'ili', alt: [] },
+      { ar: 'أَمْ', bs: 'ili', alt: [] },
+      { ar: 'عِنْدَمَا', bs: 'kada', alt: [] },
+      { ar: 'مَاذَا', bs: 'šta', alt: ['sta'] },
+      { ar: 'مَنْ', bs: 'ko', alt: ['tko'] },
+      { ar: 'كَمْ', bs: 'koliko', alt: [] },
+      { ar: 'مَتَى', bs: 'kada', alt: [] },
+      { ar: 'فَتَاةٌ', bs: 'djevojka', alt: [] },
+      { ar: 'عَامِلٌ', bs: 'radnik', alt: [] },
+      { ar: 'نَاجِحٌ', bs: 'uspješan', alt: ['uspjesan'] },
+      { ar: 'قَمَرٌ', bs: 'mjesec', alt: [] },
+      { ar: 'مُبَرْمِجٌ', bs: 'programer', alt: [] },
     ];
 
     // Suffix data: noun (display), root (no tanwin), answers for moj/m/ž/on/ona
@@ -625,6 +655,24 @@
       { ar: 'جَمِيلٌ', bs: 'lijep' },
       { ar: 'قَدِيمٌ', bs: 'star' },
       { ar: 'مُجْتَهِدٌ', bs: 'vrijedan / marljiv' },
+      // Lekcija 4 — upitne riječi
+      { ar: 'مَاذَا', bs: 'šta' },
+      { ar: 'مَنْ', bs: 'ko' },
+      { ar: 'كَمْ', bs: 'koliko' },
+      { ar: 'مَتَى', bs: 'kada' },
+      { ar: 'مَعَ مَنْ', bs: 's kim' },
+      { ar: 'مِنْ أَيْنَ', bs: 'odakle' },
+      // Lekcija 4 — ostalo
+      { ar: 'أَيْضًا', bs: 'također' },
+      { ar: 'فَقَطْ', bs: 'samo' },
+      { ar: 'أَوْ', bs: 'ili (izjavna)' },
+      { ar: 'أَمْ', bs: 'ili (upitna)' },
+      { ar: 'عِنْدَمَا', bs: 'kada (veznik)' },
+      { ar: 'فَتَاةٌ', bs: 'djevojka' },
+      { ar: 'عَامِلٌ', bs: 'radnik' },
+      { ar: 'نَاجِحٌ', bs: 'uspješan' },
+      { ar: 'قَمَرٌ', bs: 'mjesec (nebesko tijelo)' },
+      { ar: 'مُبَرْمِجٌ', bs: 'programer' },
     ];
 
     // ─── Scoring ─────────────────────────────────────────────────────────────
@@ -970,6 +1018,13 @@
       { bs: 'On je vrijedan farmer.', ar: 'هُوَ مُزَارِعٌ مُجْتَهِدٌ', alt: ['هو مزارع مجتهد'] },
       { bs: 'Ona je doktorica u bolnici.', ar: 'هِيَ طَبِيبَةٌ فِي الْمُسْتَشْفَى', alt: ['هي طبيبة في المستشفى'] },
       { bs: 'Ti si učenik u školi.', ar: 'أَنْتَ طَالِبٌ فِي الْمَدْرَسَةِ', alt: ['أنت طالب في المدرسة'] },
+      // Lekcija 4
+      { bs: 'Vrijedni kuhar je u restoranu.', ar: 'الطَّبَّاخُ الْمُجْتَهِدُ فِي الْمَطْعَمِ', alt: ['الطباخ المجتهد في المطعم'] },
+      { bs: 'Stara nena je bolesna.', ar: 'الْجَدَّةُ الْقَدِيمَةُ مَرِيضَةٌ', alt: ['الجدة القديمة مريضة'] },
+      { bs: 'Tvoj djed je berberin.', ar: 'جَدُّكَ حَلَّاقٌ', alt: ['جدك حلاق'] },
+      { bs: 'Njegova firma je velika.', ar: 'شَرِكَتُهُ كَبِيرَةٌ', alt: ['شركته كبيرة'] },
+      { bs: 'Da li si doktor?', ar: 'هَلْ أَنْتَ طَبِيبٌ؟', alt: ['هل أنت طبيب؟', 'هل انت طبيب'] },
+      { bs: 'Odakle si?', ar: 'مِنْ أَيْنَ أَنْتَ؟', alt: ['من أين أنت؟', 'من اين انت'] },
     ];
 
     function buildSent() {
