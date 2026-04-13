@@ -301,6 +301,88 @@
     .result-banner.visible { display: block; }
     .result-banner .score { color: #c9a84c; font-weight: bold; font-size: 1.1em; }
 
+    /* Zadaća blocks */
+    .zadaca-block {
+      background: #0f1525;
+      border: 1px solid #1e2a40;
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin-bottom: 24px;
+    }
+    .zadaca-heading {
+      font-size: 1rem;
+      color: #c9a84c;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .zadaca-hint {
+      font-size: 0.8rem;
+      color: #7a8baa;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .ar-hint {
+      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      font-size: 1.1em;
+      color: #c9a84c;
+      direction: rtl;
+      display: inline-block;
+      margin: 0 4px;
+    }
+
+    /* Klasifikacija item */
+    .klas-item {
+      background: #131b2e;
+      border: 1px solid #1e2a40;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+    .klas-phrase {
+      font-family: 'Traditional Arabic', serif;
+      font-size: 1.8em;
+      direction: rtl;
+      color: #e0d5c1;
+      text-align: right;
+      margin-bottom: 10px;
+    }
+    .klas-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .klas-btn {
+      padding: 8px 14px;
+      border: 1px solid #2a3550;
+      border-radius: 8px;
+      background: #0a0f1a;
+      color: #a89b80;
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: all 0.15s;
+    }
+    .klas-btn:hover { border-color: #c9a84c; color: #c9a84c; }
+    .klas-btn.selected {
+      background: #c9a84c;
+      color: #0a0f1a;
+      border-color: #c9a84c;
+      font-weight: 600;
+    }
+    .klas-btn.correct-pick {
+      background: #052e16;
+      color: #4ade80;
+      border-color: #4ade80;
+    }
+    .klas-btn.wrong-pick {
+      background: #2d0a0a;
+      color: #f87171;
+      border-color: #f87171;
+    }
+    .klas-btn.reveal-correct {
+      border-color: #4ade80;
+      color: #4ade80;
+    }
+
     /* Footer nav */
     .footer-nav {
       text-align: center;
@@ -322,7 +404,7 @@
 <body>
   <header>
     <h1>Arapski A1 — Vježbe</h1>
-    <p>Lekcija 1, 2, 3 &amp; 4</p>
+    <p>Lekcija 1, 2, 3, 4 &amp; 5</p>
   </header>
 
   <div class="tabs">
@@ -331,6 +413,7 @@
     <button onclick="showTab('sufiksi', this)">Sufiksi</button>
     <button onclick="showTab('prijedlozi', this)">Prijedlozi</button>
     <button onclick="showTab('recenice', this)">Rečenice</button>
+    <button onclick="showTab('zadaca-l5', this)">Zadaća L5</button>
     <button onclick="showTab('kviz', this)">Kviz kartice</button>
   </div>
 
@@ -393,6 +476,42 @@
       <button class="check-all-btn" onclick="checkAllSent()">Provjeri sve</button>
       <button class="reset-btn" onclick="resetSent()">Resetuj</button>
       <div class="result-banner" id="result-sent"></div>
+    </div>
+
+    <!-- TAB: Zadaća L5 (genitivna veza) -->
+    <div class="exercise-section" id="tab-zadaca-l5">
+      <div class="section-title">Zadaća — Lekcija 5 (genitivna veza)</div>
+      <div class="section-desc">Tri zadatka: napravi genitivne veze, prevedi rečenice, i klasificiraj sintagme.</div>
+
+      <!-- Zadatak 1: Genitivne veze -->
+      <div class="zadaca-block">
+        <div class="zadaca-heading">1. Napravi genitivne veze od sljedećih riječi</div>
+        <div class="zadaca-hint">Pravilo: 1. član (مُضَاف) gubi <strong>الـ</strong> i <strong>tenvin</strong>, a 2. član (مُضَاف إِلَيْهِ) stoji u <strong>genitivu</strong>.</div>
+        <div id="gv-exercises"></div>
+        <button class="check-all-btn" onclick="checkAllGv()">Provjeri sve</button>
+        <button class="reset-btn" onclick="resetGv()">Resetuj</button>
+        <div class="result-banner" id="result-gv"></div>
+      </div>
+
+      <!-- Zadatak 2: Prevedi rečenice -->
+      <div class="zadaca-block">
+        <div class="zadaca-heading">2. Prevedi rečenice na arapski</div>
+        <div class="zadaca-hint">Pomoć: <span class="ar-hint">težak = ثَقِيل</span> · <span class="ar-hint">dvorište = حَدِيقَة</span></div>
+        <div id="zs-exercises"></div>
+        <button class="check-all-btn" onclick="checkAllZs()">Provjeri sve</button>
+        <button class="reset-btn" onclick="resetZs()">Resetuj</button>
+        <div class="result-banner" id="result-zs"></div>
+      </div>
+
+      <!-- Zadatak 3: Klasifikacija sintagmi -->
+      <div class="zadaca-block">
+        <div class="zadaca-heading">3. Klasificiraj svaku sintagmu</div>
+        <div class="zadaca-hint">Odaberi vrstu: <strong>✱</strong> genitivna veza · <strong>—</strong> rečenica · <strong>+</strong> prijedložna sintagma · <strong>×</strong> atributivna sintagma</div>
+        <div id="klas-exercises"></div>
+        <button class="check-all-btn" onclick="checkAllKlas()">Provjeri sve</button>
+        <button class="reset-btn" onclick="resetKlas()">Resetuj</button>
+        <div class="result-banner" id="result-klas"></div>
+      </div>
     </div>
 
     <!-- TAB 6: Kviz kartice -->
@@ -1168,6 +1287,195 @@
       document.getElementById('result-sent').classList.remove('visible');
     }
 
+    // ─── Zadaća L5 ───────────────────────────────────────────────────────────
+
+    // Zadatak 1 — genitivne veze (mudaf + mudaf ilayhi, bez ال, 2. član u genitivu s tenvinom)
+    const gvWords = [
+      { bs: 'čovjek + kuća → kuća čovjeka', ar: 'بَيْتُ رَجُلٍ', alt: ['بيت رجل'] },
+      { bs: 'kahva + fildžan → fildžan kahve', ar: 'فِنْجَانُ قَهْوَةٍ', alt: ['فنجان قهوة'] },
+      { bs: 'škola + kantina → kantina škole', ar: 'مَقْصَفُ مَدْرَسَةٍ', alt: ['مقصف مدرسة'] },
+      { bs: 'učionica + vrata → vrata učionice', ar: 'بَابُ فَصْلٍ', alt: ['باب فصل'] },
+    ];
+
+    // Zadatak 2 — prevedi rečenice
+    const zsWords = [
+      { bs: 'Školska kantina je u školi.', ar: 'مَقْصَفُ الْمَدْرَسَةِ فِي الْمَدْرَسَةِ', alt: ['مقصف المدرسة في المدرسة'] },
+      { bs: 'Vrata velike učionice su mala.', ar: 'بَابُ الْفَصْلِ الْكَبِيرِ صَغِيرٌ', alt: ['باب الفصل الكبير صغير'] },
+      { bs: 'Fildžan kahve je na stolu u čovjekovoj kući.', ar: 'فِنْجَانُ الْقَهْوَةِ عَلَى الطَّاوِلَةِ فِي بَيْتِ الرَّجُلِ', alt: ['فنجان القهوة على الطاولة في بيت الرجل'] },
+      { bs: 'Školski ruksak je težak.', ar: 'الْحَقِيبَةُ الْمَدْرَسِيَّةُ ثَقِيلَةٌ', alt: ['الحقيبة المدرسية ثقيلة'] },
+      { bs: 'Moja majka i prijateljeva majka su u dvorištu.', ar: 'أُمِّي وَ أُمُّ الصَّدِيقِ فِي الْحَدِيقَةِ', alt: ['أمي وأم الصديق في الحديقة', 'امي وام الصديق في الحديقة', 'أمي و أم الصديق في الحديقة'] },
+    ];
+
+    // Zadatak 3 — klasifikacija sintagmi
+    const klasItems = [
+      { ar: 'اَلْمَجْلِسُ وَاسِعٌ', correct: 'recenica' },
+      { ar: 'حَافِلَةُ الْمَدِينَةِ', correct: 'gv' },
+      { ar: 'هَذَا الْبَيْتُ', correct: 'atributivna' },
+      { ar: 'الْخُبْزُ الْجَدِيدُ', correct: 'atributivna' },
+      { ar: 'مَعَ صَدِيقٍ', correct: 'prijedlozna' },
+      { ar: 'هَذِهِ أُخْتٌ', correct: 'recenica' },
+    ];
+
+    const klasOptions = [
+      { key: 'gv',           label: '✱ genitivna veza' },
+      { key: 'recenica',     label: '— rečenica' },
+      { key: 'prijedlozna',  label: '+ prijedložna sintagma' },
+      { key: 'atributivna',  label: '× atributivna sintagma' },
+    ];
+
+    // Generic input builder for zadaca BS→AR-style blocks
+    function buildInputList(containerId, data, prefix, checkFn) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      data.forEach((w, i) => {
+        const div = document.createElement('div');
+        div.className = 'exercise-item';
+        div.innerHTML = `
+          <span class="prompt">${w.bs}</span>
+          <input type="text" id="${prefix}-${i}" placeholder="اكتب هنا" autocomplete="off" spellcheck="false">
+          <button class="check-btn" onclick="${checkFn}(${i})">Provjeri</button>
+          <div class="feedback" id="fb-${prefix}-${i}"></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function checkInputItem(data, prefix, i) {
+      const input = document.getElementById(`${prefix}-${i}`);
+      const fb = document.getElementById(`fb-${prefix}-${i}`);
+      const val = input.value.trim();
+      if (!val) return;
+      const w = data[i];
+      const accepted = [w.ar, ...(w.alt || [])];
+      const isCorrect = accepted.includes(val) || accepted.some(a => normalize(a) === normalize(val));
+      input.classList.remove('correct', 'wrong');
+      fb.classList.remove('correct-msg', 'wrong-msg');
+      if (isCorrect) {
+        input.classList.add('correct');
+        fb.classList.add('correct-msg');
+        fb.textContent = '✓ Tačno!';
+      } else {
+        input.classList.add('wrong');
+        fb.classList.add('wrong-msg');
+        fb.textContent = `✗ Netačno. Tačan odgovor: ${w.ar}`;
+      }
+    }
+
+    function checkAllInputList(data, prefix, resultId, fn) {
+      let ok = 0;
+      data.forEach((_, i) => {
+        fn(i);
+        if (document.getElementById(`${prefix}-${i}`).classList.contains('correct')) ok++;
+      });
+      const banner = document.getElementById(resultId);
+      banner.innerHTML = `Rezultat: <span class="score">${ok} / ${data.length}</span>`;
+      banner.classList.add('visible');
+    }
+
+    function resetInputList(data, prefix, resultId) {
+      data.forEach((_, i) => {
+        const input = document.getElementById(`${prefix}-${i}`);
+        if (input) { input.value = ''; input.classList.remove('correct', 'wrong'); }
+        const fb = document.getElementById(`fb-${prefix}-${i}`);
+        if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+      });
+      document.getElementById(resultId).classList.remove('visible');
+    }
+
+    // Zadatak 1 — wrappers
+    function buildGv()        { buildInputList('gv-exercises', gvWords, 'gv', 'checkGv'); }
+    function checkGv(i)       { checkInputItem(gvWords, 'gv', i); }
+    function checkAllGv()     { checkAllInputList(gvWords, 'gv', 'result-gv', checkGv); }
+    function resetGv()        { resetInputList(gvWords, 'gv', 'result-gv'); }
+
+    // Zadatak 2 — wrappers
+    function buildZs()        { buildInputList('zs-exercises', zsWords, 'zs', 'checkZs'); }
+    function checkZs(i)       { checkInputItem(zsWords, 'zs', i); }
+    function checkAllZs()     { checkAllInputList(zsWords, 'zs', 'result-zs', checkZs); }
+    function resetZs()        { resetInputList(zsWords, 'zs', 'result-zs'); }
+
+    // Zadatak 3 — klasifikacija
+    const klasPicks = {};  // i -> chosen key
+
+    function buildKlas() {
+      const container = document.getElementById('klas-exercises');
+      container.innerHTML = '';
+      klasItems.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'klas-item';
+        const opts = klasOptions.map(o =>
+          `<button class="klas-btn" data-i="${i}" data-key="${o.key}" onclick="pickKlas(${i}, '${o.key}')">${o.label}</button>`
+        ).join('');
+        card.innerHTML = `
+          <div class="klas-phrase">${item.ar}</div>
+          <div class="klas-options" id="klas-opts-${i}">${opts}</div>
+          <div class="feedback" id="fb-klas-${i}" style="margin-top:8px;"></div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function pickKlas(i, key) {
+      klasPicks[i] = key;
+      // Clear previous grading styling on this row (user changing answer)
+      const row = document.getElementById(`klas-opts-${i}`);
+      row.querySelectorAll('.klas-btn').forEach(btn => {
+        btn.classList.remove('selected', 'correct-pick', 'wrong-pick', 'reveal-correct');
+        if (btn.dataset.key === key) btn.classList.add('selected');
+      });
+      const fb = document.getElementById(`fb-klas-${i}`);
+      fb.textContent = '';
+      fb.className = 'feedback';
+      fb.style.marginTop = '8px';
+    }
+
+    function checkAllKlas() {
+      let ok = 0;
+      klasItems.forEach((item, i) => {
+        const row = document.getElementById(`klas-opts-${i}`);
+        const fb = document.getElementById(`fb-klas-${i}`);
+        const pick = klasPicks[i];
+        row.querySelectorAll('.klas-btn').forEach(btn => {
+          btn.classList.remove('correct-pick', 'wrong-pick', 'reveal-correct', 'selected');
+          if (btn.dataset.key === item.correct && btn.dataset.key === pick) {
+            btn.classList.add('correct-pick');
+          } else if (btn.dataset.key === pick && pick !== item.correct) {
+            btn.classList.add('wrong-pick');
+          } else if (btn.dataset.key === item.correct) {
+            btn.classList.add('reveal-correct');
+          }
+        });
+        fb.classList.remove('correct-msg', 'wrong-msg');
+        if (pick === item.correct) {
+          ok++;
+          fb.classList.add('correct-msg');
+          fb.textContent = '✓ Tačno!';
+        } else {
+          fb.classList.add('wrong-msg');
+          const correctLabel = klasOptions.find(o => o.key === item.correct).label;
+          fb.textContent = pick
+            ? `✗ Netačno. Tačan odgovor: ${correctLabel}`
+            : `Nije odgovoreno. Tačan odgovor: ${correctLabel}`;
+        }
+      });
+      const banner = document.getElementById('result-klas');
+      banner.innerHTML = `Rezultat: <span class="score">${ok} / ${klasItems.length}</span>`;
+      banner.classList.add('visible');
+    }
+
+    function resetKlas() {
+      klasItems.forEach((_, i) => {
+        delete klasPicks[i];
+        const row = document.getElementById(`klas-opts-${i}`);
+        if (row) row.querySelectorAll('.klas-btn').forEach(btn =>
+          btn.classList.remove('selected', 'correct-pick', 'wrong-pick', 'reveal-correct')
+        );
+        const fb = document.getElementById(`fb-klas-${i}`);
+        if (fb) { fb.textContent = ''; fb.className = 'feedback'; fb.style.marginTop = '8px'; }
+      });
+      document.getElementById('result-klas').classList.remove('visible');
+    }
+
     // ─── Init ─────────────────────────────────────────────────────────────────
 
     buildBsAr();
@@ -1175,6 +1483,9 @@
     buildSuffix();
     buildPrep();
     buildSent();
+    buildGv();
+    buildZs();
+    buildKlas();
     buildQuiz();
     updateScore();
   </script>
