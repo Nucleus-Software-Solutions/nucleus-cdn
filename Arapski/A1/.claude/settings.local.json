@@ -7,7 +7,8 @@
       "Bash(node -e \":*)",
       "Bash(ls -d /c/dev/Projects/Nucleus/nucleus-cdn/Arapski/A1/*/)",
       "Bash(git -C \"d:/Development/Nucleus/Projects/nucleus-cdn/Arapski/A1\" log --oneline -20)",
-      "Bash(node -e \"const fs = require\\('fs'\\); const html = fs.readFileSync\\('vjezbe.html', 'utf8'\\); const m = html.match\\(/<script>\\([\\\\s\\\\S]*?\\)<\\\\/script>/\\); if \\(!m\\) { console.log\\('no script'\\); process.exit\\(1\\); } try { new Function\\(m[1]\\); console.log\\('JS OK — ' + m[1].split\\(/\\\\r?\\\\n/\\).length + ' lines'\\); } catch \\(e\\) { console.error\\('JS syntax error:', e.message\\); process.exit\\(1\\); }\")"
+      "Bash(node -e \"const fs = require\\('fs'\\); const html = fs.readFileSync\\('vjezbe.html', 'utf8'\\); const m = html.match\\(/<script>\\([\\\\s\\\\S]*?\\)<\\\\/script>/\\); if \\(!m\\) { console.log\\('no script'\\); process.exit\\(1\\); } try { new Function\\(m[1]\\); console.log\\('JS OK — ' + m[1].split\\(/\\\\r?\\\\n/\\).length + ' lines'\\); } catch \\(e\\) { console.error\\('JS syntax error:', e.message\\); process.exit\\(1\\); }\")",
+      "Bash(node -e ':*)"
     ]
   }
 }

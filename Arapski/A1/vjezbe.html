@@ -404,7 +404,7 @@
 <body>
   <header>
     <h1>Arapski A1 — Vježbe</h1>
-    <p>Lekcija 1, 2, 3, 4 &amp; 5</p>
+    <p>Lekcija 1, 2, 3, 4, 5 &amp; 6</p>
   </header>
 
   <div class="tabs">
@@ -414,6 +414,7 @@
     <button onclick="showTab('prijedlozi', this)">Prijedlozi</button>
     <button onclick="showTab('recenice', this)">Rečenice</button>
     <button onclick="showTab('zadaca-l5', this)">Zadaća L5</button>
+    <button onclick="showTab('perfekt', this)">Perfekt (glagoli)</button>
     <button onclick="showTab('kviz', this)">Kviz kartice</button>
   </div>
 
@@ -514,6 +515,17 @@
       </div>
     </div>
 
+    <!-- TAB: Perfekt (konjugacija glagola) -->
+    <div class="exercise-section" id="tab-perfekt">
+      <div class="section-title">Konjugiraj glagole u perfektu</div>
+      <div class="section-desc">Upiši konjugirani oblik glagola za dato lice. Koristi hareke ako možeš.</div>
+
+      <div id="perfekt-exercises"></div>
+      <button class="check-all-btn" onclick="checkAllPerfekt()">Provjeri sve</button>
+      <button class="reset-btn" onclick="resetPerfekt()">Resetuj</button>
+      <div class="result-banner" id="result-perfekt"></div>
+    </div>
+
     <!-- TAB 6: Kviz kartice -->
     <div class="exercise-section" id="tab-kviz">
       <div class="section-title">Kviz kartice</div>
@@ -606,6 +618,19 @@
       { bs: 'stablo', ar: 'شَجَرَةٌ', alt: ['شجرة'] },
       { bs: 'stadion', ar: 'مَلْعَبٌ', alt: ['ملعب'] },
       { bs: 'širok', ar: 'وَاسِعٌ', alt: ['واسع'] },
+      // Lekcija 6
+      { bs: 'dnevni boravak', ar: 'مَجْلِسٌ', alt: ['مجلس'] },
+      { bs: 'mlijeko', ar: 'حَلِيبٌ', alt: ['حليب'] },
+      { bs: 'šećer', ar: 'سُكَّرٌ', alt: ['سكر'] },
+      { bs: 'tačno / ispravno', ar: 'صَحِيحٌ', alt: ['صحيح'] },
+      { bs: 'pisati', ar: 'كَتَبَ', alt: ['كتب'] },
+      { bs: 'sjediti', ar: 'جَلَسَ', alt: ['جلس'] },
+      { bs: 'voziti', ar: 'رَكِبَ', alt: ['ركب'] },
+      { bs: 'porasti', ar: 'كَبُرَ', alt: ['كبر'] },
+      { bs: 'udariti', ar: 'ضَرَبَ', alt: ['ضرب'] },
+      { bs: 'otvoriti', ar: 'فَتَحَ', alt: ['فتح'] },
+      { bs: 'piti', ar: 'شَرِبَ', alt: ['شرب'] },
+      { bs: 'misliti / računati', ar: 'حَسِبَ', alt: ['حسب'] },
     ];
 
     const arBsWords = [
@@ -672,6 +697,19 @@
       { ar: 'شَجَرَةٌ', bs: 'stablo', alt: ['drvo'] },
       { ar: 'مَلْعَبٌ', bs: 'stadion', alt: [] },
       { ar: 'وَاسِعٌ', bs: 'širok', alt: ['sirok'] },
+      // Lekcija 6
+      { ar: 'مَجْلِسٌ', bs: 'dnevni boravak', alt: [] },
+      { ar: 'حَلِيبٌ', bs: 'mlijeko', alt: [] },
+      { ar: 'سُكَّرٌ', bs: 'šećer', alt: ['secer'] },
+      { ar: 'صَحِيحٌ', bs: 'tačno', alt: ['ispravno', 'tacno'] },
+      { ar: 'كَتَبَ', bs: 'pisati', alt: ['pisao je'] },
+      { ar: 'جَلَسَ', bs: 'sjediti', alt: ['sjedio je'] },
+      { ar: 'رَكِبَ', bs: 'voziti', alt: ['vozio je'] },
+      { ar: 'كَبُرَ', bs: 'porasti', alt: ['porastao je'] },
+      { ar: 'ضَرَبَ', bs: 'udariti', alt: ['udario je'] },
+      { ar: 'فَتَحَ', bs: 'otvoriti', alt: ['otvorio je'] },
+      { ar: 'شَرِبَ', bs: 'piti', alt: ['pio je'] },
+      { ar: 'حَسِبَ', bs: 'misliti', alt: ['racunati', 'računati'] },
     ];
 
     // Suffix data: noun (display), root (no tanwin), answers for moj/m/ž/on/ona
@@ -810,6 +848,17 @@
       { ar: 'شَجَرَةٌ', bs: 'stablo' },
       { ar: 'مَلْعَبٌ', bs: 'stadion' },
       { ar: 'وَاسِعٌ', bs: 'širok' },
+      // Lekcija 6 — glagoli u perfektu
+      { ar: 'كَتَبَ', bs: 'pisati' },
+      { ar: 'جَلَسَ', bs: 'sjediti' },
+      { ar: 'رَكِبَ', bs: 'voziti' },
+      { ar: 'كَبُرَ', bs: 'porasti' },
+      { ar: 'ضَرَبَ', bs: 'udariti' },
+      { ar: 'حَسِبَ', bs: 'misliti / računati' },
+      { ar: 'مَجْلِسٌ', bs: 'dnevni boravak' },
+      { ar: 'حَلِيبٌ', bs: 'mlijeko' },
+      { ar: 'سُكَّرٌ', bs: 'šećer' },
+      { ar: 'صَحِيحٌ', bs: 'tačno / ispravno' },
     ];
 
     // ─── Scoring ─────────────────────────────────────────────────────────────
@@ -1476,6 +1525,143 @@
       document.getElementById('result-klas').classList.remove('visible');
     }
 
+    // ─── Perfekt (verb conjugation) ───────────────────────────────────────────
+
+    const perfektVerbs = [
+      {
+        verb: 'جَلَسَ', verbBs: 'sjediti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'جَلَسْتُ', alt: ['جلست'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'جَلَسْتَ', alt: ['جلست'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'جَلَسْتِ', alt: ['جلست'] },
+          { label: 'هُوَ (on)', ar: 'جَلَسَ', alt: ['جلس'] },
+          { label: 'هِيَ (ona)', ar: 'جَلَسَتْ', alt: ['جلست'] },
+        ]
+      },
+      {
+        verb: 'كَتَبَ', verbBs: 'pisati',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'كَتَبْتُ', alt: ['كتبت'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'كَتَبْتَ', alt: ['كتبت'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'كَتَبْتِ', alt: ['كتبت'] },
+          { label: 'هُوَ (on)', ar: 'كَتَبَ', alt: ['كتب'] },
+          { label: 'هِيَ (ona)', ar: 'كَتَبَتْ', alt: ['كتبت'] },
+        ]
+      },
+      {
+        verb: 'فَتَحَ', verbBs: 'otvoriti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'فَتَحْتُ', alt: ['فتحت'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'فَتَحْتَ', alt: ['فتحت'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'فَتَحْتِ', alt: ['فتحت'] },
+          { label: 'هُوَ (on)', ar: 'فَتَحَ', alt: ['فتح'] },
+          { label: 'هِيَ (ona)', ar: 'فَتَحَتْ', alt: ['فتحت'] },
+        ]
+      },
+      {
+        verb: 'شَرِبَ', verbBs: 'piti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'شَرِبْتُ', alt: ['شربت'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'شَرِبْتَ', alt: ['شربت'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'شَرِبْتِ', alt: ['شربت'] },
+          { label: 'هُوَ (on)', ar: 'شَرِبَ', alt: ['شرب'] },
+          { label: 'هِيَ (ona)', ar: 'شَرِبَتْ', alt: ['شربت'] },
+        ]
+      },
+      {
+        verb: 'ذَهَبَ', verbBs: 'otići',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'ذَهَبْتُ', alt: ['ذهبت'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'ذَهَبْتَ', alt: ['ذهبت'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'ذَهَبْتِ', alt: ['ذهبت'] },
+          { label: 'هُوَ (on)', ar: 'ذَهَبَ', alt: ['ذهب'] },
+          { label: 'هِيَ (ona)', ar: 'ذَهَبَتْ', alt: ['ذهبت'] },
+        ]
+      },
+      {
+        verb: 'ضَرَبَ', verbBs: 'udariti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'ضَرَبْتُ', alt: ['ضربت'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'ضَرَبْتَ', alt: ['ضربت'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'ضَرَبْتِ', alt: ['ضربت'] },
+          { label: 'هُوَ (on)', ar: 'ضَرَبَ', alt: ['ضرب'] },
+          { label: 'هِيَ (ona)', ar: 'ضَرَبَتْ', alt: ['ضربت'] },
+        ]
+      },
+    ];
+
+    function buildPerfekt() {
+      const container = document.getElementById('perfekt-exercises');
+      container.innerHTML = '';
+      perfektVerbs.forEach((v, vi) => {
+        const section = document.createElement('div');
+        section.style.marginBottom = '28px';
+        const heading = document.createElement('div');
+        heading.style.cssText = 'margin-bottom:12px;';
+        heading.innerHTML = `
+          <span style="font-family:'Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${v.verb}</span>
+          <span style="font-size:0.85rem;color:#7a8baa;margin-left:10px;">(${v.verbBs})</span>
+        `;
+        section.appendChild(heading);
+        const grid = document.createElement('div');
+        grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;';
+        v.forms.forEach((f, fi) => {
+          const row = document.createElement('div');
+          row.style.cssText = 'background:#131b2e;border:1px solid #1e2a40;border-radius:10px;padding:12px;';
+          row.innerHTML = `
+            <div style="font-size:0.78rem;color:#5a6a88;margin-bottom:6px;">${f.label}</div>
+            <input class="suffix-input" id="pf-${vi}-${fi}" placeholder="..." autocomplete="off" spellcheck="false">
+            <div class="feedback" id="pfb-${vi}-${fi}" style="margin-top:4px;"></div>
+          `;
+          grid.appendChild(row);
+        });
+        section.appendChild(grid);
+        container.appendChild(section);
+      });
+    }
+
+    function checkAllPerfekt() {
+      let ok = 0, total = 0;
+      perfektVerbs.forEach((v, vi) => {
+        v.forms.forEach((f, fi) => {
+          total++;
+          const input = document.getElementById(`pf-${vi}-${fi}`);
+          const fb = document.getElementById(`pfb-${vi}-${fi}`);
+          const val = input.value.trim();
+          if (!val) return;
+          const accepted = [f.ar, ...f.alt];
+          const isCorrect = accepted.includes(val) || accepted.some(a => normalize(a) === normalize(val));
+          input.classList.remove('correct', 'wrong');
+          fb.classList.remove('correct-msg', 'wrong-msg');
+          if (isCorrect) {
+            input.classList.add('correct');
+            fb.classList.add('correct-msg');
+            fb.textContent = '✓';
+            ok++;
+          } else if (val) {
+            input.classList.add('wrong');
+            fb.classList.add('wrong-msg');
+            fb.textContent = f.ar;
+          }
+        });
+      });
+      const banner = document.getElementById('result-perfekt');
+      banner.innerHTML = `Rezultat: <span class="score">${ok} / ${total}</span>`;
+      banner.classList.add('visible');
+    }
+
+    function resetPerfekt() {
+      perfektVerbs.forEach((v, vi) => {
+        v.forms.forEach((_, fi) => {
+          const input = document.getElementById(`pf-${vi}-${fi}`);
+          if (input) { input.value = ''; input.classList.remove('correct', 'wrong'); }
+          const fb = document.getElementById(`pfb-${vi}-${fi}`);
+          if (fb) { fb.textContent = ''; fb.className = 'feedback'; fb.style.marginTop = '4px'; }
+        });
+      });
+      document.getElementById('result-perfekt').classList.remove('visible');
+    }
+
     // ─── Init ─────────────────────────────────────────────────────────────────
 
     buildBsAr();
@@ -1486,6 +1672,7 @@
     buildGv();
     buildZs();
     buildKlas();
+    buildPerfekt();
     buildQuiz();
     updateScore();
   </script>
