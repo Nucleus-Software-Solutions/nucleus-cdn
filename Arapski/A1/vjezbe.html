@@ -404,7 +404,7 @@
 <body>
   <header>
     <h1>Arapski A1 — Vježbe</h1>
-    <p>Lekcija 1, 2, 3, 4, 5 &amp; 6</p>
+    <p>Lekcija 1, 2, 3, 4, 5, 6, 7 &amp; 8</p>
   </header>
 
   <div class="tabs">
@@ -668,6 +668,46 @@
       { bs: 'zaklao je', ar: 'ذَبَحَ', alt: ['ذبح'] },
       { bs: 'pomaže', ar: 'تُسَاعِدُ', alt: ['تساعد'] },
       { bs: 'ti radiš (prezent)', ar: 'تَعْمَلُ', alt: ['تعمل'] },
+      // Lekcija 8 — kuća, stan, sobe
+      { bs: 'kuća', ar: 'بَيْتٌ', alt: ['بيت'] },
+      { bs: 'stan', ar: 'شَقَّةٌ', alt: ['شقة'] },
+      { bs: 'soba', ar: 'غُرْفَةٌ', alt: ['غرفة'] },
+      { bs: 'sobe (mn.)', ar: 'غُرَفٌ', alt: ['غرف'] },
+      { bs: 'spavaća soba', ar: 'غُرْفَةُ النَّوْمِ', alt: ['غرفة النوم'] },
+      { bs: 'trpezarija', ar: 'غُرْفَةُ الطَّعَامِ', alt: ['غرفة الطعام'] },
+      { bs: 'kupatilo', ar: 'حَمَّامٌ', alt: ['حمام'] },
+      { bs: 'bazen', ar: 'مَسْبَحٌ', alt: ['مسبح'] },
+      { bs: 'dvorište / park', ar: 'حَدِيقَةٌ', alt: ['حديقة'] },
+      { bs: 'stanovanje', ar: 'سَكَنٌ', alt: ['سكن'] },
+      { bs: 'krevet', ar: 'سَرِيرٌ', alt: ['سرير'] },
+      { bs: 'tepih', ar: 'سَجَّادَةٌ', alt: ['سجادة'] },
+      { bs: 'prozor', ar: 'نَافِذَةٌ', alt: ['نافذة'] },
+      { bs: 'zavjesa', ar: 'سِتَارَةٌ', alt: ['ستارة'] },
+      { bs: 'kanabe / garnitura', ar: 'كَنَبٌ', alt: ['كنب'] },
+      { bs: 'šporet / pećnica', ar: 'فُرْنٌ', alt: ['فرن'] },
+      { bs: 'frižider', ar: 'ثَلَّاجَةٌ', alt: ['ثلاجة'] },
+      { bs: 'veš mašina', ar: 'غَسَّالَةٌ', alt: ['غسالة'] },
+      { bs: 'usisivač', ar: 'مِكْنَسَةٌ', alt: ['مكنسة'] },
+      { bs: 'tanjir', ar: 'صَحْنٌ', alt: ['صحن'] },
+      { bs: 'tanjiri (mn.)', ar: 'صُحُونٌ', alt: ['صحون'] },
+      { bs: 'posteljina', ar: 'مَفْرَشٌ', alt: ['مفرش'] },
+      { bs: 'haljina', ar: 'فُسْتَانٌ', alt: ['فستان'] },
+      { bs: 'krava', ar: 'بَقَرَةٌ', alt: ['بقرة'] },
+      { bs: 'adresa', ar: 'عُنْوَانٌ', alt: ['عنوان'] },
+      { bs: 'komšija', ar: 'جَارٌ', alt: ['جار'] },
+      { bs: 'ovdje', ar: 'هُنَا', alt: ['هنا'] },
+      { bs: 'nekoliko / neki', ar: 'بَعْضٌ', alt: ['بعض'] },
+      { bs: 'gradnja', ar: 'بِنَاءٌ', alt: ['بناء'] },
+      // Lekcija 8 — glagoli (perfekt)
+      { bs: 'stanovati (perf.)', ar: 'سَكَنَ', alt: ['سكن'] },
+      { bs: 'staviti / postaviti (perf.)', ar: 'وَضَعَ', alt: ['وضع'] },
+      { bs: 'uzeti (perf.)', ar: 'أَخَذَ', alt: ['أخذ', 'اخذ'] },
+      { bs: 'početi (perf.)', ar: 'بَدَأَ', alt: ['بدأ'] },
+      // Lekcija 8 — prezent (1./2./1.mn.)
+      { bs: 'ja stanujem', ar: 'أَسْكُنُ', alt: ['اسكن', 'أسكن'] },
+      { bs: 'ja trebam', ar: 'أَحْتَاجُ', alt: ['احتاج', 'أحتاج'] },
+      { bs: 'ti trebaš', ar: 'تَحْتَاجُ', alt: ['تحتاج'] },
+      { bs: 'mi počinjemo', ar: 'نَبْدَأُ', alt: ['نبدأ'] },
     ];
 
     const arBsWords = [
@@ -781,6 +821,46 @@
       { ar: 'ذَبَحَ', bs: 'zaklao je', alt: ['zaklati'] },
       { ar: 'تُسَاعِدُ', bs: 'pomaže', alt: ['pomaze'] },
       { ar: 'تَعْمَلُ', bs: 'ti radiš', alt: ['radis'] },
+      // Lekcija 8 — kuća, stan, sobe
+      { ar: 'بَيْتٌ', bs: 'kuća', alt: ['kuca', 'dom'] },
+      { ar: 'شَقَّةٌ', bs: 'stan', alt: [] },
+      { ar: 'غُرْفَةٌ', bs: 'soba', alt: [] },
+      { ar: 'غُرَفٌ', bs: 'sobe', alt: [] },
+      { ar: 'غُرْفَةُ النَّوْمِ', bs: 'spavaća soba', alt: ['spavaca soba'] },
+      { ar: 'غُرْفَةُ الطَّعَامِ', bs: 'trpezarija', alt: ['blagovaonica'] },
+      { ar: 'حَمَّامٌ', bs: 'kupatilo', alt: ['kupaonica'] },
+      { ar: 'مَسْبَحٌ', bs: 'bazen', alt: [] },
+      { ar: 'حَدِيقَةٌ', bs: 'dvorište', alt: ['park', 'bašta', 'basta', 'dvoriste'] },
+      { ar: 'سَكَنٌ', bs: 'stanovanje', alt: [] },
+      { ar: 'سَرِيرٌ', bs: 'krevet', alt: [] },
+      { ar: 'سَجَّادَةٌ', bs: 'tepih', alt: ['ćilim', 'cilim'] },
+      { ar: 'نَافِذَةٌ', bs: 'prozor', alt: [] },
+      { ar: 'سِتَارَةٌ', bs: 'zavjesa', alt: ['zavjese'] },
+      { ar: 'كَنَبٌ', bs: 'kanabe', alt: ['garnitura', 'sofa'] },
+      { ar: 'فُرْنٌ', bs: 'šporet', alt: ['sporet', 'pećnica', 'pecnica'] },
+      { ar: 'ثَلَّاجَةٌ', bs: 'frižider', alt: ['frizider', 'hladnjak'] },
+      { ar: 'غَسَّالَةٌ', bs: 'veš mašina', alt: ['ves masina', 'perilica'] },
+      { ar: 'مِكْنَسَةٌ', bs: 'usisivač', alt: ['usisivac', 'metla'] },
+      { ar: 'صَحْنٌ', bs: 'tanjir', alt: ['tanjur'] },
+      { ar: 'صُحُونٌ', bs: 'tanjiri', alt: ['tanjuri'] },
+      { ar: 'مَفْرَشٌ', bs: 'posteljina', alt: ['čaršaf', 'carsaf'] },
+      { ar: 'فُسْتَانٌ', bs: 'haljina', alt: [] },
+      { ar: 'بَقَرَةٌ', bs: 'krava', alt: [] },
+      { ar: 'عُنْوَانٌ', bs: 'adresa', alt: [] },
+      { ar: 'جَارٌ', bs: 'komšija', alt: ['komsija', 'susjed'] },
+      { ar: 'هُنَا', bs: 'ovdje', alt: ['tu'] },
+      { ar: 'بَعْضٌ', bs: 'nekoliko', alt: ['neki', 'nešto', 'nesto'] },
+      { ar: 'بِنَاءٌ', bs: 'gradnja', alt: ['izgradnja'] },
+      // Lekcija 8 — glagoli (perfekt)
+      { ar: 'سَكَنَ', bs: 'stanovati', alt: ['stanovao je'] },
+      { ar: 'وَضَعَ', bs: 'staviti', alt: ['stavio je', 'postaviti'] },
+      { ar: 'أَخَذَ', bs: 'uzeti', alt: ['uzeo je'] },
+      { ar: 'بَدَأَ', bs: 'početi', alt: ['poceti', 'počeo je', 'poceo je'] },
+      // Lekcija 8 — prezent
+      { ar: 'أَسْكُنُ', bs: 'ja stanujem', alt: ['stanujem'] },
+      { ar: 'أَحْتَاجُ', bs: 'ja trebam', alt: ['trebam'] },
+      { ar: 'تَحْتَاجُ', bs: 'ti trebaš', alt: ['trebas'] },
+      { ar: 'نَبْدَأُ', bs: 'mi počinjemo', alt: ['pocinjemo', 'počinjemo'] },
     ];
 
     // Suffix data: noun (display), root (no tanwin), answers for moj/m/ž/on/ona
@@ -967,6 +1047,46 @@
       { ar: 'لَبِسَ', bs: 'obukao je' },
       { ar: 'نَجَحَ', bs: 'uspio je' },
       { ar: 'ذَبَحَ', bs: 'zaklao je' },
+      // Lekcija 8 — kuća, stan, sobe
+      { ar: 'بَيْتٌ', bs: 'kuća' },
+      { ar: 'شَقَّةٌ', bs: 'stan' },
+      { ar: 'غُرْفَةٌ', bs: 'soba' },
+      { ar: 'غُرَفٌ', bs: 'sobe (mn.)' },
+      { ar: 'غُرْفَةُ النَّوْمِ', bs: 'spavaća soba' },
+      { ar: 'غُرْفَةُ الطَّعَامِ', bs: 'trpezarija' },
+      { ar: 'حَمَّامٌ', bs: 'kupatilo' },
+      { ar: 'مَسْبَحٌ', bs: 'bazen' },
+      { ar: 'حَدِيقَةٌ', bs: 'dvorište / park' },
+      { ar: 'سَكَنٌ', bs: 'stanovanje' },
+      { ar: 'سَرِيرٌ', bs: 'krevet' },
+      { ar: 'سَجَّادَةٌ', bs: 'tepih' },
+      { ar: 'نَافِذَةٌ', bs: 'prozor' },
+      { ar: 'سِتَارَةٌ', bs: 'zavjesa' },
+      { ar: 'كَنَبٌ', bs: 'kanabe / garnitura' },
+      { ar: 'فُرْنٌ', bs: 'šporet / pećnica' },
+      { ar: 'ثَلَّاجَةٌ', bs: 'frižider' },
+      { ar: 'غَسَّالَةٌ', bs: 'veš mašina' },
+      { ar: 'مِكْنَسَةٌ', bs: 'usisivač' },
+      { ar: 'صَحْنٌ', bs: 'tanjir' },
+      { ar: 'صُحُونٌ', bs: 'tanjiri (mn.)' },
+      { ar: 'مَفْرَشٌ', bs: 'posteljina' },
+      { ar: 'فُسْتَانٌ', bs: 'haljina' },
+      { ar: 'بَقَرَةٌ', bs: 'krava' },
+      { ar: 'عُنْوَانٌ', bs: 'adresa' },
+      { ar: 'جَارٌ', bs: 'komšija' },
+      { ar: 'هُنَا', bs: 'ovdje' },
+      { ar: 'بَعْضٌ', bs: 'nekoliko / neki' },
+      { ar: 'بِنَاءٌ', bs: 'gradnja' },
+      // Lekcija 8 — glagoli (perfekt)
+      { ar: 'سَكَنَ', bs: 'stanovati (perf.)' },
+      { ar: 'وَضَعَ', bs: 'staviti (perf.)' },
+      { ar: 'أَخَذَ', bs: 'uzeti (perf.)' },
+      { ar: 'بَدَأَ', bs: 'početi (perf.)' },
+      // Lekcija 8 — prezent
+      { ar: 'أَسْكُنُ', bs: 'ja stanujem' },
+      { ar: 'أَحْتَاجُ', bs: 'ja trebam' },
+      { ar: 'تَحْتَاجُ', bs: 'ti trebaš' },
+      { ar: 'نَبْدَأُ', bs: 'mi počinjemo' },
     ];
 
     // ─── Scoring ─────────────────────────────────────────────────────────────
@@ -1384,6 +1504,32 @@
       { bs: 'Ova djevojka je lijepa kao mjesec.', ar: 'هَذِهِ الْفَتَاةُ جَمِيلَةٌ كَالْقَمَرِ', alt: ['هذه الفتاة جميلة كالقمر'] },
       { bs: 'Moja prijateljica je također doktorica u bolnici.', ar: 'صَدِيقَتِي أَيْضًا طَبِيبَةٌ فِي الْمُسْتَشْفَى', alt: ['صديقتي أيضا طبيبة في المستشفى'] },
       { bs: 'Marljivi učenik je u velikom razredu.', ar: 'الطَّالِبُ الْمُجْتَهِدُ فِي الصَّفِّ الْكَبِيرِ', alt: ['الطالب المجتهد في الصف الكبير'] },
+      // ═══ Lekcija 8 — kuća, stan, sobe (rečenice iz lekcije i zadaće) ═══
+      { bs: 'Stanujem u lijepoj kući.', ar: 'أَسْكُنُ فِي بَيْتٍ جَمِيلٍ', alt: ['اسكن في بيت جميل', 'أسكن في بيت جميل'] },
+      { bs: 'Stanujem u malom stanu.', ar: 'أَسْكُنُ فِي شَقَّةٍ صَغِيرَةٍ', alt: ['اسكن في شقة صغيرة', 'أسكن في شقة صغيرة'] },
+      { bs: 'Koja je adresa tvoje kuće?', ar: 'مَا عُنْوَانُ بَيْتِكَ؟', alt: ['ما عنوان بيتك؟', 'ما عنوان بيتك'] },
+      { bs: 'Kada počinjemo gradnju?', ar: 'مَتَى نَبْدَأُ الْبِنَاءَ؟', alt: ['متى نبدأ البناء؟', 'متى نبدأ البناء'] },
+      { bs: 'Šta trebaš za kuhinju?', ar: 'مَاذَا تَحْتَاجُ لِلْمَطْبَخِ؟', alt: ['ماذا تحتاج للمطبخ؟', 'ماذا تحتاج للمطبخ'] },
+      { bs: 'Trebam neke tanjire.', ar: 'أَحْتَاجُ بَعْضَ الصُّحُونِ', alt: ['احتاج بعض الصحون', 'أحتاج بعض الصحون'] },
+      { bs: 'Šta trebaš za spavaću sobu?', ar: 'مَاذَا تَحْتَاجُ لِغُرْفَةِ النَّوْمِ؟', alt: ['ماذا تحتاج لغرفة النوم؟', 'ماذا تحتاج لغرفة النوم'] },
+      { bs: 'Trebam novu posteljinu.', ar: 'أَحْتَاجُ مَفْرَشًا جَدِيدًا', alt: ['احتاج مفرشا جديدا', 'أحتاج مفرشا جديدا'] },
+      { bs: 'Koliko soba u tvom stanu?', ar: 'كَمْ غُرْفَةً فِي شَقَّتِكَ؟', alt: ['كم غرفة في شقتك؟', 'كم غرفة في شقتك'] },
+      { bs: 'Tri sobe.', ar: 'ثَلَاثُ غُرَفٍ', alt: ['ثلاث غرف'] },
+      { bs: 'Da li stanuješ ovdje?', ar: 'هَلْ تَسْكُنُ هُنَا؟', alt: ['هل تسكن هنا؟', 'هل تسكن هنا'] },
+      { bs: 'Da, ja sam tvoj novi komšija.', ar: 'نَعَمْ، أَنَا جَارُكَ الْجَدِيدُ', alt: ['نعم، أنا جارك الجديد', 'نعم انا جارك الجديد'] },
+      { bs: 'Sjedio sam u sobi na krevetu.', ar: 'أَنَا جَلَسْتُ فِي الْغُرْفَةِ عَلَى السَّرِيرِ', alt: ['انا جلست في الغرفة على السرير', 'جلست في الغرفة على السرير'] },
+      { bs: 'On se vratio kući.', ar: 'هُوَ رَجَعَ إِلَى الْبَيْتِ', alt: ['هو رجع إلى البيت', 'رجع إلى البيت', 'هو رجع الى البيت'] },
+      { bs: 'Službenica je uspjela u svom poslu.', ar: 'الْمُوَظَّفَةُ نَجَحَتْ فِي عَمَلِهَا', alt: ['الموظفة نجحت في عملها'] },
+      { bs: 'Da li si ti pročitala knjigu?', ar: 'هَلْ أَنْتِ قَرَأْتِ الْكِتَابَ؟', alt: ['هل أنتِ قرأتِ الكتاب؟', 'هل انت قرأت الكتاب'] },
+      { bs: 'Mesar je zaklao kravu.', ar: 'ذَبَحَ الْجَزَّارُ الْبَقَرَةَ', alt: ['ذبح الجزار البقرة'] },
+      { bs: 'Da li si ti otvorio prozor?', ar: 'هَلْ أَنْتَ فَتَحْتَ النَّافِذَةَ؟', alt: ['هل أنت فتحت النافذة؟', 'هل انت فتحت النافذة'] },
+      { bs: 'Tvoja tetka je obukla lijepu haljinu.', ar: 'خَالَتُكِ لَبِسَتْ فُسْتَانًا جَمِيلًا', alt: ['خالتكِ لبست فستانا جميلا', 'خالتك لبست فستانا جميلا'] },
+      // ═══ Lekcija 8 — Zadaća (BS → AR) ═══
+      { bs: 'Majka je stavila zavjesu na prozor.', ar: 'الْأُمُّ وَضَعَتْ السِّتَارَةَ عَلَى النَّافِذَةِ', alt: ['الأم وضعت الستارة على النافذة'] },
+      { bs: 'Ovo je moja adresa.', ar: 'هَذَا عُنْوَانِي', alt: ['هذا عنواني'] },
+      { bs: 'Stanovala sam u maloj kući u velikom gradu.', ar: 'سَكَنْتُ فِي بَيْتٍ صَغِيرٍ فِي مَدِينَةٍ كَبِيرَةٍ', alt: ['سكنت في بيت صغير في مدينة كبيرة'] },
+      { bs: 'Ti si uzeo lijepu posteljinu za spavaću sobu.', ar: 'أَنْتَ أَخَذْتَ مَفْرَشًا جَمِيلًا لِغُرْفَةِ النَّوْمِ', alt: ['انت أخذت مفرشا جميلا لغرفة النوم', 'أنت أخذت مفرشا جميلا لغرفة النوم'] },
+      { bs: 'Velika veš mašina je u kupatilu.', ar: 'الْغَسَّالَةُ الْكَبِيرَةُ فِي الْحَمَّامِ', alt: ['الغسالة الكبيرة في الحمام'] },
     ];
 
     function buildSent() {
