@@ -75,9 +75,8 @@
       border-color: #3b82f6;
     }
 
-    .toggle-all-btn {
-      display: block;
-      margin: 10px auto 0;
+    .toggle-all-btn,
+    .toggle-nav-btn {
       padding: 6px 18px;
       border: 1px solid #bfdbfe;
       border-radius: 5px;
@@ -89,9 +88,22 @@
       transition: all 0.3s;
     }
 
-    .toggle-all-btn:hover {
+    .toggle-all-btn:hover,
+    .toggle-nav-btn:hover {
       background: #dbeafe;
       border-color: #3b82f6;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .nav-links.collapsed {
+      display: none;
     }
 
     /* Print: skrij navigaciju i footer — ostavlja samo sadržaj za PDF */
@@ -360,7 +372,7 @@
     <p class="subtitle">Ključne tabele iz A0 i A1 kursa — na jednom mjestu</p>
 
     <nav class="nav">
-      <div class="nav-links">
+      <div class="nav-links collapsed">
         <a href="#licne-zamjenice">Lične zamjenice</a>
         <a href="#prisvojni-sufiksi">Prisvojni sufiksi</a>
         <a href="#pokazne-zamjenice">Pokazne zamjenice</a>
@@ -381,7 +393,10 @@
         <a href="vokabular.html">Vokabular</a>
         <a href="index.html">Početna</a>
       </div>
-      <button class="toggle-all-btn" id="toggleAllBtn" onclick="toggleAllSections()">▲ Skupi sve sekcije</button>
+      <div class="nav-buttons">
+        <button class="toggle-nav-btn" id="toggleNavBtn" onclick="toggleNav()">▼ Prikaži navigaciju</button>
+        <button class="toggle-all-btn" id="toggleAllBtn" onclick="toggleAllSections()">▲ Skupi sve sekcije</button>
+      </div>
     </nav>
 
     <!-- ═══════════════════════════════════════
@@ -1830,6 +1845,13 @@
         }
       });
       btn.textContent = allCollapsed ? '▼ Proširi sve sekcije' : '▲ Skupi sve sekcije';
+    }
+
+    function toggleNav() {
+      const links = document.querySelector('.nav-links');
+      const btn = document.getElementById('toggleNavBtn');
+      const hidden = links.classList.toggle('collapsed');
+      btn.textContent = hidden ? '▼ Prikaži navigaciju' : '▲ Sakrij navigaciju';
     }
   </script>
 </body>
