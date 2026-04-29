@@ -404,7 +404,7 @@
 <body>
   <header>
     <h1>Arapski A1 — Vježbe</h1>
-    <p>Lekcija 1, 2, 3, 4, 5, 6, 7 &amp; 8</p>
+    <p>Lekcija 1, 2, 3, 4, 5, 6, 7, 8 &amp; 9</p>
   </header>
 
   <div class="tabs">
@@ -415,6 +415,7 @@
     <button onclick="showTab('recenice', this)">Rečenice</button>
     <button onclick="showTab('zadaca-l5', this)">Zadaća L5</button>
     <button onclick="showTab('perfekt', this)">Perfekt (glagoli)</button>
+    <button onclick="showTab('prezent', this)">Prezent (glagoli)</button>
     <button onclick="showTab('kviz', this)">Kviz kartice</button>
   </div>
 
@@ -524,6 +525,17 @@
       <button class="check-all-btn" onclick="checkAllPerfekt()">Provjeri sve</button>
       <button class="reset-btn" onclick="resetPerfekt()">Resetuj</button>
       <div class="result-banner" id="result-perfekt"></div>
+    </div>
+
+    <!-- TAB: Prezent (konjugacija glagola — Lekcija 9) -->
+    <div class="exercise-section" id="tab-prezent">
+      <div class="section-title">Konjugiraj glagole u prezentu</div>
+      <div class="section-desc">Prefiks + korijen + završetak. Pazi na vokal 2. suglasnika (varira: -u-, -i-, -a-).</div>
+
+      <div id="prezent-exercises"></div>
+      <button class="check-all-btn" onclick="checkAllPrezent()">Provjeri sve</button>
+      <button class="reset-btn" onclick="resetPrezent()">Resetuj</button>
+      <div class="result-banner" id="result-prezent"></div>
     </div>
 
     <!-- TAB 6: Kviz kartice -->
@@ -708,6 +720,35 @@
       { bs: 'ja trebam', ar: 'أَحْتَاجُ', alt: ['احتاج', 'أحتاج'] },
       { bs: 'ti trebaš', ar: 'تَحْتَاجُ', alt: ['تحتاج'] },
       { bs: 'mi počinjemo', ar: 'نَبْدَأُ', alt: ['نبدأ'] },
+      // Lekcija 9 — novi glagoli i imenice
+      { bs: 'otići (perf.)', ar: 'ذَهَبَ', alt: ['ذهب'] },
+      { bs: 'jesti (perf.)', ar: 'أَكَلَ', alt: ['أكل', 'اكل'] },
+      { bs: 'plivati (perf.)', ar: 'سَبَحَ', alt: ['سبح'] },
+      { bs: 'igrati se (perf.)', ar: 'لَعِبَ', alt: ['لعب'] },
+      { bs: 'usisavati (perf.)', ar: 'كَنَسَ', alt: ['كنس'] },
+      { bs: 'škola', ar: 'مَدْرَسَةٌ', alt: ['مدرسة'] },
+      { bs: 'biblioteka', ar: 'مَكْتَبَةٌ', alt: ['مكتبة'] },
+      { bs: 'hrana', ar: 'طَعَامٌ', alt: ['طعام'] },
+      { bs: 'malen / mali', ar: 'صَغِيرٌ', alt: ['صغير'] },
+      { bs: 'kolega', ar: 'زَمِيلٌ', alt: ['زميل'] },
+      // Lekcija 9 — prezent (jednina)
+      { bs: 'ja pišem', ar: 'أَكْتُبُ', alt: ['اكتب', 'أكتب'] },
+      { bs: 'ti (m.) pišeš', ar: 'تَكْتُبُ', alt: ['تكتب'] },
+      { bs: 'ti (ž.) pišeš', ar: 'تَكْتُبِينَ', alt: ['تكتبين'] },
+      { bs: 'on piše', ar: 'يَكْتُبُ', alt: ['يكتب'] },
+      { bs: 'ona piše', ar: 'تَكْتُبُ', alt: ['تكتب'] },
+      { bs: 'ja pijem', ar: 'أَشْرَبُ', alt: ['اشرب', 'أشرب'] },
+      { bs: 'on pije', ar: 'يَشْرَبُ', alt: ['يشرب'] },
+      { bs: 'ja sjedim', ar: 'أَجْلِسُ', alt: ['اجلس', 'أجلس'] },
+      { bs: 'on sjedi', ar: 'يَجْلِسُ', alt: ['يجلس'] },
+      { bs: 'ja idem', ar: 'أَذْهَبُ', alt: ['اذهب', 'أذهب'] },
+      { bs: 'on ide', ar: 'يَذْهَبُ', alt: ['يذهب'] },
+      { bs: 'ona ide', ar: 'تَذْهَبُ', alt: ['تذهب'] },
+      { bs: 'ti (ž.) jedeš', ar: 'تَأْكُلِينَ', alt: ['تأكلين', 'تاكلين'] },
+      { bs: 'on se igra', ar: 'يَلْعَبُ', alt: ['يلعب'] },
+      { bs: 'ona pliva', ar: 'تَسْبَحُ', alt: ['تسبح'] },
+      { bs: 'ja čitam', ar: 'أَقْرَأُ', alt: ['اقرأ', 'أقرأ'] },
+      { bs: 'ti (ž.) otvaraš', ar: 'تَفْتَحِينَ', alt: ['تفتحين'] },
     ];
 
     const arBsWords = [
@@ -861,6 +902,35 @@
       { ar: 'أَحْتَاجُ', bs: 'ja trebam', alt: ['trebam'] },
       { ar: 'تَحْتَاجُ', bs: 'ti trebaš', alt: ['trebas'] },
       { ar: 'نَبْدَأُ', bs: 'mi počinjemo', alt: ['pocinjemo', 'počinjemo'] },
+      // Lekcija 9 — novi glagoli i imenice
+      { ar: 'ذَهَبَ', bs: 'otići', alt: ['otisao je', 'otisao', 'otići je'] },
+      { ar: 'أَكَلَ', bs: 'jesti', alt: ['jeo je'] },
+      { ar: 'سَبَحَ', bs: 'plivati', alt: ['plivao je'] },
+      { ar: 'لَعِبَ', bs: 'igrati se', alt: ['igrao se'] },
+      { ar: 'كَنَسَ', bs: 'usisavati', alt: ['mesti', 'usisavao je'] },
+      { ar: 'مَدْرَسَةٌ', bs: 'škola', alt: ['skola'] },
+      { ar: 'مَكْتَبَةٌ', bs: 'biblioteka', alt: [] },
+      { ar: 'طَعَامٌ', bs: 'hrana', alt: ['jelo'] },
+      { ar: 'صَغِيرٌ', bs: 'malen', alt: ['mali'] },
+      { ar: 'زَمِيلٌ', bs: 'kolega', alt: [] },
+      { ar: 'إِلَى', bs: 'do', alt: ['ka', 'prema'] },
+      // Lekcija 9 — prezent (jednina)
+      { ar: 'أَكْتُبُ', bs: 'ja pišem', alt: ['pisem', 'pišem'] },
+      { ar: 'تَكْتُبُ', bs: 'ti pišeš / ona piše', alt: ['ti pises', 'ona pise', 'ti pišeš', 'ona piše'] },
+      { ar: 'تَكْتُبِينَ', bs: 'ti (ž.) pišeš', alt: ['pises', 'ti pišeš'] },
+      { ar: 'يَكْتُبُ', bs: 'on piše', alt: ['on pise'] },
+      { ar: 'أَشْرَبُ', bs: 'ja pijem', alt: ['pijem'] },
+      { ar: 'يَشْرَبُ', bs: 'on pije', alt: [] },
+      { ar: 'أَجْلِسُ', bs: 'ja sjedim', alt: ['sjedim'] },
+      { ar: 'يَجْلِسُ', bs: 'on sjedi', alt: [] },
+      { ar: 'أَذْهَبُ', bs: 'ja idem', alt: ['idem'] },
+      { ar: 'يَذْهَبُ', bs: 'on ide', alt: [] },
+      { ar: 'تَذْهَبُ', bs: 'ona ide / ti ideš', alt: ['ona ide', 'ti ides', 'ti ideš'] },
+      { ar: 'تَأْكُلِينَ', bs: 'ti (ž.) jedeš', alt: ['jedes', 'ti jedeš'] },
+      { ar: 'يَلْعَبُ', bs: 'on se igra', alt: [] },
+      { ar: 'تَسْبَحُ', bs: 'ona pliva', alt: ['ti plivaš', 'ti plivas'] },
+      { ar: 'أَقْرَأُ', bs: 'ja čitam', alt: ['citam', 'čitam'] },
+      { ar: 'تَفْتَحِينَ', bs: 'ti (ž.) otvaraš', alt: ['otvaras', 'ti otvaraš'] },
     ];
 
     // Suffix data: noun (display), root (no tanwin), answers for moj/m/ž/on/ona
@@ -1087,6 +1157,30 @@
       { ar: 'أَحْتَاجُ', bs: 'ja trebam' },
       { ar: 'تَحْتَاجُ', bs: 'ti trebaš' },
       { ar: 'نَبْدَأُ', bs: 'mi počinjemo' },
+      // Lekcija 9 — novi pojmovi
+      { ar: 'ذَهَبَ', bs: 'otići (perf.)' },
+      { ar: 'أَكَلَ', bs: 'jesti (perf.)' },
+      { ar: 'سَبَحَ', bs: 'plivati (perf.)' },
+      { ar: 'لَعِبَ', bs: 'igrati se (perf.)' },
+      { ar: 'كَنَسَ', bs: 'usisavati (perf.)' },
+      { ar: 'مَدْرَسَةٌ', bs: 'škola' },
+      { ar: 'مَكْتَبَةٌ', bs: 'biblioteka' },
+      { ar: 'طَعَامٌ', bs: 'hrana' },
+      { ar: 'صَغِيرٌ', bs: 'malen / mali' },
+      { ar: 'زَمِيلٌ', bs: 'kolega' },
+      // Lekcija 9 — prezent
+      { ar: 'أَكْتُبُ', bs: 'ja pišem' },
+      { ar: 'تَكْتُبُ', bs: 'ti (m.) pišeš / ona piše' },
+      { ar: 'تَكْتُبِينَ', bs: 'ti (ž.) pišeš' },
+      { ar: 'يَكْتُبُ', bs: 'on piše' },
+      { ar: 'يَشْرَبُ', bs: 'on pije' },
+      { ar: 'يَجْلِسُ', bs: 'on sjedi' },
+      { ar: 'يَذْهَبُ', bs: 'on ide' },
+      { ar: 'تَذْهَبُ', bs: 'ona ide / ti (m.) ideš' },
+      { ar: 'تَأْكُلِينَ', bs: 'ti (ž.) jedeš' },
+      { ar: 'يَلْعَبُ', bs: 'on se igra' },
+      { ar: 'تَسْبَحُ', bs: 'ona pliva' },
+      { ar: 'أَقْرَأُ', bs: 'ja čitam' },
     ];
 
     // ─── Scoring ─────────────────────────────────────────────────────────────
@@ -1530,6 +1624,19 @@
       { bs: 'Stanovala sam u maloj kući u velikom gradu.', ar: 'سَكَنْتُ فِي بَيْتٍ صَغِيرٍ فِي مَدِينَةٍ كَبِيرَةٍ', alt: ['سكنت في بيت صغير في مدينة كبيرة'] },
       { bs: 'Ti si uzeo lijepu posteljinu za spavaću sobu.', ar: 'أَنْتَ أَخَذْتَ مَفْرَشًا جَمِيلًا لِغُرْفَةِ النَّوْمِ', alt: ['انت أخذت مفرشا جميلا لغرفة النوم', 'أنت أخذت مفرشا جميلا لغرفة النوم'] },
       { bs: 'Velika veš mašina je u kupatilu.', ar: 'الْغَسَّالَةُ الْكَبِيرَةُ فِي الْحَمَّامِ', alt: ['الغسالة الكبيرة في الحمام'] },
+      // ═══ Lekcija 9 — perfekt + prezent (rečenice iz lekcije i zadaće) ═══
+      { bs: 'Ti si otišla u grad, a ona ide u školu.', ar: 'أَنْتِ ذَهَبْتِ إِلَى مَدِينَةٍ وَ هِيَ تَذْهَبُ إِلَى مَدْرَسَةٍ', alt: ['ذهبت إلى مدينة وهي تذهب إلى مدرسة', 'انت ذهبت إلى مدينة و هي تذهب إلى مدرسة'] },
+      { bs: 'Sestra stanuje u malom stanu.', ar: 'الْأُخْتُ تَسْكُنُ فِي شَقَّةٍ صَغِيرَةٍ', alt: ['الأخت تسكن في شقة صغيرة'] },
+      { bs: 'Ti (ž.) jedeš hranu.', ar: 'أَنْتِ تَأْكُلِينَ الطَّعَامَ', alt: ['انت تأكلين الطعام', 'تأكلين الطعام'] },
+      { bs: 'Njegov sin se igra u dvorištu.', ar: 'اِبْنُهُ يَلْعَبُ فِي الْحَدِيقَةِ', alt: ['ابنه يلعب في الحديقة'] },
+      { bs: 'Mala djevojčica pliva u gradskom bazenu.', ar: 'الْفَتَاةُ الصَّغِيرَةُ تَسْبَحُ فِي مَسْبَحِ الْمَدِينَةِ', alt: ['الفتاة الصغيرة تسبح في مسبح المدينة'] },
+      { bs: 'Ti (ž.) otvaraš vrata učionice.', ar: 'أَنْتِ تَفْتَحِينَ بَابَ الصَّفِّ', alt: ['انت تفتحين باب الصف', 'تفتحين باب الصف'] },
+      { bs: 'Ja čitam njenu knjigu u školskoj biblioteci.', ar: 'أَنَا أَقْرَأُ كِتَابَهَا فِي مَكْتَبَةِ الْمَدْرَسَةِ', alt: ['انا أقرأ كتابها في مكتبة المدرسة', 'أقرأ كتابها في مكتبة المدرسة'] },
+      { bs: 'Moj kolega je vrijedan.', ar: 'زَمِيلِي مُجْتَهِدٌ', alt: ['زميلي مجتهد'] },
+      { bs: 'Otišao sam u školu.', ar: 'ذَهَبْتُ إِلَى الْمَدْرَسَةِ', alt: ['ذهبت إلى المدرسة'] },
+      { bs: 'On ide u biblioteku.', ar: 'هُوَ يَذْهَبُ إِلَى الْمَكْتَبَةِ', alt: ['يذهب إلى المكتبة', 'هو يذهب إلى المكتبة'] },
+      { bs: 'Ona pije kahvu sa šećerom.', ar: 'هِيَ تَشْرَبُ الْقَهْوَةَ بِالسُّكَّرِ', alt: ['تشرب القهوة بالسكر', 'هي تشرب القهوة بالسكر'] },
+      { bs: 'Ti (m.) sjediš u dnevnom boravku.', ar: 'أَنْتَ تَجْلِسُ فِي الْمَجْلِسِ', alt: ['انت تجلس في المجلس', 'تجلس في المجلس'] },
     ];
 
     function buildSent() {
@@ -1872,6 +1979,111 @@
           { label: 'هِيَ (ona)', ar: 'رَجَعَتْ', alt: ['رجعت'] },
         ]
       },
+      {
+        verb: 'كَنَسَ', verbBs: 'usisavati / mesti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'كَنَسْتُ', alt: ['كنست'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'كَنَسْتَ', alt: ['كنست'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'كَنَسْتِ', alt: ['كنست'] },
+          { label: 'هُوَ (on)', ar: 'كَنَسَ', alt: ['كنس'] },
+          { label: 'هِيَ (ona)', ar: 'كَنَسَتْ', alt: ['كنست'] },
+        ]
+      },
+    ];
+
+    // ─── Prezent (verb conjugation) — Lekcija 9 ──────────────────────────────
+
+    const prezentVerbs = [
+      {
+        verb: 'كَتَبَ → يَكْتُبُ', verbBs: 'pisati',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'أَكْتُبُ', alt: ['اكتب', 'أكتب'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَكْتُبُ', alt: ['تكتب'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَكْتُبِينَ', alt: ['تكتبين'] },
+          { label: 'هُوَ (on)', ar: 'يَكْتُبُ', alt: ['يكتب'] },
+          { label: 'هِيَ (ona)', ar: 'تَكْتُبُ', alt: ['تكتب'] },
+        ]
+      },
+      {
+        verb: 'جَلَسَ → يَجْلِسُ', verbBs: 'sjediti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'أَجْلِسُ', alt: ['اجلس', 'أجلس'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَجْلِسُ', alt: ['تجلس'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَجْلِسِينَ', alt: ['تجلسين'] },
+          { label: 'هُوَ (on)', ar: 'يَجْلِسُ', alt: ['يجلس'] },
+          { label: 'هِيَ (ona)', ar: 'تَجْلِسُ', alt: ['تجلس'] },
+        ]
+      },
+      {
+        verb: 'شَرِبَ → يَشْرَبُ', verbBs: 'piti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'أَشْرَبُ', alt: ['اشرب', 'أشرب'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَشْرَبُ', alt: ['تشرب'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَشْرَبِينَ', alt: ['تشربين'] },
+          { label: 'هُوَ (on)', ar: 'يَشْرَبُ', alt: ['يشرب'] },
+          { label: 'هِيَ (ona)', ar: 'تَشْرَبُ', alt: ['تشرب'] },
+        ]
+      },
+      {
+        verb: 'ذَهَبَ → يَذْهَبُ', verbBs: 'otići / ići',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'أَذْهَبُ', alt: ['اذهب', 'أذهب'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَذْهَبُ', alt: ['تذهب'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَذْهَبِينَ', alt: ['تذهبين'] },
+          { label: 'هُوَ (on)', ar: 'يَذْهَبُ', alt: ['يذهب'] },
+          { label: 'هِيَ (ona)', ar: 'تَذْهَبُ', alt: ['تذهب'] },
+        ]
+      },
+      {
+        verb: 'فَتَحَ → يَفْتَحُ', verbBs: 'otvoriti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'أَفْتَحُ', alt: ['افتح', 'أفتح'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَفْتَحُ', alt: ['تفتح'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَفْتَحِينَ', alt: ['تفتحين'] },
+          { label: 'هُوَ (on)', ar: 'يَفْتَحُ', alt: ['يفتح'] },
+          { label: 'هِيَ (ona)', ar: 'تَفْتَحُ', alt: ['تفتح'] },
+        ]
+      },
+      {
+        verb: 'كَنَسَ → يَكْنُسُ', verbBs: 'usisavati / mesti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'أَكْنُسُ', alt: ['اكنس', 'أكنس'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَكْنُسُ', alt: ['تكنس'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَكْنُسِينَ', alt: ['تكنسين'] },
+          { label: 'هُوَ (on)', ar: 'يَكْنُسُ', alt: ['يكنس'] },
+          { label: 'هِيَ (ona)', ar: 'تَكْنُسُ', alt: ['تكنس'] },
+        ]
+      },
+      {
+        verb: 'لَعِبَ → يَلْعَبُ', verbBs: 'igrati se',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'أَلْعَبُ', alt: ['العب', 'ألعب'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَلْعَبُ', alt: ['تلعب'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَلْعَبِينَ', alt: ['تلعبين'] },
+          { label: 'هُوَ (on)', ar: 'يَلْعَبُ', alt: ['يلعب'] },
+          { label: 'هِيَ (ona)', ar: 'تَلْعَبُ', alt: ['تلعب'] },
+        ]
+      },
+      {
+        verb: 'سَبَحَ → يَسْبَحُ', verbBs: 'plivati',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'أَسْبَحُ', alt: ['اسبح', 'أسبح'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَسْبَحُ', alt: ['تسبح'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَسْبَحِينَ', alt: ['تسبحين'] },
+          { label: 'هُوَ (on)', ar: 'يَسْبَحُ', alt: ['يسبح'] },
+          { label: 'هِيَ (ona)', ar: 'تَسْبَحُ', alt: ['تسبح'] },
+        ]
+      },
+      {
+        verb: 'أَكَلَ → يَأْكُلُ', verbBs: 'jesti',
+        forms: [
+          { label: 'أَنَا (ja)', ar: 'آكُلُ', alt: ['اكل', 'آكل'] },
+          { label: 'أَنْتَ (ti m.)', ar: 'تَأْكُلُ', alt: ['تأكل', 'تاكل'] },
+          { label: 'أَنْتِ (ti ž.)', ar: 'تَأْكُلِينَ', alt: ['تأكلين', 'تاكلين'] },
+          { label: 'هُوَ (on)', ar: 'يَأْكُلُ', alt: ['يأكل', 'ياكل'] },
+          { label: 'هِيَ (ona)', ar: 'تَأْكُلُ', alt: ['تأكل', 'تاكل'] },
+        ]
+      },
     ];
 
     function buildPerfekt() {
@@ -1946,6 +2158,80 @@
       document.getElementById('result-perfekt').classList.remove('visible');
     }
 
+    // ─── Prezent build / check / reset ───────────────────────────────────────
+
+    function buildPrezent() {
+      const container = document.getElementById('prezent-exercises');
+      container.innerHTML = '';
+      prezentVerbs.forEach((v, vi) => {
+        const section = document.createElement('div');
+        section.style.marginBottom = '28px';
+        const heading = document.createElement('div');
+        heading.style.cssText = 'margin-bottom:12px;';
+        heading.innerHTML = `
+          <span style="font-family:'Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${v.verb}</span>
+          <span style="font-size:0.85rem;color:#7a8baa;margin-left:10px;">(${v.verbBs})</span>
+        `;
+        section.appendChild(heading);
+        const grid = document.createElement('div');
+        grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;';
+        v.forms.forEach((f, fi) => {
+          const row = document.createElement('div');
+          row.style.cssText = 'background:#131b2e;border:1px solid #1e2a40;border-radius:10px;padding:12px;';
+          row.innerHTML = `
+            <div style="font-size:0.78rem;color:#5a6a88;margin-bottom:6px;">${f.label}</div>
+            <input class="suffix-input" id="pz-${vi}-${fi}" placeholder="..." autocomplete="off" spellcheck="false">
+            <div class="feedback" id="pzfb-${vi}-${fi}" style="margin-top:4px;"></div>
+          `;
+          grid.appendChild(row);
+        });
+        section.appendChild(grid);
+        container.appendChild(section);
+      });
+    }
+
+    function checkAllPrezent() {
+      let ok = 0, total = 0;
+      prezentVerbs.forEach((v, vi) => {
+        v.forms.forEach((f, fi) => {
+          total++;
+          const input = document.getElementById(`pz-${vi}-${fi}`);
+          const fb = document.getElementById(`pzfb-${vi}-${fi}`);
+          const val = input.value.trim();
+          if (!val) return;
+          const accepted = [f.ar, ...f.alt];
+          const isCorrect = accepted.includes(val) || accepted.some(a => normalize(a) === normalize(val));
+          input.classList.remove('correct', 'wrong');
+          fb.classList.remove('correct-msg', 'wrong-msg');
+          if (isCorrect) {
+            input.classList.add('correct');
+            fb.classList.add('correct-msg');
+            fb.textContent = '✓';
+            ok++;
+          } else if (val) {
+            input.classList.add('wrong');
+            fb.classList.add('wrong-msg');
+            fb.textContent = f.ar;
+          }
+        });
+      });
+      const banner = document.getElementById('result-prezent');
+      banner.innerHTML = `Rezultat: <span class="score">${ok} / ${total}</span>`;
+      banner.classList.add('visible');
+    }
+
+    function resetPrezent() {
+      prezentVerbs.forEach((v, vi) => {
+        v.forms.forEach((_, fi) => {
+          const input = document.getElementById(`pz-${vi}-${fi}`);
+          if (input) { input.value = ''; input.classList.remove('correct', 'wrong'); }
+          const fb = document.getElementById(`pzfb-${vi}-${fi}`);
+          if (fb) { fb.textContent = ''; fb.className = 'feedback'; fb.style.marginTop = '4px'; }
+        });
+      });
+      document.getElementById('result-prezent').classList.remove('visible');
+    }
+
     // ─── Init ─────────────────────────────────────────────────────────────────
 
     buildBsAr();
@@ -1957,6 +2243,7 @@
     buildZs();
     buildKlas();
     buildPerfekt();
+    buildPrezent();
     buildQuiz();
     updateScore();
   </script>
