@@ -229,6 +229,42 @@
       border-color: #3b82f6;
     }
 
+    /* Print: skrij navigaciju, footer i strelice za toggle — ostavlja samo sadržaj za PDF */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .nav,
+      .footer-nav {
+        display: none !important;
+      }
+      .lesson {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        padding: 16px;
+      }
+      .lesson-header {
+        cursor: default;
+        padding-right: 0;
+        margin-bottom: 14px;
+        padding-bottom: 8px;
+      }
+      .lesson-header h2::after {
+        display: none;
+      }
+      .sub-section {
+        margin-bottom: 16px;
+      }
+      /* Forsiraj prikaz svih sekcija pri printanju */
+      .lesson.collapsed .lesson-body,
+      .lesson-body.collapsed {
+        max-height: none !important;
+        opacity: 1 !important;
+      }
+    }
+
     .lesson-body {
       overflow: hidden;
       transition: max-height 0.3s ease, opacity 0.3s ease;

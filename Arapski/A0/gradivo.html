@@ -392,6 +392,40 @@
             background: #dbeafe;
             border-color: #3b82f6;
         }
+
+        /* Print: skrij navigaciju i footer — ostavlja samo sadržaj za PDF */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .nav,
+            footer {
+                display: none !important;
+            }
+            .section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                margin-bottom: 12px;
+                padding: 16px;
+            }
+            .section h2 {
+                cursor: default;
+                padding-right: 0;
+                margin-bottom: 14px;
+                padding-bottom: 8px;
+            }
+            .section h2::after {
+                display: none;
+            }
+            /* Forsiraj prikaz svih sekcija pri printanju (čak i ako su collapsed) */
+            .section.collapsed .section-content,
+            .section-content.collapsed {
+                max-height: none !important;
+                opacity: 1 !important;
+                margin-top: revert !important;
+            }
+        }
     </style>
 </head>
 
