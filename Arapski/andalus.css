@@ -34,7 +34,7 @@ body {
 .page { max-width: 1280px; margin: 0 auto; }
 
 .serif { font-family: 'Fraunces', 'Times New Roman', serif; font-feature-settings: 'ss01' on; }
-.arabic { font-family: 'Amiri', 'Noto Naskh Arabic', 'Times New Roman', serif; direction: rtl; }
+.arabic { font-family: 'Noto Naskh Arabic', 'Amiri', 'Times New Roman', serif; direction: rtl; }
 .mono { font-family: 'JetBrains Mono', monospace; }
 
 /* ============================================================
@@ -53,7 +53,7 @@ body {
   background: var(--emerald);
   color: var(--paper);
   border-radius: 8px;
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 22px;
   line-height: 1;
   padding-bottom: 2px;
@@ -260,7 +260,7 @@ body {
   pointer-events: none;
 }
 .arabic-word {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 96px;
   line-height: 1.4;
   color: var(--emerald);
@@ -329,7 +329,7 @@ body {
   max-width: 540px;
 }
 .inner-arabic {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 88px;
   color: var(--terracotta);
   direction: rtl;
@@ -421,7 +421,7 @@ body {
 }
 .level-card.soon .level-card-code { color: var(--ink-3); }
 .level-card-arabic {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 14px;
   color: var(--terracotta);
   opacity: 0.8;
@@ -602,7 +602,7 @@ body {
   flex-wrap: wrap;
 }
 .footer-arabic {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 14px;
   direction: rtl;
   color: var(--ink-2);
@@ -663,7 +663,7 @@ body {
 }
 .toc-label { flex: 1; padding: 0 8px; }
 .toc-arabic-mini {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 13px;
   color: var(--terracotta);
   direction: rtl;
@@ -697,7 +697,7 @@ body {
   display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
 }
 .doc-section-title-ar {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 24px;
   color: var(--terracotta);
   direction: rtl;
@@ -782,14 +782,16 @@ body {
 .tbl tbody tr:last-child td { border-bottom: none; }
 .tbl tbody tr:hover { background: var(--paper); }
 .tbl .ar {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 22px;
   color: var(--emerald);
   direction: rtl;
   text-align: right;
   font-weight: 400;
   line-height: 1.5;
+  white-space: nowrap;
 }
+.tbl thead th, .tbl tbody td { white-space: nowrap; }
 .tbl .translit {
   font-family: 'Fraunces', serif;
   font-style: italic;
@@ -804,7 +806,7 @@ body {
   background: var(--emerald);
   color: var(--paper);
   border-radius: 6px;
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 20px;
   direction: rtl;
   font-weight: 400;
@@ -850,7 +852,7 @@ body {
 .callout strong { color: var(--ink); }
 .callout .ar-inline,
 .ar-inline {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 18px;
   color: var(--emerald);
   direction: rtl;
@@ -979,14 +981,14 @@ body {
   line-height: 1.2;
 }
 .vj-prompt.ar {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   direction: rtl;
   text-align: right;
   color: var(--emerald);
   font-size: 26px;
 }
 .vj-input {
-  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 22px;
   padding: 12px 18px;
   border: 1px solid var(--rule);
@@ -1139,7 +1141,7 @@ body {
   flex-wrap: wrap;
 }
 .vok-cat-title-ar {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 20px;
   color: var(--terracotta);
   direction: rtl;
@@ -1170,7 +1172,7 @@ body {
 .vok-card:hover { border-color: var(--emerald); }
 .vok-card.learned { opacity: 0.6; background: var(--paper); }
 .vok-word-ar {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 28px;
   color: var(--emerald);
   direction: rtl;
@@ -1246,7 +1248,7 @@ body {
   display: flex; flex-direction: column; justify-content: center; gap: 16px;
 }
 .quiz-card .ar {
-  font-family: 'Amiri', serif;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   font-size: 56px;
   color: var(--emerald);
   direction: rtl;
