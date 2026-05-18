@@ -245,21 +245,17 @@
       display: none;
     }
 
-    /* Print: skrij navigaciju, footer i strelice za toggle — ostavlja samo sadržaj za PDF */
+    /* Print: knjiški režim za PDF export */
     @media print {
-      body {
-        background: #fff;
-        padding: 0;
-      }
-      .nav,
-      .footer-nav {
-        display: none !important;
-      }
+      body { background: #fff; padding: 0; font-size: 11pt; }
+      .nav, .footer-nav { display: none !important; }
       .lesson {
         box-shadow: none;
         border: 1px solid #ddd;
         margin-bottom: 12px;
         padding: 16px;
+        page-break-inside: avoid;
+        break-inside: avoid;
       }
       .lesson-header {
         cursor: default;
@@ -267,18 +263,26 @@
         margin-bottom: 14px;
         padding-bottom: 8px;
       }
-      .lesson-header h2::after {
-        display: none;
-      }
-      .sub-section {
-        margin-bottom: 16px;
-      }
-      /* Forsiraj prikaz svih sekcija pri printanju */
+      .lesson-header h2::after { display: none; }
+      .sub-section { margin-bottom: 16px; }
+      /* Forsiraj prikaz svih sekcija pri printanju (ignoriraj collapsed) */
       .lesson.collapsed .lesson-body,
       .lesson-body.collapsed {
         max-height: none !important;
         opacity: 1 !important;
       }
+      /* Tabele: zaglavlja se ponavljaju na sljedećoj strani, redovi ne lome */
+      table { page-break-inside: auto; }
+      tr { page-break-inside: avoid; page-break-after: auto; }
+      thead { display: table-header-group; }
+      /* h2/h3 ne ostaju sami na dnu strane */
+      h2, h3 { page-break-after: avoid; }
+      /* H1 — tamna boja umjesto gradient (ne renderira se na papiru dobro) */
+      h1 { -webkit-text-fill-color: #1e40af; color: #1e40af; background: none; }
+      /* Linkovi crni za papir */
+      a { color: #000; text-decoration: none; }
+      /* A4 stranica s margina za korice/uvez */
+      @page { size: A4; margin: 1.5cm 1.2cm; }
     }
 
     .lesson-body {
