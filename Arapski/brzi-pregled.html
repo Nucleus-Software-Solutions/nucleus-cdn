@@ -4,2070 +4,1239 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arapski — Brzi pregled gramatike</title>
+  <title>Brzi pregled gramatike — Arapski jezik</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-      color: #2d3748;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #2563eb, #059669);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #64748b;
-      margin-bottom: 32px;
-      font-size: 0.95rem;
-    }
-
-    /* Nav chips */
-    .nav {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-
-    .nav-links a {
-      color: #1e40af;
-      text-decoration: none;
-      padding: 5px 12px;
-      border-radius: 5px;
-      background: #eff6ff;
-      transition: all 0.3s;
-      font-size: 0.9em;
-      border: 1px solid #bfdbfe;
-    }
-
-    .nav-links a:hover {
-      background: #dbeafe;
-      border-color: #3b82f6;
-    }
-
-    .toggle-all-btn,
-    .toggle-nav-btn {
-      padding: 6px 18px;
-      border: 1px solid #bfdbfe;
-      border-radius: 5px;
-      background: #eff6ff;
-      color: #1e40af;
-      font-size: 0.9em;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .toggle-all-btn:hover,
-    .toggle-nav-btn:hover {
-      background: #dbeafe;
-      border-color: #3b82f6;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .nav-links.collapsed {
-      display: none;
-    }
-
-    /* Print: knjiški režim za PDF export */
-    @media print {
-      body { background: #fff; padding: 0; font-size: 11pt; }
-      .nav, .footer-nav { display: none !important; }
-      .lesson {
-        box-shadow: none;
-        border: 1px solid #ddd;
-        margin-bottom: 12px;
-        padding: 16px;
-        }
-      .lesson-header {
-        cursor: default;
-        padding-right: 0;
-        margin-bottom: 14px;
-        padding-bottom: 8px;
-      }
-      .lesson-header h2::after { display: none; }
-      .sub-section { margin-bottom: 16px; }
-      .lesson.collapsed .lesson-body,
-      .lesson-body.collapsed {
-        max-height: none !important;
-        opacity: 1 !important;
-      }
-      table { page-break-inside: auto; }
-      tr { page-break-inside: avoid; page-break-after: auto; }
-      thead { display: table-header-group; }
-      h2, h3 { page-break-after: avoid; }
-      h1 { -webkit-text-fill-color: #1e40af; color: #1e40af; background: none; }
-      a { color: #000; text-decoration: none; }
-      @page { size: A4; margin: 1.5cm 1.2cm; }
-    }
-
-    /* Lesson / section cards */
-    .lesson {
-      background: #fff;
-      border-radius: 16px;
-      padding: 28px;
-      margin-bottom: 28px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-    }
-
-    .lesson-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border-bottom: 2px solid #3b82f6;
-      padding-bottom: 12px;
-      margin-bottom: 24px;
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-      padding-right: 40px;
-    }
-
-    .lesson-header h2 {
-      color: #1e40af;
-      font-size: 1.35rem;
-    }
-
-    .lesson-header h2::after {
-      content: '▼';
-      position: absolute;
-      right: 10px;
-      transition: transform 0.3s ease;
-      font-size: 0.8em;
-      color: #3b82f6;
-    }
-
-    .lesson.collapsed .lesson-header h2::after {
-      transform: rotate(-90deg);
-    }
-
-    .lesson-header h2:hover {
-      color: #2563eb;
-    }
-
-    .lesson-body {
-      overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-      max-height: 50000px;
-      opacity: 1;
-    }
-
-    .lesson-body.collapsed {
-      max-height: 0;
-      opacity: 0;
-    }
-
-    /* Sub-sections */
-    .sub-section {
-      margin-bottom: 28px;
-    }
-
-    .sub-section h3 {
-      color: #059669;
-      font-size: 1.05rem;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .sub-section h3::before {
-      content: '';
-      display: inline-block;
-      width: 4px;
-      height: 18px;
-      background: #059669;
-      border-radius: 2px;
-    }
-
-    /* Level tags */
-    .level-tag {
-      display: inline-block;
-      font-size: 0.65rem;
-      padding: 2px 7px;
-      border-radius: 10px;
-      margin-left: 6px;
-      font-weight: 700;
-      vertical-align: middle;
-    }
-
-    .level-tag.a0 {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .level-tag.a1 {
-      background: #dbeafe;
-      color: #1e40af;
-    }
-
-    /* Arabic text */
-    .ar {
-      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
-      font-size: 1.7em;
-      direction: rtl;
-      color: #1e40af;
-      line-height: 1.4;
-    }
-
-    .ar-sm {
-      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
-      font-size: 1.3em;
-      direction: rtl;
-      color: #1e40af;
-    }
-
-    /* Tables */
-    .table-wrap {
-      overflow-x: auto;
-      margin: 10px 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 400px;
-    }
-
-    th,
-    td {
-      padding: 12px;
-      text-align: center;
-      border: 1px solid #e2e8f0;
-    }
-
-    th {
-      background: #eff6ff;
-      color: #1e40af;
-      font-weight: 600;
-    }
-
-    td {
-      font-size: 0.92rem;
-      vertical-align: middle;
-    }
-
-    tr:hover td {
-      background: #f8fafc;
-    }
-
-    /* Info box */
-    .info-box {
-      background: #fefce8;
-      border: 1px solid #fde047;
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin: 14px 0;
-      font-size: 0.88rem;
-      color: #713f12;
-      line-height: 1.6;
-    }
-
-    .info-box strong {
-      color: #92400e;
-    }
-
-    /* Rule box */
-    .rule-box {
-      background: #f0fdf4;
-      border: 1px solid #86efac;
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin: 14px 0;
-      font-size: 0.9rem;
-      color: #14532d;
-      line-height: 1.5;
-    }
-
-    .rule-box strong {
-      color: #059669;
-    }
-
-    .rule-ar {
-      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
-      font-size: 1.5em;
-      direction: rtl;
-      color: #059669;
-    }
-
-    /* Footer nav */
-    .footer-nav {
-      text-align: center;
-      margin-top: 40px;
-      padding: 16px;
-      border-top: 1px solid #e2e8f0;
-    }
-
-    .footer-nav a {
-      margin: 0 12px;
-      color: #3b82f6;
-      text-decoration: none;
-      font-size: 0.88rem;
-    }
-
-    .footer-nav a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 600px) {
-      table {
-        min-width: 320px;
-      }
-
-      .lesson {
-        padding: 18px;
-      }
-
-      .ar {
-        font-size: 1.4em;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="andalus.css">
 </head>
 
 <body>
-  <div class="container">
-    <h1>📋 Brzi pregled gramatike</h1>
-    <p class="subtitle">Ključne tabele iz A0 i A1 kursa — na jednom mjestu</p>
+  <div class="page">
 
-    <nav class="nav">
-      <div class="nav-links collapsed">
-        <a href="#licne-zamjenice">Lične zamjenice</a>
-        <a href="#prisvojni-sufiksi">Prisvojni sufiksi</a>
-        <a href="#pokazne-zamjenice">Pokazne zamjenice</a>
-        <a href="#upitne-cestice">Upitne čestice</a>
-        <a href="#prijedlozi">Prijedlozi</a>
-        <a href="#prijedlozi-sufiksi">Prijedlozi + sufiksi</a>
-        <a href="#imenska-recenica">Imenska rečenica</a>
-        <a href="#suncana-mjeseceva">Sunčana / Mjesečeva</a>
-        <a href="#brojevi">Brojevi 0–10</a>
-        <a href="#atribut-predikat">Atribut vs. predikat</a>
-        <a href="#upitne-rijeci-prosireno">Upitne riječi (prošireno)</a>
-        <a href="#genitivna-veza-bp">Genitivna veza (الإضافة)</a>
-        <a href="#perfekt-bp">Perfekt (الْمَاضِي)</a>
-        <a href="#prezent-bp">Prezent (الْمُضَارِع)</a>
-        <a href="#imenice-produzene-bp">Imenice produžene dekl.</a>
-        <a href="#imati-nemati-bp">Imati / nemati (لِي)</a>
-        <a href="#dvojina-bp">Dvojina (ـَانِ)</a>
-        <a href="#pravilna-mnozina-bp">Pravilna množina m.r. / ž.r.</a>
-        <a href="#brojanje-bp">Brojanje predmeta 1–10</a>
-        <a href="vokabular.html">Vokabular</a>
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <div class="brand-mark">ع</div>
+        <div>
+          <div class="brand-name">Arapski jezik</div>
+          <div class="brand-sub">Kurs · 7 nivoa</div>
+        </div>
+      </a>
+
+      <nav class="nav">
         <a href="index.html">Početna</a>
+
+        <div class="nav-dropdown" id="levelsDropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Nivoi
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 4.5L6 7.5L9 4.5" />
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-head">Svi nivoi kursa</div>
+            <a class="nav-dropdown-item" href="A0/index.html">
+              <span class="nav-dropdown-code">A0</span>
+              <span class="nav-dropdown-title">Osnove</span><span></span>
+            </a>
+            <a class="nav-dropdown-item" href="A1/index.html">
+              <span class="nav-dropdown-code">A1</span>
+              <span class="nav-dropdown-title">Lekcije</span><span></span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A2</span>
+              <span class="nav-dropdown-title">Glagolski sistem</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A3</span>
+              <span class="nav-dropdown-title">Buduće vrijeme</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A4</span>
+              <span class="nav-dropdown-title">Složene rečenice</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A5</span>
+              <span class="nav-dropdown-title">Tekstovi</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A6</span>
+              <span class="nav-dropdown-title">Akademski jezik</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="vokabular.html">Vokabular</a>
+        <a href="brzi-pregled.html" class="active">Gramatika</a>
+      </nav>
+
+      <a class="btn btn-ghost btn-sm" href="A0/index.html">Nastavi učiti</a>
+      <button class="btn btn-ghost btn-sm menu-btn" type="button" aria-label="Meni">☰</button>
+    </header>
+
+    <div class="breadcrumb">
+      <a href="index.html">← Početna</a>
+      <span>·</span>
+      <span>Brzi pregled gramatike</span>
+    </div>
+
+    <section class="inner-hero">
+      <div>
+        <div class="level-badge">Referenca · A0 + A1</div>
+        <h1 class="serif">Brzi pregled gramatike</h1>
+        <p>Ključne tabele iz A0 i A1 kursa — zamjenice, sufiksi, prijedlozi, brojevi i ostalo, sve na jednom mjestu.</p>
       </div>
-      <div class="nav-buttons">
-        <button class="toggle-nav-btn" id="toggleNavBtn" onclick="toggleNav()">▼ Prikaži navigaciju</button>
-        <button class="toggle-all-btn" id="toggleAllBtn" onclick="toggleAllSections()">▲ Skupi sve sekcije</button>
+      <div class="inner-arabic">مَرْجِع</div>
+    </section>
+
+    <div style="padding: 20px 56px 0; text-align: right;">
+      <button class="toggle-all-btn" onclick="toggleAllSections()">▼ Skupi sve</button>
+    </div>
+
+    <div class="doc-layout">
+      <aside class="toc">
+        <h3 class="toc-title">Sadržaj</h3>
+        <ul class="toc-list">
+          <li><a href="#licne-zamjenice"><span class="toc-num">§01</span><span class="toc-label">Lične zamjenice</span><span class="toc-arabic-mini">الضَّمَائِر</span></a></li>
+          <li><a href="#prisvojni-sufiksi"><span class="toc-num">§02</span><span class="toc-label">Prisvojni sufiksi</span><span class="toc-arabic-mini">الْمُتَّصِلَة</span></a></li>
+          <li><a href="#pokazne-zamjenice"><span class="toc-num">§03</span><span class="toc-label">Pokazne zamjenice</span><span class="toc-arabic-mini">الْإِشَارَة</span></a></li>
+          <li><a href="#upitne-cestice"><span class="toc-num">§04</span><span class="toc-label">Upitne čestice</span><span class="toc-arabic-mini">الِاسْتِفْهَام</span></a></li>
+          <li><a href="#prijedlozi"><span class="toc-num">§05</span><span class="toc-label">Prijedlozi</span><span class="toc-arabic-mini">الْجَرّ</span></a></li>
+          <li><a href="#prijedlozi-sufiksi"><span class="toc-num">§06</span><span class="toc-label">Prijedlozi + sufiksi</span><span class="toc-arabic-mini">لِي</span></a></li>
+          <li><a href="#imenska-recenica"><span class="toc-num">§07</span><span class="toc-label">Imenska rečenica</span><span class="toc-arabic-mini">الِاسْمِيَّة</span></a></li>
+          <li><a href="#suncana-mjeseceva"><span class="toc-num">§08</span><span class="toc-label">Sunčana / Mjesečeva</span><span class="toc-arabic-mini">الـ</span></a></li>
+          <li><a href="#brojevi"><span class="toc-num">§09</span><span class="toc-label">Brojevi 0–10</span><span class="toc-arabic-mini">الْأَعْدَاد</span></a></li>
+          <li><a href="#atribut-predikat"><span class="toc-num">§10</span><span class="toc-label">Atribut vs. predikat</span><span class="toc-arabic-mini">الْوَصْف</span></a></li>
+          <li><a href="#upitne-rijeci-prosireno"><span class="toc-num">§11</span><span class="toc-label">Upitne riječi (prošireno)</span><span class="toc-arabic-mini">الِاسْتِفْهَام</span></a></li>
+          <li><a href="#genitivna-veza-bp"><span class="toc-num">§12</span><span class="toc-label">Genitivna veza</span><span class="toc-arabic-mini">الإضافة</span></a></li>
+          <li><a href="#perfekt-bp"><span class="toc-num">§13</span><span class="toc-label">Perfekt</span><span class="toc-arabic-mini">الْمَاضِي</span></a></li>
+          <li><a href="#prezent-bp"><span class="toc-num">§14</span><span class="toc-label">Prezent</span><span class="toc-arabic-mini">الْمُضَارِع</span></a></li>
+          <li><a href="#imenice-produzene-bp"><span class="toc-num">§15</span><span class="toc-label">Imenice produžene dekl.</span><span class="toc-arabic-mini">السِّتَّة</span></a></li>
+          <li><a href="#imati-nemati-bp"><span class="toc-num">§16</span><span class="toc-label">Imati / nemati</span><span class="toc-arabic-mini">لِي</span></a></li>
+          <li><a href="#dvojina-bp"><span class="toc-num">§17</span><span class="toc-label">Dvojina</span><span class="toc-arabic-mini">الْمُثَنَّى</span></a></li>
+          <li><a href="#pravilna-mnozina-bp"><span class="toc-num">§18</span><span class="toc-label">Pravilna množina</span><span class="toc-arabic-mini">السَّالِم</span></a></li>
+          <li><a href="#brojanje-bp"><span class="toc-num">§19</span><span class="toc-label">Brojanje predmeta 1–10</span><span class="toc-arabic-mini">١–١٠</span></a></li>
+        </ul>
+      </aside>
+
+      <div class="doc-body">
+
+        <!-- §01 Lične zamjenice -->
+        <section class="doc-section" id="licne-zamjenice">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§01 · Lične zamjenice</span>
+              <span class="doc-section-title-ar">الضَّمَائِرُ الْمُنْفَصِلَة</span>
+              <span class="level-pills">
+                <span class="level-pill">A0</span>
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Rastavljene zamjenice</h3>
+              <p class="doc-subsection-lede">Samostalne zamjenice — koriste se kao subjekat u rečenici.</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Transliteracija</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">أَنَا</td><td class="translit">anā</td><td class="bs">ja</td></tr>
+                    <tr><td class="ar">أَنْتَ</td><td class="translit">anta</td><td class="bs">ti (m.r.)</td></tr>
+                    <tr><td class="ar">أَنْتِ</td><td class="translit">anti</td><td class="bs">ti (ž.r.)</td></tr>
+                    <tr><td class="ar">هُوَ</td><td class="translit">huwa</td><td class="bs">on</td></tr>
+                    <tr><td class="ar">هِيَ</td><td class="translit">hiya</td><td class="bs">ona</td></tr>
+                    <tr><td colspan="3" class="meta" style="text-align:center; font-weight:600; letter-spacing:0.5px;">— MNOŽINA —</td></tr>
+                    <tr><td class="ar">نَحْنُ</td><td class="translit">naḥnu</td><td class="bs">mi (m. i ž.)</td></tr>
+                    <tr><td class="ar">أَنْتُمْ</td><td class="translit">antum</td><td class="bs">vi (m.r.)</td></tr>
+                    <tr><td class="ar">أَنْتُنَّ</td><td class="translit">antunna</td><td class="bs">vi (ž.r.)</td></tr>
+                    <tr><td class="ar">هُمْ</td><td class="translit">hum</td><td class="bs">oni (m.r.)</td></tr>
+                    <tr><td class="ar">هُنَّ</td><td class="translit">hunna</td><td class="bs">one (ž.r.)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-note">
+                <div class="callout-label">ⓘ Napomena</div>
+                <div>Mješovita grupa (m. + ž.) koristi <span class="ar-inline">أَنْتُمْ</span> / <span class="ar-inline">هُمْ</span> (m.r.). <span class="ar-inline">نَحْنُ</span> nema razlike po rodu.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §02 Prisvojni sufiksi -->
+        <section class="doc-section" id="prisvojni-sufiksi">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§02 · Prisvojni sufiksi (spojene zamjenice)</span>
+              <span class="doc-section-title-ar">الضَّمَائِرُ الْمُتَّصِلَة</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Tabela sufiksa</h3>
+              <div class="callout callout-note">
+                <div class="callout-label">ⓘ Napomena</div>
+                <div>Dodaju se direktno na imenice, prijedloge ili glagole. <strong>Tanvin se briše</strong> prije dodavanja sufiksa.</div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Bosanski</th>
+                      <th>Sufiks</th>
+                      <th>كِتَاب (knjiga)</th>
+                      <th>قَلَم (olovka)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">moj/a/e</td><td class="suffix-cell">ـي</td><td class="ar">كِتَابِي</td><td class="ar">قَلَمِي</td></tr>
+                    <tr><td class="bs">tvoj/a/e (m.r.)</td><td class="suffix-cell">ـكَ</td><td class="ar">كِتَابُكَ</td><td class="ar">قَلَمُكَ</td></tr>
+                    <tr><td class="bs">tvoj/a/e (ž.r.)</td><td class="suffix-cell">ـكِ</td><td class="ar">كِتَابُكِ</td><td class="ar">قَلَمُكِ</td></tr>
+                    <tr><td class="bs">njegov/a/e</td><td class="suffix-cell">ـهُ / ـهِ</td><td class="ar">كِتَابُهُ</td><td class="ar">قَلَمُهُ</td></tr>
+                    <tr><td class="bs">njen/a/o</td><td class="suffix-cell">ـهَا</td><td class="ar">كِتَابُهَا</td><td class="ar">قَلَمُهَا</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §03 Pokazne zamjenice -->
+        <section class="doc-section" id="pokazne-zamjenice">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§03 · Pokazne zamjenice</span>
+              <span class="doc-section-title-ar">أَسْمَاءُ الْإِشَارَة</span>
+              <span class="level-pills">
+                <span class="level-pill">A0</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Osnovni oblici</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Transliteracija</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">هَذَا</td><td class="translit">hāḏā</td><td class="bs">ovaj, ovo (m.r.)</td></tr>
+                    <tr><td class="ar">هَذِهِ</td><td class="translit">hāḏihi</td><td class="bs">ova, ovo (ž.r.)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-note">
+                <div class="callout-label">ⓘ Upotreba</div>
+                <div>
+                  <strong>Atributivna sintagma:</strong> <span class="ar-inline">هَذَا الْكِتَابُ</span> = ova knjiga<br>
+                  <strong>Prosta rečenica:</strong> <span class="ar-inline">هَذَا كِتَابٌ</span> = Ovo je knjiga<br>
+                  <strong>Proširena:</strong> <span class="ar-inline">هَذَا الْكِتَابُ مُفِيدٌ</span> = Ova knjiga je korisna
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §04 Upitne čestice -->
+        <section class="doc-section" id="upitne-cestice">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§04 · Upitne čestice i zamjenice</span>
+              <span class="doc-section-title-ar">أَدَوَاتُ الِاسْتِفْهَام</span>
+              <span class="level-pills">
+                <span class="level-pill">A0</span>
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Najčešće upitne riječi</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Transliteracija</th>
+                      <th>Bosanski</th>
+                      <th>Primjer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">مَا</td><td class="translit">mā</td><td class="bs">šta</td><td class="ar">مَا اسْمُكَ؟</td></tr>
+                    <tr><td class="ar">مَنْ</td><td class="translit">man</td><td class="bs">ko</td><td class="ar">مَنْ هَذَا؟</td></tr>
+                    <tr><td class="ar">هَلْ</td><td class="translit">hal</td><td class="bs">da li</td><td class="ar">هَلْ أَنْتَ طَالِبٌ؟</td></tr>
+                    <tr><td class="ar">أَ ـ</td><td class="translit">a-</td><td class="bs">da li (= هَلْ, kraći oblik)</td><td class="ar">أَأَنْتَ فَتَحْتَ النَّافِذَةَ؟</td></tr>
+                    <tr><td class="ar">أَيْنَ</td><td class="translit">ayna</td><td class="bs">gdje</td><td class="ar">أَيْنَ تَعْمَلُ؟</td></tr>
+                    <tr><td class="ar">كَيْفَ</td><td class="translit">kayfa</td><td class="bs">kako</td><td class="ar">كَيْفَ حَالُكَ؟</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §05 Prijedlozi -->
+        <section class="doc-section" id="prijedlozi">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§05 · Prijedlozi</span>
+              <span class="doc-section-title-ar">حُرُوفُ الْجَرّ</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Razdvojeni prijedlozi</h3>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div>Imenica iza prijedloga <strong>uvijek</strong> ide u genitiv (مَجْرُور) — kasra <span class="ar-inline">ـِ</span> ili kasratan <span class="ar-inline">ـٍ</span>.</div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Transliteracija</th>
+                      <th>Bosanski</th>
+                      <th>Primjer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">فِي</td><td class="translit">fī</td><td class="bs">u</td><td class="ar">فِي الْبَيْتِ</td></tr>
+                    <tr><td class="ar">مِنْ</td><td class="translit">min</td><td class="bs">iz, od</td><td class="ar">مِنْ مَدِينَةٍ</td></tr>
+                    <tr><td class="ar">إِلَى</td><td class="translit">ilā</td><td class="bs">do, ka, prema</td><td class="ar">إِلَى الْمَدْرَسَةِ</td></tr>
+                    <tr><td class="ar">عَلَى</td><td class="translit">'alā</td><td class="bs">na</td><td class="ar">عَلَى طَاوِلَةٍ</td></tr>
+                    <tr><td class="ar">مَعَ</td><td class="translit">ma'a</td><td class="bs">s, sa</td><td class="ar">مَعَ الْأَبِ</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Spojeni prijedlozi (pišu se uz riječ)</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Transliteracija</th>
+                      <th>Bosanski</th>
+                      <th>Neodređeno</th>
+                      <th>Određeno</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">بِـ</td><td class="translit">bi-</td><td class="bs">s, sa (sredstvo)</td><td class="ar">بِقِطَارٍ</td><td class="ar">بِالْقِطَارِ</td></tr>
+                    <tr><td class="ar">لِـ</td><td class="translit">li-</td><td class="bs">za</td><td class="ar">لِأُمٍّ</td><td class="ar">لِلْأُمِّ</td></tr>
+                    <tr><td class="ar">كَـ</td><td class="translit">ka-</td><td class="bs">kao, poput</td><td class="ar">كَأُخْتٍ</td><td class="ar">كَالْأُخْتِ</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div><span class="ar-inline">لِـ + الـ → لِلْـ</span> (elif se briše, ostaje samo لِلْـ).</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §06 Prijedlozi + sufiksi -->
+        <section class="doc-section" id="prijedlozi-sufiksi">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§06 · Prijedlozi sa zamjeničkim sufiksima</span>
+              <span class="doc-section-title-ar">لِي · مِنِّي · مَعَهُ</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Sklonidba glavnih prijedloga</h3>
+              <div class="callout callout-note">
+                <div class="callout-label">ⓘ Napomena</div>
+                <div>Prijedlog + zamjenički sufiks = prijedložni izraz (npr. <strong>لِي</strong> = za mene).</div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Lice</th>
+                      <th>فِي</th>
+                      <th>مِنْ</th>
+                      <th>لِـ</th>
+                      <th>مَعَ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">ja</td><td class="ar">فِيَّ</td><td class="ar">مِنِّي</td><td class="ar">لِي</td><td class="ar">مَعِي</td></tr>
+                    <tr><td class="bs">ti (m.)</td><td class="ar">فِيكَ</td><td class="ar">مِنْكَ</td><td class="ar">لَكَ</td><td class="ar">مَعَكَ</td></tr>
+                    <tr><td class="bs">ti (ž.)</td><td class="ar">فِيكِ</td><td class="ar">مِنْكِ</td><td class="ar">لَكِ</td><td class="ar">مَعَكِ</td></tr>
+                    <tr><td class="bs">on</td><td class="ar">فِيهِ</td><td class="ar">مِنْهُ</td><td class="ar">لَهُ</td><td class="ar">مَعَهُ</td></tr>
+                    <tr><td class="bs">ona</td><td class="ar">فِيهَا</td><td class="ar">مِنْهَا</td><td class="ar">لَهَا</td><td class="ar">مَعَهَا</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §07 Imenska rečenica -->
+        <section class="doc-section" id="imenska-recenica">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§07 · Imenska rečenica</span>
+              <span class="doc-section-title-ar">الْجُمْلَةُ الِاسْمِيَّة</span>
+              <span class="level-pills">
+                <span class="level-pill">A0</span>
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Pridjevski predikat</h3>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div><strong>Subjekat</strong> (مُبْتَدَأ) = određen (sa الـ ili prisvojnim sufiksom). <strong>Predikat</strong> (خَبَر) = neodređen (sa tanvinom). Glagol „je/su" se <strong>ne piše</strong>.</div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Bosanski</th>
+                      <th>Struktura</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">اَلْبَيْتُ كَبِيرٌ</td><td class="bs">Kuća je velika.</td><td class="meta">subjekat (odr.) + pridjev (neodr.)</td></tr>
+                    <tr><td class="ar">بَيْتُكَ كَبِيرٌ</td><td class="bs">Tvoja kuća je velika.</td><td class="meta">subjekat (prisv.) + pridjev (neodr.)</td></tr>
+                    <tr><td class="ar">بَيْتِي كَبِيرٌ</td><td class="bs">Moja kuća je velika.</td><td class="meta">subjekat (prisv.) + pridjev (neodr.)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Prijedložni predikat</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">اَلْبَيْتُ فِي مَدِينَةٍ</td><td class="bs">Kuća je u gradu.</td></tr>
+                    <tr><td class="ar">اَلْأُمُّ فِي مَطْبَخٍ</td><td class="bs">Majka je u kuhinji.</td></tr>
+                    <tr><td class="ar">اَلْأَخُ الْكَبِيرُ مَعَ الْأَبِ</td><td class="bs">Veliki brat je s ocem.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §08 Sunčana / mjesečeva slova -->
+        <section class="doc-section" id="suncana-mjeseceva">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§08 · Sunčana i mjesečeva slova</span>
+              <span class="doc-section-title-ar">الـ (التَّعْرِيف)</span>
+              <span class="level-pills">
+                <span class="level-pill">A0</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Sunčana slova (14): ت ث د ذ ر ز س ش ص ض ط ظ ل ن</h3>
+              <div class="callout callout-note">
+                <div class="callout-label">ⓘ Razlika</div>
+                <div>
+                  <strong>Sunčana slova (شَمْسِيَّة):</strong> LAM se ne izgovara, prvo slovo se udvostručuje (šedda).<br>
+                  <strong>Mjesečeva slova (قَمَرِيَّة):</strong> LAM se izgovara normalno.
+                </div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Bez الـ</th>
+                      <th>Sa الـ</th>
+                      <th>Izgovor</th>
+                      <th>Značenje</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">شَمْسٌ</td><td class="ar">الشَّمْسُ</td><td class="translit">aš-šams</td><td class="bs">sunce</td></tr>
+                    <tr><td class="ar">نُورٌ</td><td class="ar">النُّورُ</td><td class="translit">an-nūru</td><td class="bs">svjetlo</td></tr>
+                    <tr><td class="ar">سَلَامٌ</td><td class="ar">السَّلَامُ</td><td class="translit">as-salāmu</td><td class="bs">mir</td></tr>
+                    <tr><td class="ar">دَرْسٌ</td><td class="ar">الدَّرْسُ</td><td class="translit">ad-darsu</td><td class="bs">lekcija</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Mjesečeva slova (14): ا ب ج ح خ ع غ ف ق ك م ه و ي</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Bez الـ</th>
+                      <th>Sa الـ</th>
+                      <th>Izgovor</th>
+                      <th>Značenje</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">قَمَرٌ</td><td class="ar">الْقَمَرُ</td><td class="translit">al-qamaru</td><td class="bs">mjesec</td></tr>
+                    <tr><td class="ar">بَيْتٌ</td><td class="ar">الْبَيْتُ</td><td class="translit">al-bajtu</td><td class="bs">kuća</td></tr>
+                    <tr><td class="ar">كِتَابٌ</td><td class="ar">الْكِتَابُ</td><td class="translit">al-kitābu</td><td class="bs">knjiga</td></tr>
+                    <tr><td class="ar">مَاءٌ</td><td class="ar">الْمَاءُ</td><td class="translit">al-māʾu</td><td class="bs">voda</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §09 Brojevi 0-10 -->
+        <section class="doc-section" id="brojevi">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§09 · Brojevi 0–10</span>
+              <span class="doc-section-title-ar">الْأَعْدَاد</span>
+              <span class="level-pills">
+                <span class="level-pill">A0</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Tabela brojeva</h3>
+              <div class="callout callout-important">
+                <div class="callout-label">! Pažnja</div>
+                <div>Brojevi 3–10 imaju <strong>obrnuto rodno slaganje</strong> — muški oblik za ženske imenice i obrnuto.</div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>M.R.</th>
+                      <th>Ž.R.</th>
+                      <th>Transliteracija</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">0</td><td class="ar">صِفْرٌ</td><td class="ar">صِفْرٌ</td><td class="translit">ṣifr</td><td class="bs">nula</td></tr>
+                    <tr><td class="bs">1</td><td class="ar">وَاحِدٌ</td><td class="ar">وَاحِدَةٌ</td><td class="translit">wāḥid / wāḥida</td><td class="bs">jedan/jedna</td></tr>
+                    <tr><td class="bs">2</td><td class="ar">اِثْنَانِ</td><td class="ar">اِثْنَتَانِ</td><td class="translit">iṯnāni / iṯnatāni</td><td class="bs">dva/dvije</td></tr>
+                    <tr><td class="bs">3</td><td class="ar">ثَلَاثٌ</td><td class="ar">ثَلَاثَةٌ</td><td class="translit">ṯalāṯ / ṯalāṯa</td><td class="bs">tri</td></tr>
+                    <tr><td class="bs">4</td><td class="ar">أَرْبَعٌ</td><td class="ar">أَرْبَعَةٌ</td><td class="translit">arba' / arba'a</td><td class="bs">četiri</td></tr>
+                    <tr><td class="bs">5</td><td class="ar">خَمْسٌ</td><td class="ar">خَمْسَةٌ</td><td class="translit">ḫams / ḫamsa</td><td class="bs">pet</td></tr>
+                    <tr><td class="bs">6</td><td class="ar">سِتٌّ</td><td class="ar">سِتَّةٌ</td><td class="translit">sitt / sitta</td><td class="bs">šest</td></tr>
+                    <tr><td class="bs">7</td><td class="ar">سَبْعٌ</td><td class="ar">سَبْعَةٌ</td><td class="translit">sab' / sab'a</td><td class="bs">sedam</td></tr>
+                    <tr><td class="bs">8</td><td class="ar">ثَمَانٍ</td><td class="ar">ثَمَانِيَةٌ</td><td class="translit">ṯamānī / ṯamāniya</td><td class="bs">osam</td></tr>
+                    <tr><td class="bs">9</td><td class="ar">تِسْعٌ</td><td class="ar">تِسْعَةٌ</td><td class="translit">tis' / tis'a</td><td class="bs">devet</td></tr>
+                    <tr><td class="bs">10</td><td class="ar">عَشْرٌ</td><td class="ar">عَشَرَةٌ</td><td class="translit">'ašr / 'ašara</td><td class="bs">deset</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §10 Atribut vs predikat -->
+        <section class="doc-section" id="atribut-predikat">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§10 · Atribut vs. predikat</span>
+              <span class="doc-section-title-ar">الْوَصْفُ وَ الْخَبَر</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Razlika u određenosti</h3>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div><strong>Atribut</strong> = imenica i pridjev su <strong>oba određeni</strong> (opis). <strong>Predikat</strong> = imenica je određena, pridjev je <strong>neodređen</strong> (rečenica).</div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Bosanski</th>
+                      <th>Vrsta</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">الطَّبَّاخُ الْمُجْتَهِدُ</td><td class="bs">vrijedni kuhar</td><td class="meta">atribut (oba odr.)</td></tr>
+                    <tr><td class="ar">الطَّبَّاخُ مُجْتَهِدٌ</td><td class="bs">Kuhar je vrijedan.</td><td class="meta">predikat (pridj. neodr.)</td></tr>
+                    <tr><td class="ar">شَرِكَتُهُ الْكَبِيرَةُ</td><td class="bs">njegova velika firma</td><td class="meta">atribut (posv. + odr. pridj.)</td></tr>
+                    <tr><td class="ar">شَرِكَتُهُ كَبِيرَةٌ</td><td class="bs">Njegova firma je velika.</td><td class="meta">predikat (pridj. neodr.)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-note">
+                <div class="callout-label">ⓘ Zapamti</div>
+                <div>الـ + الـ = opis (atribut). الـ + tanvin = rečenica (predikat).</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §11 Upitne riječi prošireno -->
+        <section class="doc-section" id="upitne-rijeci-prosireno">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§11 · Upitne riječi (prošireno)</span>
+              <span class="doc-section-title-ar">أَدَوَاتُ الِاسْتِفْهَام</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Šire upitne riječi</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Transliteracija</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">مَا / مَاذَا</td><td class="translit">mā / mādhā</td><td class="bs">šta</td></tr>
+                    <tr><td class="ar">مَنْ</td><td class="translit">man</td><td class="bs">ko</td></tr>
+                    <tr><td class="ar">أَيْنَ</td><td class="translit">ayna</td><td class="bs">gdje</td></tr>
+                    <tr><td class="ar">مِنْ أَيْنَ</td><td class="translit">min ayna</td><td class="bs">odakle</td></tr>
+                    <tr><td class="ar">هَلْ</td><td class="translit">hal</td><td class="bs">da li</td></tr>
+                    <tr><td class="ar">كَيْفَ</td><td class="translit">kayfa</td><td class="bs">kako</td></tr>
+                    <tr><td class="ar">كَمْ</td><td class="translit">kam</td><td class="bs">koliko</td></tr>
+                    <tr><td class="ar">مَتَى</td><td class="translit">matā</td><td class="bs">kada</td></tr>
+                    <tr><td class="ar">مَعَ مَنْ</td><td class="translit">ma'a man</td><td class="bs">s kim</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Korisni veznici i prilozi</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">أَيْضًا</td><td class="bs">također</td></tr>
+                    <tr><td class="ar">فَقَطْ</td><td class="bs">samo</td></tr>
+                    <tr><td class="ar">أَوْ</td><td class="bs">ili (izjavna)</td></tr>
+                    <tr><td class="ar">أَمْ</td><td class="bs">ili (upitna, iza هَلْ)</td></tr>
+                    <tr><td class="ar">عِنْدَمَا</td><td class="bs">kada (vremenski veznik)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-note">
+                <div class="callout-label">ⓘ أَمْ vs. أَوْ</div>
+                <div><span class="ar-inline">أَمْ</span> se koristi u pitanjima (iza <span class="ar-inline">هَلْ</span>), <span class="ar-inline">أَوْ</span> u izjavnim rečenicama.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §12 Genitivna veza -->
+        <section class="doc-section" id="genitivna-veza-bp">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§12 · Genitivna veza</span>
+              <span class="doc-section-title-ar">الإضافة</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Pravila genitivne veze</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Član</th>
+                      <th>Pravila</th>
+                      <th>Primjer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs"><strong>1. član</strong> (مُضَاف)</td><td class="bs">Bez الـ, bez tenvina, slobodan padež</td><td class="ar">كِتَابُ</td></tr>
+                    <tr><td class="bs"><strong>2. član</strong> (مُضَاف إِلَيْهِ)</td><td class="bs">Može imati الـ, mora biti u genitivu</td><td class="ar">وَلَدٍ / الْوَلَدِ</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div><span class="ar-inline">مُضَاف + مُضَاف إِلَيْهِ</span> — 1. član <strong>gubi الـ i tenvin</strong>. 2. član stoji u <strong>genitivu</strong>. G.V. nije rečenica, nego dio rečenice.</div>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Primjeri genitivne veze</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Bosanski</th>
+                      <th>Analiza</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">كِتَابُ وَلَدٍ</td><td class="bs">Dječakova knjiga</td><td class="meta">1.čl. + 2.čl. (neodr.)</td></tr>
+                    <tr><td class="ar">كِتَابُ الْوَلَدِ</td><td class="bs">Knjiga (tog) dječaka</td><td class="meta">1.čl. + 2.čl. (odr.)</td></tr>
+                    <tr><td class="ar">كِتَابُهُ</td><td class="bs">Njegova knjiga</td><td class="meta">1.čl. + prisv. zamjenica</td></tr>
+                    <tr><td class="ar">حَقِيبَةُ طَالِبٍ</td><td class="bs">Učenikova torba</td><td class="meta">1.čl. + 2.čl. (neodr.)</td></tr>
+                    <tr><td class="ar">مَلْعَبُ مَدِينَةٍ</td><td class="bs">Gradski stadion</td><td class="meta">1.čl. + 2.čl. (neodr.)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Atribut u genitivnoj vezi</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Bosanski</th>
+                      <th>Koji član opisuje?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">كِتَابُ وَلَدٍ صَغِيرٍ</td><td class="bs">Knjiga malog dječaka</td><td class="meta">Atribut <strong>2. člana</strong> (gen., neodr.)</td></tr>
+                    <tr><td class="ar">كِتَابُ الْوَلَدِ الْجَدِيدُ</td><td class="bs">Nova knjiga dječaka</td><td class="meta">Atribut <strong>1. člana</strong> (nom., odr.) — 1.čl. određen jer je 2.čl. određen</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-note">
+                <div class="callout-label">ⓘ Napomena</div>
+                <div><strong>Atribut 2. člana</strong> — slijedi ga u padežu i određenosti. <strong>Atribut 1. člana</strong> — dolazi s الـ i slaže se s padežom 1. člana.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §13 Perfekt -->
+        <section class="doc-section" id="perfekt-bp">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§13 · Perfekt — prošlo vrijeme</span>
+              <span class="doc-section-title-ar">فِعْلُ الْمَاضِي</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Sufiksi perfekta (jednina)</h3>
+              <p class="doc-subsection-lede">Na korijen glagola (3. l. jd. m.r.) dodaju se sufiksi za ostala lica. Primjer: <span class="ar-inline">جَلَسَ</span> (sjediti).</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Lice</th>
+                      <th>Zamjenica</th>
+                      <th>Sufiks</th>
+                      <th>Primjer</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">1. l. jd.</td><td class="ar">أَنَا</td><td class="suffix-cell">ـتُ</td><td class="ar">جَلَسْتُ</td><td class="bs">ja sam sjedio/la</td></tr>
+                    <tr><td class="bs">2. l. jd. m.r.</td><td class="ar">أَنْتَ</td><td class="suffix-cell">ـتَ</td><td class="ar">جَلَسْتَ</td><td class="bs">ti si sjedio</td></tr>
+                    <tr><td class="bs">2. l. jd. ž.r.</td><td class="ar">أَنْتِ</td><td class="suffix-cell">ـتِ</td><td class="ar">جَلَسْتِ</td><td class="bs">ti si sjedila</td></tr>
+                    <tr><td class="bs">3. l. jd. m.r.</td><td class="ar">هُوَ</td><td class="suffix-cell">∅</td><td class="ar">جَلَسَ</td><td class="bs">on je sjedio</td></tr>
+                    <tr><td class="bs">3. l. jd. ž.r.</td><td class="ar">هِيَ</td><td class="suffix-cell">ـتْ</td><td class="ar">جَلَسَتْ</td><td class="bs">ona je sjedila</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div>3. l. jd. m.r. (<span class="ar-inline">هُوَ</span>) je osnovni oblik — <strong>bez sufiksa</strong>. To je ujedno i rječnički oblik glagola (infinitiv).</div>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Tri oblika korijena</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Oblik</th>
+                      <th>Vokali</th>
+                      <th>Primjeri</th>
+                      <th>Tip</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">فَعَلَ</td><td class="bs">a - a</td><td class="ar">كَتَبَ، جَلَسَ، ذَهَبَ</td><td class="meta">najčešći, prelazni</td></tr>
+                    <tr><td class="ar">فَعِلَ</td><td class="bs">a - i</td><td class="ar">رَكِبَ، حَسِبَ، شَرِبَ</td><td class="meta">stanje, osobina</td></tr>
+                    <tr><td class="ar">فَعُلَ</td><td class="bs">a - u</td><td class="ar">كَبُرَ، صَغُرَ</td><td class="meta">svojstvo, kvaliteta</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Glagolska rečenica</h3>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div><strong>Redoslijed:</strong> فِعْل (glagol) + فَاعِل (subjekat) + مَفْعُول بِهِ (objekat). Objekat je u <strong>akuzativu</strong> — neodređeni: <span class="ar-inline">كِتَابًا</span> (tenvin na fathi), određeni: <span class="ar-inline">الْكِتَابَ</span> (fatha).</div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">كَتَبْتُ كِتَابًا</td><td class="bs">Napisao/la sam knjigu.</td></tr>
+                    <tr><td class="ar">رَكِبَتْ حَافِلَةَ مَدِينَةٍ</td><td class="bs">Vozila je gradski autobus.</td></tr>
+                    <tr><td class="ar">خَرَجْتِ مِنْ بَيْتٍ كَبِيرٍ</td><td class="bs">Izašla si iz velike kuće.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §14 Prezent -->
+        <section class="doc-section" id="prezent-bp">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§14 · Prezent</span>
+              <span class="doc-section-title-ar">فِعْلُ الْمُضَارِع</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Prefiksi i završeci prezenta (jednina)</h3>
+              <p class="doc-subsection-lede">Prezent se tvori <em>prefiksom</em> na korijen (a ne sufiksom kao perfekt). Završni vokal indikativa je <strong>damma (ـُ)</strong>. Primjer: <span class="ar-inline">كَتَبَ → يَكْتُبُ</span> (pisati).</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Lice</th>
+                      <th>Zamjenica</th>
+                      <th>Prefiks</th>
+                      <th>Završetak</th>
+                      <th>Primjer</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">1. l. jd.</td><td class="ar">أَنَا</td><td class="suffix-cell">أَـ</td><td class="suffix-cell">ـُ</td><td class="ar">أَكْتُبُ</td><td class="bs">(ja) pišem</td></tr>
+                    <tr><td class="bs">2. l. jd. m.r.</td><td class="ar">أَنْتَ</td><td class="suffix-cell">تَـ</td><td class="suffix-cell">ـُ</td><td class="ar">تَكْتُبُ</td><td class="bs">(ti m.) pišeš</td></tr>
+                    <tr><td class="bs">2. l. jd. ž.r.</td><td class="ar">أَنْتِ</td><td class="suffix-cell">تَـ</td><td class="suffix-cell">ـِينَ</td><td class="ar">تَكْتُبِينَ</td><td class="bs">(ti ž.) pišeš</td></tr>
+                    <tr><td class="bs">3. l. jd. m.r.</td><td class="ar">هُوَ</td><td class="suffix-cell">يَـ</td><td class="suffix-cell">ـُ</td><td class="ar">يَكْتُبُ</td><td class="bs">(on) piše</td></tr>
+                    <tr><td class="bs">3. l. jd. ž.r.</td><td class="ar">هِيَ</td><td class="suffix-cell">تَـ</td><td class="suffix-cell">ـُ</td><td class="ar">تَكْتُبُ</td><td class="bs">(ona) piše</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-important">
+                <div class="callout-label">! Pažnja</div>
+                <div>2. l. m.r. (<span class="ar-inline">أَنْتَ</span>) i 3. l. ž.r. (<span class="ar-inline">هِيَ</span>) su u jednini <strong>identični oblici</strong> — razlika se vidi samo iz konteksta ili dodavanjem samostalne lične zamjenice.</div>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Vokal 2. korijenskog suglasnika</h3>
+              <p class="doc-subsection-lede">U prezentu 2. korijenski suglasnik dobija jedan od tri vokala — <strong>nepredvidiv</strong>, uči se napamet uz svaki glagol.</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Tip</th>
+                      <th>Perfekt</th>
+                      <th>Prezent</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">يَفْعُلُ (-u-)</td><td class="ar">كَتَبَ، سَكَنَ</td><td class="ar">يَكْتُبُ، يَسْكُنُ</td><td class="bs">pisati, stanovati</td></tr>
+                    <tr><td class="ar">يَفْعِلُ (-i-)</td><td class="ar">جَلَسَ</td><td class="ar">يَجْلِسُ</td><td class="bs">sjediti</td></tr>
+                    <tr><td class="ar">يَفْعَلُ (-a-)</td><td class="ar">شَرِبَ، ذَهَبَ، فَتَحَ، لَعِبَ، سَبَحَ</td><td class="ar">يَشْرَبُ، يَذْهَبُ، يَفْتَحُ، يَلْعَبُ، يَسْبَحُ</td><td class="bs">piti, otići, otvoriti, igrati se, plivati</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Smjernica</div>
+                <div>Glagoli tipa <em>fa'ila</em> (perfekt s vokalom <em>-i-</em>) i glagoli s grlenim suglasnicima (ح، ع، ه، ء، خ، غ) najčešće idu u <strong>-a-</strong> u prezentu.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §15 Imenice produžene deklinacije -->
+        <section class="doc-section" id="imenice-produzene-bp">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§15 · Imenice produžene deklinacije</span>
+              <span class="doc-section-title-ar">الْأَسْمَاءُ السِّتَّةُ</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Padeži sa prisvojnim sufiksom</h3>
+              <p class="doc-subsection-lede">Imenice <span class="ar-inline">أَبٌ</span> (otac), <span class="ar-inline">أَخٌ</span> (brat) i dr. imaju produženu deklinaciju kada im se doda prisvojni sufiks.</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Padež</th>
+                      <th>Produženje</th>
+                      <th>أَبٌ + ـكَ</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">Nominativ (مرفوع)</td><td class="ar">و</td><td class="ar">أَبُوكَ</td><td class="bs">tvoj otac (subjekat)</td></tr>
+                    <tr><td class="bs">Genitiv (مجرور)</td><td class="ar">ي</td><td class="ar">أَبِيكَ</td><td class="bs">tvog oca (iza prijedloga)</td></tr>
+                    <tr><td class="bs">Akuzativ (منصوب)</td><td class="ar">ا</td><td class="ar">أَبَاكَ</td><td class="bs">tvog oca (objekat)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-important">
+                <div class="callout-label">! Važno</div>
+                <div><strong>Ovo pravilo važi samo sa prisvojnim sufiksom!</strong> Bez sufiksa, <span class="ar-inline">أَبٌ</span> se deklinira normalno (<span class="ar-inline">أَبٌ / أَبٍ / أَبًا</span>).</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §16 Imati / nemati -->
+        <section class="doc-section" id="imati-nemati-bp">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§16 · Imati / nemati — konstrukcija لِـ + sufiks</span>
+              <span class="doc-section-title-ar">لِي · لَيْسَ لِي</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Konstrukcija لِـ + sufiks</h3>
+              <p class="doc-subsection-lede">U arapskom nema glagola „imati". Koristi se prijedlog <span class="ar-inline">لِـ</span> + spojena zamjenica. Doslovno „meni / tebi / njemu (pripada)".</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Arapski</th>
+                      <th>Translit.</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">لِي</td><td class="translit">lī</td><td class="bs">ja imam</td></tr>
+                    <tr><td class="ar">لَكَ</td><td class="translit">laka</td><td class="bs">ti imaš (m.r.)</td></tr>
+                    <tr><td class="ar">لَكِ</td><td class="translit">laki</td><td class="bs">ti imaš (ž.r.)</td></tr>
+                    <tr><td class="ar">لَهُ</td><td class="translit">lahu</td><td class="bs">on ima</td></tr>
+                    <tr><td class="ar">لَهَا</td><td class="translit">lahā</td><td class="bs">ona ima</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Negacija</div>
+                <div><span class="ar-inline">لَيْسَ + لِـ</span> = <em>nemati</em>. Ispred <span class="ar-inline">لِـ</span> dodaje se <span class="ar-inline">لَيْسَ</span> („nije"): <span class="ar-inline">لَيْسَ لِي أَخٌ</span> — <em>Nemam brata</em>. Imenica ostaje u <strong>nominativu</strong> (<span class="ar-inline">ـٌ</span>).</div>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Primjer</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="ar">لِي أَخٌ وَاحِدٌ.</td><td class="bs">Imam jednog brata.</td></tr>
+                    <tr><td class="ar">لِي ثَلَاثَةُ أَوْلَادٍ.</td><td class="bs">Imam troje djece.</td></tr>
+                    <tr><td class="ar">لَيْسَ لِي أَخٌ.</td><td class="bs">Nemam brata.</td></tr>
+                    <tr><td class="ar">لَيْسَ لَهَا أُخْتٌ.</td><td class="bs">Ona nema sestru.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §17 Dvojina -->
+        <section class="doc-section" id="dvojina-bp">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§17 · Dvojina</span>
+              <span class="doc-section-title-ar">الْمُثَنَّى</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Tvorba dvojine</h3>
+              <p class="doc-subsection-lede">Za <strong>dvije</strong> osobe ili stvari arapski koristi posebnu kategoriju — dvojinu (<span class="ar-inline">مُثَنَّى</span>). Tvori se dodavanjem nastavka <span class="ar-inline">ـَانِ</span> (nom.) ili <span class="ar-inline">ـَيْنِ</span> (gen./akuz.) na jedninu.</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Značenje</th>
+                      <th>Jednina</th>
+                      <th>Dvojina</th>
+                      <th>Množina</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">brat</td><td class="ar">أَخٌ</td><td class="ar">أَخَوَانِ</td><td class="ar">إِخْوَةٌ</td></tr>
+                    <tr><td class="bs">dijete</td><td class="ar">وَلَدٌ</td><td class="ar">وَلَدَانِ</td><td class="ar">أَوْلَادٌ</td></tr>
+                    <tr><td class="bs">knjiga</td><td class="ar">كِتَابٌ</td><td class="ar">كِتَابَانِ</td><td class="ar">كُتُبٌ</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div><span class="ar-inline">ـَانِ / ـَيْنِ</span> — <strong>Nominativ dvojine:</strong> <span class="ar-inline">ـَانِ</span> (subjekat). <strong>Genitiv / akuzativ dvojine:</strong> <span class="ar-inline">ـَيْنِ</span> (iza prijedloga ili kao objekat). Lomljena množina (<span class="ar-inline">إِخْوَةٌ، أَوْلَادٌ، كُتُبٌ</span>) je nepravilna i uči se napamet.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §18 Pravilna množina -->
+        <section class="doc-section" id="pravilna-mnozina-bp">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§18 · Pravilna množina (m.r. / ž.r.)</span>
+              <span class="doc-section-title-ar">جَمْعُ السَّالِم</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Muški rod: ـُونَ (nom.) / ـِينَ (gen. + akuz.)</h3>
+              <p class="doc-subsection-lede">Pravilna (zdrava) množina tvori se dodavanjem fiksnog nastavka. <strong>Tanvin se uvijek briše</strong> prije nastavka.</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Padež</th>
+                      <th>Jednina</th>
+                      <th>Množina (neodr.)</th>
+                      <th>Množina (odr.)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">nominativ</td><td class="ar">مُعَلِّمٌ</td><td class="ar">مُعَلِّمُونَ</td><td class="ar">ٱلْمُعَلِّمُونَ</td></tr>
+                    <tr><td class="bs">akuzativ / genitiv</td><td class="ar">مُعَلِّمًا / مُعَلِّمٍ</td><td class="ar">مُعَلِّمِينَ</td><td class="ar">ٱلْمُعَلِّمِينَ</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Ženski rod: ـَاتٌ (nom.) / ـَاتٍ (gen. + akuz.) — briše se ة</h3>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Padež</th>
+                      <th>Jednina</th>
+                      <th>Množina (neodr.)</th>
+                      <th>Množina (odr.)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs">nominativ</td><td class="ar">طَبِيبَةٌ</td><td class="ar">طَبِيبَاتٌ</td><td class="ar">ٱلطَّبِيبَاتُ</td></tr>
+                    <tr><td class="bs">genitiv / akuzativ</td><td class="ar">طَبِيبَةٍ</td><td class="ar">طَبِيبَاتٍ</td><td class="ar">ٱلطَّبِيبَاتِ</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Slaganje atributa</div>
+                <div><span class="ar-inline">ةٌ → ـَاتٌ</span>. Pravilna množina <em>za ljude</em> traži atribut u odgovarajućoj množini. <strong>Množina nežive imenice</strong> (npr. <span class="ar-inline">كُتُبٌ</span>, <span class="ar-inline">شَرِكَاتٌ</span>) traži atribut u <strong>ženskoj jednini</strong> (npr. <span class="ar-inline">شَرِكَاتٌ كَبِيرَةٌ</span> — velike firme).</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §19 Brojanje predmeta 1-10 -->
+        <section class="doc-section" id="brojanje-bp">
+          <div class="doc-section-head" onclick="toggleLesson(this)">
+            <h2 class="doc-section-title">
+              <span>§19 · Brojanje predmeta — brojevi 1–10</span>
+              <span class="doc-section-title-ar">١–١٠</span>
+              <span class="level-pills">
+                <span class="level-pill a1">A1</span>
+              </span>
+            </h2>
+            <div class="doc-toggle">▾</div>
+          </div>
+          <div class="doc-body-inner">
+            <div class="doc-subsection">
+              <h3 class="doc-subsection-title">Konstrukcije s brojevima</h3>
+              <p class="doc-subsection-lede">Broj <strong>1</strong> stoji iza imenice u jednini, <strong>2</strong> koristi dvojinu (sam broj se ne piše), <strong>3–10</strong> traže imenicu u <em>lomljenoj množini</em> i <em>genitivu</em>, s <strong>obrnutim slaganjem roda</strong>.</p>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Broj</th>
+                      <th>Konstrukcija</th>
+                      <th>Bosanski</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="bs"><strong>1</strong></td><td class="ar">بَيْتٌ وَاحِدٌ</td><td class="bs">jedna kuća</td></tr>
+                    <tr><td class="bs"><strong>2</strong></td><td class="ar">بَيْتَانِ (ٱثْنَانِ)</td><td class="bs">dvije kuće — dvojina</td></tr>
+                    <tr><td class="bs"><strong>3</strong></td><td class="ar">ثَلَاثُ طَالِبَاتٍ</td><td class="bs">tri studentice</td></tr>
+                    <tr><td class="bs"><strong>4</strong></td><td class="ar">أَرْبَعَةُ كُتُبٍ</td><td class="bs">četiri knjige</td></tr>
+                    <tr><td class="bs"><strong>5</strong></td><td class="ar">خَمْسَةُ طُلَّابٍ</td><td class="bs">pet studenata</td></tr>
+                    <tr><td class="bs"><strong>6</strong></td><td class="ar">سِتَّةُ أَقْلَامٍ</td><td class="bs">šest olovaka</td></tr>
+                    <tr><td class="bs"><strong>7</strong></td><td class="ar">سَبْعَةُ كُتُبٍ</td><td class="bs">sedam knjiga</td></tr>
+                    <tr><td class="bs"><strong>8</strong></td><td class="ar">ثَمَانِيَةُ أَقْلَامٍ</td><td class="bs">osam olovaka</td></tr>
+                    <tr><td class="bs"><strong>9</strong></td><td class="ar">تِسْعَةُ بُيُوتٍ</td><td class="bs">devet kuća</td></tr>
+                    <tr><td class="bs"><strong>10</strong></td><td class="ar">عَشْرَةُ طُلَّابٍ</td><td class="bs">deset studenata</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-rule">
+                <div class="callout-label">✓ Pravilo</div>
+                <div><span class="ar-inline">٣–١٠</span> <strong>Obrnuto slaganje roda</strong> (3–10): uz mušku imenicu broj uzima oblik <em>s</em> <span class="ar-inline">ـَة</span> (npr. <span class="ar-inline">خَمْسَةُ كُتُبٍ</span>); uz žensku imenicu broj nema <span class="ar-inline">ـَة</span> (npr. <span class="ar-inline">ثَلَاثُ طَالِبَاتٍ</span>). Imenica je uvijek u <strong>genitivu neodređenom</strong> (kasratan).</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
+    </div>
+
+    <nav class="footer-nav">
+      <a href="index.html">Početna</a>
+      <a href="A0/index.html">A0</a>
+      <a href="A1/index.html">A1</a>
+      <a href="vokabular.html">Vokabular</a>
+      <a href="brzi-pregled.html" class="active">Brzi pregled</a>
     </nav>
 
-    <!-- ═══════════════════════════════════════
-         LIČNE ZAMJENICE
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="licne-zamjenice">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Lične zamjenice — الضَّمَائِرُ الْمُنْفَصِلَة <span class="level-tag a0">A0</span><span
-            class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">Samostalne zamjenice — koriste se kao
-            subjekat u rečenici.</p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Transliteracija</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">أَنَا</td>
-                  <td>anā</td>
-                  <td>ja</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَنْتَ</td>
-                  <td>anta</td>
-                  <td>ti (m.r.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَنْتِ</td>
-                  <td>anti</td>
-                  <td>ti (ž.r.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">هُوَ</td>
-                  <td>huwa</td>
-                  <td>on</td>
-                </tr>
-                <tr>
-                  <td class="ar">هِيَ</td>
-                  <td>hiya</td>
-                  <td>ona</td>
-                </tr>
-                <tr>
-                  <td colspan="3" style="background:#f1f5f9; color:#475569; font-size:0.78rem; font-weight:600; letter-spacing:0.5px;">— MNOŽINA —</td>
-                </tr>
-                <tr>
-                  <td class="ar">نَحْنُ</td>
-                  <td>naḥnu</td>
-                  <td>mi (m. i ž.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَنْتُمْ</td>
-                  <td>antum</td>
-                  <td>vi (m.r.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَنْتُنَّ</td>
-                  <td>antunna</td>
-                  <td>vi (ž.r.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">هُمْ</td>
-                  <td>hum</td>
-                  <td>oni (m.r.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">هُنَّ</td>
-                  <td>hunna</td>
-                  <td>one (ž.r.)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="info-box" style="margin-top:12px;">
-            <strong>Napomena:</strong> mješovita grupa (m. + ž.) koristi
-            <span class="ar-sm">أَنْتُمْ</span> / <span class="ar-sm">هُمْ</span> (m.r.).
-            <span class="ar-sm">نَحْنُ</span> nema razlike po rodu.
-          </div>
-        </div>
-      </div>
-    </div>
+    <footer class="footer">
+      <span>© 2026 · Kurs arapskog jezika · Brzi pregled gramatike</span>
+      <span class="footer-arabic">وَفَّقَكُمُ الله</span>
+    </footer>
 
-    <!-- ═══════════════════════════════════════
-         PRISVOJNI SUFIKSI
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="prisvojni-sufiksi">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Prisvojni sufiksi (spojene zamjenice) — الضَّمَائِرُ الْمُتَّصِلَة <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="info-box">
-            Dodaju se direktno na imenice, prijedloge ili glagole. <strong>Tanvin se briše</strong> prije dodavanja
-            sufiksa.
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Bosanski</th>
-                  <th>Sufiks</th>
-                  <th>كِتَاب (knjiga)</th>
-                  <th>قَلَم (olovka)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>moj/a/e</td>
-                  <td class="ar" style="font-size:1.4em">ـي</td>
-                  <td class="ar">كِتَابِي</td>
-                  <td class="ar">قَلَمِي</td>
-                </tr>
-                <tr>
-                  <td>tvoj/a/e (m.r.)</td>
-                  <td class="ar" style="font-size:1.4em">ـكَ</td>
-                  <td class="ar">كِتَابُكَ</td>
-                  <td class="ar">قَلَمُكَ</td>
-                </tr>
-                <tr>
-                  <td>tvoj/a/e (ž.r.)</td>
-                  <td class="ar" style="font-size:1.4em">ـكِ</td>
-                  <td class="ar">كِتَابُكِ</td>
-                  <td class="ar">قَلَمُكِ</td>
-                </tr>
-                <tr>
-                  <td>njegov/a/e</td>
-                  <td class="ar" style="font-size:1.4em">ـهُ / ـهِ</td>
-                  <td class="ar">كِتَابُهُ</td>
-                  <td class="ar">قَلَمُهُ</td>
-                </tr>
-                <tr>
-                  <td>njen/a/o</td>
-                  <td class="ar" style="font-size:1.4em">ـهَا</td>
-                  <td class="ar">كِتَابُهَا</td>
-                  <td class="ar">قَلَمُهَا</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         POKAZNE ZAMJENICE
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="pokazne-zamjenice">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Pokazne zamjenice — أَسْمَاءُ الْإِشَارَة <span class="level-tag a0">A0</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Transliteracija</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">هَذَا</td>
-                  <td>hāḏā</td>
-                  <td>ovaj, ovo (m.r.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">هَذِهِ</td>
-                  <td>hāḏihi</td>
-                  <td>ova, ovo (ž.r.)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="info-box">
-            <strong>Atributivna sintagma:</strong> <span class="ar-sm">هَذَا الْكِتَابُ</span> = ova knjiga<br>
-            <strong>Prosta rečenica:</strong> <span class="ar-sm">هَذَا كِتَابٌ</span> = Ovo je knjiga<br>
-            <strong>Proširena:</strong> <span class="ar-sm">هَذَا الْكِتَابُ مُفِيدٌ</span> = Ova knjiga je korisna
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         UPITNE ČESTICE
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="upitne-cestice">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Upitne čestice i zamjenice — أَدَوَاتُ الِاسْتِفْهَام <span class="level-tag a0">A0</span><span
-            class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Transliteracija</th>
-                  <th>Bosanski</th>
-                  <th>Primjer</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">مَا</td>
-                  <td>mā</td>
-                  <td>šta</td>
-                  <td class="ar-sm">مَا اسْمُكَ؟</td>
-                </tr>
-                <tr>
-                  <td class="ar">مَنْ</td>
-                  <td>man</td>
-                  <td>ko</td>
-                  <td class="ar-sm">مَنْ هَذَا؟</td>
-                </tr>
-                <tr>
-                  <td class="ar">هَلْ</td>
-                  <td>hal</td>
-                  <td>da li</td>
-                  <td class="ar-sm">هَلْ أَنْتَ طَالِبٌ؟</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَ ـ</td>
-                  <td>a-</td>
-                  <td>da li (= هَلْ, kraći oblik)</td>
-                  <td class="ar-sm">أَأَنْتَ فَتَحْتَ النَّافِذَةَ؟</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَيْنَ</td>
-                  <td>ayna</td>
-                  <td>gdje</td>
-                  <td class="ar-sm">أَيْنَ تَعْمَلُ؟</td>
-                </tr>
-                <tr>
-                  <td class="ar">كَيْفَ</td>
-                  <td>kayfa</td>
-                  <td>kako</td>
-                  <td class="ar-sm">كَيْفَ حَالُكَ؟</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         PRIJEDLOZI
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="prijedlozi">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Prijedlozi — حُرُوفُ الْجَرّ <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="rule-box">
-            Imenica iza prijedloga <strong>uvijek</strong> ide u genitiv (مَجْرُور) — kasra <span
-              class="rule-ar">ـِ</span> ili kasratan <span class="rule-ar">ـٍ</span>.
-          </div>
-          <h3>Razdvojeni prijedlozi</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Transliteracija</th>
-                  <th>Bosanski</th>
-                  <th>Primjer</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">فِي</td>
-                  <td>fī</td>
-                  <td>u</td>
-                  <td class="ar-sm">فِي الْبَيْتِ</td>
-                </tr>
-                <tr>
-                  <td class="ar">مِنْ</td>
-                  <td>min</td>
-                  <td>iz, od</td>
-                  <td class="ar-sm">مِنْ مَدِينَةٍ</td>
-                </tr>
-                <tr>
-                  <td class="ar">إِلَى</td>
-                  <td>ilā</td>
-                  <td>do, ka, prema</td>
-                  <td class="ar-sm">إِلَى الْمَدْرَسَةِ</td>
-                </tr>
-                <tr>
-                  <td class="ar">عَلَى</td>
-                  <td>'alā</td>
-                  <td>na</td>
-                  <td class="ar-sm">عَلَى طَاوِلَةٍ</td>
-                </tr>
-                <tr>
-                  <td class="ar">مَعَ</td>
-                  <td>ma'a</td>
-                  <td>s, sa</td>
-                  <td class="ar-sm">مَعَ الْأَبِ</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="sub-section">
-          <h3>Spojeni prijedlozi (pišu se uz riječ)</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Transliteracija</th>
-                  <th>Bosanski</th>
-                  <th>Neodređeno</th>
-                  <th>Određeno</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">بِـ</td>
-                  <td>bi-</td>
-                  <td>s, sa (sredstvo)</td>
-                  <td class="ar-sm">بِقِطَارٍ</td>
-                  <td class="ar-sm">بِالْقِطَارِ</td>
-                </tr>
-                <tr>
-                  <td class="ar">لِـ</td>
-                  <td>li-</td>
-                  <td>za</td>
-                  <td class="ar-sm">لِأُمٍّ</td>
-                  <td class="ar-sm">لِلْأُمِّ</td>
-                </tr>
-                <tr>
-                  <td class="ar">كَـ</td>
-                  <td>ka-</td>
-                  <td>kao, poput</td>
-                  <td class="ar-sm">كَأُخْتٍ</td>
-                  <td class="ar-sm">كَالْأُخْتِ</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="rule-box">
-            <strong>Pravilo:</strong> <span class="rule-ar">لِـ + الـ → لِلْـ</span> (elif se briše, ostaje samo لِلْـ)
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         PRIJEDLOZI + SUFIKSI
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="prijedlozi-sufiksi">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Prijedlozi sa zamjeničkim sufiksima <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="info-box">
-            Prijedlog + zamjenički sufiks = prijedložni izraz (npr. <strong>لِي</strong> = za mene).
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Lice</th>
-                  <th class="ar-sm">فِي</th>
-                  <th class="ar-sm">مِنْ</th>
-                  <th class="ar-sm">لِـ</th>
-                  <th class="ar-sm">مَعَ</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>ja</td>
-                  <td class="ar-sm">فِيَّ</td>
-                  <td class="ar-sm">مِنِّي</td>
-                  <td class="ar-sm">لِي</td>
-                  <td class="ar-sm">مَعِي</td>
-                </tr>
-                <tr>
-                  <td>ti (m.)</td>
-                  <td class="ar-sm">فِيكَ</td>
-                  <td class="ar-sm">مِنْكَ</td>
-                  <td class="ar-sm">لَكَ</td>
-                  <td class="ar-sm">مَعَكَ</td>
-                </tr>
-                <tr>
-                  <td>ti (ž.)</td>
-                  <td class="ar-sm">فِيكِ</td>
-                  <td class="ar-sm">مِنْكِ</td>
-                  <td class="ar-sm">لَكِ</td>
-                  <td class="ar-sm">مَعَكِ</td>
-                </tr>
-                <tr>
-                  <td>on</td>
-                  <td class="ar-sm">فِيهِ</td>
-                  <td class="ar-sm">مِنْهُ</td>
-                  <td class="ar-sm">لَهُ</td>
-                  <td class="ar-sm">مَعَهُ</td>
-                </tr>
-                <tr>
-                  <td>ona</td>
-                  <td class="ar-sm">فِيهَا</td>
-                  <td class="ar-sm">مِنْهَا</td>
-                  <td class="ar-sm">لَهَا</td>
-                  <td class="ar-sm">مَعَهَا</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         IMENSKA REČENICA
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="imenska-recenica">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Imenska rečenica — الْجُمْلَةُ الِاسْمِيَّة <span class="level-tag a0">A0</span><span
-            class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="rule-box">
-            <strong>Subjekat</strong> (مُبْتَدَأ) = određen (sa الـ ili prisvojnim sufiksom) &nbsp;|&nbsp;
-            <strong>Predikat</strong> (خَبَر) = neodređen (sa tanvinom) — glagol "je/su" se <strong>ne piše</strong>
-          </div>
-          <h3>Pridjevski predikat</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Bosanski</th>
-                  <th>Struktura</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">اَلْبَيْتُ كَبِيرٌ</td>
-                  <td>Kuća je velika.</td>
-                  <td style="font-size:0.82rem; color:#64748b;">subjekat (odr.) + pridjev (neodr.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">بَيْتُكَ كَبِيرٌ</td>
-                  <td>Tvoja kuća je velika.</td>
-                  <td style="font-size:0.82rem; color:#64748b;">subjekat (prisv.) + pridjev (neodr.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">بَيْتِي كَبِيرٌ</td>
-                  <td>Moja kuća je velika.</td>
-                  <td style="font-size:0.82rem; color:#64748b;">subjekat (prisv.) + pridjev (neodr.)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="sub-section">
-          <h3>Prijedložni predikat</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">اَلْبَيْتُ فِي مَدِينَةٍ</td>
-                  <td>Kuća je u gradu.</td>
-                </tr>
-                <tr>
-                  <td class="ar">اَلْأُمُّ فِي مَطْبَخٍ</td>
-                  <td>Majka je u kuhinji.</td>
-                </tr>
-                <tr>
-                  <td class="ar">اَلْأَخُ الْكَبِيرُ مَعَ الْأَبِ</td>
-                  <td>Veliki brat je s ocem.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         SUNČANA / MJESEČEVA SLOVA
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="suncana-mjeseceva">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Sunčana i mjesečeva slova — الـ (član) <span class="level-tag a0">A0</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="info-box">
-            <strong>Sunčana slova (شَمْسِيَّة):</strong> LAM se ne izgovara, prvo slovo se udvostručuje (šedda)<br>
-            <strong>Mjesečeva slova (قَمَرِيَّة):</strong> LAM se izgovara normalno
-          </div>
-          <h3>Sunčana slova (14): ت ث د ذ ر ز س ش ص ض ط ظ ل ن</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Bez الـ</th>
-                  <th>Sa الـ</th>
-                  <th>Izgovor</th>
-                  <th>Značenje</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">شَمْسٌ</td>
-                  <td class="ar">الشَّمْسُ</td>
-                  <td>aš-šams</td>
-                  <td>sunce</td>
-                </tr>
-                <tr>
-                  <td class="ar">نُورٌ</td>
-                  <td class="ar">النُّورُ</td>
-                  <td>an-nūru</td>
-                  <td>svjetlo</td>
-                </tr>
-                <tr>
-                  <td class="ar">سَلَامٌ</td>
-                  <td class="ar">السَّلَامُ</td>
-                  <td>as-salāmu</td>
-                  <td>mir</td>
-                </tr>
-                <tr>
-                  <td class="ar">دَرْسٌ</td>
-                  <td class="ar">الدَّرْسُ</td>
-                  <td>ad-darsu</td>
-                  <td>lekcija</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="sub-section">
-          <h3>Mjesečeva slova (14): ا ب ج ح خ ع غ ف ق ك م ه و ي</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Bez الـ</th>
-                  <th>Sa الـ</th>
-                  <th>Izgovor</th>
-                  <th>Značenje</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">قَمَرٌ</td>
-                  <td class="ar">الْقَمَرُ</td>
-                  <td>al-qamaru</td>
-                  <td>mjesec</td>
-                </tr>
-                <tr>
-                  <td class="ar">بَيْتٌ</td>
-                  <td class="ar">الْبَيْتُ</td>
-                  <td>al-bajtu</td>
-                  <td>kuća</td>
-                </tr>
-                <tr>
-                  <td class="ar">كِتَابٌ</td>
-                  <td class="ar">الْكِتَابُ</td>
-                  <td>al-kitābu</td>
-                  <td>knjiga</td>
-                </tr>
-                <tr>
-                  <td class="ar">مَاءٌ</td>
-                  <td class="ar">الْمَاءُ</td>
-                  <td>al-māʾu</td>
-                  <td>voda</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         BROJEVI 0–10
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="brojevi">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Brojevi 0–10 — الْأَعْدَاد <span class="level-tag a0">A0</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="info-box">
-            Brojevi 3–10 imaju <strong>obrnutu rodnu slaganje</strong> — muški oblik za ženske imenice i obrnuto.
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>M.R. (muški rod)</th>
-                  <th>Ž.R. (ženski rod)</th>
-                  <th>Transliteracija</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>0</td>
-                  <td class="ar">صِفْرٌ</td>
-                  <td class="ar">صِفْرٌ</td>
-                  <td>ṣifr</td>
-                  <td>nula</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td class="ar">وَاحِدٌ</td>
-                  <td class="ar">وَاحِدَةٌ</td>
-                  <td>wāḥid / wāḥida</td>
-                  <td>jedan/jedna</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td class="ar">اِثْنَانِ</td>
-                  <td class="ar">اِثْنَتَانِ</td>
-                  <td>iṯnāni / iṯnatāni</td>
-                  <td>dva/dvije</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td class="ar">ثَلَاثٌ</td>
-                  <td class="ar">ثَلَاثَةٌ</td>
-                  <td>ṯalāṯ / ṯalāṯa</td>
-                  <td>tri</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td class="ar">أَرْبَعٌ</td>
-                  <td class="ar">أَرْبَعَةٌ</td>
-                  <td>arba' / arba'a</td>
-                  <td>četiri</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td class="ar">خَمْسٌ</td>
-                  <td class="ar">خَمْسَةٌ</td>
-                  <td>ḫams / ḫamsa</td>
-                  <td>pet</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td class="ar">سِتٌّ</td>
-                  <td class="ar">سِتَّةٌ</td>
-                  <td>sitt / sitta</td>
-                  <td>šest</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td class="ar">سَبْعٌ</td>
-                  <td class="ar">سَبْعَةٌ</td>
-                  <td>sab' / sab'a</td>
-                  <td>sedam</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td class="ar">ثَمَانٍ</td>
-                  <td class="ar">ثَمَانِيَةٌ</td>
-                  <td>ṯamānī / ṯamāniya</td>
-                  <td>osam</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td class="ar">تِسْعٌ</td>
-                  <td class="ar">تِسْعَةٌ</td>
-                  <td>tis' / tis'a</td>
-                  <td>devet</td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td class="ar">عَشْرٌ</td>
-                  <td class="ar">عَشَرَةٌ</td>
-                  <td>'ašr / 'ašara</td>
-                  <td>deset</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         ATRIBUT VS. PREDIKAT
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="atribut-predikat">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Atribut vs. predikat — الْوَصْفُ وَ الْخَبَر <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="rule-box">
-            <strong>Atribut</strong> = imenica i pridjev su <strong>oba određeni</strong> (opis) &nbsp;|&nbsp;
-            <strong>Predikat</strong> = imenica je određena, pridjev je <strong>neodređen</strong> (rečenica)
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Bosanski</th>
-                  <th>Vrsta</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">الطَّبَّاخُ الْمُجْتَهِدُ</td>
-                  <td>vrijedni kuhar</td>
-                  <td style="font-size:0.82rem; color:#64748b;">atribut (oba odr.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">الطَّبَّاخُ مُجْتَهِدٌ</td>
-                  <td>Kuhar je vrijedan.</td>
-                  <td style="font-size:0.82rem; color:#64748b;">predikat (pridj. neodr.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">شَرِكَتُهُ الْكَبِيرَةُ</td>
-                  <td>njegova velika firma</td>
-                  <td style="font-size:0.82rem; color:#64748b;">atribut (posv. + odr. pridj.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">شَرِكَتُهُ كَبِيرَةٌ</td>
-                  <td>Njegova firma je velika.</td>
-                  <td style="font-size:0.82rem; color:#64748b;">predikat (pridj. neodr.)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="sub-section">
-          <div class="info-box">
-            <strong>Zapamti:</strong> الـ + الـ = opis (atribut) &nbsp;|&nbsp; الـ + tanvin = rečenica (predikat)
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         UPITNE RIJEČI (prošireno)
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="upitne-rijeci-prosireno">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Upitne riječi (prošireno) — أَدَوَاتُ الِاسْتِفْهَام <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Transliteracija</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">مَا / مَاذَا</td>
-                  <td>mā / mādhā</td>
-                  <td>šta</td>
-                </tr>
-                <tr>
-                  <td class="ar">مَنْ</td>
-                  <td>man</td>
-                  <td>ko</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَيْنَ</td>
-                  <td>ayna</td>
-                  <td>gdje</td>
-                </tr>
-                <tr>
-                  <td class="ar">مِنْ أَيْنَ</td>
-                  <td>min ayna</td>
-                  <td>odakle</td>
-                </tr>
-                <tr>
-                  <td class="ar">هَلْ</td>
-                  <td>hal</td>
-                  <td>da li</td>
-                </tr>
-                <tr>
-                  <td class="ar">كَيْفَ</td>
-                  <td>kayfa</td>
-                  <td>kako</td>
-                </tr>
-                <tr>
-                  <td class="ar">كَمْ</td>
-                  <td>kam</td>
-                  <td>koliko</td>
-                </tr>
-                <tr>
-                  <td class="ar">مَتَى</td>
-                  <td>matā</td>
-                  <td>kada</td>
-                </tr>
-                <tr>
-                  <td class="ar">مَعَ مَنْ</td>
-                  <td>ma'a man</td>
-                  <td>s kim</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="sub-section">
-          <h3>Korisni veznici i prilozi</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">أَيْضًا</td>
-                  <td>također</td>
-                </tr>
-                <tr>
-                  <td class="ar">فَقَطْ</td>
-                  <td>samo</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَوْ</td>
-                  <td>ili (izjavna)</td>
-                </tr>
-                <tr>
-                  <td class="ar">أَمْ</td>
-                  <td>ili (upitna, iza هَلْ)</td>
-                </tr>
-                <tr>
-                  <td class="ar">عِنْدَمَا</td>
-                  <td>kada (vremenski veznik)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="info-box">
-            <strong>أَمْ vs. أَوْ:</strong> أَمْ se koristi u pitanjima (iza هَلْ), أَوْ u izjavnim rečenicama.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         GENITIVNA VEZA (الإضافة)
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="genitivna-veza-bp">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Genitivna veza — الإضافة <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <h3>Pravila genitivne veze</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Član</th>
-                  <th>Pravila</th>
-                  <th>Primjer</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>1. član</strong> (مُضَاف)</td>
-                  <td>Bez الـ, bez tenvina, slobodan padež</td>
-                  <td><span class="ar">كِتَابُ</span></td>
-                </tr>
-                <tr>
-                  <td><strong>2. član</strong> (مُضَاف إِلَيْهِ)</td>
-                  <td>Može imati الـ, mora biti u genitivu</td>
-                  <td><span class="ar">وَلَدٍ / الْوَلَدِ</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="rule-box">
-            <span class="ar" style="white-space:nowrap;">مُضَاف + مُضَاف إِلَيْهِ</span>
-            <div>1. član <strong>gubi الـ i tenvin</strong>. 2. član stoji u <strong>genitivu</strong>. G.V. nije
-              rečenica, nego dio rečenice.</div>
-          </div>
-        </div>
-        <div class="sub-section">
-          <h3>Primjeri genitivne veze</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Bosanski</th>
-                  <th>Analiza</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="ar">كِتَابُ وَلَدٍ</span></td>
-                  <td>Dječakova knjiga</td>
-                  <td>1.čl. + 2.čl. (neodr.)</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">كِتَابُ الْوَلَدِ</span></td>
-                  <td>Knjiga (tog) dječaka</td>
-                  <td>1.čl. + 2.čl. (odr.)</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">كِتَابُهُ</span></td>
-                  <td>Njegova knjiga</td>
-                  <td>1.čl. + prisv. zamjenica</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">حَقِيبَةُ طَالِبٍ</span></td>
-                  <td>Učenikova torba</td>
-                  <td>1.čl. + 2.čl. (neodr.)</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">مَلْعَبُ مَدِينَةٍ</span></td>
-                  <td>Gradski stadion</td>
-                  <td>1.čl. + 2.čl. (neodr.)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="sub-section">
-          <h3>Atribut u genitivnoj vezi</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Bosanski</th>
-                  <th>Koji član opisuje?</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="ar">كِتَابُ وَلَدٍ صَغِيرٍ</span></td>
-                  <td>Knjiga malog dječaka</td>
-                  <td>Atribut <strong>2. člana</strong> (gen., neodr.)</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">كِتَابُ الْوَلَدِ الْجَدِيدُ</span></td>
-                  <td>Nova knjiga dječaka</td>
-                  <td>Atribut <strong>1. člana</strong> (nom., odr.) — 1.čl. određen jer je 2.čl. određen</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="info-box">
-            <strong>Atribut 2. člana</strong> — slijedi ga u padežu i određenosti. <strong>Atribut 1. člana</strong> —
-            dolazi s الـ i slaže se s padežom 1. člana.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         PERFEKT (PROŠLO VRIJEME)
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="perfekt-bp">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Perfekt — فِعْلُ الْمَاضِي <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <h3>Sufiksi perfekta (jednina)</h3>
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">
-            Na korijen glagola (3. l. jd. m.r.) dodaju se sufiksi za ostala lica. Primjer: جَلَسَ (sjediti).
-          </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Lice</th>
-                  <th>Zamjenica</th>
-                  <th>Sufiks</th>
-                  <th>Primjer</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1. l. jd.</td>
-                  <td><span class="ar">أَنَا</span></td>
-                  <td><span class="ar">ـتُ</span></td>
-                  <td><span class="ar">جَلَسْتُ</span></td>
-                  <td>ja sam sjedio/la</td>
-                </tr>
-                <tr>
-                  <td>2. l. jd. m.r.</td>
-                  <td><span class="ar">أَنْتَ</span></td>
-                  <td><span class="ar">ـتَ</span></td>
-                  <td><span class="ar">جَلَسْتَ</span></td>
-                  <td>ti si sjedio</td>
-                </tr>
-                <tr>
-                  <td>2. l. jd. ž.r.</td>
-                  <td><span class="ar">أَنْتِ</span></td>
-                  <td><span class="ar">ـتِ</span></td>
-                  <td><span class="ar">جَلَسْتِ</span></td>
-                  <td>ti si sjedila</td>
-                </tr>
-                <tr>
-                  <td>3. l. jd. m.r.</td>
-                  <td><span class="ar">هُوَ</span></td>
-                  <td><span class="ar">∅</span></td>
-                  <td><span class="ar">جَلَسَ</span></td>
-                  <td>on je sjedio</td>
-                </tr>
-                <tr>
-                  <td>3. l. jd. ž.r.</td>
-                  <td><span class="ar">هِيَ</span></td>
-                  <td><span class="ar">ـتْ</span></td>
-                  <td><span class="ar">جَلَسَتْ</span></td>
-                  <td>ona je sjedila</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="rule-box">
-            <strong>Pravilo:</strong> 3. l. jd. m.r. (هُوَ) je osnovni oblik — <strong>bez sufiksa</strong>. To je
-            ujedno i rječnički oblik glagola (infinitiv).
-          </div>
-        </div>
-        <div class="sub-section">
-          <h3>Tri oblika korijena</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Oblik</th>
-                  <th>Vokali</th>
-                  <th>Primjeri</th>
-                  <th>Tip</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="ar">فَعَلَ</span></td>
-                  <td>a - a</td>
-                  <td><span class="ar">كَتَبَ، جَلَسَ، ذَهَبَ</span></td>
-                  <td>najčešći, prelazni</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">فَعِلَ</span></td>
-                  <td>a - i</td>
-                  <td><span class="ar">رَكِبَ، حَسِبَ، شَرِبَ</span></td>
-                  <td>stanje, osobina</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">فَعُلَ</span></td>
-                  <td>a - u</td>
-                  <td><span class="ar">كَبُرَ، صَغُرَ</span></td>
-                  <td>svojstvo, kvaliteta</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="sub-section">
-          <h3>Glagolska rečenica</h3>
-          <div class="rule-box">
-            <strong>Redoslijed:</strong> فِعْل (glagol) + فَاعِل (subjekat) + مَفْعُول بِهِ (objekat). Objekat je u
-            <strong>akuzativu</strong> — neodređeni: كِتَابًا (tenvin na fathi), određeni: الْكِتَابَ (fatha).
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="ar">كَتَبْتُ كِتَابًا</span></td>
-                  <td>Napisao/la sam knjigu.</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">رَكِبَتْ حَافِلَةَ مَدِينَةٍ</span></td>
-                  <td>Vozila je gradski autobus.</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">خَرَجْتِ مِنْ بَيْتٍ كَبِيرٍ</span></td>
-                  <td>Izašla si iz velike kuće.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         PREZENT — الْمُضَارِع
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="prezent-bp">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Prezent — فِعْلُ الْمُضَارِع <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <h3>Prefiksi i završeci prezenta (jednina)</h3>
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">
-            Prezent se tvori <strong>prefiksom</strong> na korijen (a ne sufiksom kao perfekt).
-            Završni vokal indikativa je <strong>damma (ـُ)</strong>. Primjer: كَتَبَ → يَكْتُبُ (pisati).
-          </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Lice</th>
-                  <th>Zamjenica</th>
-                  <th>Prefiks</th>
-                  <th>Završetak</th>
-                  <th>Primjer</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1. l. jd.</td>
-                  <td><span class="ar">أَنَا</span></td>
-                  <td><span class="ar">أَـ</span></td>
-                  <td><span class="ar">ـُ</span></td>
-                  <td><span class="ar">أَكْتُبُ</span></td>
-                  <td>(ja) pišem</td>
-                </tr>
-                <tr>
-                  <td>2. l. jd. m.r.</td>
-                  <td><span class="ar">أَنْتَ</span></td>
-                  <td><span class="ar">تَـ</span></td>
-                  <td><span class="ar">ـُ</span></td>
-                  <td><span class="ar">تَكْتُبُ</span></td>
-                  <td>(ti m.) pišeš</td>
-                </tr>
-                <tr>
-                  <td>2. l. jd. ž.r.</td>
-                  <td><span class="ar">أَنْتِ</span></td>
-                  <td><span class="ar">تَـ</span></td>
-                  <td><span class="ar">ـِينَ</span></td>
-                  <td><span class="ar">تَكْتُبِينَ</span></td>
-                  <td>(ti ž.) pišeš</td>
-                </tr>
-                <tr>
-                  <td>3. l. jd. m.r.</td>
-                  <td><span class="ar">هُوَ</span></td>
-                  <td><span class="ar">يَـ</span></td>
-                  <td><span class="ar">ـُ</span></td>
-                  <td><span class="ar">يَكْتُبُ</span></td>
-                  <td>(on) piše</td>
-                </tr>
-                <tr>
-                  <td>3. l. jd. ž.r.</td>
-                  <td><span class="ar">هِيَ</span></td>
-                  <td><span class="ar">تَـ</span></td>
-                  <td><span class="ar">ـُ</span></td>
-                  <td><span class="ar">تَكْتُبُ</span></td>
-                  <td>(ona) piše</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="info-box">
-            <strong>Pažnja:</strong> 2.l. m.r. (أَنْتَ) i 3.l. ž.r. (هِيَ) su u jednini
-            <strong>identični oblici</strong> — razlika se vidi samo iz konteksta ili dodavanjem
-            samostalne lične zamjenice.
-          </div>
-        </div>
-
-        <div class="sub-section">
-          <h3>Vokal 2. korijenskog suglasnika</h3>
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">
-            U prezentu 2. korijenski suglasnik dobija jedan od tri vokala — <strong>nepredvidiv</strong>,
-            uči se napamet uz svaki glagol.
-          </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Tip</th>
-                  <th>Perfekt</th>
-                  <th>Prezent</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="ar">يَفْعُلُ</span> (-u-)</td>
-                  <td><span class="ar">كَتَبَ، سَكَنَ</span></td>
-                  <td><span class="ar">يَكْتُبُ، يَسْكُنُ</span></td>
-                  <td>pisati, stanovati</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">يَفْعِلُ</span> (-i-)</td>
-                  <td><span class="ar">جَلَسَ</span></td>
-                  <td><span class="ar">يَجْلِسُ</span></td>
-                  <td>sjediti</td>
-                </tr>
-                <tr>
-                  <td><span class="ar">يَفْعَلُ</span> (-a-)</td>
-                  <td><span class="ar">شَرِبَ، ذَهَبَ، فَتَحَ، لَعِبَ، سَبَحَ</span></td>
-                  <td><span class="ar">يَشْرَبُ، يَذْهَبُ، يَفْتَحُ، يَلْعَبُ، يَسْبَحُ</span></td>
-                  <td>piti, otići, otvoriti, igrati se, plivati</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="rule-box">
-            <strong>Smjernica:</strong> Glagoli tipa <em>fa'ila</em> (perfekt s vokalom <em>-i-</em>) i
-            glagoli s grlenim suglasnicima (ح، ع، ه، ء، خ، غ) najčešće idu u <strong>-a-</strong> u
-            prezentu.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         IMENICE PRODUŽENE DEKLINACIJE
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="imenice-produzene-bp">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Imenice produžene deklinacije — الْأَسْمَاءُ السِّتَّةُ <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">
-            Imenice أَبٌ (otac), أَخٌ (brat) i dr. imaju produženu deklinaciju kada im se doda prisvojni sufiks.
-          </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Padež</th>
-                  <th>Produženje</th>
-                  <th>أَبٌ + ـكَ</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Nominativ (مرفوع)</td>
-                  <td>و</td>
-                  <td><span class="ar">أَبُوكَ</span></td>
-                  <td>tvoj otac (subjekat)</td>
-                </tr>
-                <tr>
-                  <td>Genitiv (مجرور)</td>
-                  <td>ي</td>
-                  <td><span class="ar">أَبِيكَ</span></td>
-                  <td>tvog oca (iza prijedloga)</td>
-                </tr>
-                <tr>
-                  <td>Akuzativ (منصوب)</td>
-                  <td>ا</td>
-                  <td><span class="ar">أَبَاكَ</span></td>
-                  <td>tvog oca (objekat)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="info-box">
-            <strong>Ovo pravilo važi samo sa prisvojnim sufiksom!</strong> Bez sufiksa, أَبٌ se deklinira normalno (أَبٌ
-            / أَبٍ / أَبًا).
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         IMATI / NEMATI
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="imati-nemati-bp">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Imati / nemati — konstrukcija لِـ + sufiks <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">
-            U arapskom nema glagola "imati". Koristi se prijedlog <span class="ar">لِـ</span> + spojena zamjenica.
-            Doslovno "meni / tebi / njemu (pripada)".
-          </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Arapski</th>
-                  <th>Translit.</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">لِي</td>
-                  <td>lī</td>
-                  <td>ja imam</td>
-                </tr>
-                <tr>
-                  <td class="ar">لَكَ</td>
-                  <td>laka</td>
-                  <td>ti imaš (m.r.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">لَكِ</td>
-                  <td>laki</td>
-                  <td>ti imaš (ž.r.)</td>
-                </tr>
-                <tr>
-                  <td class="ar">لَهُ</td>
-                  <td>lahu</td>
-                  <td>on ima</td>
-                </tr>
-                <tr>
-                  <td class="ar">لَهَا</td>
-                  <td>lahā</td>
-                  <td>ona ima</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="rule-box">
-            <span class="rule-ar">لَيْسَ + لِـ = nemati</span>
-            <div>
-              Za negaciju se ispred لِـ dodaje <span class="ar">لَيْسَ</span> ("nije"):
-              <span class="ar">لَيْسَ لِي أَخٌ</span> — <em>Nemam brata</em>. Imenica ostaje u
-              <strong>nominativu</strong> (ـٌ).
-            </div>
-          </div>
-
-          <div class="table-wrap" style="margin-top:14px;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Primjer</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="ar">لِي أَخٌ وَاحِدٌ.</td>
-                  <td>Imam jednog brata.</td>
-                </tr>
-                <tr>
-                  <td class="ar">لِي ثَلَاثَةُ أَوْلَادٍ.</td>
-                  <td>Imam troje djece.</td>
-                </tr>
-                <tr>
-                  <td class="ar">لَيْسَ لِي أَخٌ.</td>
-                  <td>Nemam brata.</td>
-                </tr>
-                <tr>
-                  <td class="ar">لَيْسَ لَهَا أُخْتٌ.</td>
-                  <td>Ona nema sestru.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         DVOJINA
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="dvojina-bp">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Dvojina — الْمُثَنَّى <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">
-            Za <strong>dvije</strong> osobe ili stvari arapski koristi posebnu kategoriju — dvojinu (مُثَنَّى). Tvori se
-            dodavanjem nastavka <span class="ar-sm">ـَانِ</span> (nom.) ili <span class="ar-sm">ـَيْنِ</span>
-            (gen./akuz.) na jedninu.
-          </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Broj</th>
-                  <th>Jednina</th>
-                  <th>Dvojina</th>
-                  <th>Množina</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>brat</td>
-                  <td class="ar">أَخٌ</td>
-                  <td class="ar">أَخَوَانِ</td>
-                  <td class="ar">إِخْوَةٌ</td>
-                </tr>
-                <tr>
-                  <td>dijete</td>
-                  <td class="ar">وَلَدٌ</td>
-                  <td class="ar">وَلَدَانِ</td>
-                  <td class="ar">أَوْلَادٌ</td>
-                </tr>
-                <tr>
-                  <td>knjiga</td>
-                  <td class="ar">كِتَابٌ</td>
-                  <td class="ar">كِتَابَانِ</td>
-                  <td class="ar">كُتُبٌ</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="rule-box">
-            <span class="rule-ar">ـَانِ / ـَيْنِ</span>
-            <div>
-              <strong>Nominativ dvojine:</strong> ـَانِ (subjekat).
-              <strong>Genitiv / akuzativ dvojine:</strong> ـَيْنِ (iza prijedloga ili kao objekat).
-              Lomljena množina (إِخْوَةٌ, أَوْلَادٌ, كُتُبٌ) je nepravilna i uči se napamet.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         PRAVILNA MNOŽINA
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="pravilna-mnozina-bp">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Pravilna množina — جَمْعُ السَّالِم <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">
-            Pravilna (zdrava) množina tvori se dodavanjem fiksnog nastavka. <strong>Tanvin se uvijek briše</strong> prije nastavka.
-          </p>
-
-          <p style="font-size:0.92rem; color:#1e40af; font-weight:600; margin:10px 0 8px;">
-            Muški rod: ـُونَ (nom.) / ـِينَ (gen. + akuz.)
-          </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Padež</th>
-                  <th>Jednina</th>
-                  <th>Množina (neodr.)</th>
-                  <th>Množina (odr.)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>nominativ</td>
-                  <td class="ar">مُعَلِّمٌ</td>
-                  <td class="ar">مُعَلِّمُونَ</td>
-                  <td class="ar">ٱلْمُعَلِّمُونَ</td>
-                </tr>
-                <tr>
-                  <td>akuzativ / genitiv</td>
-                  <td class="ar">مُعَلِّمًا / مُعَلِّمٍ</td>
-                  <td class="ar">مُعَلِّمِينَ</td>
-                  <td class="ar">ٱلْمُعَلِّمِينَ</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p style="font-size:0.92rem; color:#1e40af; font-weight:600; margin:18px 0 8px;">
-            Ženski rod: ـَاتٌ (nom.) / ـَاتٍ (gen. + akuz.) — briše se ة
-          </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Padež</th>
-                  <th>Jednina</th>
-                  <th>Množina (neodr.)</th>
-                  <th>Množina (odr.)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>nominativ</td>
-                  <td class="ar">طَبِيبَةٌ</td>
-                  <td class="ar">طَبِيبَاتٌ</td>
-                  <td class="ar">ٱلطَّبِيبَاتُ</td>
-                </tr>
-                <tr>
-                  <td>genitiv / akuzativ</td>
-                  <td class="ar">طَبِيبَةٍ</td>
-                  <td class="ar">طَبِيبَاتٍ</td>
-                  <td class="ar">ٱلطَّبِيبَاتِ</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="rule-box" style="margin-top:14px;">
-            <span class="rule-ar">ةٌ → ـَاتٌ</span>
-            <div>
-              <strong>Slaganje atributa:</strong> pravilna množina <em>za ljude</em> traži atribut u
-              odgovarajućoj množini. <strong>Množina nežive imenice</strong> (npr.
-              <span class="ar-sm">كُتُبٌ</span>, <span class="ar-sm">شَرِكَاتٌ</span>) traži atribut u
-              <strong>ženskoj jednini</strong> (npr.
-              <span class="ar-sm">شَرِكَاتٌ كَبِيرَةٌ</span> — velike firme).
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════
-         BROJANJE PREDMETA 1–10
-    ═══════════════════════════════════════ -->
-    <div class="lesson" id="brojanje-bp">
-      <div class="lesson-header" onclick="toggleLesson(this)">
-        <h2>Brojanje predmeta — brojevi 1–10 <span class="level-tag a1">A1</span></h2>
-      </div>
-      <div class="lesson-body">
-        <div class="sub-section">
-          <p style="font-size:0.88rem; color:#64748b; margin-bottom:12px;">
-            Broj <strong>1</strong> stoji iza imenice u jednini, <strong>2</strong> koristi
-            dvojinu (sam broj se ne piše), <strong>3–10</strong> traže imenicu u
-            <em>lomljenoj množini</em> i <em>genitivu</em>, s <strong>obrnutim slaganjem roda</strong>.
-          </p>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Broj</th>
-                  <th>Konstrukcija</th>
-                  <th>Bosanski</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>1</strong></td>
-                  <td class="ar">بَيْتٌ وَاحِدٌ</td>
-                  <td>jedna kuća</td>
-                </tr>
-                <tr>
-                  <td><strong>2</strong></td>
-                  <td class="ar">بَيْتَانِ (ٱثْنَانِ)</td>
-                  <td>dvije kuće — dvojina</td>
-                </tr>
-                <tr>
-                  <td><strong>3</strong></td>
-                  <td class="ar">ثَلَاثُ طَالِبَاتٍ</td>
-                  <td>tri studentice</td>
-                </tr>
-                <tr>
-                  <td><strong>4</strong></td>
-                  <td class="ar">أَرْبَعَةُ كُتُبٍ</td>
-                  <td>četiri knjige</td>
-                </tr>
-                <tr>
-                  <td><strong>5</strong></td>
-                  <td class="ar">خَمْسَةُ طُلَّابٍ</td>
-                  <td>pet studenata</td>
-                </tr>
-                <tr>
-                  <td><strong>6</strong></td>
-                  <td class="ar">سِتَّةُ أَقْلَامٍ</td>
-                  <td>šest olovaka</td>
-                </tr>
-                <tr>
-                  <td><strong>7</strong></td>
-                  <td class="ar">سَبْعَةُ كُتُبٍ</td>
-                  <td>sedam knjiga</td>
-                </tr>
-                <tr>
-                  <td><strong>8</strong></td>
-                  <td class="ar">ثَمَانِيَةُ أَقْلَامٍ</td>
-                  <td>osam olovaka</td>
-                </tr>
-                <tr>
-                  <td><strong>9</strong></td>
-                  <td class="ar">تِسْعَةُ بُيُوتٍ</td>
-                  <td>devet kuća</td>
-                </tr>
-                <tr>
-                  <td><strong>10</strong></td>
-                  <td class="ar">عَشْرَةُ طُلَّابٍ</td>
-                  <td>deset studenata</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="rule-box">
-            <span class="rule-ar">٣–١٠</span>
-            <div>
-              <strong>Obrnuto slaganje roda</strong> (3–10): uz mušku imenicu broj uzima oblik
-              <em>s</em> <span class="ar-sm">ـَة</span> (npr. <span class="ar-sm">خَمْسَةُ كُتُبٍ</span>);
-              uz žensku imenicu broj nema <span class="ar-sm">ـَة</span> (npr.
-              <span class="ar-sm">ثَلَاثُ طَالِبَاتٍ</span>). Imenica je uvijek u
-              <strong>genitivu neodređenom</strong> (kasratan).
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer nav -->
-    <div class="footer-nav">
-      <a href="index.html">Početna</a> ·
-      <a href="vokabular.html">Vokabular</a> ·
-      <a href="A0/index.html">A0</a> ·
-      <a href="A1/index.html">A1</a>
-    </div>
   </div>
 
   <script>
-    function toggleLesson(header) {
-      const lesson = header.closest('.lesson');
-      lesson.classList.toggle('collapsed');
-      const body = lesson.querySelector('.lesson-body');
-      if (lesson.classList.contains('collapsed')) {
-        body.classList.add('collapsed');
-      } else {
-        body.classList.remove('collapsed');
-      }
-    }
-
-    let allCollapsed = false;
-    function toggleAllSections() {
-      const btn = document.getElementById('toggleAllBtn');
-      allCollapsed = !allCollapsed;
-      document.querySelectorAll('.lesson').forEach(l => {
-        if (allCollapsed) {
-          l.classList.add('collapsed');
-          l.querySelector('.lesson-body').classList.add('collapsed');
-        } else {
-          l.classList.remove('collapsed');
-          l.querySelector('.lesson-body').classList.remove('collapsed');
+    // Nivoi dropdown
+    (function () {
+      var dd = document.getElementById('levelsDropdown');
+      if (!dd) return;
+      var trigger = dd.querySelector('.nav-dropdown-trigger');
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = dd.classList.toggle('force-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
         }
       });
-      btn.textContent = allCollapsed ? '▼ Proširi sve sekcije' : '▲ Skupi sve sekcije';
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // Per-section toggle
+    function toggleLesson(header) {
+      var section = header.closest('.doc-section');
+      if (section) section.classList.toggle('collapsed');
     }
 
-    function toggleNav() {
-      const links = document.querySelector('.nav-links');
-      const btn = document.getElementById('toggleNavBtn');
-      const hidden = links.classList.toggle('collapsed');
-      btn.textContent = hidden ? '▼ Prikaži navigaciju' : '▲ Sakrij navigaciju';
+    // Toggle all sections
+    var allCollapsed = false;
+    function toggleAllSections() {
+      var btn = document.querySelector('.toggle-all-btn');
+      allCollapsed = !allCollapsed;
+      document.querySelectorAll('.doc-section').forEach(function (s) {
+        if (allCollapsed) s.classList.add('collapsed');
+        else s.classList.remove('collapsed');
+      });
+      if (btn) btn.textContent = allCollapsed ? '▲ Proširi sve' : '▼ Skupi sve';
     }
   </script>
 </body>

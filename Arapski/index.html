@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="bs" dir="ltr">
 
+</html>
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,166 +11,279 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-      color: #2d3748;
-      min-height: 100vh;
-      padding: 30px 20px;
-    }
-
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .arabic-title {
-      text-align: center;
-      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
-      font-size: 2.6rem;
-      color: #1e40af;
-      direction: rtl;
-      margin-bottom: 8px;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2.4rem;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #2563eb, #059669);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #64748b;
-      margin-bottom: 32px;
-      font-size: 1rem;
-    }
-
-    .cards {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    a.card {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 20px 24px;
-      text-decoration: none;
-      color: #2d3748;
-      transition: all 0.25s;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    a.card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      border-color: #3b82f6;
-    }
-
-    .card-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
-      width: 56px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1e40af;
-      border-radius: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .card-text h2 {
-      color: #1e40af;
-      font-size: 1.15rem;
-      margin-bottom: 4px;
-    }
-
-    .card-text p {
-      color: #64748b;
-      font-size: 0.88rem;
-      line-height: 1.4;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 0.8rem;
-      color: #94a3b8;
-    }
-  </style>
+  <link rel="stylesheet" href="andalus.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="arabic-title">تَعَلَّمِ الْعَرَبِيَّةَ</div>
-    <h1>🕌 Arapski jezik — Kurs</h1>
-    <p class="subtitle">Sveobuhvatan kurs arapskog jezika</p>
+  <div class="page">
 
-    <div class="cards">
-      <a class="card" href="A0/index.html">
-        <div class="card-icon">A0</div>
-        <div class="card-text">
-          <h2>Arapski A0 — Osnove</h2>
-          <p>Abeceda, slova, samoglasnici, gramatika, zamjenice, konverzacija — 14+ lekcija</p>
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <div class="brand-mark">ع</div>
+        <div>
+          <div class="brand-name">Arapski jezik</div>
+          <div class="brand-sub">Kurs · 7 nivoa</div>
         </div>
       </a>
 
-      <a class="card" href="A1/index.html">
-        <div class="card-icon">A1</div>
-        <div class="card-text">
-          <h2>Arapski A1 — Lekcije</h2>
-          <p>Porodica, pronominalni sufiksi, glagoli, lične zamjenice</p>
-        </div>
-      </a>
+      <nav class="nav">
+        <a href="index.html" class="active">Početna</a>
 
-      <a class="card" href="vokabular.html">
-        <div class="card-icon">📖</div>
-        <div class="card-text">
-          <h2>Vokabular</h2>
-          <p>Sve riječi iz svih nivoa kursa na jednom mjestu — pretraga, filteri, praćenje napretka</p>
+        <div class="nav-dropdown" id="levelsDropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Nivoi
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 4.5L6 7.5L9 4.5" />
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-head">Svi nivoi kursa</div>
+            <a class="nav-dropdown-item" href="A0/index.html">
+              <span class="nav-dropdown-code">A0</span>
+              <span class="nav-dropdown-title">Osnove</span><span></span>
+            </a>
+            <a class="nav-dropdown-item" href="A1/index.html">
+              <span class="nav-dropdown-code">A1</span>
+              <span class="nav-dropdown-title">Lekcije</span><span></span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A2</span>
+              <span class="nav-dropdown-title">Glagolski sistem</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A3</span>
+              <span class="nav-dropdown-title">Buduće vrijeme</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A4</span>
+              <span class="nav-dropdown-title">Složene rečenice</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A5</span>
+              <span class="nav-dropdown-title">Tekstovi</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A6</span>
+              <span class="nav-dropdown-title">Akademski jezik</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+          </div>
         </div>
-      </a>
 
-      <a class="card" href="brzi-pregled.html">
-        <div class="card-icon">📋</div>
-        <div class="card-text">
-          <h2>Brzi pregled gramatike</h2>
-          <p>Zamjenice, sufiksi, prijedlozi, brojevi — ključna gramatika iz A0 i A1 na jednom mjestu</p>
+        <a href="vokabular.html">Vokabular</a>
+        <a href="brzi-pregled.html">Gramatika</a>
+      </nav>
+
+      <a class="btn btn-ghost btn-sm" href="A0/index.html">Nastavi učiti</a>
+      <button class="btn btn-ghost btn-sm menu-btn" type="button" aria-label="Meni">☰</button>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="hero-eyebrow">Bismillah · Dobro došli</div>
+        <h1 class="serif">Arapski jezik,<br>učen <em>polako</em><br>i temeljito.</h1>
+        <p>Sveobuhvatan kurs arapskog jezika kroz 7 nivoa — od prvog slova do tečnog izražavanja.
+          Interaktivno gradivo, vježbe, ispiti i potpuna referenca gramatike.</p>
+        <div class="hero-cta">
+          <a href="A0/index.html" class="btn btn-primary">Započni A0 — Osnove →</a>
+          <a href="brzi-pregled.html" class="btn btn-ghost">Brzi pregled gramatike</a>
         </div>
-      </a>
+      </div>
+      <div class="calligraphy">
+        <div class="arabic-word">تَعَلَّمِ الْعَرَبِيَّة</div>
+        <div class="arabic-translit">taʿallam al-ʿarabiyya</div>
+        <div class="arabic-meaning">— Učimo arapski —</div>
+      </div>
+    </section>
 
-      <a class="card" href="brzi-pregled.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Brzi pregled (PDF)</h2>
-          <p>Ključna gramatika u PDF formatu — za preuzimanje ili printanje</p>
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">Nivoi kursa</div>
+          <h2 class="section-title">Putanja kroz jezik</h2>
         </div>
-      </a>
-    </div>
+        <div class="pill">2 / 7 dostupno</div>
+      </div>
 
-    <footer>Kurs arapskog jezika</footer>
+      <div class="levels-grid">
+        <a href="A0/index.html" class="level-card">
+          <div class="level-card-head">
+            <div class="level-card-code">A0</div>
+            <div class="level-card-arabic">المُسْتَوَى الأَوَّل</div>
+          </div>
+          <h3 class="level-card-title">Osnove</h3>
+          <p class="level-card-desc">Abeceda, slova, samoglasnici, gramatika, član AL-, sintagme,
+            rečenice, zamjenice, konverzacija.</p>
+          <div class="level-card-foot">
+            <span class="level-status">● Dostupno</span>
+            <span class="level-card-meta">14+ lekcija · Vježbe · 3 ispita</span>
+          </div>
+        </a>
+
+        <a href="A1/index.html" class="level-card">
+          <div class="level-card-head">
+            <div class="level-card-code">A1</div>
+            <div class="level-card-arabic">المُسْتَوَى الثَّانِي</div>
+          </div>
+          <h3 class="level-card-title">Lekcije</h3>
+          <p class="level-card-desc">Porodica, pronominalni sufiksi, glagoli, lične zamjenice,
+            imenske i glagolske rečenice, brojevi.</p>
+          <div class="level-card-foot">
+            <span class="level-status">● Dostupno</span>
+            <span class="level-card-meta">Gradivo · Vježbe · Kviz kartice</span>
+          </div>
+        </a>
+
+        <a href="#" class="level-card soon" aria-disabled="true">
+          <div class="level-card-head">
+            <div class="level-card-code">A2</div>
+            <div class="level-card-arabic">المُسْتَوَى الثَّالِث</div>
+          </div>
+          <h3 class="level-card-title">Glagolski sistem</h3>
+          <p class="level-card-desc">Prošlo vrijeme, glagolski oblici, množina imenica.</p>
+          <div class="level-card-foot">
+            <span class="level-status soon">● Uskoro</span>
+          </div>
+        </a>
+
+        <a href="#" class="level-card soon" aria-disabled="true">
+          <div class="level-card-head">
+            <div class="level-card-code">A3</div>
+            <div class="level-card-arabic">المُسْتَوَى الرَّابِع</div>
+          </div>
+          <h3 class="level-card-title">Buduće vrijeme</h3>
+          <p class="level-card-desc">Prezent, futur, izvedene glagolske vrste, modalni glagoli.</p>
+          <div class="level-card-foot">
+            <span class="level-status soon">● Uskoro</span>
+          </div>
+        </a>
+
+        <a href="#" class="level-card soon" aria-disabled="true">
+          <div class="level-card-head">
+            <div class="level-card-code">A4</div>
+            <div class="level-card-arabic">المُسْتَوَى الخَامِس</div>
+          </div>
+          <h3 class="level-card-title">Složene rečenice</h3>
+          <p class="level-card-desc">Zavisne klauzule, kondicionali, pasiv, negacija u svim vremenima.</p>
+          <div class="level-card-foot">
+            <span class="level-status soon">● Uskoro</span>
+          </div>
+        </a>
+
+        <a href="#" class="level-card soon" aria-disabled="true">
+          <div class="level-card-head">
+            <div class="level-card-code">A5</div>
+            <div class="level-card-arabic">المُسْتَوَى السَّادِس</div>
+          </div>
+          <h3 class="level-card-title">Tekstovi</h3>
+          <p class="level-card-desc">Klasični tekstovi, savremeni mediji, čitanje s razumijevanjem.</p>
+          <div class="level-card-foot">
+            <span class="level-status soon">● Uskoro</span>
+          </div>
+        </a>
+
+        <a href="#" class="level-card soon" aria-disabled="true">
+          <div class="level-card-head">
+            <div class="level-card-code">A6</div>
+            <div class="level-card-arabic">المُسْتَوَى السَّابِع</div>
+          </div>
+          <h3 class="level-card-title">Akademski jezik</h3>
+          <p class="level-card-desc">Stilistika, retorika, prevođenje, formalno izražavanje.</p>
+          <div class="level-card-foot">
+            <span class="level-status soon">● Uskoro</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">Alati i reference</div>
+          <h2 class="section-title">Sve na jednom mjestu</h2>
+        </div>
+      </div>
+
+      <div class="tools">
+        <a href="vokabular.html" class="tool">
+          <div class="tool-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z" />
+              <path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5" />
+            </svg>
+          </div>
+          <h4 class="tool-title">Vokabular</h4>
+          <p class="tool-desc">Sve riječi iz svih nivoa kursa — pretraga, filteri, praćenje napretka.</p>
+        </a>
+
+        <a href="brzi-pregled.html" class="tool">
+          <div class="tool-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="16" height="18" rx="2" />
+              <path d="M8 7h8M8 11h8M8 15h5" />
+            </svg>
+          </div>
+          <h4 class="tool-title">Brzi pregled gramatike</h4>
+          <p class="tool-desc">Zamjenice, sufiksi, prijedlozi, brojevi — ključna gramatika iz A0 i A1.</p>
+        </a>
+
+        <a href="brzi-pregled.pdf" target="_blank" rel="noopener" class="tool">
+          <div class="tool-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <path d="M14 2v6h6" />
+              <path d="M9 13l2 2 4-4" />
+            </svg>
+          </div>
+          <h4 class="tool-title">Brzi pregled (PDF)</h4>
+          <p class="tool-desc">Ključna gramatika u PDF formatu — za preuzimanje ili printanje.</p>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 · Kurs arapskog jezika</span>
+      <span class="footer-arabic">وَفَّقَكُمُ الله</span>
+    </footer>
+
   </div>
+
+  <script>
+    (function () {
+      var dd = document.getElementById('levelsDropdown');
+      if (!dd) return;
+      var trigger = dd.querySelector('.nav-dropdown-trigger');
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = dd.classList.toggle('force-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>

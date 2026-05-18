@@ -4,243 +4,268 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arapski A0 - Kurs arapskog jezika</title>
+  <title>Arapski A0 — Osnove</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-      color: #2d3748;
-      min-height: 100vh;
-      padding: 30px 20px;
-    }
-
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .arabic-title {
-      text-align: center;
-      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
-      font-size: 2.2rem;
-      color: #1e40af;
-      direction: rtl;
-      margin-bottom: 8px;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2.4rem;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #2563eb, #059669);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #64748b;
-      margin-bottom: 32px;
-      font-size: 1rem;
-    }
-
-    .cards {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    a.card {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 20px 24px;
-      text-decoration: none;
-      color: #2d3748;
-      transition: all 0.25s;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    a.card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      border-color: #3b82f6;
-    }
-
-    .card-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1e40af;
-      border-radius: 12px;
-    }
-
-    .card-text h2 {
-      font-size: 1.15rem;
-      color: #1e40af;
-      margin-bottom: 4px;
-    }
-
-    .card-text p {
-      font-size: 0.88rem;
-      color: #64748b;
-      line-height: 1.4;
-    }
-
-    .section-label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #64748b;
-      margin-top: 28px;
-      margin-bottom: 6px;
-      padding-left: 4px;
-      font-weight: 600;
-    }
-
-    .section-label:first-child {
-      margin-top: 0;
-    }
-
-    a.card.back {
-      background: #eff6ff;
-      border-color: #bfdbfe;
-      color: #1e40af;
-      padding: 10px 16px;
-      margin-bottom: 28px;
-      border-radius: 10px;
-      box-shadow: none;
-      font-weight: 500;
-    }
-
-    a.card.back:hover {
-      background: #dbeafe;
-      transform: none;
-      box-shadow: none;
-      border-color: #93c5fd;
-    }
-
-    a.card.back .card-icon {
-      font-size: 1rem;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: #fff;
-      border-color: #bfdbfe;
-    }
-
-    a.card.back .card-text h2 {
-      font-size: 0.9rem;
-      color: #1e40af;
-      margin-bottom: 0;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 0.8rem;
-      color: #94a3b8;
-    }
-  </style>
+  <link rel="stylesheet" href="../andalus.css">
 </head>
 
 <body>
-  <div class="container">
-    <a class="card back" href="../index.html">
-      <div class="card-icon">←</div>
-      <div class="card-text">
-        <h2>Svi nivoi kursa</h2>
-      </div>
-    </a>
+  <div class="page">
 
-    <div class="arabic-title">العَرَبِيَّةُ</div>
-    <h1>🕌 Arapski A0 — Osnove</h1>
-    <p class="subtitle">Alfabet, fonologija i osnovna gramatika</p>
-
-    <div class="cards">
-      <div class="section-label">Interaktivno</div>
-
-      <a class="card" href="gradivo.html">
-        <div class="card-icon">📚</div>
-        <div class="card-text">
-          <h2>Gradivo</h2>
-          <p>Abeceda, slova, samoglasnici, gramatika, član AL-, sintagme, rečenice, zamjenice, konverzacija</p>
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <div class="brand-mark">ع</div>
+        <div>
+          <div class="brand-name">Arapski jezik</div>
+          <div class="brand-sub">Kurs · 7 nivoa</div>
         </div>
       </a>
 
-      <a class="card" href="vjezbe.html">
-        <div class="card-icon">✏️</div>
-        <div class="card-text">
-          <h2>Vježbe</h2>
-          <p>Sastavi slova, rastavi riječ, prevedi, član AL-, sintagma i rečenica, rod, zamjenice, kviz</p>
-        </div>
-      </a>
+      <nav class="nav">
+        <a href="../index.html">Početna</a>
 
-      <a class="card" href="ispiti-vjezbe/ispiti.html">
-        <div class="card-icon">📝</div>
-        <div class="card-text">
-          <h2>Ispiti</h2>
-          <p>3 interaktivna testa — zamjenice, pokazne zamjenice, abeceda, član AL-, rečenice, slova</p>
+        <div class="nav-dropdown active" id="levelsDropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Nivoi
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 4.5L6 7.5L9 4.5" />
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-head">Svi nivoi kursa</div>
+            <a class="nav-dropdown-item active" href="index.html">
+              <span class="nav-dropdown-code">A0</span>
+              <span class="nav-dropdown-title">Osnove</span><span></span>
+            </a>
+            <a class="nav-dropdown-item" href="../A1/index.html">
+              <span class="nav-dropdown-code">A1</span>
+              <span class="nav-dropdown-title">Lekcije</span><span></span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A2</span>
+              <span class="nav-dropdown-title">Glagolski sistem</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A3</span>
+              <span class="nav-dropdown-title">Buduće vrijeme</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A4</span>
+              <span class="nav-dropdown-title">Složene rečenice</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A5</span>
+              <span class="nav-dropdown-title">Tekstovi</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A6</span>
+              <span class="nav-dropdown-title">Akademski jezik</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+          </div>
         </div>
-      </a>
 
-      <div class="section-label">PDF dokumenti</div>
+        <a href="../vokabular.html">Vokabular</a>
+        <a href="../brzi-pregled.html">Gramatika</a>
+      </nav>
 
-      <a class="card" href="gradivo.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Gradivo (PDF)</h2>
-          <p>Kompletno gradivo u PDF formatu — za preuzimanje ili printanje</p>
-        </div>
-      </a>
+      <a class="btn btn-ghost btn-sm" href="gradivo.html">Nastavi učiti</a>
+      <button class="btn btn-ghost btn-sm menu-btn" type="button" aria-label="Meni">☰</button>
+    </header>
 
-      <a class="card" href="ispiti-vjezbe/ispit-1.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Ispit 1 (PDF)</h2>
-          <p>Prvi ispit u PDF formatu — za preuzimanje ili printanje</p>
-        </div>
-      </a>
-
-      <a class="card" href="ispiti-vjezbe/ispit-2.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Ispit 2 (PDF)</h2>
-          <p>Drugi ispit u PDF formatu — za preuzimanje ili printanje</p>
-        </div>
-      </a>
-
-      <a class="card" href="ispiti-vjezbe/ispit-3.pdf" target="_blank">
-        <div class="card-icon">📄</div>
-        <div class="card-text">
-          <h2>Ispit 3 (PDF)</h2>
-          <p>Treći ispit u PDF formatu — za preuzimanje ili printanje</p>
-        </div>
-      </a>
+    <div class="breadcrumb">
+      <a href="../index.html">← Svi nivoi</a>
+      <span>·</span>
+      <span>A0</span>
     </div>
 
-    <footer>Kurs arapskog jezika — Arapski A0</footer>
+    <section class="inner-hero">
+      <div>
+        <div class="level-badge">Nivo · A0</div>
+        <h1 class="serif">Arapski A0 — Osnove</h1>
+        <p>Alfabet, fonologija i osnovna gramatika. Abeceda, slova, samoglasnici, član AL-,
+          sintagme, rečenice, zamjenice i konverzacija — kroz interaktivno gradivo, vježbe i tri ispita.</p>
+      </div>
+      <div class="inner-arabic">الْعَرَبِيَّةُ</div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">Interaktivno gradivo</div>
+          <h2 class="section-title">Lekcije, vježbe i ispiti</h2>
+        </div>
+        <div class="pill">3 modula</div>
+      </div>
+
+      <div class="lessons">
+        <a class="lesson" href="gradivo.html">
+          <div class="lesson-num">01</div>
+          <div>
+            <h3 class="lesson-title">Gradivo</h3>
+            <p class="lesson-desc">Abeceda, slova, samoglasnici, gramatika, član AL-, sintagme,
+              rečenice, zamjenice, konverzacija.</p>
+          </div>
+          <div class="lesson-meta">
+            <span class="pill">Interaktivno</span>
+            <div class="arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a class="lesson" href="vjezbe.html">
+          <div class="lesson-num">02</div>
+          <div>
+            <h3 class="lesson-title">Vježbe</h3>
+            <p class="lesson-desc">Sastavi slova, rastavi riječ, prevedi, član AL-, sintagma i rečenica,
+              rod, zamjenice, kviz.</p>
+          </div>
+          <div class="lesson-meta">
+            <span class="pill">Interaktivno</span>
+            <div class="arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a class="lesson" href="ispiti-vjezbe/ispiti.html">
+          <div class="lesson-num">03</div>
+          <div>
+            <h3 class="lesson-title">Ispiti</h3>
+            <p class="lesson-desc">3 interaktivna testa — zamjenice, pokazne zamjenice, abeceda,
+              član AL-, rečenice, slova.</p>
+          </div>
+          <div class="lesson-meta">
+            <span class="pill">Ispiti</span>
+            <div class="arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">Za preuzimanje</div>
+          <h2 class="section-title">PDF dokumenti</h2>
+        </div>
+      </div>
+
+      <a class="pdf-row" href="gradivo.pdf" target="_blank" rel="noopener">
+        <div class="pdf-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6" />
+          </svg>
+        </div>
+        <div class="pdf-meta">
+          <h4>Gradivo (A0) — PDF</h4>
+          <p>Kompletno gradivo u PDF formatu — za preuzimanje ili printanje.</p>
+        </div>
+        <span class="btn btn-ghost btn-sm">Preuzmi</span>
+      </a>
+
+      <a class="pdf-row" href="ispiti-vjezbe/ispit-1.pdf" target="_blank" rel="noopener">
+        <div class="pdf-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6" />
+          </svg>
+        </div>
+        <div class="pdf-meta">
+          <h4>Ispit 1 — PDF</h4>
+          <p>Prvi ispit u PDF formatu — za preuzimanje ili printanje.</p>
+        </div>
+        <span class="btn btn-ghost btn-sm">Preuzmi</span>
+      </a>
+
+      <a class="pdf-row" href="ispiti-vjezbe/ispit-2.pdf" target="_blank" rel="noopener">
+        <div class="pdf-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6" />
+          </svg>
+        </div>
+        <div class="pdf-meta">
+          <h4>Ispit 2 — PDF</h4>
+          <p>Drugi ispit u PDF formatu — za preuzimanje ili printanje.</p>
+        </div>
+        <span class="btn btn-ghost btn-sm">Preuzmi</span>
+      </a>
+
+      <a class="pdf-row" href="ispiti-vjezbe/ispit-3.pdf" target="_blank" rel="noopener">
+        <div class="pdf-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6" />
+          </svg>
+        </div>
+        <div class="pdf-meta">
+          <h4>Ispit 3 — PDF</h4>
+          <p>Treći ispit u PDF formatu — za preuzimanje ili printanje.</p>
+        </div>
+        <span class="btn btn-ghost btn-sm">Preuzmi</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 · Kurs arapskog jezika — A0</span>
+      <span class="footer-arabic">وَفَّقَكُمُ الله</span>
+    </footer>
+
   </div>
+
+  <script>
+    (function () {
+      var dd = document.getElementById('levelsDropdown');
+      if (!dd) return;
+      var trigger = dd.querySelector('.nav-dropdown-trigger');
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = dd.classList.toggle('force-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>

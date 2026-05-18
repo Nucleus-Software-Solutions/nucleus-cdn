@@ -4,371 +4,198 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arapski — Vokabular</title>
+  <title>Vokabular — Arapski jezik</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="andalus.css">
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-      color: #2d3748;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container { max-width: 1100px; margin: 0 auto; }
-
-    h1 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #2563eb, #059669);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle { text-align: center; color: #64748b; margin-bottom: 24px; font-size: 0.95rem; }
-
-    /* Progress bar */
-    .progress-bar {
-      height: 6px;
-      background: #e2e8f0;
-      border-radius: 3px;
-      margin-bottom: 18px;
-      overflow: hidden;
-    }
-    .progress-bar .fill {
-      height: 100%;
-      background: linear-gradient(90deg, #2563eb, #059669);
-      transition: width 0.3s;
-    }
-
-    /* Nav (kontrole + filteri) */
-    .nav {
-      background: #fff;
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 20px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
-    .nav-section + .nav-section { margin-top: 10px; }
-    .nav-section { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; }
-
-    .search-box {
-      width: 100%;
-      max-width: 380px;
-      padding: 8px 14px;
-      border-radius: 20px;
-      border: 1px solid #bfdbfe;
-      background: #fff;
-      color: #1e293b;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .search-box::placeholder { color: #94a3b8; }
-    .search-box:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.12); }
-
-    /* Filter dugmadi (kategorija + nivo + toggle) — A1 chip stil */
-    .controls button,
-    .level-btn,
-    .toggle-btn {
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #bfdbfe;
-      background: #eff6ff;
-      color: #1e40af;
-      font-weight: 500;
-    }
-
-    .controls button:hover,
-    .level-btn:hover { background: #dbeafe; border-color: #3b82f6; }
-
-    .controls button.active,
-    .level-btn.active {
-      background: #1e40af;
-      color: #fff;
-      border-color: #1e40af;
-    }
-
-    .toggle-btn {
-      border-color: #86efac;
-      background: #f0fdf4;
-      color: #166534;
-    }
-    .toggle-btn:hover { background: #dcfce7; border-color: #22c55e; }
-    .toggle-btn.hiding {
-      border-color: #fca5a5;
-      background: #fef2f2;
-      color: #991b1b;
-    }
-    .toggle-btn.hiding:hover { background: #fecaca; border-color: #ef4444; }
-
-    .stats {
-      text-align: center;
-      padding: 6px 10px;
-      font-size: 0.82rem;
-      color: #64748b;
-      margin-bottom: 16px;
-    }
-
-    /* Kategorija sekcija — kao A1 lesson */
-    .cat-section {
-      background: #fff;
-      border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 22px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-    }
-
-    .cat-header {
-      color: #1e40af;
-      font-size: 1.2rem;
-      border-bottom: 2px solid #3b82f6;
-      padding-bottom: 8px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .cat-header .cat-count {
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: #64748b;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 10px;
-    }
-
-    .card {
-      background: #fafbfc;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 12px 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card:hover {
-      border-color: #3b82f6;
-      background: #fff;
-      box-shadow: 0 4px 10px rgba(59,130,246,0.1);
-    }
-
-    .card.learned {
-      border-color: #86efac;
-      background: #f0fdf4;
-    }
-
-    .card.hidden-learned { display: none; }
-
-    .card .left { flex: 1; min-width: 0; }
-
-    .card .arabic {
-      font-size: 1.55rem;
-      color: #1e40af;
-      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
-      direction: rtl;
-      line-height: 1.4;
-    }
-
-    .card .trans {
-      font-size: 0.8rem;
-      color: #64748b;
-      font-style: italic;
-      margin-top: 2px;
-    }
-
-    .card .bs {
-      font-size: 0.92rem;
-      color: #334155;
-      margin-top: 2px;
-    }
-
-    .card .meta {
-      display: flex;
-      gap: 6px;
-      margin-top: 4px;
-      align-items: center;
-    }
-
-    .level-tag {
-      font-size: 0.62rem;
-      padding: 1px 7px;
-      border-radius: 8px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .level-tag.a0 { background: #dcfce7; color: #166534; }
-    .level-tag.a1 { background: #dbeafe; color: #1e40af; }
-
-    .card .check {
-      font-size: 1.1rem;
-      color: #cbd5e1;
-      flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      border: 1px solid #cbd5e1;
-      transition: all 0.2s;
-      background: #fff;
-    }
-
-    .card.learned .check {
-      color: #fff;
-      border-color: #16a34a;
-      background: #16a34a;
-    }
-
-    .loading-msg {
-      text-align: center;
+    /* Page-specific tweaks: hide-learned mode + empty state */
+    .hide-learned-mode .vok-card.learned { display: none; }
+    .vok-category.empty { display: none; }
+    .vok-empty {
+      margin: 40px 56px;
       padding: 40px;
-      color: #94a3b8;
-      font-size: 0.9rem;
-    }
-
-    /* Footer nav (kao A1) */
-    .footer-nav {
       text-align: center;
-      margin-top: 40px;
-      padding: 16px;
-      border-top: 1px solid #e2e8f0;
+      color: var(--ink-3);
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
     }
-    .footer-nav a {
-      margin: 0 12px;
-      color: #3b82f6;
-      text-decoration: none;
-      font-size: 0.88rem;
-    }
-    .footer-nav a:hover { text-decoration: underline; }
-
-    /* Print: dictionary stil — kompaktne kolone, sve grupe vidljive, bez kontrola */
-    @media print {
-      body { background: #fff; padding: 0; font-size: 10pt; }
-      .progress-bar, .nav, .stats, .footer-nav, .check { display: none !important; }
-      .container { max-width: none; }
-      h1 { -webkit-text-fill-color: #1e40af; color: #1e40af; background: none; font-size: 1.6rem; }
-      .subtitle { display: none; }
-
-      .cat-section {
-        box-shadow: none;
-        border: none;
-        padding: 0;
-        margin-bottom: 8px;
-        page-break-inside: auto;
-        break-inside: auto;
-      }
-      .cat-header {
-        font-size: 1.05rem;
-        border-bottom: 1px solid #1e40af;
-        padding-bottom: 4px;
-        margin-bottom: 6px;
-        page-break-after: avoid;
-      }
-      .cat-header .cat-count { display: none; }
-
-      /* Dvije kolone na A4 za kompaktan prikaz */
-      .card-grid {
-        display: block;
-        column-count: 2;
-        column-gap: 12px;
-      }
-
-      .card {
-        background: #fff !important;
-        border: none !important;
-        border-bottom: 1px solid #e2e8f0 !important;
-        border-radius: 0;
-        padding: 4px 0;
-        margin-bottom: 0;
-        box-shadow: none !important;
-        display: block;
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-      .card.learned { background: #fff !important; }
-      .card.hidden-learned { display: block !important; }  /* sve riječi u printu */
-
-      .card .arabic { font-size: 1.05rem; color: #1e40af; display: inline-block; margin-right: 6px; }
-      .card .trans { font-size: 0.72rem; display: inline; color: #64748b; }
-      .card .bs { font-size: 0.78rem; display: inline; color: #334155; margin-left: 6px; }
-      .card .bs::before { content: '— '; }
-      .card .meta { display: none; }
-
-      a { color: #000; text-decoration: none; }
-      @page { size: A4; margin: 1.5cm 1.2cm; }
+    @media (max-width: 720px) {
+      .vok-empty { margin: 24px 20px; padding: 28px 20px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>🕌 Arapski — Vokabular</h1>
-    <p class="subtitle">Sve riječi iz kursa (A0 + A1) — klikni karticu da označiš kao naučeno</p>
+  <div class="page">
 
-    <div class="progress-bar">
-      <div class="fill" id="progFill"></div>
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <div class="brand-mark">ع</div>
+        <div>
+          <div class="brand-name">Arapski jezik</div>
+          <div class="brand-sub">Kurs · 7 nivoa</div>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html">Početna</a>
+
+        <div class="nav-dropdown" id="levelsDropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Nivoi
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 4.5L6 7.5L9 4.5" />
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-head">Svi nivoi kursa</div>
+            <a class="nav-dropdown-item" href="A0/index.html">
+              <span class="nav-dropdown-code">A0</span>
+              <span class="nav-dropdown-title">Osnove</span><span></span>
+            </a>
+            <a class="nav-dropdown-item" href="A1/index.html">
+              <span class="nav-dropdown-code">A1</span>
+              <span class="nav-dropdown-title">Lekcije</span><span></span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A2</span>
+              <span class="nav-dropdown-title">Glagolski sistem</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A3</span>
+              <span class="nav-dropdown-title">Buduće vrijeme</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A4</span>
+              <span class="nav-dropdown-title">Složene rečenice</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A5</span>
+              <span class="nav-dropdown-title">Tekstovi</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A6</span>
+              <span class="nav-dropdown-title">Akademski jezik</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="vokabular.html" class="active">Vokabular</a>
+        <a href="brzi-pregled.html">Gramatika</a>
+      </nav>
+
+      <a class="btn btn-ghost btn-sm" href="A0/index.html">Nastavi učiti</a>
+      <button class="btn btn-ghost btn-sm menu-btn" type="button" aria-label="Meni">☰</button>
+    </header>
+
+    <section class="inner-hero">
+      <div>
+        <div class="level-badge">Referenca · A0 + A1</div>
+        <h1 class="serif">Vokabular</h1>
+        <p>Sve riječi iz kursa na jednom mjestu — pretraga, filteri po kategorijama i nivoima, praćenje naučenog.</p>
+      </div>
+      <div class="inner-arabic">مُفْرَدَات</div>
+    </section>
+
+    <div class="vok-controls">
+      <div class="vok-search">
+        <svg class="vok-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="M21 21l-4.3-4.3"/>
+        </svg>
+        <input type="text" id="search" placeholder="Pretraži riječi — bosanski, arapski, ili transliteraciju…">
+      </div>
+      <div class="vok-filters" id="catFilters">
+        <button class="vok-chip active" data-cat="all">Sve</button>
+        <button class="vok-chip" data-cat="vjera">Vjera</button>
+        <button class="vok-chip" data-cat="ljudi">Ljudi</button>
+        <button class="vok-chip" data-cat="vlast">Vlast / rat</button>
+        <button class="vok-chip" data-cat="svakodnevno">Svakodnevno</button>
+        <button class="vok-chip" data-cat="glagoli">Glagoli</button>
+        <button class="vok-chip" data-cat="pridjevi">Pridjevi</button>
+        <button class="vok-chip" data-cat="fraze">Fraze</button>
+        <button class="vok-chip" data-cat="pozdravi">Pozdravi</button>
+        <button class="vok-chip" data-cat="predmeti">Predmeti</button>
+        <button class="vok-chip" data-cat="porodica">Porodica</button>
+        <button class="vok-chip" data-cat="hrana">Hrana / Priroda</button>
+        <button class="vok-chip" data-cat="zivotinje">Životinje</button>
+        <button class="vok-chip" data-cat="odjeca">Odjeća</button>
+        <button class="vok-chip" data-cat="pojmovi">Pojmovi</button>
+        <button class="vok-chip" data-cat="zanimanja">Zanimanja</button>
+        <button class="vok-chip" data-cat="brojevi">Brojevi</button>
+        <button class="vok-chip" data-cat="zamjenice">Zamjenice</button>
+        <button class="vok-chip" data-cat="mjesta">Mjesta</button>
+        <button class="vok-chip" data-cat="pitanja">Pitanja / Prijedlozi</button>
+        <button class="vok-chip" data-cat="vrijeme">Vrijeme</button>
+      </div>
+      <div class="vok-toolbar">
+        <div class="vok-levels" id="levelFilters">
+          <button class="vok-chip active" data-level="all">Svi nivoi</button>
+          <button class="vok-chip" data-level="A0">A0</button>
+          <button class="vok-chip" data-level="A1">A1</button>
+        </div>
+        <button class="vok-toggle" id="toggleLearned" type="button">
+          <span>👁</span> <span class="vok-toggle-label">Sakrij naučene</span>
+        </button>
+      </div>
     </div>
 
-    <nav class="nav">
-      <div class="nav-section">
-        <input type="text" class="search-box" id="search" placeholder="Pretraži (bosanski, arapski ili transliteraciju)...">
-      </div>
-      <div class="nav-section controls">
-        <button class="active" data-cat="all">Sve</button>
-        <button data-cat="vjera">Vjera</button>
-        <button data-cat="ljudi">Ljudi</button>
-        <button data-cat="vlast">Vlast/rat</button>
-        <button data-cat="svakodnevno">Svakodnevno</button>
-        <button data-cat="glagoli">Glagoli</button>
-        <button data-cat="pridjevi">Pridjevi</button>
-        <button data-cat="fraze">Fraze</button>
-        <button data-cat="pozdravi">Pozdravi</button>
-        <button data-cat="predmeti">Predmeti</button>
-        <button data-cat="porodica">Porodica</button>
-        <button data-cat="hrana">Hrana/Priroda</button>
-        <button data-cat="zivotinje">Životinje</button>
-        <button data-cat="odjeca">Odjeća</button>
-        <button data-cat="pojmovi">Pojmovi</button>
-        <button data-cat="zanimanja">Zanimanja</button>
-        <button data-cat="brojevi">Brojevi</button>
-        <button data-cat="zamjenice">Zamjenice</button>
-        <button data-cat="mjesta">Mjesta</button>
-        <button data-cat="pitanja">Pitanja/Prijedlozi</button>
-        <button data-cat="vrijeme">Vrijeme</button>
-      </div>
-      <div class="nav-section">
-        <button class="level-btn active" data-level="all">Svi nivoi</button>
-        <button class="level-btn" data-level="A0">A0</button>
-        <button class="level-btn" data-level="A1">A1</button>
-        <button class="toggle-btn" id="toggleLearned">&#128065; Sakrij naučene</button>
-      </div>
-    </nav>
+    <div class="vok-stats" id="stats">
+      <em>0</em> / 0 naučeno · Prikazano: 0
+    </div>
 
-    <div class="stats" id="stats"></div>
     <div id="grid">
-      <div class="loading-msg">Učitavanje...</div>
+      <div class="vok-empty">Učitavanje…</div>
     </div>
+
+    <footer class="footer">
+      <span>© 2026 · Kurs arapskog jezika · Vokabular</span>
+      <span class="footer-arabic">وَفَّقَكُمُ الله</span>
+    </footer>
+
   </div>
+
+  <script>
+    // ----- Nivoi dropdown (kopija iz index.html) -----
+    (function () {
+      var dd = document.getElementById('levelsDropdown');
+      if (!dd) return;
+      var trigger = dd.querySelector('.nav-dropdown-trigger');
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = dd.classList.toggle('force-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 
   <script>
     const words = [
@@ -1113,7 +940,7 @@
       { ar: 'غُرْفَةُ الْجُلُوسِ', tr: 'ghurfat al-julus', bs: 'dnevna soba', cat: 'mjesta', lvl: 'A1' },
     ];
 
-    // Mapiranje kategorija \u2192 ljudska imena (za prikaz sekcijskog naslova)
+    // Mapiranje kategorija → ljudska imena + arapski nazivi
     const CATEGORY_LABELS = {
       vjera: 'Vjera',
       ljudi: 'Ljudi',
@@ -1126,8 +953,8 @@
       predmeti: 'Predmeti',
       porodica: 'Porodica',
       hrana: 'Hrana / Priroda',
-      zivotinje: '\u017divotinje',
-      odjeca: 'Odje\u0107a',
+      zivotinje: 'Životinje',
+      odjeca: 'Odjeća',
       pojmovi: 'Pojmovi',
       zanimanja: 'Zanimanja',
       brojevi: 'Brojevi',
@@ -1137,7 +964,30 @@
       vrijeme: 'Vrijeme',
     };
 
-    // Redoslijed kategorija (prema kursu \u2014 A0 prvo, A1 dodato kasnije)
+    const CATEGORY_ARABIC = {
+      vjera: 'الدِّين',
+      ljudi: 'النَّاس',
+      vlast: 'السُّلْطَة',
+      glagoli: 'الأَفْعَال',
+      pridjevi: 'الصِّفَات',
+      fraze: 'العِبَارَات',
+      pozdravi: 'التَّحِيَّات',
+      predmeti: 'الأَشْيَاء',
+      porodica: 'العَائِلَة',
+      hrana: 'الطَّعَام',
+      zivotinje: 'الحَيَوَانَات',
+      odjeca: 'المَلَابِس',
+      pojmovi: 'المَفَاهِيم',
+      zanimanja: 'المِهَن',
+      brojevi: 'الأَرْقَام',
+      zamjenice: 'الضَّمَائِر',
+      mjesta: 'الأَمَاكِن',
+      pitanja: 'الأَسْئِلَة',
+      vrijeme: 'الوَقْت',
+      svakodnevno: 'يَوْمِيًّا',
+    };
+
+    // Redoslijed kategorija (prema kursu — A0 prvo, A1 dodato kasnije)
     const CATEGORY_ORDER = [
       'vjera', 'ljudi', 'porodica', 'vlast', 'svakodnevno', 'mjesta',
       'predmeti', 'hrana', 'zivotinje', 'odjeca',
@@ -1169,24 +1019,25 @@
       } catch (e) { /* silent */ }
     }
 
+    function escapeHTML(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
     function cardHTML(w) {
       const idx = words.indexOf(w);
-      const isLearned = learned[idx];
-      const shouldHide = hideLearned && isLearned;
-      return {
-        html: `<div class="card ${isLearned ? 'learned' : ''} ${shouldHide ? 'hidden-learned' : ''}" onclick="toggle(${idx})">
-  <div class="left">
-    <div class="arabic">${w.ar}</div>
-    <div class="trans">${w.tr}</div>
-    <div class="bs">${w.bs}</div>
-    <div class="meta">
-      <span class="level-tag ${w.lvl.toLowerCase()}">${w.lvl}</span>
-    </div>
-  </div>
-  <div class="check">${isLearned ? '\u2713' : ''}</div>
-</div>`,
-        visible: !shouldHide,
-      };
+      const isLearned = !!learned[idx];
+      const levelClass = w.lvl === 'A1' ? 'vok-word-level a1' : 'vok-word-level';
+      return `<div class="vok-card${isLearned ? ' learned' : ''}" data-idx="${idx}" onclick="toggle(${idx})">
+        <div class="vok-word-ar">${escapeHTML(w.ar)}</div>
+        <div class="vok-word-translit">${escapeHTML(w.tr)}</div>
+        <div class="vok-word-meta">
+          <span class="${levelClass}">${w.lvl}</span>
+          <button class="vok-check-circle" aria-label="označi" onclick="event.stopPropagation(); toggle(${idx})"></button>
+        </div>
+        <div class="vok-word-bs">${escapeHTML(w.bs)}</div>
+      </div>`;
     }
 
     function render(filter) {
@@ -1214,31 +1065,48 @@
         return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
       });
 
+      // Hide-learned mode: applied via body class; cards themselves get .learned
+      document.body.classList.toggle('hide-learned-mode', hideLearned);
+
       let visibleCount = 0;
       const sectionsHTML = sortedCats.map(cat => {
-        const cards = byCat[cat].map(cardHTML);
-        cards.forEach(c => { if (c.visible) visibleCount++; });
+        const list = byCat[cat];
+        const cards = list.map(cardHTML).join('');
+        // count visible considering hide-learned mode
+        list.forEach(w => {
+          const idx = words.indexOf(w);
+          const isLearned = !!learned[idx];
+          if (!(hideLearned && isLearned)) visibleCount++;
+        });
         const label = CATEGORY_LABELS[cat] || cat;
-        const count = byCat[cat].length;
-        return `<section class="cat-section" data-cat="${cat}">
-  <h2 class="cat-header">${label} <span class="cat-count">${count} rije\u010di</span></h2>
-  <div class="card-grid">${cards.map(c => c.html).join('')}</div>
-</section>`;
+        const arName = CATEGORY_ARABIC[cat] || '';
+        const count = list.length;
+        return `<section class="vok-category" data-cat="${cat}">
+          <div class="vok-cat-head">
+            <h2 class="vok-cat-title">
+              <span>${label}</span>
+              ${arName ? `<span class="vok-cat-title-ar">${arName}</span>` : ''}
+            </h2>
+            <span class="vok-cat-count">${count} RIJEČI</span>
+          </div>
+          <div class="vok-grid">${cards}</div>
+        </section>`;
       }).join('');
 
-      grid.innerHTML = sectionsHTML || '<div class="loading-msg">Nema rezultata za zadane filtere.</div>';
+      grid.innerHTML = sectionsHTML || '<div class="vok-empty">Nema rezultata za zadane filtere.</div>';
 
       const total = words.length;
-      const learnedCount = Object.keys(learned).length;
-      document.getElementById('stats').textContent = `${learnedCount}/${total} nau\u010deno \u00b7 Prikazano: ${visibleCount}`;
-      document.getElementById('progFill').style.width = `${(learnedCount / total) * 100}%`;
+      const learnedCount = Object.keys(learned).filter(k => learned[k]).length;
+      document.getElementById('stats').innerHTML =
+        `<em>${learnedCount}</em> / ${total} naučeno · Prikazano: ${visibleCount}`;
 
       const btn = document.getElementById('toggleLearned');
+      const label = btn.querySelector('.vok-toggle-label');
       if (hideLearned) {
-        btn.innerHTML = '&#128065; Prika\u017ei nau\u010dene';
+        label.textContent = 'Prikaži naučene';
         btn.classList.add('hiding');
       } else {
-        btn.innerHTML = '&#128065; Sakrij nau\u010dene';
+        label.textContent = 'Sakrij naučene';
         btn.classList.remove('hiding');
       }
     }
@@ -1249,21 +1117,22 @@
       saveLearned();
       render();
     }
+    window.toggle = toggle;
 
     document.getElementById('search').addEventListener('input', e => render(e.target.value));
 
-    document.querySelectorAll('.controls button').forEach(btn => {
+    document.querySelectorAll('#catFilters .vok-chip').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#catFilters .vok-chip').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         activeCategory = btn.dataset.cat;
         render();
       });
     });
 
-    document.querySelectorAll('.level-btn').forEach(btn => {
+    document.querySelectorAll('#levelFilters .vok-chip').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#levelFilters .vok-chip').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         activeLevel = btn.dataset.level;
         render();
@@ -1277,13 +1146,6 @@
 
     loadLearned();
   </script>
-
-  <div class="footer-nav">
-    <a href="index.html">Početna</a>
-    <a href="A0/index.html">A0</a>
-    <a href="A1/index.html">A1</a>
-    <a href="brzi-pregled.html">Brzi pregled</a>
-  </div>
 </body>
 
 </html>
