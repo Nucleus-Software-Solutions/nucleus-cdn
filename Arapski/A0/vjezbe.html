@@ -2084,9 +2084,17 @@
     .vj-feedback.hidden { display: none; }
     .vj-feedback.shown { display: flex; }
     .vj-feedback em { font-style: italic; color: var(--ink-3); }
-    /* Quiz cards: show .bs.hidden-answer only when revealed */
-    .quiz-card .hidden-answer { opacity: 0.15; filter: blur(3px); transition: all 0.25s; user-select: none; }
-    .quiz-card.revealed .hidden-answer { opacity: 1; filter: none; }
+    /* Quiz cards: hide .bs.hidden-answer until card is revealed */
+    .quiz-card .hidden-answer { display: none; }
+    .quiz-card.revealed .hidden-answer { display: block; }
+    .quiz-card:not(.revealed)::after {
+      content: 'klikni za odgovor';
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-3);
+    }
+    .quiz-card.revealed .ar { font-size: 30px; opacity: 0.85; }
     /* Letter exercise states */
     .letter-box.selected { border-color: var(--terracotta) !important; background: rgba(176, 74, 42, 0.08) !important; }
     .letter-box.correct-letter { border-color: var(--emerald) !important; background: rgba(20, 84, 60, 0.08) !important; }
