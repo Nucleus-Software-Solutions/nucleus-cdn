@@ -255,6 +255,57 @@
     .suffix-grid input.correct { border-color: var(--emerald); background: rgba(20, 84, 60, 0.06); }
     .suffix-grid input.wrong { border-color: var(--terracotta); background: rgba(176, 74, 42, 0.06); }
 
+    /* Conjugation grid — used by Sufiksi, Perfekt, Prezent */
+    .conj-section { margin-bottom: 28px; }
+    .conj-heading { margin-bottom: 12px; }
+    .conj-heading .verb-ar {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 1.8em;
+      direction: rtl;
+      color: var(--emerald);
+    }
+    .conj-heading .verb-bs {
+      font-size: 0.85rem;
+      color: var(--ink-3);
+      margin-left: 10px;
+    }
+    .conj-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .conj-cell {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .conj-label {
+      font-size: 0.78rem;
+      color: var(--ink-3);
+      margin-bottom: 6px;
+    }
+    .suffix-input {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 20px;
+      padding: 8px 12px;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      background: var(--paper);
+      color: var(--ink);
+      direction: rtl;
+      text-align: right;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.12s, background 0.12s;
+    }
+    .suffix-input:focus { border-color: var(--emerald); background: var(--card); }
+    .suffix-input.correct { border-color: var(--emerald); background: rgba(20, 84, 60, 0.06); }
+    .suffix-input.wrong { border-color: var(--terracotta); background: rgba(176, 74, 42, 0.06); }
+    @media (max-width: 720px) {
+      .conj-grid { grid-template-columns: 1fr; }
+    }
+
     /* Quiz cards */
     .quiz-grid {
       display: grid;
@@ -1684,25 +1735,24 @@
 
       suffixNouns.forEach((noun, ni) => {
         const section = document.createElement('div');
-        section.style.marginBottom = '28px';
+        section.className = 'conj-section';
 
-        // Noun heading
         const heading = document.createElement('div');
-        heading.style.cssText = 'margin-bottom:12px;';
+        heading.className = 'conj-heading';
         heading.innerHTML = `
-          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#1e40af;">${noun.label}</span>
-          <span style="font-size:0.85rem;color:#64748b;margin-left:10px;">(${noun.labelBs})</span>
+          <span class="verb-ar">${noun.label}</span>
+          <span class="verb-bs">(${noun.labelBs})</span>
         `;
         section.appendChild(heading);
 
         const grid = document.createElement('div');
-        grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;';
+        grid.className = 'conj-grid';
 
         suffixLabels.forEach((label, si) => {
           const row = document.createElement('div');
-          row.style.cssText = 'background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.06);';
+          row.className = 'conj-cell';
           row.innerHTML = `
-            <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:6px;">${label}</div>
+            <div class="conj-label">${label}</div>
             <input class="suffix-input" id="suffix-${ni}-${si}" placeholder="..." autocomplete="off" spellcheck="false">
             <div class="feedback" id="sfb-${ni}-${si}" style="margin-top:4px;"></div>
           `;
@@ -2442,21 +2492,21 @@
       container.innerHTML = '';
       perfektVerbs.forEach((v, vi) => {
         const section = document.createElement('div');
-        section.style.marginBottom = '28px';
+        section.className = 'conj-section';
         const heading = document.createElement('div');
-        heading.style.cssText = 'margin-bottom:12px;';
+        heading.className = 'conj-heading';
         heading.innerHTML = `
-          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#1e40af;">${v.verb}</span>
-          <span style="font-size:0.85rem;color:#64748b;margin-left:10px;">(${v.verbBs})</span>
+          <span class="verb-ar">${v.verb}</span>
+          <span class="verb-bs">(${v.verbBs})</span>
         `;
         section.appendChild(heading);
         const grid = document.createElement('div');
-        grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;';
+        grid.className = 'conj-grid';
         v.forms.forEach((f, fi) => {
           const row = document.createElement('div');
-          row.style.cssText = 'background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.06);';
+          row.className = 'conj-cell';
           row.innerHTML = `
-            <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:6px;">${f.label}</div>
+            <div class="conj-label">${f.label}</div>
             <input class="suffix-input" id="pf-${vi}-${fi}" placeholder="..." autocomplete="off" spellcheck="false">
             <div class="feedback" id="pfb-${vi}-${fi}" style="margin-top:4px;"></div>
           `;
@@ -2516,21 +2566,21 @@
       container.innerHTML = '';
       prezentVerbs.forEach((v, vi) => {
         const section = document.createElement('div');
-        section.style.marginBottom = '28px';
+        section.className = 'conj-section';
         const heading = document.createElement('div');
-        heading.style.cssText = 'margin-bottom:12px;';
+        heading.className = 'conj-heading';
         heading.innerHTML = `
-          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#1e40af;">${v.verb}</span>
-          <span style="font-size:0.85rem;color:#64748b;margin-left:10px;">(${v.verbBs})</span>
+          <span class="verb-ar">${v.verb}</span>
+          <span class="verb-bs">(${v.verbBs})</span>
         `;
         section.appendChild(heading);
         const grid = document.createElement('div');
-        grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;';
+        grid.className = 'conj-grid';
         v.forms.forEach((f, fi) => {
           const row = document.createElement('div');
-          row.style.cssText = 'background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.06);';
+          row.className = 'conj-cell';
           row.innerHTML = `
-            <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:6px;">${f.label}</div>
+            <div class="conj-label">${f.label}</div>
             <input class="suffix-input" id="pz-${vi}-${fi}" placeholder="..." autocomplete="off" spellcheck="false">
             <div class="feedback" id="pzfb-${vi}-${fi}" style="margin-top:4px;"></div>
           `;
