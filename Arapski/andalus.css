@@ -1469,3 +1469,210 @@ body {
   .exam-question { padding: 20px 20px; }
   .exam-q-text { font-size: 17px; }
 }
+
+/* ============================================================
+   PRINT — optimized for gradivo / brzi-pregled / ispiti PDFs
+   ============================================================ */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 12mm 16mm 12mm;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #1a1a1a;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  body * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  .page { max-width: none; margin: 0; padding: 0; }
+
+  /* Hide chrome */
+  .topbar,
+  .breadcrumb,
+  .menu-btn,
+  .nav-dropdown,
+  .footer,
+  .footer-nav,
+  .toggle-all-btn,
+  .doc-toggle,
+  .hero-cta,
+  .btn { display: none !important; }
+
+  /* Inner hero — keep title but tight */
+  .inner-hero {
+    padding: 0 0 16pt;
+    border-bottom: 1px solid #999;
+    margin-bottom: 18pt;
+    grid-template-columns: 1fr auto;
+    gap: 12pt;
+    align-items: baseline;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  .inner-hero h1 { font-size: 22pt; margin: 0 0 4pt; }
+  .inner-hero p { font-size: 10.5pt; max-width: none; }
+  .level-badge {
+    background: transparent;
+    border: 1px solid #888;
+    color: #1a1a1a;
+    margin-bottom: 8pt;
+    padding: 2pt 8pt;
+    font-size: 8pt;
+  }
+  .level-badge::before { background: var(--emerald); }
+  .inner-arabic { font-size: 36pt; opacity: 1; color: var(--terracotta); }
+
+  /* Doc layout: single column, no TOC sidebar */
+  .doc-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+  }
+  .toc {
+    display: none;
+  }
+
+  /* Expand all collapsed sections */
+  .doc-section.collapsed .doc-body-inner { display: block !important; }
+  .doc-section.collapsed .doc-section-head {
+    margin-bottom: 14pt;
+    padding-bottom: 10pt;
+    border-bottom: 1px solid #ccc;
+  }
+
+  /* Doc sections */
+  .doc-section {
+    background: #fff;
+    border: none;
+    border-top: 2px solid var(--emerald);
+    border-radius: 0;
+    padding: 14pt 0 18pt;
+    margin: 0 0 6pt;
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+  .doc-section:first-of-type { border-top: none; padding-top: 0; }
+
+  .doc-section-head {
+    padding-bottom: 10pt;
+    margin-bottom: 14pt;
+    border-bottom: 1px solid #ccc;
+    page-break-after: avoid;
+    break-after: avoid;
+    cursor: default;
+  }
+  .doc-section-title { font-size: 16pt; }
+  .doc-section-title-ar { font-size: 14pt; color: var(--terracotta); }
+
+  .doc-subsection {
+    margin-bottom: 14pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .doc-subsection-title { font-size: 12pt; page-break-after: avoid; break-after: avoid; }
+  .doc-subsection-lede { font-size: 10.5pt; margin-bottom: 8pt; }
+
+  /* Tables */
+  .tbl-wrap { overflow: visible; margin-bottom: 6pt; }
+  .tbl {
+    font-size: 10pt;
+    border: 1px solid #888;
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+  .tbl thead { display: table-header-group; }
+  .tbl thead th {
+    background: #f0f0f0 !important;
+    color: #1a1a1a;
+    padding: 6pt 8pt;
+    border-bottom: 1px solid #888;
+    font-size: 8.5pt;
+  }
+  .tbl tbody td {
+    padding: 6pt 8pt;
+    border-bottom: 1px solid #d0d0d0;
+  }
+  .tbl tbody tr { page-break-inside: avoid; break-inside: avoid; }
+  .tbl tbody tr:hover { background: transparent; }
+  .tbl .ar { font-size: 14pt; color: var(--emerald); }
+  .tbl .translit { font-size: 10pt; }
+  .tbl .suffix-cell {
+    background: var(--emerald) !important;
+    color: #fff !important;
+    font-size: 12pt;
+    padding: 4pt 8pt;
+  }
+
+  /* Callouts */
+  .callout {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 8pt 12pt;
+    font-size: 10pt;
+    margin-top: 8pt;
+    border-width: 1px;
+    border-style: solid;
+  }
+  .callout-rule { background: #f4f9f6 !important; border-color: #7da896 !important; }
+  .callout-note { background: #fbf6ec !important; border-color: #c7a672 !important; }
+  .callout-important { background: #faeee8 !important; border-color: #c98a72 !important; }
+  .callout-label { font-size: 8.5pt; margin-bottom: 3pt; }
+  .callout .ar-inline, .ar-inline { font-size: 12pt; }
+
+  /* Level pills (brzi-pregled) */
+  .level-pill {
+    background: #f0f0f0 !important;
+    border: 1px solid #999;
+    font-size: 8pt;
+    padding: 1pt 5pt;
+  }
+  .level-pill.a1 { color: var(--terracotta); }
+
+  /* Ispiti */
+  .exam-question {
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 4pt;
+    padding: 10pt 12pt;
+    margin-bottom: 8pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .exam-q-num { font-size: 8.5pt; }
+  .exam-q-text { font-size: 11pt; margin-bottom: 8pt; }
+  .exam-option {
+    background: #fff;
+    border: 1px solid #aaa;
+    padding: 6pt 10pt;
+    font-size: 10pt;
+  }
+  .exam-option-letter {
+    background: #f0f0f0 !important;
+    color: #1a1a1a;
+    width: 18pt; height: 18pt;
+    font-size: 9pt;
+  }
+  .exam-option.selected, .exam-option.correct {
+    background: #f4f9f6 !important;
+    border-color: var(--emerald) !important;
+  }
+  .exam-option.incorrect {
+    background: #faeee8 !important;
+    border-color: var(--terracotta) !important;
+  }
+
+  /* Section padding cleanup for any leftover sections */
+  .section { padding: 0; border: none; }
+
+  /* Avoid orphans/widows */
+  p, li { orphans: 3; widows: 3; }
+  h1, h2, h3, h4 { page-break-after: avoid; break-after: avoid; }
+
+  /* Links: keep readable, remove underlines */
+  a { color: inherit; text-decoration: none; }
+  a[href^="#"]::after { content: ''; }
+}
