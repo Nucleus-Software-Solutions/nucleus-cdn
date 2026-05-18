@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arapski A0 - Ispiti</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -52,7 +56,7 @@
     }
 
     .arabic {
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       direction: rtl;
     }
 
@@ -106,7 +110,7 @@
     }
 
     .section-title-ar {
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.4rem;
       color: #c9a84c;
       direction: rtl;
@@ -130,7 +134,7 @@
     }
 
     .exercise-row .word {
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.5rem;
       color: #e0d5c1;
       min-width: 120px;
@@ -145,7 +149,7 @@
       background: #0a0f1a;
       color: #e0d5c1;
       font-size: 1rem;
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       direction: rtl;
       transition: border-color 0.2s;
     }
@@ -217,7 +221,7 @@
       height: 52px;
       border: 1px solid #2a3550;
       border-radius: 6px;
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.4rem;
       color: #c9a84c;
       background: #1a1a2e;
@@ -230,7 +234,7 @@
       border-radius: 6px;
       background: #0a0f1a;
       color: #e0d5c1;
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.4rem;
       text-align: center;
       direction: rtl;
@@ -256,7 +260,7 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.3rem;
       padding: 6px 14px;
       border: 1px solid #2a3550;
@@ -281,7 +285,7 @@
       margin-bottom: 14px;
       direction: rtl;
       flex-wrap: wrap;
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.4rem;
     }
 
@@ -305,7 +309,7 @@
       border-radius: 8px;
       background: #0a0f1a;
       color: #e0d5c1;
-      font-family: 'Traditional Arabic', 'Scheherazade', 'Arial', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.2rem;
       text-align: center;
       direction: rtl;
@@ -393,7 +397,7 @@
 
     function poolSelect(id, pool, placeholder) {
       const opts = shuffle(pool);
-      return `<select id="${id}" style="font-family:'Traditional Arabic','Scheherazade','Arial',serif;font-size:1.2rem;direction:rtl;min-width:160px;padding:8px 12px;border:1px solid #2a3550;border-radius:8px;background:#0a0f1a;color:#e0d5c1;">
+      return `<select id="${id}" style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.2rem;direction:rtl;min-width:160px;padding:8px 12px;border:1px solid #2a3550;border-radius:8px;background:#0a0f1a;color:#e0d5c1;">
         <option value="">${placeholder || 'Odaberi'}</option>
         ${opts.map(o => `<option value="${o}">${o}</option>`).join('')}
       </select>`;
@@ -760,7 +764,7 @@
           cells += `<div class="cell">${letter}</div>`;
         } else {
           const opts = shuffle([...ALPHABET]);
-          cells += `<select id="${eid}-s3-${i}" data-answer="${letter}" style="width:100%;height:100%;border:1px solid #2a3550;border-radius:6px;background:#0a0f1a;color:#e0d5c1;font-family:'Traditional Arabic','Scheherazade','Arial',serif;font-size:1.2rem;text-align:center;direction:rtl;padding:0;appearance:none;-webkit-appearance:none;text-align-last:center;">
+          cells += `<select id="${eid}-s3-${i}" data-answer="${letter}" style="width:100%;height:100%;border:1px solid #2a3550;border-radius:6px;background:#0a0f1a;color:#e0d5c1;font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.2rem;text-align:center;direction:rtl;padding:0;appearance:none;-webkit-appearance:none;text-align-last:center;">
             <option value="">—</option>
             ${opts.map(l => `<option value="${l}">${l}</option>`).join('')}
           </select>`;

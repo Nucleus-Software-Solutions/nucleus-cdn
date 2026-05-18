@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arapski A1 - Vježbe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -26,7 +30,7 @@
     header p { font-size: 0.85rem; color: #a89b80; }
 
     .ar {
-      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       direction: rtl;
       color: #c9a84c;
     }
@@ -109,7 +113,7 @@
     }
 
     .exercise-item .prompt-ar {
-      font-family: 'Traditional Arabic', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.6em;
       direction: rtl;
       color: #e0d5c1;
@@ -126,7 +130,7 @@
       color: #e0d5c1;
       font-size: 0.9rem;
       outline: none;
-      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.3em;
       direction: rtl;
       text-align: right;
@@ -188,7 +192,7 @@
       border-radius: 8px;
       padding: 10px 12px;
       color: #e0d5c1;
-      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.4em;
       direction: rtl;
       text-align: right;
@@ -200,7 +204,7 @@
     .suffix-input.wrong { border-color: #f87171; background: #2d0a0a; }
 
     .noun-header {
-      font-family: 'Traditional Arabic', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.6em;
       direction: rtl;
       color: #c9a84c;
@@ -237,7 +241,7 @@
     .quiz-card.revealed { border-color: #4ade80; background: #051c10; }
 
     .quiz-card .q-ar {
-      font-family: 'Traditional Arabic', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 2em;
       direction: rtl;
       color: #c9a84c;
@@ -322,7 +326,7 @@
       line-height: 1.5;
     }
     .ar-hint {
-      font-family: 'Traditional Arabic', 'Scheherazade', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.1em;
       color: #c9a84c;
       direction: rtl;
@@ -339,7 +343,7 @@
       margin-bottom: 12px;
     }
     .klas-phrase {
-      font-family: 'Traditional Arabic', serif;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.8em;
       direction: rtl;
       color: #e0d5c1;
@@ -1629,7 +1633,7 @@
         const heading = document.createElement('div');
         heading.style.cssText = 'margin-bottom:12px;';
         heading.innerHTML = `
-          <span style="font-family:'Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${noun.label}</span>
+          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${noun.label}</span>
           <span style="font-size:0.85rem;color:#7a8baa;margin-left:10px;">(${noun.labelBs})</span>
         `;
         section.appendChild(heading);
@@ -2386,7 +2390,7 @@
         const heading = document.createElement('div');
         heading.style.cssText = 'margin-bottom:12px;';
         heading.innerHTML = `
-          <span style="font-family:'Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${v.verb}</span>
+          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${v.verb}</span>
           <span style="font-size:0.85rem;color:#7a8baa;margin-left:10px;">(${v.verbBs})</span>
         `;
         section.appendChild(heading);
@@ -2460,7 +2464,7 @@
         const heading = document.createElement('div');
         heading.style.cssText = 'margin-bottom:12px;';
         heading.innerHTML = `
-          <span style="font-family:'Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${v.verb}</span>
+          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${v.verb}</span>
           <span style="font-size:0.85rem;color:#7a8baa;margin-left:10px;">(${v.verbBs})</span>
         `;
         section.appendChild(heading);

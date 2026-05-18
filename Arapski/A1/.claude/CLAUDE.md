@@ -130,7 +130,7 @@ Kreiraj `A1/ispiti-vjezbe/` folder po uzoru na A0. Dodaj:
 | `vokabular.html` | Dark | `#0a0f1a` | `#c9a84c` (zlatna) |
 | `index.html` | Dark | `#0a0f1a` | `#c9a84c` (zlatna) |
 
-**Arapski font:** `'Traditional Arabic', 'Arabic Typesetting', 'Scheherazade', serif`
+**Arapski font:** `'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif` — Noto Naskh Arabic i Amiri se učitavaju iz Google Fonts (vidi `<head>` u svakom HTML fajlu). Noto Naskh je primarni jer je dizajniran za ekransku čitljivost (jasnije razdvojeni mīm u لـمـ ligaturi). Traditional Arabic ostaje kao fallback za stare Windows sisteme bez interneta.
 **Smjer:** `direction: rtl`
 
 **Transliteracija:** DIN 31635 prilagođen bosanskom:
