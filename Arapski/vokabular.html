@@ -10,331 +10,364 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0a0f1a;
-      color: #e0d5c1;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+      color: #2d3748;
       min-height: 100vh;
+      padding: 20px;
     }
 
-    header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      padding: 28px 20px 20px;
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    h1 {
       text-align: center;
-      border-bottom: 2px solid #c9a84c;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #2563eb, #059669);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    header h1 {
-      font-size: 1.6rem;
-      color: #c9a84c;
-      margin-bottom: 6px;
-      letter-spacing: 1px;
+    .subtitle { text-align: center; color: #64748b; margin-bottom: 24px; font-size: 0.95rem; }
+
+    /* Progress bar */
+    .progress-bar {
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+    .progress-bar .fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #059669);
+      transition: width 0.3s;
     }
 
-    header p {
-      font-size: 0.85rem;
-      color: #a89b80;
+    /* Nav (kontrole + filteri) */
+    .nav {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      padding: 14px 16px;
-      background: #0f1525;
-      border-bottom: 1px solid #1e2a40;
-    }
-
-    .controls button {
-      padding: 7px 14px;
-      border: 1px solid #2a3550;
-      border-radius: 20px;
-      background: #131b2e;
-      color: #a89b80;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: all 0.2s;
-    }
-
-    .controls button:hover,
-    .controls button.active {
-      background: #c9a84c;
-      color: #0a0f1a;
-      border-color: #c9a84c;
-    }
-
-    .level-row {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 16px 0;
-      background: #0f1525;
-    }
-
-    .level-btn {
-      padding: 7px 16px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #2a3550;
-      background: #131b2e;
-      color: #a89b80;
-    }
-
-    .level-btn:hover {
-      border-color: #c9a84c;
-    }
-
-    .level-btn.active {
-      background: #c9a84c;
-      color: #0a0f1a;
-      border-color: #c9a84c;
-    }
-
-    .toggle-row {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 16px 0;
-      background: #0f1525;
-    }
-
-    .toggle-btn {
-      padding: 7px 16px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #2d6a4f;
-      background: #0d1f15;
-      color: #4da87a;
-    }
-
-    .toggle-btn:hover {
-      background: #143d28;
-    }
-
-    .toggle-btn.hiding {
-      border-color: #8b3a3a;
-      background: #1f0d0d;
-      color: #d46a6a;
-    }
-
-    .toggle-btn.hiding:hover {
-      background: #2a1515;
-    }
+    .nav-section + .nav-section { margin-top: 10px; }
+    .nav-section { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; }
 
     .search-box {
       width: 100%;
-      max-width: 340px;
+      max-width: 380px;
       padding: 8px 14px;
       border-radius: 20px;
-      border: 1px solid #2a3550;
-      background: #131b2e;
-      color: #e0d5c1;
-      font-size: 0.85rem;
+      border: 1px solid #bfdbfe;
+      background: #fff;
+      color: #1e293b;
+      font-size: 0.9rem;
       outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box::placeholder { color: #94a3b8; }
+    .search-box:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.12); }
+
+    /* Filter dugmadi (kategorija + nivo + toggle) — A1 chip stil */
+    .controls button,
+    .level-btn,
+    .toggle-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1e40af;
+      font-weight: 500;
     }
 
-    .search-box::placeholder {
-      color: #555;
+    .controls button:hover,
+    .level-btn:hover { background: #dbeafe; border-color: #3b82f6; }
+
+    .controls button.active,
+    .level-btn.active {
+      background: #1e40af;
+      color: #fff;
+      border-color: #1e40af;
     }
 
-    .search-box:focus {
-      border-color: #c9a84c;
+    .toggle-btn {
+      border-color: #86efac;
+      background: #f0fdf4;
+      color: #166534;
     }
+    .toggle-btn:hover { background: #dcfce7; border-color: #22c55e; }
+    .toggle-btn.hiding {
+      border-color: #fca5a5;
+      background: #fef2f2;
+      color: #991b1b;
+    }
+    .toggle-btn.hiding:hover { background: #fecaca; border-color: #ef4444; }
 
     .stats {
       text-align: center;
-      padding: 8px;
-      font-size: 0.78rem;
-      color: #666;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-bottom: 16px;
     }
 
-    .grid {
+    /* Kategorija sekcija — kao A1 lesson */
+    .cat-section {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 22px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .cat-header {
+      color: #1e40af;
+      font-size: 1.2rem;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cat-header .cat-count {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #64748b;
+    }
+
+    .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 10px;
-      padding: 12px 16px 30px;
     }
 
     .card {
-      background: #131b2e;
-      border: 1px solid #1e2a40;
+      background: #fafbfc;
+      border: 1px solid #e2e8f0;
       border-radius: 10px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all 0.2s;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .card:hover {
-      border-color: #c9a84c;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.1);
+      border-color: #3b82f6;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(59,130,246,0.1);
     }
 
     .card.learned {
-      border-color: #2d6a4f;
-      background: #0d1f15;
+      border-color: #86efac;
+      background: #f0fdf4;
     }
 
-    .card.hidden-learned {
-      display: none;
-    }
+    .card.hidden-learned { display: none; }
 
-    .card .left {
-      flex: 1;
-      min-width: 0;
-    }
+    .card .left { flex: 1; min-width: 0; }
 
     .card .arabic {
       font-size: 1.55rem;
-      color: #c9a84c;
+      color: #1e40af;
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       direction: rtl;
       line-height: 1.4;
     }
 
     .card .trans {
-      font-size: 0.82rem;
-      color: #7a8baa;
+      font-size: 0.8rem;
+      color: #64748b;
+      font-style: italic;
       margin-top: 2px;
     }
 
     .card .bs {
       font-size: 0.92rem;
-      color: #d0c5a9;
-      margin-top: 1px;
+      color: #334155;
+      margin-top: 2px;
     }
 
     .card .meta {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       margin-top: 4px;
       align-items: center;
     }
 
-    .card .cat-tag {
-      font-size: 0.65rem;
-      color: #555;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .card .level-tag {
-      font-size: 0.6rem;
-      padding: 1px 6px;
+    .level-tag {
+      font-size: 0.62rem;
+      padding: 1px 7px;
       border-radius: 8px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.5px;
     }
-
-    .card .level-tag.a0 {
-      background: #1a2e1a;
-      color: #4da87a;
-    }
-
-    .card .level-tag.a1 {
-      background: #2e2010;
-      color: #c9a84c;
-    }
+    .level-tag.a0 { background: #dcfce7; color: #166534; }
+    .level-tag.a1 { background: #dbeafe; color: #1e40af; }
 
     .card .check {
-      font-size: 1.2rem;
-      color: #2a3550;
+      font-size: 1.1rem;
+      color: #cbd5e1;
       flex-shrink: 0;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      border: 1px solid #2a3550;
+      border: 1px solid #cbd5e1;
       transition: all 0.2s;
+      background: #fff;
     }
 
     .card.learned .check {
-      color: #2d6a4f;
-      border-color: #2d6a4f;
-      background: #143d28;
-    }
-
-    .progress-bar {
-      height: 3px;
-      background: #1e2a40;
-    }
-
-    .progress-bar .fill {
-      height: 100%;
-      background: #c9a84c;
-      transition: width 0.3s;
+      color: #fff;
+      border-color: #16a34a;
+      background: #16a34a;
     }
 
     .loading-msg {
       text-align: center;
       padding: 40px;
-      color: #666;
+      color: #94a3b8;
       font-size: 0.9rem;
+    }
+
+    /* Footer nav (kao A1) */
+    .footer-nav {
+      text-align: center;
+      margin-top: 40px;
+      padding: 16px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .footer-nav a {
+      margin: 0 12px;
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 0.88rem;
+    }
+    .footer-nav a:hover { text-decoration: underline; }
+
+    /* Print: dictionary stil — kompaktne kolone, sve grupe vidljive, bez kontrola */
+    @media print {
+      body { background: #fff; padding: 0; font-size: 10pt; }
+      .progress-bar, .nav, .stats, .footer-nav, .check { display: none !important; }
+      .container { max-width: none; }
+      h1 { -webkit-text-fill-color: #1e40af; color: #1e40af; background: none; font-size: 1.6rem; }
+      .subtitle { display: none; }
+
+      .cat-section {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        margin-bottom: 8px;
+        page-break-inside: auto;
+        break-inside: auto;
+      }
+      .cat-header {
+        font-size: 1.05rem;
+        border-bottom: 1px solid #1e40af;
+        padding-bottom: 4px;
+        margin-bottom: 6px;
+        page-break-after: avoid;
+      }
+      .cat-header .cat-count { display: none; }
+
+      /* Dvije kolone na A4 za kompaktan prikaz */
+      .card-grid {
+        display: block;
+        column-count: 2;
+        column-gap: 12px;
+      }
+
+      .card {
+        background: #fff !important;
+        border: none !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        border-radius: 0;
+        padding: 4px 0;
+        margin-bottom: 0;
+        box-shadow: none !important;
+        display: block;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .card.learned { background: #fff !important; }
+      .card.hidden-learned { display: block !important; }  /* sve riječi u printu */
+
+      .card .arabic { font-size: 1.05rem; color: #1e40af; display: inline-block; margin-right: 6px; }
+      .card .trans { font-size: 0.72rem; display: inline; color: #64748b; }
+      .card .bs { font-size: 0.78rem; display: inline; color: #334155; margin-left: 6px; }
+      .card .bs::before { content: '— '; }
+      .card .meta { display: none; }
+
+      a { color: #000; text-decoration: none; }
+      @page { size: A4; margin: 1.5cm 1.2cm; }
     }
   </style>
 </head>
 
 <body>
-  <div class="progress-bar">
-    <div class="fill" id="progFill"></div>
-  </div>
-  <header>
-    <h1>Arapski — Vokabular</h1>
-    <p>Sve riječi iz kursa (A0 + A1) · Klikni karticu da oznacis kao nauceno</p>
-  </header>
+  <div class="container">
+    <h1>🕌 Arapski — Vokabular</h1>
+    <p class="subtitle">Sve riječi iz kursa (A0 + A1) — klikni karticu da označiš kao naučeno</p>
 
-  <div class="controls">
-    <input type="text" class="search-box" id="search" placeholder="Pretrazi (bosanski ili arapski)...">
-    <button class="active" data-cat="all">Sve</button>
-    <button data-cat="vjera">Vjera</button>
-    <button data-cat="ljudi">Ljudi</button>
-    <button data-cat="vlast">Vlast/rat</button>
-    <button data-cat="svakodnevno">Svakodnevno</button>
-    <button data-cat="glagoli">Glagoli</button>
-    <button data-cat="pridjevi">Pridjevi</button>
-    <button data-cat="fraze">Fraze</button>
-    <button data-cat="pozdravi">Pozdravi</button>
-    <button data-cat="predmeti">Predmeti</button>
-    <button data-cat="porodica">Porodica</button>
-    <button data-cat="hrana">Hrana/Priroda</button>
-    <button data-cat="zivotinje">Zivotinje</button>
-    <button data-cat="odjeca">Odjeca</button>
-    <button data-cat="pojmovi">Pojmovi</button>
-    <button data-cat="zanimanja">Zanimanja</button>
-    <button data-cat="brojevi">Brojevi</button>
-    <button data-cat="zamjenice">Zamjenice</button>
-    <button data-cat="mjesta">Mjesta</button>
-    <button data-cat="pitanja">Pitanja/Prijedlozi</button>
-    <button data-cat="vrijeme">Vrijeme</button>
-  </div>
-  <div class="level-row">
-    <button class="level-btn active" data-level="all">Svi nivoi</button>
-    <button class="level-btn" data-level="A0">A0</button>
-    <button class="level-btn" data-level="A1">A1</button>
-  </div>
-  <div class="toggle-row">
-    <button class="toggle-btn" id="toggleLearned">&#128065; Sakrij naucene</button>
-  </div>
-  <div class="stats" id="stats"></div>
-  <div class="grid" id="grid">
-    <div class="loading-msg">Ucitavanje...</div>
+    <div class="progress-bar">
+      <div class="fill" id="progFill"></div>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-section">
+        <input type="text" class="search-box" id="search" placeholder="Pretraži (bosanski, arapski ili transliteraciju)...">
+      </div>
+      <div class="nav-section controls">
+        <button class="active" data-cat="all">Sve</button>
+        <button data-cat="vjera">Vjera</button>
+        <button data-cat="ljudi">Ljudi</button>
+        <button data-cat="vlast">Vlast/rat</button>
+        <button data-cat="svakodnevno">Svakodnevno</button>
+        <button data-cat="glagoli">Glagoli</button>
+        <button data-cat="pridjevi">Pridjevi</button>
+        <button data-cat="fraze">Fraze</button>
+        <button data-cat="pozdravi">Pozdravi</button>
+        <button data-cat="predmeti">Predmeti</button>
+        <button data-cat="porodica">Porodica</button>
+        <button data-cat="hrana">Hrana/Priroda</button>
+        <button data-cat="zivotinje">Životinje</button>
+        <button data-cat="odjeca">Odjeća</button>
+        <button data-cat="pojmovi">Pojmovi</button>
+        <button data-cat="zanimanja">Zanimanja</button>
+        <button data-cat="brojevi">Brojevi</button>
+        <button data-cat="zamjenice">Zamjenice</button>
+        <button data-cat="mjesta">Mjesta</button>
+        <button data-cat="pitanja">Pitanja/Prijedlozi</button>
+        <button data-cat="vrijeme">Vrijeme</button>
+      </div>
+      <div class="nav-section">
+        <button class="level-btn active" data-level="all">Svi nivoi</button>
+        <button class="level-btn" data-level="A0">A0</button>
+        <button class="level-btn" data-level="A1">A1</button>
+        <button class="toggle-btn" id="toggleLearned">&#128065; Sakrij naučene</button>
+      </div>
+    </nav>
+
+    <div class="stats" id="stats"></div>
+    <div id="grid">
+      <div class="loading-msg">Učitavanje...</div>
+    </div>
   </div>
 
   <script>
@@ -1080,6 +1113,38 @@
       { ar: 'غُرْفَةُ الْجُلُوسِ', tr: 'ghurfat al-julus', bs: 'dnevna soba', cat: 'mjesta', lvl: 'A1' },
     ];
 
+    // Mapiranje kategorija \u2192 ljudska imena (za prikaz sekcijskog naslova)
+    const CATEGORY_LABELS = {
+      vjera: 'Vjera',
+      ljudi: 'Ljudi',
+      vlast: 'Vlast / rat',
+      svakodnevno: 'Svakodnevno',
+      glagoli: 'Glagoli',
+      pridjevi: 'Pridjevi',
+      fraze: 'Fraze',
+      pozdravi: 'Pozdravi',
+      predmeti: 'Predmeti',
+      porodica: 'Porodica',
+      hrana: 'Hrana / Priroda',
+      zivotinje: '\u017divotinje',
+      odjeca: 'Odje\u0107a',
+      pojmovi: 'Pojmovi',
+      zanimanja: 'Zanimanja',
+      brojevi: 'Brojevi',
+      zamjenice: 'Zamjenice',
+      mjesta: 'Mjesta',
+      pitanja: 'Pitanja / Prijedlozi',
+      vrijeme: 'Vrijeme',
+    };
+
+    // Redoslijed kategorija (prema kursu \u2014 A0 prvo, A1 dodato kasnije)
+    const CATEGORY_ORDER = [
+      'vjera', 'ljudi', 'porodica', 'vlast', 'svakodnevno', 'mjesta',
+      'predmeti', 'hrana', 'zivotinje', 'odjeca',
+      'glagoli', 'pridjevi', 'zamjenice', 'brojevi',
+      'fraze', 'pozdravi', 'pitanja', 'vrijeme', 'pojmovi', 'zanimanja',
+    ];
+
     let learned = {};
     let activeCategory = 'all';
     let activeLevel = 'all';
@@ -1104,6 +1169,26 @@
       } catch (e) { /* silent */ }
     }
 
+    function cardHTML(w) {
+      const idx = words.indexOf(w);
+      const isLearned = learned[idx];
+      const shouldHide = hideLearned && isLearned;
+      return {
+        html: `<div class="card ${isLearned ? 'learned' : ''} ${shouldHide ? 'hidden-learned' : ''}" onclick="toggle(${idx})">
+  <div class="left">
+    <div class="arabic">${w.ar}</div>
+    <div class="trans">${w.tr}</div>
+    <div class="bs">${w.bs}</div>
+    <div class="meta">
+      <span class="level-tag ${w.lvl.toLowerCase()}">${w.lvl}</span>
+    </div>
+  </div>
+  <div class="check">${isLearned ? '\u2713' : ''}</div>
+</div>`,
+        visible: !shouldHide,
+      };
+    }
+
     function render(filter) {
       if (filter === undefined) filter = document.getElementById('search').value;
       const grid = document.getElementById('grid');
@@ -1115,37 +1200,45 @@
         return catOk && lvlOk && searchOk;
       });
 
+      // Grupiraj po kategoriji
+      const byCat = {};
+      filtered.forEach(w => {
+        if (!byCat[w.cat]) byCat[w.cat] = [];
+        byCat[w.cat].push(w);
+      });
+
+      // Sortiraj kategorije po CATEGORY_ORDER (nepoznate idu na kraj)
+      const sortedCats = Object.keys(byCat).sort((a, b) => {
+        const ia = CATEGORY_ORDER.indexOf(a);
+        const ib = CATEGORY_ORDER.indexOf(b);
+        return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+      });
+
       let visibleCount = 0;
-      grid.innerHTML = filtered.map(w => {
-        const idx = words.indexOf(w);
-        const isLearned = learned[idx];
-        const shouldHide = hideLearned && isLearned;
-        if (!shouldHide) visibleCount++;
-        return `<div class="card ${isLearned ? 'learned' : ''} ${shouldHide ? 'hidden-learned' : ''}" onclick="toggle(${idx})">
-  <div class="left">
-    <div class="arabic">${w.ar}</div>
-    <div class="trans">${w.tr}</div>
-    <div class="bs">${w.bs}</div>
-    <div class="meta">
-      <span class="cat-tag">${w.cat}</span>
-      <span class="level-tag ${w.lvl.toLowerCase()}">${w.lvl}</span>
-    </div>
-  </div>
-  <div class="check">${isLearned ? '\u2713' : ''}</div>
-</div>`;
+      const sectionsHTML = sortedCats.map(cat => {
+        const cards = byCat[cat].map(cardHTML);
+        cards.forEach(c => { if (c.visible) visibleCount++; });
+        const label = CATEGORY_LABELS[cat] || cat;
+        const count = byCat[cat].length;
+        return `<section class="cat-section" data-cat="${cat}">
+  <h2 class="cat-header">${label} <span class="cat-count">${count} rije\u010di</span></h2>
+  <div class="card-grid">${cards.map(c => c.html).join('')}</div>
+</section>`;
       }).join('');
+
+      grid.innerHTML = sectionsHTML || '<div class="loading-msg">Nema rezultata za zadane filtere.</div>';
 
       const total = words.length;
       const learnedCount = Object.keys(learned).length;
-      document.getElementById('stats').textContent = `${learnedCount}/${total} nauceno \u00b7 Prikazano: ${visibleCount}`;
+      document.getElementById('stats').textContent = `${learnedCount}/${total} nau\u010deno \u00b7 Prikazano: ${visibleCount}`;
       document.getElementById('progFill').style.width = `${(learnedCount / total) * 100}%`;
 
       const btn = document.getElementById('toggleLearned');
       if (hideLearned) {
-        btn.textContent = '\ud83d\udc41 Prikazi naucene';
+        btn.innerHTML = '&#128065; Prika\u017ei nau\u010dene';
         btn.classList.add('hiding');
       } else {
-        btn.textContent = '\ud83d\udc41 Sakrij naucene';
+        btn.innerHTML = '&#128065; Sakrij nau\u010dene';
         btn.classList.remove('hiding');
       }
     }
@@ -1185,11 +1278,12 @@
     loadLearned();
   </script>
 
-  <footer style="text-align:center;padding:30px;color:#555;font-size:0.8rem;">
-    <a href="index.html" style="color:#c9a84c;text-decoration:none;">Pocetna</a> &middot;
-    <a href="A0/index.html" style="color:#c9a84c;text-decoration:none;">A0</a> &middot;
-    <a href="A1/index.html" style="color:#c9a84c;text-decoration:none;">A1</a>
-  </footer>
+  <div class="footer-nav">
+    <a href="index.html">Početna</a>
+    <a href="A0/index.html">A0</a>
+    <a href="A1/index.html">A1</a>
+    <a href="brzi-pregled.html">Brzi pregled</a>
+  </div>
 </body>
 
 </html>
