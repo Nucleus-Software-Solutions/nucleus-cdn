@@ -274,32 +274,28 @@
       text-align: center;
     }
     .quiz-card:hover { border-color: var(--emerald); transform: translateY(-1px); }
-    .quiz-card .ar {
+    .quiz-card .q-ar {
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 36px;
       color: var(--emerald);
       direction: rtl;
       line-height: 1.3;
     }
-    .quiz-card .bs {
+    .quiz-card .answer {
       font-size: 18px;
       font-weight: 500;
       color: var(--ink);
       display: none;
     }
-    .quiz-card .translit {
+    .quiz-card .hint {
       font-family: 'Fraunces', serif;
       font-style: italic;
       font-size: 14px;
       color: var(--ink-3);
-      display: none;
     }
-    .quiz-card.revealed .bs,
-    .quiz-card.revealed .translit,
-    .quiz-card.flipped .bs,
-    .quiz-card.flipped .translit { display: block; }
-    .quiz-card.revealed .ar,
-    .quiz-card.flipped .ar { font-size: 30px; opacity: 0.85; }
+    .quiz-card.revealed .answer { display: block; }
+    .quiz-card.revealed .hint { display: none; }
+    .quiz-card.revealed .q-ar { font-size: 30px; opacity: 0.85; }
 
     /* Zadaća blocks */
     .zadaca-block {
@@ -1779,7 +1775,6 @@
         div.className = 'quiz-card';
         div.innerHTML = `
           <div class="q-ar">${card.ar}</div>
-          <div class="q-bs" style="display:none;">${card.bs}</div>
           <div class="answer">${card.bs}</div>
           <div class="hint">klikni za odgovor</div>
         `;
