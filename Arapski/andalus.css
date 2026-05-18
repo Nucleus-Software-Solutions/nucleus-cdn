@@ -1502,16 +1502,22 @@ body {
   .hero-cta,
   .btn { display: none !important; }
 
-  /* Inner hero — keep title but tight */
+  /* Hide the wrapper that contains only the toggle-all-btn (its inline
+     padding would otherwise leave dead space between hero and first section) */
+  div:has(> .toggle-all-btn) { display: none !important; }
+
+  /* Inner hero — keep title but tight. NO page-break-after rule so the
+     first doc-section can flow naturally onto page 1 instead of being
+     pushed to page 2 by a cascade of "keep with next" hints. */
   .inner-hero {
     padding: 0 0 16pt;
     border-bottom: 1px solid #999;
-    margin-bottom: 18pt;
+    margin-bottom: 14pt;
     grid-template-columns: 1fr auto;
     gap: 12pt;
     align-items: baseline;
-    page-break-after: avoid;
-    break-after: avoid;
+    page-break-after: auto;
+    break-after: auto;
   }
   .inner-hero h1 { font-size: 22pt; margin: 0 0 4pt; }
   .inner-hero p { font-size: 10.5pt; max-width: none; }
@@ -1570,11 +1576,16 @@ body {
 
   .doc-subsection {
     margin-bottom: 14pt;
-    page-break-inside: avoid;
-    break-inside: avoid;
+    /* Allow breaking inside large subsections (e.g. the alphabet table).
+       Internal break points (table rows, callouts) still avoid breaking. */
+    page-break-inside: auto;
+    break-inside: auto;
   }
   .doc-subsection-title { font-size: 12pt; page-break-after: avoid; break-after: avoid; }
-  .doc-subsection-lede { font-size: 10.5pt; margin-bottom: 8pt; }
+  .doc-subsection-lede { font-size: 10.5pt; margin-bottom: 8pt; page-break-after: avoid; break-after: avoid; }
+
+  /* First section starts on page 1 right after the hero */
+  .doc-section:first-of-type { page-break-before: avoid; break-before: avoid; }
 
   /* Tables */
   .tbl-wrap { overflow: visible; margin-bottom: 6pt; }
