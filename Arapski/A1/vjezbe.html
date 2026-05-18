@@ -14,28 +14,36 @@
 
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0a0f1a;
-      color: #e0d5c1;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+      color: #2d3748;
       min-height: 100vh;
+      padding: 20px;
     }
 
-    header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      padding: 28px 20px 20px;
+    h1 {
       text-align: center;
-      border-bottom: 2px solid #c9a84c;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #2563eb, #059669);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    header h1 { font-size: 1.6rem; color: #c9a84c; margin-bottom: 6px; letter-spacing: 1px; }
-    header p { font-size: 0.85rem; color: #a89b80; }
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
 
     .ar {
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       direction: rtl;
-      color: #c9a84c;
+      color: #1e40af;
     }
 
-    .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 4px; }
 
     /* Tab Navigation */
     .tabs {
@@ -43,60 +51,71 @@
       flex-wrap: wrap;
       gap: 6px;
       justify-content: center;
+      background: #fff;
+      border-radius: 10px;
       padding: 14px 16px;
-      background: #0f1525;
-      border-bottom: 1px solid #1e2a40;
+      margin-bottom: 18px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
 
     .tabs button {
-      padding: 8px 14px;
-      border: 1px solid #2a3550;
+      padding: 7px 14px;
+      border: 1px solid #bfdbfe;
       border-radius: 20px;
-      background: #131b2e;
-      color: #a89b80;
+      background: #eff6ff;
+      color: #1e40af;
       cursor: pointer;
       font-size: 0.8rem;
       transition: all 0.2s;
     }
 
-    .tabs button:hover, .tabs button.active {
-      background: #c9a84c;
-      color: #0a0f1a;
-      border-color: #c9a84c;
+    .tabs button:hover {
+      background: #dbeafe;
+      border-color: #3b82f6;
+    }
+
+    .tabs button.active {
+      background: #1e40af;
+      color: #fff;
+      border-color: #1e40af;
     }
 
     /* Score Bar */
     .score-bar {
       text-align: center;
-      padding: 10px;
+      padding: 12px;
       font-size: 0.85rem;
-      color: #a89b80;
-      background: #0f1525;
-      border-bottom: 1px solid #1e2a40;
+      color: #64748b;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      margin-bottom: 18px;
     }
-    .score-bar span { color: #c9a84c; font-weight: bold; }
+    .score-bar span { color: #1e40af; font-weight: bold; }
 
     /* Sections */
-    .exercise-section { display: none; padding: 24px 0; }
+    .exercise-section { display: none; padding: 4px 0 24px; }
     .exercise-section.active { display: block; }
 
     .section-title {
       font-size: 1.1rem;
-      color: #c9a84c;
+      color: #1e40af;
       margin-bottom: 6px;
       font-weight: 600;
     }
 
     .section-desc {
       font-size: 0.82rem;
-      color: #7a8baa;
+      color: #64748b;
       margin-bottom: 20px;
     }
 
     /* Input exercises */
     .exercise-item {
-      background: #131b2e;
-      border: 1px solid #1e2a40;
+      background: #fff;
+      border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 18px 20px;
       margin-bottom: 14px;
@@ -104,30 +123,32 @@
       align-items: center;
       gap: 14px;
       flex-wrap: wrap;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
 
     .exercise-item .prompt {
       font-size: 1rem;
       flex: 1;
       min-width: 140px;
+      color: #2d3748;
     }
 
     .exercise-item .prompt-ar {
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.6em;
       direction: rtl;
-      color: #e0d5c1;
+      color: #2d3748;
       flex: 1;
     }
 
     .exercise-item input {
       flex: 2;
       min-width: 160px;
-      background: #0a0f1a;
-      border: 1px solid #2a3550;
+      background: #fff;
+      border: 1px solid #bfdbfe;
       border-radius: 8px;
       padding: 10px 14px;
-      color: #e0d5c1;
+      color: #2d3748;
       font-size: 0.9rem;
       outline: none;
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
@@ -136,14 +157,14 @@
       text-align: right;
     }
 
-    .exercise-item input:focus { border-color: #c9a84c; }
-    .exercise-item input.correct { border-color: #4ade80; background: #052e16; }
-    .exercise-item input.wrong { border-color: #f87171; background: #2d0a0a; }
+    .exercise-item input:focus { border-color: #1e40af; }
+    .exercise-item input.correct { border-color: #16a34a; background: #f0fdf4; }
+    .exercise-item input.wrong { border-color: #ef4444; background: #fef2f2; }
 
     .check-btn {
       padding: 9px 18px;
-      background: #c9a84c;
-      color: #0a0f1a;
+      background: #1e40af;
+      color: #fff;
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -152,15 +173,15 @@
       transition: all 0.2s;
       white-space: nowrap;
     }
-    .check-btn:hover { background: #e6c05a; }
+    .check-btn:hover { background: #2563eb; }
 
     .feedback {
       font-size: 0.8rem;
       margin-top: 6px;
       width: 100%;
     }
-    .feedback.correct-msg { color: #4ade80; }
-    .feedback.wrong-msg { color: #f87171; }
+    .feedback.correct-msg { color: #16a34a; }
+    .feedback.wrong-msg { color: #ef4444; }
 
     /* Suffix exercise */
     .suffix-grid {
@@ -169,11 +190,16 @@
       gap: 10px;
       align-items: center;
       margin-bottom: 24px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
 
     .suffix-grid-header {
       font-size: 0.75rem;
-      color: #5a6a88;
+      color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 1px;
       padding: 8px 4px;
@@ -182,16 +208,16 @@
 
     .suffix-label {
       font-size: 0.85rem;
-      color: #a89b80;
+      color: #64748b;
       padding: 8px 4px;
     }
 
     .suffix-input {
-      background: #0a0f1a;
-      border: 1px solid #2a3550;
+      background: #fff;
+      border: 1px solid #bfdbfe;
       border-radius: 8px;
       padding: 10px 12px;
-      color: #e0d5c1;
+      color: #2d3748;
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.4em;
       direction: rtl;
@@ -199,15 +225,15 @@
       width: 100%;
       outline: none;
     }
-    .suffix-input:focus { border-color: #c9a84c; }
-    .suffix-input.correct { border-color: #4ade80; background: #052e16; }
-    .suffix-input.wrong { border-color: #f87171; background: #2d0a0a; }
+    .suffix-input:focus { border-color: #1e40af; }
+    .suffix-input.correct { border-color: #16a34a; background: #f0fdf4; }
+    .suffix-input.wrong { border-color: #ef4444; background: #fef2f2; }
 
     .noun-header {
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.6em;
       direction: rtl;
-      color: #c9a84c;
+      color: #1e40af;
       text-align: center;
       padding: 8px 4px;
     }
@@ -220,8 +246,8 @@
     }
 
     .quiz-card {
-      background: #131b2e;
-      border: 1px solid #1e2a40;
+      background: #fff;
+      border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 20px;
       text-align: center;
@@ -235,32 +261,33 @@
       transition: all 0.2s;
       position: relative;
       user-select: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
 
-    .quiz-card:hover { border-color: #c9a84c; }
-    .quiz-card.revealed { border-color: #4ade80; background: #051c10; }
+    .quiz-card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+    .quiz-card.revealed { border-color: #16a34a; background: #f0fdf4; }
 
     .quiz-card .q-ar {
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 2em;
       direction: rtl;
-      color: #c9a84c;
+      color: #1e40af;
     }
 
     .quiz-card .q-bs {
       font-size: 0.85rem;
-      color: #7a8baa;
+      color: #64748b;
     }
 
     .quiz-card .answer {
       font-size: 0.88rem;
-      color: #4ade80;
+      color: #16a34a;
       display: none;
       margin-top: 4px;
     }
 
     .quiz-card.revealed .answer { display: block; }
-    .quiz-card .hint { font-size: 0.7rem; color: #3a4a60; margin-top: 4px; }
+    .quiz-card .hint { font-size: 0.7rem; color: #cbd5e1; margin-top: 4px; }
     .quiz-card.revealed .hint { display: none; }
 
     /* Check all button */
@@ -268,8 +295,8 @@
       display: block;
       margin: 20px auto 0;
       padding: 11px 28px;
-      background: #c9a84c;
-      color: #0a0f1a;
+      background: #1e40af;
+      color: #fff;
       border: none;
       border-radius: 10px;
       cursor: pointer;
@@ -277,58 +304,59 @@
       font-weight: 700;
       transition: all 0.2s;
     }
-    .check-all-btn:hover { background: #e6c05a; }
+    .check-all-btn:hover { background: #2563eb; }
 
     /* Reset button */
     .reset-btn {
       display: block;
       margin: 12px auto 0;
       padding: 8px 20px;
-      background: transparent;
-      color: #7a8baa;
-      border: 1px solid #2a3550;
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
       border-radius: 8px;
       cursor: pointer;
       font-size: 0.8rem;
       transition: all 0.2s;
     }
-    .reset-btn:hover { border-color: #c9a84c; color: #c9a84c; }
+    .reset-btn:hover { background: #dbeafe; border-color: #3b82f6; }
 
     /* Result banner */
     .result-banner {
       text-align: center;
       margin-top: 16px;
       font-size: 0.9rem;
-      color: #a89b80;
+      color: #64748b;
       display: none;
     }
     .result-banner.visible { display: block; }
-    .result-banner .score { color: #c9a84c; font-weight: bold; font-size: 1.1em; }
+    .result-banner .score { color: #1e40af; font-weight: bold; font-size: 1.1em; }
 
     /* Zadaća blocks */
     .zadaca-block {
-      background: #0f1525;
-      border: 1px solid #1e2a40;
+      background: #fafbfc;
+      border: 1px solid #e2e8f0;
       border-radius: 14px;
       padding: 20px 18px;
       margin-bottom: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
     .zadaca-heading {
       font-size: 1rem;
-      color: #c9a84c;
+      color: #1e40af;
       font-weight: 700;
       margin-bottom: 6px;
     }
     .zadaca-hint {
       font-size: 0.8rem;
-      color: #7a8baa;
+      color: #64748b;
       margin-bottom: 16px;
       line-height: 1.5;
     }
     .ar-hint {
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.1em;
-      color: #c9a84c;
+      color: #1e40af;
       direction: rtl;
       display: inline-block;
       margin: 0 4px;
@@ -336,17 +364,18 @@
 
     /* Klasifikacija item */
     .klas-item {
-      background: #131b2e;
-      border: 1px solid #1e2a40;
+      background: #fff;
+      border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 16px 18px;
       margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
     .klas-phrase {
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       font-size: 1.8em;
       direction: rtl;
-      color: #e0d5c1;
+      color: #2d3748;
       text-align: right;
       margin-bottom: 10px;
     }
@@ -357,77 +386,84 @@
     }
     .klas-btn {
       padding: 8px 14px;
-      border: 1px solid #2a3550;
+      border: 1px solid #bfdbfe;
       border-radius: 8px;
-      background: #0a0f1a;
-      color: #a89b80;
+      background: #eff6ff;
+      color: #1e40af;
       cursor: pointer;
       font-size: 0.82rem;
       transition: all 0.15s;
     }
-    .klas-btn:hover { border-color: #c9a84c; color: #c9a84c; }
+    .klas-btn:hover { background: #dbeafe; border-color: #3b82f6; }
     .klas-btn.selected {
-      background: #c9a84c;
-      color: #0a0f1a;
-      border-color: #c9a84c;
+      background: #1e40af;
+      color: #fff;
+      border-color: #1e40af;
       font-weight: 600;
     }
     .klas-btn.correct-pick {
-      background: #052e16;
-      color: #4ade80;
-      border-color: #4ade80;
+      background: #f0fdf4;
+      color: #16a34a;
+      border-color: #16a34a;
     }
     .klas-btn.wrong-pick {
-      background: #2d0a0a;
-      color: #f87171;
-      border-color: #f87171;
+      background: #fef2f2;
+      color: #ef4444;
+      border-color: #ef4444;
     }
     .klas-btn.reveal-correct {
-      border-color: #4ade80;
-      color: #4ade80;
+      border-color: #16a34a;
+      color: #16a34a;
+      background: #f0fdf4;
     }
 
     /* Footer nav */
     .footer-nav {
       text-align: center;
-      padding: 24px 16px;
-      border-top: 1px solid #1e2a40;
-      margin-top: 16px;
+      margin-top: 40px;
+      padding: 16px;
+      border-top: 1px solid #e2e8f0;
     }
     .footer-nav a {
-      margin: 0 10px;
-      color: #c9a84c;
+      margin: 0 12px;
+      color: #3b82f6;
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
     }
     .footer-nav a:hover { text-decoration: underline; }
+
+    /* Print */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .tabs, .check-btn, .check-all-btn, .reset-btn, .footer-nav { display: none !important; }
+      .exercise-section { display: block !important; page-break-inside: avoid; }
+      h1 { -webkit-text-fill-color: #1e40af; color: #1e40af; background: none; }
+    }
 
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>Arapski A1 — Vježbe</h1>
-    <p>Lekcija 1, 2, 3, 4, 5, 6, 7, 8 &amp; 9</p>
-  </header>
-
-  <div class="tabs">
-    <button class="active" onclick="showTab('prevedi-bs-ar', this)">Prevedi (BS→AR)</button>
-    <button onclick="showTab('prevedi-ar-bs', this)">Prevedi (AR→BS)</button>
-    <button onclick="showTab('sufiksi', this)">Sufiksi</button>
-    <button onclick="showTab('prijedlozi', this)">Prijedlozi</button>
-    <button onclick="showTab('recenice', this)">Rečenice</button>
-    <button onclick="showTab('zadaca-l5', this)">Zadaća L5</button>
-    <button onclick="showTab('perfekt', this)">Perfekt (glagoli)</button>
-    <button onclick="showTab('prezent', this)">Prezent (glagoli)</button>
-    <button onclick="showTab('kviz', this)">Kviz kartice</button>
-  </div>
-
-  <div class="score-bar">
-    Tačnih odgovora: <span id="score">0</span> / <span id="total">0</span>
-  </div>
-
   <div class="container">
+    <h1>🕌 Arapski A1 — Vježbe</h1>
+    <p class="subtitle">Interaktivne vježbe za savladavanje gradiva</p>
+
+    <div class="tabs">
+      <button class="active" onclick="showTab('prevedi-bs-ar', this)">Prevedi (BS→AR)</button>
+      <button onclick="showTab('prevedi-ar-bs', this)">Prevedi (AR→BS)</button>
+      <button onclick="showTab('sufiksi', this)">Sufiksi</button>
+      <button onclick="showTab('prijedlozi', this)">Prijedlozi</button>
+      <button onclick="showTab('recenice', this)">Rečenice</button>
+      <button onclick="showTab('zadaca-l5', this)">Zadaća L5</button>
+      <button onclick="showTab('perfekt', this)">Perfekt (glagoli)</button>
+      <button onclick="showTab('prezent', this)">Prezent (glagoli)</button>
+      <button onclick="showTab('kviz', this)">Kviz kartice</button>
+    </div>
+
+    <div class="score-bar">
+      Tačnih odgovora: <span id="score">0</span> / <span id="total">0</span>
+    </div>
+
 
     <!-- TAB 1: Prevedi BS → AR -->
     <div class="exercise-section active" id="tab-prevedi-bs-ar">
@@ -1633,8 +1669,8 @@
         const heading = document.createElement('div');
         heading.style.cssText = 'margin-bottom:12px;';
         heading.innerHTML = `
-          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${noun.label}</span>
-          <span style="font-size:0.85rem;color:#7a8baa;margin-left:10px;">(${noun.labelBs})</span>
+          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#1e40af;">${noun.label}</span>
+          <span style="font-size:0.85rem;color:#64748b;margin-left:10px;">(${noun.labelBs})</span>
         `;
         section.appendChild(heading);
 
@@ -1643,9 +1679,9 @@
 
         suffixLabels.forEach((label, si) => {
           const row = document.createElement('div');
-          row.style.cssText = 'background:#131b2e;border:1px solid #1e2a40;border-radius:10px;padding:12px;';
+          row.style.cssText = 'background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.06);';
           row.innerHTML = `
-            <div style="font-size:0.78rem;color:#5a6a88;margin-bottom:6px;">${label}</div>
+            <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:6px;">${label}</div>
             <input class="suffix-input" id="suffix-${ni}-${si}" placeholder="..." autocomplete="off" spellcheck="false">
             <div class="feedback" id="sfb-${ni}-${si}" style="margin-top:4px;"></div>
           `;
@@ -2390,17 +2426,17 @@
         const heading = document.createElement('div');
         heading.style.cssText = 'margin-bottom:12px;';
         heading.innerHTML = `
-          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${v.verb}</span>
-          <span style="font-size:0.85rem;color:#7a8baa;margin-left:10px;">(${v.verbBs})</span>
+          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#1e40af;">${v.verb}</span>
+          <span style="font-size:0.85rem;color:#64748b;margin-left:10px;">(${v.verbBs})</span>
         `;
         section.appendChild(heading);
         const grid = document.createElement('div');
         grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;';
         v.forms.forEach((f, fi) => {
           const row = document.createElement('div');
-          row.style.cssText = 'background:#131b2e;border:1px solid #1e2a40;border-radius:10px;padding:12px;';
+          row.style.cssText = 'background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.06);';
           row.innerHTML = `
-            <div style="font-size:0.78rem;color:#5a6a88;margin-bottom:6px;">${f.label}</div>
+            <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:6px;">${f.label}</div>
             <input class="suffix-input" id="pf-${vi}-${fi}" placeholder="..." autocomplete="off" spellcheck="false">
             <div class="feedback" id="pfb-${vi}-${fi}" style="margin-top:4px;"></div>
           `;
@@ -2464,17 +2500,17 @@
         const heading = document.createElement('div');
         heading.style.cssText = 'margin-bottom:12px;';
         heading.innerHTML = `
-          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#c9a84c;">${v.verb}</span>
-          <span style="font-size:0.85rem;color:#7a8baa;margin-left:10px;">(${v.verbBs})</span>
+          <span style="font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif;font-size:1.8em;direction:rtl;color:#1e40af;">${v.verb}</span>
+          <span style="font-size:0.85rem;color:#64748b;margin-left:10px;">(${v.verbBs})</span>
         `;
         section.appendChild(heading);
         const grid = document.createElement('div');
         grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;';
         v.forms.forEach((f, fi) => {
           const row = document.createElement('div');
-          row.style.cssText = 'background:#131b2e;border:1px solid #1e2a40;border-radius:10px;padding:12px;';
+          row.style.cssText = 'background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.06);';
           row.innerHTML = `
-            <div style="font-size:0.78rem;color:#5a6a88;margin-bottom:6px;">${f.label}</div>
+            <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:6px;">${f.label}</div>
             <input class="suffix-input" id="pz-${vi}-${fi}" placeholder="..." autocomplete="off" spellcheck="false">
             <div class="feedback" id="pzfb-${vi}-${fi}" style="margin-top:4px;"></div>
           `;

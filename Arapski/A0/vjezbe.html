@@ -18,40 +18,39 @@
 
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0a0f1a;
-      color: #e0d5c1;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+      color: #2d3748;
       min-height: 100vh;
+      padding: 20px;
     }
 
-    header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      padding: 28px 20px 20px;
+    h1 {
       text-align: center;
-      border-bottom: 2px solid #c9a84c;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #2563eb, #059669);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    header h1 {
-      font-size: 1.6rem;
-      color: #c9a84c;
-      margin-bottom: 6px;
-      letter-spacing: 1px;
-    }
-
-    header p {
-      font-size: 0.85rem;
-      color: #a89b80;
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
     }
 
     .arabic {
       font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
       direction: rtl;
-      color: #c9a84c;
+      color: #1e40af;
     }
 
     .container {
       max-width: 900px;
       margin: 0 auto;
-      padding: 16px;
+      padding: 0 4px;
     }
 
     /* Tab Navigation */
@@ -60,43 +59,51 @@
       flex-wrap: wrap;
       gap: 6px;
       justify-content: center;
+      background: #fff;
+      border-radius: 10px;
       padding: 14px 16px;
-      background: #0f1525;
-      border-bottom: 1px solid #1e2a40;
-      position: static;
-      z-index: 10;
+      margin-bottom: 18px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
 
     .tabs button {
-      padding: 8px 14px;
-      border: 1px solid #2a3550;
+      padding: 7px 14px;
+      border: 1px solid #bfdbfe;
       border-radius: 20px;
-      background: #131b2e;
-      color: #a89b80;
+      background: #eff6ff;
+      color: #1e40af;
       cursor: pointer;
       font-size: 0.8rem;
       transition: all 0.2s;
     }
 
-    .tabs button:hover,
+    .tabs button:hover {
+      background: #dbeafe;
+      border-color: #3b82f6;
+    }
+
     .tabs button.active {
-      background: #c9a84c;
-      color: #0a0f1a;
-      border-color: #c9a84c;
+      background: #1e40af;
+      color: #fff;
+      border-color: #1e40af;
     }
 
     /* Score Bar */
     .score-bar {
       text-align: center;
-      padding: 10px;
+      padding: 12px;
       font-size: 0.85rem;
-      color: #a89b80;
-      background: #0f1525;
-      border-bottom: 1px solid #1e2a40;
+      color: #64748b;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      margin-bottom: 18px;
     }
 
     .score-bar span {
-      color: #c9a84c;
+      color: #1e40af;
       font-weight: bold;
     }
 
@@ -121,42 +128,43 @@
     }
 
     .section-block {
-      background: #131b2e;
-      border: 1px solid #1e2a40;
+      background: #fff;
+      border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 20px;
       margin-bottom: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
 
     .section-block h2 {
-      color: #c9a84c;
+      color: #1e40af;
       font-size: 1.2rem;
       margin-bottom: 12px;
       padding-bottom: 8px;
-      border-bottom: 1px solid #1e2a40;
+      border-bottom: 1px solid #e2e8f0;
     }
 
     .section-block h3 {
-      color: #4da87a;
+      color: #059669;
       font-size: 1rem;
       margin: 18px 0 10px;
     }
 
     .info-box {
-      background: #0d1f15;
-      border: 1px solid #2d6a4f;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
       border-radius: 8px;
       padding: 12px 16px;
       margin-bottom: 14px;
       font-size: 0.88rem;
-      color: #7ac9a0;
+      color: #14532d;
       line-height: 1.5;
     }
 
     /* Exercise Items */
     .ex-item {
-      background: #0f1525;
-      border: 1px solid #1e2a40;
+      background: #fafbfc;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
       padding: 14px 16px;
       margin-bottom: 10px;
@@ -164,12 +172,13 @@
     }
 
     .ex-item:hover {
-      border-color: #2a3550;
+      border-color: #bfdbfe;
     }
 
     .ex-item .question {
       font-size: 1.1rem;
       margin-bottom: 8px;
+      color: #2d3748;
     }
 
     .ex-item .question .arabic {
@@ -187,10 +196,11 @@
 
     details summary {
       cursor: pointer;
-      color: #c9a84c;
+      color: #1e40af;
       font-size: 0.85rem;
       padding: 6px 12px;
-      background: #1a1a2e;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
       border-radius: 6px;
       display: inline-block;
       transition: all 0.2s;
@@ -198,21 +208,24 @@
     }
 
     details summary:hover {
-      background: #252545;
+      background: #dbeafe;
+      border-color: #3b82f6;
     }
 
     details[open] summary {
-      background: #2d6a4f;
-      color: #e0d5c1;
+      background: #1e40af;
+      color: #fff;
+      border-color: #1e40af;
     }
 
     .answer {
       margin-top: 10px;
       padding: 12px;
-      background: #0d1f15;
-      border: 1px solid #2d6a4f;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
       border-radius: 8px;
       line-height: 1.6;
+      color: #14532d;
     }
 
     .answer .arabic {
@@ -220,7 +233,7 @@
     }
 
     .pron {
-      color: #7a8baa;
+      color: #64748b;
       font-style: italic;
       font-size: 0.9em;
     }
@@ -234,28 +247,28 @@
     }
 
     .badge-sun {
-      background: #7c2d12;
-      color: #fdba74;
+      background: #fed7aa;
+      color: #9a3412;
     }
 
     .badge-moon {
-      background: #1e3a5f;
-      color: #93c5fd;
+      background: #dbeafe;
+      color: #1e40af;
     }
 
     .badge-green {
-      background: #14532d;
-      color: #86efac;
+      background: #dcfce7;
+      color: #14532d;
     }
 
     .badge-attr {
-      background: #581c87;
-      color: #d8b4fe;
+      background: #ede9fe;
+      color: #6b21a8;
     }
 
     .badge-sent {
-      background: #7c2d12;
-      color: #fca5a5;
+      background: #fee2e2;
+      color: #991b1b;
     }
 
     /* Interactive Quiz Styles */
@@ -266,17 +279,18 @@
     }
 
     .quiz-card {
-      background: #131b2e;
-      border: 1px solid #1e2a40;
+      background: #fff;
+      border: 1px solid #e2e8f0;
       border-radius: 10px;
       padding: 16px;
       cursor: pointer;
       transition: all 0.3s;
       text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
 
     .quiz-card:hover {
-      border-color: #c9a84c;
+      border-color: #3b82f6;
       transform: translateY(-2px);
     }
 
@@ -287,8 +301,8 @@
     }
 
     .quiz-card .hidden-answer {
-      color: #0f1525;
-      background: #1e2a40;
+      color: #e2e8f0;
+      background: #e2e8f0;
       border-radius: 6px;
       padding: 6px 10px;
       margin-top: 8px;
@@ -298,8 +312,8 @@
     }
 
     .quiz-card.revealed .hidden-answer {
-      color: #e0d5c1;
-      background: #2d6a4f;
+      color: #14532d;
+      background: #dcfce7;
     }
 
     /* Input exercises */
@@ -313,34 +327,34 @@
     .input-exercise input {
       padding: 8px 14px;
       border-radius: 8px;
-      border: 1px solid #2a3550;
-      background: #0f1525;
-      color: #e0d5c1;
+      border: 1px solid #bfdbfe;
+      background: #fff;
+      color: #2d3748;
       font-size: 0.95rem;
       outline: none;
       width: 200px;
     }
 
     .input-exercise input:focus {
-      border-color: #c9a84c;
+      border-color: #1e40af;
     }
 
     .input-exercise input.correct {
-      border-color: #2d6a4f;
-      background: #0d1f15;
+      border-color: #16a34a;
+      background: #f0fdf4;
     }
 
     .input-exercise input.wrong {
-      border-color: #dc2626;
-      background: #1f0d0d;
+      border-color: #ef4444;
+      background: #fef2f2;
     }
 
     .check-btn {
       padding: 8px 16px;
       border: none;
       border-radius: 8px;
-      background: #c9a84c;
-      color: #0a0f1a;
+      background: #1e40af;
+      color: #fff;
       font-weight: bold;
       cursor: pointer;
       font-size: 0.85rem;
@@ -348,7 +362,7 @@
     }
 
     .check-btn:hover {
-      background: #d4b65c;
+      background: #2563eb;
     }
 
     /* Letter boxes */
@@ -358,27 +372,27 @@
       justify-content: center;
       width: 48px;
       height: 48px;
-      border: 2px solid #2a3550;
+      border: 2px solid #bfdbfe;
       border-radius: 8px;
       margin: 4px;
       font-size: 1.4rem;
       cursor: pointer;
       transition: all 0.2s;
-      background: #131b2e;
+      background: #fff;
     }
 
     .letter-box:hover {
-      border-color: #c9a84c;
+      border-color: #3b82f6;
     }
 
     .letter-box.selected {
-      border-color: #dc2626;
-      background: #2a1010;
+      border-color: #ef4444;
+      background: #fef2f2;
     }
 
     .letter-box.correct-letter {
-      border-color: #2d6a4f;
-      background: #0d1f15;
+      border-color: #16a34a;
+      background: #f0fdf4;
     }
 
     /* Drag classify */
@@ -390,8 +404,8 @@
     }
 
     .classify-box {
-      background: #0f1525;
-      border: 2px dashed #2a3550;
+      background: #fafbfc;
+      border: 2px dashed #cbd5e1;
       border-radius: 10px;
       padding: 14px;
       min-height: 120px;
@@ -404,50 +418,72 @@
     }
 
     .classify-box.attr h4 {
-      color: #d8b4fe;
+      color: #6b21a8;
     }
 
     .classify-box.sent h4 {
-      color: #fca5a5;
+      color: #991b1b;
     }
 
     .draggable-item {
       display: inline-block;
       padding: 8px 14px;
-      background: #1a1a2e;
-      border: 1px solid #2a3550;
+      background: #fff;
+      border: 1px solid #bfdbfe;
       border-radius: 8px;
       margin: 4px;
       cursor: grab;
       transition: all 0.2s;
       font-size: 0.95rem;
+      color: #2d3748;
     }
 
     .draggable-item:hover {
-      border-color: #c9a84c;
+      border-color: #3b82f6;
     }
 
     .draggable-item.placed-attr {
       border-color: #7c3aed;
-      background: #1e0f30;
+      background: #ede9fe;
+      color: #6b21a8;
     }
 
     .draggable-item.placed-sent {
-      border-color: #dc2626;
-      background: #1f0d0d;
+      border-color: #ef4444;
+      background: #fee2e2;
+      color: #991b1b;
     }
 
     /* Progress bar */
     .progress-bar {
       height: 3px;
-      background: #1e2a40;
+      background: #e2e8f0;
     }
 
     .progress-bar .fill {
       height: 100%;
-      background: #c9a84c;
+      background: #1e40af;
       transition: width 0.3s;
       width: 0%;
+    }
+
+    /* Footer nav */
+    .footer-nav {
+      text-align: center;
+      margin-top: 40px;
+      padding: 16px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .footer-nav a {
+      margin: 0 12px;
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 0.88rem;
+    }
+
+    .footer-nav a:hover {
+      text-decoration: underline;
     }
 
     /* Responsive */
@@ -470,16 +506,12 @@
       }
     }
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #555;
-      font-size: 0.8rem;
-    }
-
-    footer a {
-      color: #c9a84c;
-      text-decoration: none;
+    /* Print */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .tabs, .check-btn, .footer-nav, .progress-bar { display: none !important; }
+      .exercise-section { display: block !important; page-break-inside: avoid; }
+      h1 { -webkit-text-fill-color: #1e40af; color: #1e40af; background: none; }
     }
 
   </style>
@@ -491,29 +523,27 @@
     <div class="fill" id="progFill"></div>
   </div>
 
-  <header>
-    <h1>Arapski A0 — Vježbe</h1>
-    <p>Interaktivne vježbe iz kursa arapskog jezika</p>
-  </header>
-
-  <div class="tabs" id="tabs">
-    <button class="active" data-tab="sastavi">Sastavi slova</button>
-    <button data-tab="rastavi">Rastavi riječ</button>
-    <button data-tab="prevedi">Pročitaj i prevedi</button>
-    <button data-tab="clan">Član AL-</button>
-    <button data-tab="sintagma">Sintagma i rečenica</button>
-    <button data-tab="rod">Promjena roda</button>
-    <button data-tab="suglasnici">Suglasnici</button>
-    <button data-tab="zamjenice">Zamjenice</button>
-    <button data-tab="brojevi">Brojevi</button>
-    <button data-tab="kviz">Kviz</button>
-  </div>
-
-  <div class="score-bar">
-    Riješeno: <span id="solvedCount">0</span> / <span id="totalCount">0</span> vježbi u ovoj sekciji
-  </div>
-
   <div class="container">
+    <h1>🕌 Arapski A0 — Vježbe</h1>
+    <p class="subtitle">Interaktivne vježbe iz kursa arapskog jezika</p>
+
+    <div class="tabs" id="tabs">
+      <button class="active" data-tab="sastavi">Sastavi slova</button>
+      <button data-tab="rastavi">Rastavi riječ</button>
+      <button data-tab="prevedi">Pročitaj i prevedi</button>
+      <button data-tab="clan">Član AL-</button>
+      <button data-tab="sintagma">Sintagma i rečenica</button>
+      <button data-tab="rod">Promjena roda</button>
+      <button data-tab="suglasnici">Suglasnici</button>
+      <button data-tab="zamjenice">Zamjenice</button>
+      <button data-tab="brojevi">Brojevi</button>
+      <button data-tab="kviz">Kviz</button>
+    </div>
+
+    <div class="score-bar">
+      Riješeno: <span id="solvedCount">0</span> / <span id="totalCount">0</span> vježbi u ovoj sekciji
+    </div>
+
 
     <!-- ============================================ -->
     <!-- TAB 1: SASTAVI SLOVA U RIJEČ -->
@@ -2438,7 +2468,7 @@
           <button class="check-btn" onclick="checkQuiz()" style="padding: 12px 30px; font-size: 1rem;">Provjeri sve
             odgovore</button>
           <button class="check-btn" onclick="newQuiz()"
-            style="padding: 12px 30px; font-size: 1rem; background: #2d6a4f; color: #e0d5c1; margin-left: 10px;">Novi
+            style="padding: 12px 30px; font-size: 1rem; background: #059669; color: #fff; margin-left: 10px;">Novi
             kviz</button>
         </div>
         <div id="quizResult" style="text-align: center; margin-top: 16px; font-size: 1.1rem;"></div>
@@ -2454,22 +2484,22 @@
           <button class="check-btn" onclick="checkReverseQuiz()"
             style="padding: 12px 30px; font-size: 1rem;">Provjeri</button>
           <button class="check-btn" onclick="newReverseQuiz()"
-            style="padding: 12px 30px; font-size: 1rem; background: #2d6a4f; color: #e0d5c1; margin-left: 10px;">Novi
+            style="padding: 12px 30px; font-size: 1rem; background: #059669; color: #fff; margin-left: 10px;">Novi
             kviz</button>
         </div>
         <div id="reverseQuizResult" style="text-align: center; margin-top: 16px; font-size: 1.1rem;"></div>
       </div>
     </div>
 
-  </div>
+    <div class="footer-nav">
+      <a href="index.html">Početna</a>
+      <a href="gradivo.html">Gradivo</a>
+      <a href="vjezbe.html">Vježbe</a>
+      <a href="../vokabular.html">Vokabular</a>
+      <a href="ispiti-vjezbe/ispiti.html">Ispiti</a>
+    </div>
 
-  <footer>
-    <a href="index.html">Početna</a> &middot;
-    <a href="gradivo.html">Gradivo</a> &middot;
-    <a href="vjezbe.html">Vježbe</a> &middot;
-    <a href="../vokabular.html">Vokabular</a> &middot;
-    <a href="ispiti-vjezbe/ispiti.html">Ispiti</a>
-  </footer>
+  </div>
 
   <script>
     // ===== TAB NAVIGATION =====
@@ -2534,16 +2564,16 @@
           box.classList.add('correct-letter');
           correct++;
         } else if (!doesNotConnect && isSelected) {
-          box.style.borderColor = '#dc2626';
-          box.style.background = '#2a1010';
+          box.style.borderColor = '#ef4444';
+          box.style.background = '#fef2f2';
           setTimeout(() => {
-            box.style.borderColor = '#2a3550';
-            box.style.background = '#131b2e';
+            box.style.borderColor = '#bfdbfe';
+            box.style.background = '#fff';
           }, 2000);
         } else if (doesNotConnect && !isSelected) {
-          box.style.borderColor = '#c9a84c';
+          box.style.borderColor = '#1e40af';
           setTimeout(() => {
-            box.style.borderColor = '#2a3550';
+            box.style.borderColor = '#bfdbfe';
           }, 2000);
         }
       });
@@ -2646,17 +2676,17 @@
           input.classList.remove('wrong');
           input.classList.add('correct');
           fb.innerHTML = '&#10003;';
-          fb.style.color = '#4da87a';
+          fb.style.color = '#16a34a';
           correct++;
         } else {
           input.classList.remove('correct');
           input.classList.add('wrong');
           fb.innerHTML = w.ans.join(' / ');
-          fb.style.color = '#fca5a5';
+          fb.style.color = '#ef4444';
         }
       });
       document.getElementById('quizResult').innerHTML =
-        `Rezultat: <span style="color:#c9a84c;font-size:1.3rem;">${correct}/${currentQuiz.length}</span>`;
+        `Rezultat: <span style="color:#1e40af;font-size:1.3rem;">${correct}/${currentQuiz.length}</span>`;
     }
 
     // ===== QUIZ: Bosnian → Arabic transliteration =====
@@ -2713,17 +2743,17 @@
           input.classList.remove('wrong');
           input.classList.add('correct');
           fb.innerHTML = '&#10003;';
-          fb.style.color = '#4da87a';
+          fb.style.color = '#16a34a';
           correct++;
         } else {
           input.classList.remove('correct');
           input.classList.add('wrong');
           fb.innerHTML = w.ans[0];
-          fb.style.color = '#fca5a5';
+          fb.style.color = '#ef4444';
         }
       });
       document.getElementById('reverseQuizResult').innerHTML =
-        `Rezultat: <span style="color:#c9a84c;font-size:1.3rem;">${correct}/${currentReverseQuiz.length}</span>`;
+        `Rezultat: <span style="color:#1e40af;font-size:1.3rem;">${correct}/${currentReverseQuiz.length}</span>`;
     }
 
     // Initialize quizzes

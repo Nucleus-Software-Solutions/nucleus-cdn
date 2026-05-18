@@ -126,9 +126,12 @@ Kreiraj `A1/ispiti-vjezbe/` folder po uzoru na A0. Dodaj:
 | Fajl | Tema | Pozadina | Akcent |
 |------|------|----------|--------|
 | `gradivo.html` | Light | `#f5f7fa → #e4e8ec` | `#1e40af` (plava) |
-| `vjezbe.html` | Dark | `#0a0f1a` | `#c9a84c` (zlatna) |
-| `vokabular.html` | Dark | `#0a0f1a` | `#c9a84c` (zlatna) |
-| `index.html` | Dark | `#0a0f1a` | `#c9a84c` (zlatna) |
+| `vjezbe.html` | Light | `#f5f7fa → #e4e8ec` | `#1e40af` (plava) |
+| `vokabular.html` | Light | `#f5f7fa → #e4e8ec` | `#1e40af` (plava) |
+| `index.html` | Light | `#f5f7fa → #e4e8ec` | `#1e40af` (plava) |
+| `brzi-pregled.html` | Light | `#f5f7fa → #e4e8ec` | `#1e40af` (plava) |
+
+**Unifikovana light tema** kroz cijeli projekt (A0 + A1 + root). Akcent linije: H1 koristi gradient `linear-gradient(90deg, #2563eb, #059669)`, podnaslovi (H2) plavi `#1e40af`, H3 zelena `#059669`, info-box žuti, rule-box zeleni.
 
 **Arapski font:** `'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif` — Noto Naskh Arabic i Amiri se učitavaju iz Google Fonts (vidi `<head>` u svakom HTML fajlu). Noto Naskh je primarni jer je dizajniran za ekransku čitljivost (jasnije razdvojeni mīm u لـمـ ligaturi). Traditional Arabic ostaje kao fallback za stare Windows sisteme bez interneta.
 **Smjer:** `direction: rtl`
