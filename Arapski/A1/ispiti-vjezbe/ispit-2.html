@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="bs" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ispit 2 — Arapski A1</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="../../andalus.css">
+  <style>
+    .exam-section { margin-bottom: 20px; }
+    .exam-section .exam-q-num { margin-bottom: 4px; }
+    .exam-section .section-prompt-ar {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 22px; color: var(--terracotta); direction: rtl;
+      text-align: right; margin: 0 0 4px; line-height: 1.4;
+    }
+    .exam-section .section-prompt-bs {
+      font-size: 14px; color: var(--ink-2); margin: 0 0 16px; font-style: italic;
+    }
+    .exam-section .section-pts {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--ink-3); letter-spacing: 0.08em; margin-bottom: 12px;
+    }
+    .exam-row {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      direction: rtl; padding: 12px 0; border-bottom: 1px dashed var(--rule);
+    }
+    .exam-row:last-child { border-bottom: none; }
+    .exam-row .ar-word {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 26px; color: var(--emerald); min-width: 140px;
+      text-align: center; direction: rtl; line-height: 1.4;
+    }
+    .exam-row .ar-target {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 22px; color: var(--ink); direction: rtl;
+    }
+    .exam-row .arrow-rtl { color: var(--ink-3); font-size: 18px; }
+    .exam-select {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 20px; direction: rtl; min-width: 160px; padding: 10px 14px;
+      border: 1px solid var(--rule); border-radius: 8px; background: var(--paper);
+      color: var(--ink); transition: border-color 0.12s, background 0.12s;
+      cursor: pointer; font-weight: 400;
+    }
+    .exam-select:focus { outline: none; border-color: var(--emerald); background: var(--card); }
+    .exam-select.correct { border-color: var(--emerald); background: rgba(20, 84, 60, 0.08); color: var(--emerald); }
+    .exam-select.incorrect { border-color: var(--terracotta); background: rgba(176, 74, 42, 0.08); color: var(--terracotta); }
+    .pron-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; direction: rtl; }
+    .pron-grid .exam-select { width: 100%; min-width: 0; text-align: center; text-align-last: center; padding: 10px 6px; font-size: 20px; }
+    .conj-table { width: 100%; border-collapse: collapse; direction: rtl; margin: 10px 0; }
+    .conj-table th, .conj-table td {
+      border: 1px solid var(--rule); padding: 10px 8px; text-align: center;
+      vertical-align: middle; font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 22px;
+    }
+    .conj-table thead th { background: var(--paper-2); color: var(--ink); font-weight: 700; }
+    .conj-table .verb-cell {
+      background: rgba(20, 84, 60, 0.08); color: var(--emerald);
+      font-weight: 700; font-size: 24px;
+    }
+    .conj-table .exam-select { width: 100%; min-width: 0; padding: 8px 6px; font-size: 19px; text-align: center; text-align-last: center; }
+    .text-passage {
+      direction: rtl; font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 24px; line-height: 2; color: var(--ink);
+      background: var(--paper-2); border: 1px solid var(--rule);
+      border-radius: 10px; padding: 18px 22px; margin: 14px 0 18px;
+    }
+    .tf-row {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      direction: rtl; padding: 12px 0; border-bottom: 1px dashed var(--rule);
+    }
+    .tf-row:last-child { border-bottom: none; }
+    .tf-row .tf-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink-3); min-width: 24px; }
+    .tf-row .ar-statement {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 22px; color: var(--ink); flex: 1; direction: rtl;
+      text-align: right; min-width: 220px;
+    }
+    .tf-buttons { display: flex; gap: 8px; direction: ltr; }
+    .tf-buttons label {
+      display: flex; align-items: center; gap: 6px; padding: 8px 14px;
+      border: 1px solid var(--rule); border-radius: 8px; background: var(--paper);
+      cursor: pointer; font-size: 14px; color: var(--ink); font-weight: 500;
+      transition: border-color 0.12s, background 0.12s;
+    }
+    .tf-buttons label:hover { border-color: var(--emerald); background: var(--paper-2); }
+    .tf-buttons label.correct { border-color: var(--emerald); background: rgba(20, 84, 60, 0.08); color: var(--emerald); }
+    .tf-buttons label.incorrect { border-color: var(--terracotta); background: rgba(176, 74, 42, 0.08); color: var(--terracotta); }
+    .tf-buttons input[type="radio"] { accent-color: var(--emerald); width: 16px; height: 16px; }
+    .suffix-noun {
+      display: block; font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 28px; color: var(--emerald); direction: rtl; text-align: right;
+      padding: 6px 0; margin-top: 14px; border-bottom: 2px solid var(--rule);
+    }
+    .suffix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; direction: rtl; padding: 10px 0; }
+    .suffix-cell {
+      display: flex; flex-direction: column; gap: 6px; padding: 10px;
+      border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); align-items: center;
+    }
+    .suffix-cell .pron-label {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 20px; color: var(--terracotta); direction: rtl;
+    }
+    .count-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; direction: rtl; }
+    .count-cell {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding: 12px 14px; border: 1px solid var(--rule);
+      border-radius: 10px; background: var(--paper); direction: rtl;
+    }
+    .dots-box {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(14px, max-content));
+      gap: 6px; max-width: 180px; min-width: 100px; justify-content: flex-end; direction: ltr;
+    }
+    .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--ink); border: 1px solid var(--ink-3); }
+    .count-cell .exam-select { min-width: 130px; font-size: 18px; }
+    .check-row { display: flex; align-items: center; gap: 16px; margin-top: 18px; flex-wrap: wrap; }
+    .score-pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--emerald);
+      font-weight: 600; padding: 6px 12px; background: rgba(20, 84, 60, 0.08); border-radius: 999px;
+    }
+    .score-pill:empty { display: none; }
+    .total-card {
+      background: var(--card); border: 2px solid var(--emerald); border-radius: 12px;
+      padding: 22px 28px; margin-bottom: 24px; text-align: center;
+      font-family: 'Fraunces', serif; font-size: 22px; color: var(--ink);
+    }
+    .total-card strong { color: var(--emerald); font-weight: 600; }
+    .exam-content { padding: 40px 56px; }
+    .open-textarea {
+      width: 100%; min-height: 140px; padding: 14px 16px;
+      border: 1px solid var(--rule); border-radius: 10px; background: var(--paper);
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 20px; color: var(--ink); direction: rtl; line-height: 1.8; resize: vertical;
+    }
+    .open-textarea:focus { outline: none; border-color: var(--emerald); background: var(--card); }
+    .sample-box {
+      display: none; direction: rtl;
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 20px; line-height: 1.9; color: var(--ink);
+      background: rgba(20, 84, 60, 0.06); border: 1px dashed var(--emerald);
+      border-radius: 10px; padding: 14px 18px; margin-top: 14px;
+    }
+    .sample-box.show { display: block; }
+    .sample-box .sample-label {
+      font-family: 'Fraunces', serif; font-style: italic; font-size: 14px;
+      color: var(--emerald); direction: ltr; text-align: left;
+      margin-bottom: 6px; display: block;
+    }
+    .oral-list { list-style: none; padding: 0; margin: 12px 0 0; direction: rtl; }
+    .oral-list li {
+      font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 24px; color: var(--ink); padding: 10px 0;
+      border-bottom: 1px dashed var(--rule); line-height: 1.7;
+    }
+    .oral-list li:last-child { border-bottom: none; }
+    .oral-list li .num {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--ink-3); margin-left: 10px; direction: ltr; display: inline-block;
+    }
+    @media (max-width: 860px) {
+      .exam-content { padding: 28px 20px; }
+      .exam-row .ar-word { font-size: 22px; min-width: 100px; }
+      .exam-select { font-size: 18px; min-width: 120px; }
+      .pron-grid { grid-template-columns: repeat(2, 1fr); }
+      .conj-table th, .conj-table td { font-size: 18px; padding: 8px 4px; }
+      .conj-table .verb-cell { font-size: 20px; }
+      .suffix-grid { grid-template-columns: repeat(2, 1fr); }
+      .count-grid { grid-template-columns: 1fr; }
+      .text-passage { font-size: 20px; padding: 14px 16px; }
+      .oral-list li { font-size: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="topbar">
+      <a class="brand" href="../../index.html">
+        <div class="brand-mark">ع</div>
+        <div>
+          <div class="brand-name">Arapski jezik</div>
+          <div class="brand-sub">Kurs · 7 nivoa</div>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="../../index.html">Početna</a>
+
+        <div class="nav-dropdown active" id="levelsDropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Nivoi
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 4.5L6 7.5L9 4.5" />
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-head">Svi nivoi kursa</div>
+            <a class="nav-dropdown-item" href="../../A0/index.html">
+              <span class="nav-dropdown-code">A0</span>
+              <span class="nav-dropdown-title">Osnove</span><span></span>
+            </a>
+            <a class="nav-dropdown-item active" href="../index.html">
+              <span class="nav-dropdown-code">A1</span>
+              <span class="nav-dropdown-title">Lekcije</span><span></span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A2</span>
+              <span class="nav-dropdown-title">Glagolski sistem</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A3</span>
+              <span class="nav-dropdown-title">Buduće vrijeme</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A4</span>
+              <span class="nav-dropdown-title">Složene rečenice</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A5</span>
+              <span class="nav-dropdown-title">Tekstovi</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A6</span>
+              <span class="nav-dropdown-title">Akademski jezik</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="../../vokabular.html">Vokabular</a>
+        <a href="../../brzi-pregled.html">Gramatika</a>
+      </nav>
+
+      <a class="btn btn-ghost btn-sm" href="../gradivo.html">Nastavi učiti</a>
+      <button class="btn btn-ghost btn-sm menu-btn" type="button" aria-label="Meni">☰</button>
+    </header>
+
+    <div class="breadcrumb">
+      <a href="../index.html">← Arapski A1</a>
+      <span>·</span>
+      <a href="ispiti.html">Ispiti</a>
+      <span>·</span>
+      <span>Ispit 2</span>
+    </div>
+
+    <section class="inner-hero">
+      <div>
+        <div class="level-badge">Ispit · A1 · 2</div>
+        <h1 class="serif">Ispit 2</h1>
+        <p>Probni ispit za nivo A1 — druga grupa primjera: zanimanja u jednini i množini,
+          glagoli كَتَبَ i دَرَسَ, čitanje o porodici, sufiksi na imenicama كِتَاب i قَلَم.</p>
+      </div>
+      <div class="inner-arabic">إِمْتِحَان ٢</div>
+    </section>
+
+    <div class="exam-content" id="exam-content"></div>
+
+    <nav class="footer-nav">
+      <a href="../index.html">Početna</a>
+      <a href="../gradivo.html">Gradivo</a>
+      <a href="../vjezbe.html">Vježbe</a>
+      <a class="active" href="ispiti.html">Ispiti</a>
+      <a href="../../vokabular.html">Vokabular</a>
+      <a href="../../brzi-pregled.html">Brzi pregled</a>
+    </nav>
+
+    <footer class="footer">
+      <span>© 2026 · Kurs arapskog jezika · Ispit 2 — A1</span>
+      <span class="footer-arabic">وَفَّقَكُمُ الله</span>
+    </footer>
+
+  </div>
+
+  <script>
+    const ALL_SINGULAR = ['أَنَا', 'أَنْتَ', 'أَنْتِ', 'هُوَ', 'هِيَ'];
+    const ALL_PLURAL = ['نَحْنُ', 'أَنْتُمْ', 'أَنْتُنَّ', 'هُمْ', 'هُنَّ'];
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function poolSelect(id, pool, placeholder) {
+      const opts = shuffle(pool);
+      return `<select id="${id}" class="exam-select">
+        <option value="">${placeholder || 'Odaberi'}</option>
+        ${opts.map(o => `<option value="${o}">${o}</option>`).join('')}
+      </select>`;
+    }
+
+    const exam = {
+      title: 'Ispit 2',
+      pronouns: [
+        { options: ['هِيَ', 'أَنْتُمْ', 'نَحْنُ'], target: 'مُهَنْدِسُونَ', answer: 'نَحْنُ' },
+        { options: ['أَنْتَ', 'هُوَ', 'أَنَا'], target: 'طَالِبٌ', answer: 'أَنَا' },
+        { options: ['هُنَّ', 'هُمْ', 'هِيَ'], target: 'مُسْلِمَاتٌ', answer: 'هُنَّ' },
+        { options: ['أَنْتِ', 'أَنْتَ', 'هِيَ'], target: 'بِنْتٌ', answer: 'أَنْتِ' },
+      ],
+      singularPronouns: ALL_SINGULAR,
+      pluralPronouns: ALL_PLURAL,
+      pluralization: [
+        { sing: 'طَبِيبٌ', plur: 'أَطِبَّاءُ' },
+        { sing: 'مُمَرِّضَةٌ', plur: 'مُمَرِّضَاتٌ' },
+        { sing: 'كَاتِبٌ', plur: 'كُتَّابٌ' },
+        { sing: 'مُدِيرَةٌ', plur: 'مُدِيرَاتٌ' },
+      ],
+      selfIntroSample: [
+        'مَرْحَبًا! اِسْمِي أَحْمَدُ.',
+        'أَنَا مِنْ سُورِيَا.',
+        'أَعِيشُ فِي زِنِيتْسَا.',
+        'أَنَا مُهَنْدِسٌ فِي شَرِكَةٍ كَبِيرَةٍ.',
+        'أَسْكُنُ فِي بَيْتٍ مَعَ زَوْجَتِي وَ أَوْلَادِي.',
+        'أُحِبُّ القِرَاءَةَ وَ كُرَةَ القَدَمِ.',
+      ],
+      perfectConj: {
+        verb: 'كَتَبَ',
+        meaning: 'pisati / pisao je',
+        forms: [
+          { pron: 'أَنَا', conj: 'كَتَبْتُ' },
+          { pron: 'أَنْتَ', conj: 'كَتَبْتَ' },
+          { pron: 'أَنْتِ', conj: 'كَتَبْتِ' },
+          { pron: 'هُوَ', conj: 'كَتَبَ' },
+          { pron: 'هِيَ', conj: 'كَتَبَتْ' },
+        ],
+      },
+      presentConj: {
+        verb: 'دَرَسَ',
+        meaning: 'učiti / studirati',
+        forms: [
+          { pron: 'أَنَا', conj: 'أَدْرُسُ' },
+          { pron: 'أَنْتَ', conj: 'تَدْرُسُ' },
+          { pron: 'أَنْتِ', conj: 'تَدْرُسِينَ' },
+          { pron: 'هُوَ', conj: 'يَدْرُسُ' },
+          { pron: 'هِيَ', conj: 'تَدْرُسُ' },
+        ],
+      },
+      passage: 'أَنَا أَحْمَدُ مِنْ تُرْكِيَا. أَعِيشُ فِي إِسْطَنْبُول. أَنَا مُدَرِّسٌ. أَعْمَلُ فِي الْمَدْرَسَةِ. أَسْكُنُ فِي بَيْتٍ كَبِيرٍ مَعَ أُسْرَتِي. عِنْدِي وَلَدَانِ وَ بِنْتٌ. زَوْجَتِي اسْمُهَا فَرِيدَةٌ. هِيَ طَبَّاخَةٌ مَاهِرَةٌ.',
+      tf: [
+        { ar: 'أَحْمَدُ مِنْ مِصْر', answer: 'netacno' },
+        { ar: 'هُوَ يَعْمَلُ فِي الْمَدْرَسَةِ', answer: 'tacno' },
+        { ar: 'هُوَ يَسْكُنُ فِي شَقَّةٍ', answer: 'netacno' },
+        { ar: 'عِنْدَهُ وَلَدَانِ وَ بِنْتٌ', answer: 'tacno' },
+        { ar: 'زَوْجَتُهُ مُدَرِّسَةٌ', answer: 'netacno' },
+      ],
+      suffixes: [
+        {
+          noun: 'كِتَاب',
+          forms: [
+            { pron: 'أَنَا', conj: 'كِتَابِي' },
+            { pron: 'أَنْتَ', conj: 'كِتَابُكَ' },
+            { pron: 'أَنْتِ', conj: 'كِتَابُكِ' },
+            { pron: 'هُوَ', conj: 'كِتَابُهُ' },
+            { pron: 'هِيَ', conj: 'كِتَابُهَا' },
+            { pron: 'نَحْنُ', conj: 'كِتَابُنَا' },
+          ],
+        },
+        {
+          noun: 'قَلَم',
+          forms: [
+            { pron: 'أَنَا', conj: 'قَلَمِي' },
+            { pron: 'أَنْتَ', conj: 'قَلَمُكَ' },
+            { pron: 'أَنْتِ', conj: 'قَلَمُكِ' },
+            { pron: 'هُوَ', conj: 'قَلَمُهُ' },
+            { pron: 'هِيَ', conj: 'قَلَمُهَا' },
+            { pron: 'نَحْنُ', conj: 'قَلَمُنَا' },
+          ],
+        },
+      ],
+      counting: [
+        { n: 7, ar: 'سَبْعَةٌ' },
+        { n: 3, ar: 'ثَلَاثَةٌ' },
+        { n: 10, ar: 'عَشَرَةٌ' },
+        { n: 1, ar: 'وَاحِدٌ' },
+        { n: 5, ar: 'خَمْسَةٌ' },
+        { n: 9, ar: 'تِسْعَةٌ' },
+        { n: 2, ar: 'اِثْنَانِ' },
+        { n: 6, ar: 'سِتَّةٌ' },
+        { n: 4, ar: 'أَرْبَعَةٌ' },
+        { n: 8, ar: 'ثَمَانِيَةٌ' },
+      ],
+      oral: [
+        'مَا اسْمُكَ؟',
+        'كَمْ عُمْرُكَ؟',
+        'أَيْنَ تَعْمَلُ؟',
+        'مَا هِوَايَتُكَ؟',
+        'مَنْ أَفْرَادُ أُسْرَتِكَ؟',
+        'مَاذَا تَفْعَلُ فِي الْعُطْلَةِ؟',
+        'أُذْكُرْ ثَلَاثَةَ أَلْوَانٍ تُحِبُّهَا!',
+        'أُذْكُرْ خَمْسَةَ أَشْيَاءَ فِي مَدْرَسَتِكَ!',
+      ],
+    };
+
+    const eid = 'e2';
+
+    function renderExam() {
+      const el = document.getElementById('exam-content');
+      el.innerHTML = `
+        <div class="total-card" id="${eid}-total" style="display:none"></div>
+        ${renderSection1()}
+        ${renderSection2()}
+        ${renderSection3()}
+        ${renderSection4()}
+        ${renderSection5()}
+        ${renderSection6()}
+        ${renderSection7()}
+        ${renderSection8()}
+        ${renderSection9()}
+        ${renderSection10()}
+        ${renderSection11()}
+      `;
+    }
+
+    function renderSection1() {
+      const rows = exam.pronouns.map((p, i) => `
+        <div class="exam-row">
+          <span class="ar-word">(${p.options.join(' - ')})</span>
+          <select id="${eid}-s1-${i}" class="exam-select">
+            <option value="">Odaberi</option>
+            ${p.options.map(o => `<option value="${o}">${o}</option>`).join('')}
+          </select>
+          <span class="ar-target">${p.target}.</span>
+        </div>
+      `).join('');
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 01 · LIČNE ZAMJENICE</div>
+          <h3 class="exam-q-text">Odaberi odgovarajuću ličnu zamjenicu za imenicu koja slijedi iza</h3>
+          <div class="section-prompt-ar">اِخْتَرِ الضَّمِيرَ الْمُنَاسِبَ لِلْاِسْمِ الَّذِي يَلِيهِ</div>
+          ${rows}
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection1()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s1-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection1() {
+      let correct = 0;
+      exam.pronouns.forEach((p, i) => {
+        const sel = document.getElementById(`${eid}-s1-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === p.answer) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s1-score`).textContent = `${correct}/${exam.pronouns.length}`;
+      updateTotal();
+    }
+
+    function renderSection2() {
+      const cells = exam.singularPronouns.map((_, i) => poolSelect(`${eid}-s2-${i}`, ALL_SINGULAR, '—')).join('');
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 02 · ZAMJENICE — JEDNINA</div>
+          <h3 class="exam-q-text">Napiši lične zamjenice za jedninu</h3>
+          <div class="section-prompt-ar">اُكْتُبِ الضَّمَائِرَ لِلْمُفْرَدِ</div>
+          <div class="pron-grid">${cells}</div>
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection2()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s2-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection2() {
+      const used = new Set();
+      let correct = 0;
+      exam.singularPronouns.forEach((_, i) => {
+        const sel = document.getElementById(`${eid}-s2-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        const v = sel.value;
+        if (v && ALL_SINGULAR.includes(v) && !used.has(v)) {
+          used.add(v); sel.classList.add('correct'); correct++;
+        } else if (v !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s2-score`).textContent = `${correct}/${exam.singularPronouns.length}`;
+      updateTotal();
+    }
+
+    function renderSection3() {
+      const cells = exam.pluralPronouns.map((_, i) => poolSelect(`${eid}-s3-${i}`, ALL_PLURAL, '—')).join('');
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 03 · ZAMJENICE — MNOŽINA</div>
+          <h3 class="exam-q-text">Napiši lične zamjenice za množinu</h3>
+          <div class="section-prompt-ar">اُكْتُبِ الضَّمَائِرَ لِلْجَمْعِ</div>
+          <div class="pron-grid">${cells}</div>
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection3()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s3-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection3() {
+      const used = new Set();
+      let correct = 0;
+      exam.pluralPronouns.forEach((_, i) => {
+        const sel = document.getElementById(`${eid}-s3-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        const v = sel.value;
+        if (v && ALL_PLURAL.includes(v) && !used.has(v)) {
+          used.add(v); sel.classList.add('correct'); correct++;
+        } else if (v !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s3-score`).textContent = `${correct}/${exam.pluralPronouns.length}`;
+      updateTotal();
+    }
+
+    function renderSection4() {
+      const pool = exam.pluralization.map(p => p.plur);
+      const rows = exam.pluralization.map((item, i) => `
+        <div class="exam-row">
+          <span class="ar-word">${item.sing}</span>
+          <span class="arrow-rtl">←</span>
+          ${poolSelect(`${eid}-s4-${i}`, pool, 'Odaberi množinu')}
+        </div>
+      `).join('');
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 04 · MNOŽINA IMENICA</div>
+          <h3 class="exam-q-text">Sljedeće imenice prebaci iz jednine u množinu</h3>
+          <div class="section-prompt-ar">حَوِّلِ الأَسْمَاءَ التَّالِيَةَ مِنَ الْمُفْرَدِ إِلَى الْجَمْعِ</div>
+          ${rows}
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection4()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s4-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection4() {
+      let correct = 0;
+      exam.pluralization.forEach((item, i) => {
+        const sel = document.getElementById(`${eid}-s4-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === item.plur) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s4-score`).textContent = `${correct}/${exam.pluralization.length}`;
+      updateTotal();
+    }
+
+    function renderSection5() {
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 05 · PREDSTAVI SE</div>
+          <h3 class="exam-q-text">Predstavi se u najmanje šest rečenica</h3>
+          <div class="section-prompt-ar">قَدِّمْ نَفْسَكَ فِي سِتِّ جُمَلٍ عَلَى الْأَقَلِّ</div>
+          <textarea id="${eid}-s5-text" class="open-textarea" placeholder="اُكْتُبْ هُنَا..."></textarea>
+          <div class="check-row">
+            <button class="btn btn-ghost" onclick="toggleSample5()">Pokaži primjer odgovora</button>
+            <span class="score-pill" style="background:rgba(176,74,42,0.08);color:var(--terracotta)">Otvoreni zadatak</span>
+          </div>
+          <div class="sample-box" id="${eid}-s5-sample">
+            <span class="sample-label">Primjer odgovora:</span>
+            ${exam.selfIntroSample.map(s => `<div>${s}</div>`).join('')}
+          </div>
+        </div>`;
+    }
+    function toggleSample5() {
+      document.getElementById(`${eid}-s5-sample`).classList.toggle('show');
+    }
+
+    function renderConjTable(sectionNum, conj, scoreId, eidPrefix) {
+      const headers = conj.forms.map(f => `<th>${f.pron}</th>`).join('');
+      const cells = conj.forms.map((f, i) => `
+        <td>${poolSelect(`${eidPrefix}-${sectionNum}-${i}`, conj.forms.map(x => x.conj), 'Odaberi')}</td>
+      `).join('');
+      return `
+        <div style="overflow-x:auto;">
+          <table class="conj-table">
+            <thead><tr>${headers}<th class="verb-cell">${conj.verb}</th></tr></thead>
+            <tbody><tr>${cells}<td class="verb-cell">${conj.verb}</td></tr></tbody>
+          </table>
+        </div>`;
+    }
+    function renderSection6() {
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 06 · PERFEKT</div>
+          <h3 class="exam-q-text">Promijeni glagol <span style="font-family:'Noto Naskh Arabic',serif;color:var(--emerald);">كَتَبَ</span> kroz lica jednine u perfektu</h3>
+          <div class="section-prompt-ar">صَرِّفِ الْفِعْلَ "كَتَبَ" فِي الْمَاضِي لِلْمُفْرَدِ</div>
+          ${renderConjTable('s6', exam.perfectConj, 's6-score', eid)}
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection6()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s6-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection6() {
+      let correct = 0;
+      exam.perfectConj.forms.forEach((f, i) => {
+        const sel = document.getElementById(`${eid}-s6-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === f.conj) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s6-score`).textContent = `${correct}/${exam.perfectConj.forms.length}`;
+      updateTotal();
+    }
+
+    function renderSection7() {
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 07 · PREZENT</div>
+          <h3 class="exam-q-text">Promijeni glagol <span style="font-family:'Noto Naskh Arabic',serif;color:var(--emerald);">دَرَسَ</span> kroz lica jednine u prezentu</h3>
+          <div class="section-prompt-ar">صَرِّفِ الْفِعْلَ "دَرَسَ" فِي الْمُضَارِعِ لِلْمُفْرَدِ</div>
+          ${renderConjTable('s7', exam.presentConj, 's7-score', eid)}
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection7()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s7-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection7() {
+      let correct = 0;
+      exam.presentConj.forms.forEach((f, i) => {
+        const sel = document.getElementById(`${eid}-s7-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === f.conj) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s7-score`).textContent = `${correct}/${exam.presentConj.forms.length}`;
+      updateTotal();
+    }
+
+    function renderSection8() {
+      const rows = exam.tf.map((t, i) => `
+        <div class="tf-row">
+          <span class="tf-num">${i + 1}.</span>
+          <span class="ar-statement">${t.ar}</span>
+          <div class="tf-buttons" id="${eid}-s8-${i}">
+            <label><input type="radio" name="${eid}-s8-${i}" value="tacno"> TAČNO</label>
+            <label><input type="radio" name="${eid}-s8-${i}" value="netacno"> NETAČNO</label>
+          </div>
+        </div>
+      `).join('');
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 08 · ČITANJE S RAZUMIJEVANJEM</div>
+          <h3 class="exam-q-text">Pročitaj tekst i označi TAČNO / NETAČNO za tvrdnje koje slijede</h3>
+          <div class="section-prompt-ar">اِقْرَأِ النَّصَّ وَ ضَعْ "صَحِيحٌ" أَوْ "خَطَأٌ" أَمَامَ الْعِبَارَاتِ التَّالِيَة</div>
+          <div class="text-passage">${exam.passage}</div>
+          ${rows}
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection8()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s8-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection8() {
+      let correct = 0;
+      exam.tf.forEach((t, i) => {
+        const group = document.getElementById(`${eid}-s8-${i}`);
+        const labels = group.querySelectorAll('label');
+        labels.forEach(l => l.classList.remove('correct', 'incorrect'));
+        const checked = group.querySelector('input:checked');
+        if (checked) {
+          const parentLabel = checked.closest('label');
+          if (checked.value === t.answer) { parentLabel.classList.add('correct'); correct++; }
+          else { parentLabel.classList.add('incorrect'); }
+        }
+      });
+      document.getElementById(`${eid}-s8-score`).textContent = `${correct}/${exam.tf.length}`;
+      updateTotal();
+    }
+
+    function renderSection9() {
+      let blocks = '';
+      let selIdx = 0;
+      exam.suffixes.forEach((block) => {
+        const pool = block.forms.map(f => f.conj);
+        const cells = block.forms.map((f) => {
+          const id = `${eid}-s9-${selIdx++}`;
+          return `
+            <div class="suffix-cell">
+              <span class="pron-label">${f.pron}</span>
+              ${poolSelect(id, pool, 'Odaberi')}
+            </div>`;
+        }).join('');
+        blocks += `
+          <div class="suffix-noun">${block.noun} ←</div>
+          <div class="suffix-grid">${cells}</div>`;
+      });
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 09 · SPOJENE LIČNE ZAMJENICE</div>
+          <h3 class="exam-q-text">Na sljedeće imenice dodaj spojene lične zamjenice (sufikse)</h3>
+          <div class="section-prompt-ar">أَضِفْ ضَمَائِرَ الْمِلْكِيَّةِ إِلَى الأَسْمَاءِ التَّالِيَة</div>
+          ${blocks}
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection9()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s9-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection9() {
+      let correct = 0, total = 0, idx = 0;
+      exam.suffixes.forEach(block => {
+        block.forms.forEach(f => {
+          const sel = document.getElementById(`${eid}-s9-${idx++}`);
+          sel.classList.remove('correct', 'incorrect');
+          total++;
+          if (sel.value === f.conj) { sel.classList.add('correct'); correct++; }
+          else if (sel.value !== '') { sel.classList.add('incorrect'); }
+        });
+      });
+      document.getElementById(`${eid}-s9-score`).textContent = `${correct}/${total}`;
+      updateTotal();
+    }
+
+    function renderSection10() {
+      const pool = exam.counting.map(c => c.ar);
+      const cells = exam.counting.map((c, i) => {
+        const dots = Array(c.n).fill('<span class="dot"></span>').join('');
+        return `
+          <div class="count-cell">
+            <div class="dots-box">${dots}</div>
+            ${poolSelect(`${eid}-s10-${i}`, pool, 'Odaberi broj')}
+          </div>`;
+      }).join('');
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 10 · BROJEVI</div>
+          <h3 class="exam-q-text">Prebroj i napiši broj riječima (na arapskom)</h3>
+          <div class="section-prompt-ar">اُعْدُدْ وَ اُكْتُبِ الْعَدَدَ بِالْكَلِمَاتِ</div>
+          <div class="count-grid">${cells}</div>
+          <div class="check-row">
+            <button class="btn btn-primary" onclick="checkSection10()">Provjeri</button>
+            <span class="score-pill" id="${eid}-s10-score"></span>
+          </div>
+        </div>`;
+    }
+    function checkSection10() {
+      let correct = 0;
+      exam.counting.forEach((c, i) => {
+        const sel = document.getElementById(`${eid}-s10-${i}`);
+        sel.classList.remove('correct', 'incorrect');
+        if (sel.value === c.ar) { sel.classList.add('correct'); correct++; }
+        else if (sel.value !== '') { sel.classList.add('incorrect'); }
+      });
+      document.getElementById(`${eid}-s10-score`).textContent = `${correct}/${exam.counting.length}`;
+      updateTotal();
+    }
+
+    function renderSection11() {
+      const items = exam.oral.map((q, i) => `<li><span class="num">${i + 1}.</span> ${q}</li>`).join('');
+      return `
+        <div class="exam-question exam-section">
+          <div class="exam-q-num">PITANJE 11 · USMENI ISPIT</div>
+          <h3 class="exam-q-text">Odgovori na pitanja usmeno</h3>
+          <div class="section-prompt-ar">أَجِبْ عَنِ الْأَسْئِلَةِ شَفَوِيًّا</div>
+          <div class="section-prompt-bs">Otvoreni zadatak — pripremi odgovore za usmeni dio ispita.</div>
+          <ol class="oral-list">${items}</ol>
+        </div>`;
+    }
+
+    function updateTotal() {
+      let total = 0, max = 0;
+      for (let s = 1; s <= 10; s++) {
+        const scoreEl = document.getElementById(`${eid}-s${s}-score`);
+        if (scoreEl && scoreEl.textContent) {
+          const parts = scoreEl.textContent.split('/');
+          total += parseInt(parts[0]) || 0;
+          max += parseInt(parts[1]) || 0;
+        }
+      }
+      if (max > 0) {
+        const totalEl = document.getElementById(`${eid}-total`);
+        totalEl.style.display = 'block';
+        const pct = Math.round((total / max) * 100);
+        totalEl.innerHTML = `Ukupan rezultat: <strong>${total} / ${max}</strong> (${pct}%)`;
+      }
+    }
+
+    renderExam();
+
+    (function () {
+      var dd = document.getElementById('levelsDropdown');
+      if (!dd) return;
+      var trigger = dd.querySelector('.nav-dropdown-trigger');
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = dd.classList.toggle('force-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>
