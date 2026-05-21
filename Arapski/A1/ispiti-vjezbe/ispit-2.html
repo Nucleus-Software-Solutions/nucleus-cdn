@@ -309,10 +309,10 @@
     const exam = {
       title: 'Ispit 2',
       pronouns: [
-        { options: ['هِيَ', 'أَنْتُمْ', 'نَحْنُ'], target: 'مُهَنْدِسُونَ', answer: 'نَحْنُ' },
-        { options: ['أَنْتَ', 'هُوَ', 'أَنَا'], target: 'طَالِبٌ', answer: 'أَنَا' },
-        { options: ['هُنَّ', 'هُمْ', 'هِيَ'], target: 'مُسْلِمَاتٌ', answer: 'هُنَّ' },
-        { options: ['أَنْتِ', 'أَنْتَ', 'هِيَ'], target: 'بِنْتٌ', answer: 'أَنْتِ' },
+        { options: ['هِيَ', 'أَنْتُمْ', 'نَحْنُ'], target: 'مُهَنْدِسُونَ', answers: ['أَنْتُمْ', 'نَحْنُ'] },
+        { options: ['أَنْتَ', 'هُوَ', 'أَنَا'], target: 'طَالِبٌ', answers: ['أَنْتَ', 'هُوَ', 'أَنَا'] },
+        { options: ['هُنَّ', 'هُمْ', 'هِيَ'], target: 'مُسْلِمَاتٌ', answers: ['هُنَّ'] },
+        { options: ['أَنْتِ', 'أَنْتَ', 'هِيَ'], target: 'بِنْتٌ', answers: ['أَنْتِ', 'هِيَ'] },
       ],
       singularPronouns: ALL_SINGULAR,
       pluralPronouns: ALL_PLURAL,
@@ -456,7 +456,7 @@
       exam.pronouns.forEach((p, i) => {
         const sel = document.getElementById(`${eid}-s1-${i}`);
         sel.classList.remove('correct', 'incorrect');
-        if (sel.value === p.answer) { sel.classList.add('correct'); correct++; }
+        if (p.answers.includes(sel.value)) { sel.classList.add('correct'); correct++; }
         else if (sel.value !== '') { sel.classList.add('incorrect'); }
       });
       document.getElementById(`${eid}-s1-score`).textContent = `${correct}/${exam.pronouns.length}`;

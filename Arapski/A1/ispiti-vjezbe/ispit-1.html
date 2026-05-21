@@ -497,10 +497,10 @@
       title: 'Ispit 1',
       // 1 — Choose pronoun for following noun
       pronouns: [
-        { options: ['أَنْتَ', 'هُوَ', 'نَحْنُ'], target: 'طَالِبَاتٌ', answer: 'نَحْنُ' },
-        { options: ['هِيَ', 'أَنْتِ', 'هُوَ'], target: 'زَمِيلَةٌ', answer: 'هِيَ' },
-        { options: ['هُمْ', 'أَنْتَ', 'أَنَا'], target: 'مُسْلِمُونَ', answer: 'هُمْ' },
-        { options: ['أَنْتَ', 'هِيَ', 'أَنْتِ'], target: 'رَجُلٌ', answer: 'أَنْتَ' },
+        { options: ['أَنْتَ', 'هُوَ', 'نَحْنُ'], target: 'طَالِبَاتٌ', answers: ['نَحْنُ'] },
+        { options: ['هِيَ', 'أَنْتِ', 'هُوَ'], target: 'زَمِيلَةٌ', answers: ['هِيَ', 'أَنْتِ'] },
+        { options: ['هُمْ', 'أَنْتَ', 'أَنَا'], target: 'مُسْلِمُونَ', answers: ['هُمْ'] },
+        { options: ['أَنْتَ', 'هِيَ', 'أَنْتِ'], target: 'رَجُلٌ', answers: ['أَنْتَ'] },
       ],
       // 2 — Singular pronouns (write all 5)
       singularPronouns: ALL_SINGULAR,
@@ -662,7 +662,7 @@
       exam.pronouns.forEach((p, i) => {
         const sel = document.getElementById(`${eid}-s1-${i}`);
         sel.classList.remove('correct', 'incorrect');
-        if (sel.value === p.answer) { sel.classList.add('correct'); correct++; }
+        if (p.answers.includes(sel.value)) { sel.classList.add('correct'); correct++; }
         else if (sel.value !== '') { sel.classList.add('incorrect'); }
       });
       document.getElementById(`${eid}-s1-score`).textContent = `${correct}/${exam.pronouns.length}`;
