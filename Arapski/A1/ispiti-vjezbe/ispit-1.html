@@ -593,14 +593,14 @@
       ],
       // 11 — Oral exam
       oral: [
-        'مَا اسْمُكَ؟',
-        'مِنْ أَيْنَ أَنْتَ؟',
-        'أَيْنَ تَعِيشُ؟',
-        'أَيْنَ تَسْكُنُ؟ / هَلْ تَسْكُنُ فِي بَيْتٍ أَوْ فِي شَقَّةٍ؟',
-        'مَعَ مَنْ تَسْكُنُ؟',
-        'هَلْ أَنْتَ مُتَزَوِّجٌ؟',
-        'أُذْكُرْ ثَلَاثَةَ أَشْيَاءٍ المَوْجُودَةَ فِي المَجْلِسِ / غُرْفَةِ النَّوْمِ / المَطْبَخِ!',
-        'أُذْكُرْ خَمْسَةَ أَفْرَادِ الأُسْرَة!',
+        { q: 'مَا اسْمُكَ؟', a: 'اِسْمِي عَلِيٌّ.' },
+        { q: 'مِنْ أَيْنَ أَنْتَ؟', a: 'أَنَا مِنَ البُوسْنَة وَ الهِرْسَك.' },
+        { q: 'أَيْنَ تَعِيشُ؟', a: 'أَعِيشُ فِي سَرَايِيفُو.' },
+        { q: 'أَيْنَ تَسْكُنُ؟ / هَلْ تَسْكُنُ فِي بَيْتٍ أَوْ فِي شَقَّةٍ؟', a: 'أَسْكُنُ فِي شَقَّةٍ.' },
+        { q: 'مَعَ مَنْ تَسْكُنُ؟', a: 'أَسْكُنُ مَعَ أُسْرَتِي.' },
+        { q: 'هَلْ أَنْتَ مُتَزَوِّجٌ؟', a: 'نَعَمْ، أَنَا مُتَزَوِّجٌ. / لَا، أَنَا أَعْزَب.' },
+        { q: 'أُذْكُرْ ثَلَاثَةَ أَشْيَاءٍ المَوْجُودَةَ فِي المَجْلِسِ / غُرْفَةِ النَّوْمِ / المَطْبَخِ!', a: 'فِي الْمَجْلِسِ: كَنَبَة، طَاوِلَة، تِلْفَاز.' },
+        { q: 'أُذْكُرْ خَمْسَةَ أَفْرَادِ الأُسْرَة!', a: 'أَبِي، أُمِّي، أَخِي، أُخْتِي، جَدِّي.' },
       ],
     };
 
@@ -986,7 +986,8 @@
 
     // ===== 11. Oral exam =====
     function renderSection11() {
-      const items = exam.oral.map((q, i) => `<li><span class="num">${i + 1}.</span> ${q}</li>`).join('');
+      const items = exam.oral.map((item, i) => `<li><span class="num">${i + 1}.</span> ${item.q}</li>`).join('');
+      const samples = exam.oral.map((item, i) => `<div>${i + 1}. ${item.a}</div>`).join('');
       return `
         <div class="exam-question exam-section">
           <div class="exam-q-num">PITANJE 11 · USMENI ISPIT</div>
@@ -994,7 +995,18 @@
           <div class="section-prompt-ar">أَجِبْ عَنِ الْأَسْئِلَةِ شَفَوِيًّا</div>
           <div class="section-prompt-bs">Otvoreni zadatak — pripremi odgovore za usmeni dio ispita.</div>
           <ol class="oral-list">${items}</ol>
+          <div class="check-row">
+            <button class="btn btn-ghost" onclick="toggleSample11()">Pokaži primjer odgovora</button>
+            <span class="score-pill" style="background:rgba(176,74,42,0.08);color:var(--terracotta)">Otvoreni zadatak</span>
+          </div>
+          <div class="sample-box" id="${eid}-s11-sample">
+            <span class="sample-label">Primjer odgovora:</span>
+            ${samples}
+          </div>
         </div>`;
+    }
+    function toggleSample11() {
+      document.getElementById(`${eid}-s11-sample`).classList.toggle('show');
     }
 
     function updateTotal() {
