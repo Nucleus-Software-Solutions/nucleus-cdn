@@ -1921,11 +1921,16 @@
       }
 
       // Iz ćelije td.ar uzima samo glavni arapski tekst — preskače parenthetical
-      // pojašnjenja koja dolaze nakon <br> (npr. "<br><span>(knjiga)</span>").
+      // pojašnjenja koja dolaze nakon <br> ili u <span class="meta">.
       function extractArabic(cell) {
         let html = cell.innerHTML;
-        const brIdx = html.search(/<br\b/i);
-        if (brIdx >= 0) html = html.slice(0, brIdx);
+        // Cut at <br> ili <span class="meta"> — što god dođe prvo
+        let cutAt = html.length;
+        const m1 = html.search(/<br\b/i);
+        const m2 = html.search(/<span\s+class="meta"/i);
+        if (m1 >= 0 && m1 < cutAt) cutAt = m1;
+        if (m2 >= 0 && m2 < cutAt) cutAt = m2;
+        html = html.slice(0, cutAt);
         const tmp = document.createElement('div');
         tmp.innerHTML = html;
         return (tmp.textContent || '').replace(/\s+/g, ' ').trim();

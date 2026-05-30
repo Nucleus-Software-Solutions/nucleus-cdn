@@ -35,12 +35,18 @@ function arabicHash(s) {
 }
 
 // Iz `<td class="ar">...</td>` izvlači samo glavni arapski tekst.
-// Cell-content može imati nested HTML (<strong>, <br><span>(pojašnjenje)</span>).
-// Pravilo: uzmi samo dio prije prvog <br>, skini sve HTML tagove, normaliziraj whitespace.
+// Cell-content može imati nested HTML (<strong>, <br><span>(pojašnjenje)</span>,
+// ili inline <span class="meta">latin pojašnjenje</span>).
+// Pravilo: uzmi dio prije prvog <br> ILI <span class="meta">, skini sve HTML tagove,
+// normaliziraj whitespace. MORA biti identično ekstraktoru u browseru (vidi gradivo.html).
 function extractArabicFromCell(inner) {
   let s = inner;
-  const brIdx = s.search(/<br\b/i);
-  if (brIdx >= 0) s = s.slice(0, brIdx);
+  let cutAt = s.length;
+  const m1 = s.search(/<br\b/i);
+  const m2 = s.search(/<span\s+class="meta"/i);
+  if (m1 >= 0 && m1 < cutAt) cutAt = m1;
+  if (m2 >= 0 && m2 < cutAt) cutAt = m2;
+  s = s.slice(0, cutAt);
   s = s.replace(/<[^>]+>/g, '');
   // Osnovne HTML entitete koje bismo mogli sresti
   s = s.replace(/&nbsp;/g, ' ')

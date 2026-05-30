@@ -24,12 +24,15 @@ Arapski/
 │   │       └── p-<i>.mp3  # Pojedinačne fraze
 │   ├── vokabular/
 │   │   └── <wordId>.mp3   # Po riječi, ime = FNV-1a hash (vidi vokabularWordId)
+│   ├── a0-gradivo/
+│   │   └── <hash>.mp3     # Po td.ar ćeliji u A0/gradivo.html, ime = FNV-1a hash arapskog teksta
 │   └── a1-gradivo/
 │       └── <hash>.mp3     # Po td.ar ćeliji u A1/gradivo.html, ime = FNV-1a hash arapskog teksta
 ├── tools/                 # Node skripte (audio generator itd.)
 │   ├── package.json
 │   ├── generate-namaz-audio.mjs
 │   ├── generate-vokabular-audio.mjs
+│   ├── generate-a0-gradivo-audio.mjs
 │   ├── generate-a1-gradivo-audio.mjs
 │   └── node_modules/      # gitignored
 └── andalus.css            # Shared theme za sve stranice
@@ -72,6 +75,7 @@ cd Arapski/tools
 npm install              # samo prvi put
 npm run gen:namaz        # generiše namaz MP3-eve
 npm run gen:vokabular    # generiše vokabular MP3-eve
+npm run gen:a0-gradivo   # generiše A0/gradivo.html MP3-eve
 npm run gen:a1-gradivo   # generiše A1/gradivo.html MP3-eve
 npm run gen:all          # sve odjednom
 ```
@@ -79,6 +83,7 @@ npm run gen:all          # sve odjednom
 Trenutno generisano:
 - **namaz/** — 111 fajlova, 2.4 MB
 - **vokabular/** — 650 fajlova, 7.8 MB
+- **a0-gradivo/** — 369 fajlova, 4.4 MB
 - **a1-gradivo/** — 430 fajlova, 6.1 MB
 
 ### Kako proširiti audio na druge dijelove kursa (A0, A1, vjezbe, itd.)
@@ -133,7 +138,14 @@ Kad arapske riječi/fraze žive **inline u HTML-u** kao `<td class="ar">...</td>
 - Stranica runtime ubacuje play dugmad kroz JS (`document.querySelectorAll('td.ar').forEach(...)`) — ne diramo postojeće HTML rowove ručno.
 - Hash funkcija + ekstrakcija MORAJU biti identične u browseru i generatoru. Vidi `<script>` blok u `A1/gradivo.html` i `tools/generate-a1-gradivo-audio.mjs` — funkcije `arabicHash()` i `extractArabicFromCell()` / `extractArabic()`.
 
-Kad td.ar ćelija ima ugniježdeni HTML (npr. `<strong>` ili `<br><span>(pojašnjenje)</span>`), ekstrakcija uzima **samo dio prije prvog `<br>`** i skida ostale tagove. Pojašnjenja u zagradama se ignorišu (nisu se trebala čitati TTS-om).
+Kad td.ar ćelija ima ugniježdeni HTML, ekstrakcija odsijeca sve nakon prvog cut markera (**`<br>`** ILI **`<span class="meta">`**), pa skida preostale HTML tagove. Pojašnjenja u zagradama i latinski opisi se ignorišu (nisu se trebala čitati TTS-om).
+
+Primjeri pattern-a koji se obrađuju ispravno:
+- `<td class="ar">كِتَابُ<br><span style="...">(knjiga)</span></td>` → `كِتَابُ`
+- `<td class="ar">بَ <span class="meta">= BE (be)</span></td>` → `بَ`
+- `<td class="ar"><strong>أَنَا</strong></td>` → `أَنَا`
+
+Ako ćelija ima drugačiji wrapper koji treba ignorisati za TTS, dodaj njegov cut marker u **i** browser-side `extractArabic()` **i** generator-side `extractArabicFromCell()` istovremeno.
 
 Najlakši pattern za proširenje kad sadržaj već postoji u HTML-u — ne treba refaktor da bi se izdvojili podaci. Mana: ako se uredi arapski tekst u HTML-u, mijenja se hash → stari MP3 postaje orphan, novi se generiše pri sljedećem pokretanju.
 

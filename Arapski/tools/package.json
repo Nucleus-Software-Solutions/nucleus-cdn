@@ -8,8 +8,9 @@
     "gen": "node generate-namaz-audio.mjs",
     "gen:namaz": "node generate-namaz-audio.mjs",
     "gen:vokabular": "node generate-vokabular-audio.mjs",
+    "gen:a0-gradivo": "node generate-a0-gradivo-audio.mjs",
     "gen:a1-gradivo": "node generate-a1-gradivo-audio.mjs",
-    "gen:all": "node generate-namaz-audio.mjs && node generate-vokabular-audio.mjs && node generate-a1-gradivo-audio.mjs"
+    "gen:all": "node generate-namaz-audio.mjs && node generate-vokabular-audio.mjs && node generate-a0-gradivo-audio.mjs && node generate-a1-gradivo-audio.mjs"
   },
   "dependencies": {
     "msedge-tts": "^2.0.5"
