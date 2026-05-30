@@ -124,6 +124,19 @@ if (typeof module !== 'undefined' && module.exports) {
 
 Generator skripta detektuje i prijavljuje slučajne hash kolizije (vrlo malo vjerovatno, ali ako se desi — promijeni hash u širi prostor).
 
+#### Pattern C: HTML-embedded sadržaj (vidi `A1/gradivo.html`)
+
+Kad arapske riječi/fraze žive **inline u HTML-u** kao `<td class="ar">...</td>` ili sličnim elementima — nema posebnog `*-data.js` fajla. Path: `audio/<page>/<hashId>.mp3`.
+
+- HTML je single source of truth.
+- Generator skripta **parsira HTML direktno** (regex preko `<td class="ar">`), izvlači jedinstvene arapske tekstove i hashira ih.
+- Stranica runtime ubacuje play dugmad kroz JS (`document.querySelectorAll('td.ar').forEach(...)`) — ne diramo postojeće HTML rowove ručno.
+- Hash funkcija + ekstrakcija MORAJU biti identične u browseru i generatoru. Vidi `<script>` blok u `A1/gradivo.html` i `tools/generate-a1-gradivo-audio.mjs` — funkcije `arabicHash()` i `extractArabicFromCell()` / `extractArabic()`.
+
+Kad td.ar ćelija ima ugniježdeni HTML (npr. `<strong>` ili `<br><span>(pojašnjenje)</span>`), ekstrakcija uzima **samo dio prije prvog `<br>`** i skida ostale tagove. Pojašnjenja u zagradama se ignorišu (nisu se trebala čitati TTS-om).
+
+Najlakši pattern za proširenje kad sadržaj već postoji u HTML-u — ne treba refaktor da bi se izdvojili podaci. Mana: ako se uredi arapski tekst u HTML-u, mijenja se hash → stari MP3 postaje orphan, novi se generiše pri sljedećem pokretanju.
+
 #### Koraci za novu stranicu (npr. A0 vjezbe)
 
 1. **Izdvoji podatke** u zaseban `*-data.js` fajl po jednom od pattern-a iznad.
