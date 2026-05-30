@@ -16,14 +16,18 @@ Arapski/
 ├── brzi-pregled.html      # Gramatika referenca
 ├── namaz.html             # Riječi i fraze iz namaza (interaktivno učenje)
 ├── namaz-data.js          # Sadržaj namaz.html (shared s generator skriptom)
+├── vokabular-data.js      # Sadržaj vokabular.html (shared) + vokabularWordId()
 ├── audio/                 # Pre-generisani TTS MP3 fajlovi
-│   └── namaz/
-│       └── <section-id>/
-│           ├── full.mp3   # Cijeli ajet / sekcija
-│           └── p-<i>.mp3  # Pojedinačne fraze
+│   ├── namaz/
+│   │   └── <section-id>/
+│   │       ├── full.mp3   # Cijeli ajet / sekcija
+│   │       └── p-<i>.mp3  # Pojedinačne fraze
+│   └── vokabular/
+│       └── <wordId>.mp3   # Po riječi, ime = FNV-1a hash (vidi vokabularWordId)
 ├── tools/                 # Node skripte (audio generator itd.)
 │   ├── package.json
 │   ├── generate-namaz-audio.mjs
+│   ├── generate-vokabular-audio.mjs
 │   └── node_modules/      # gitignored
 └── andalus.css            # Shared theme za sve stranice
 ```
@@ -62,65 +66,67 @@ Koristi `msedge-tts` npm paket koji se preko WebSocket-a spaja na Microsoft Edge
 
 ```powershell
 cd Arapski/tools
-npm install        # samo prvi put
-npm run gen        # generiše MP3 fajlove
+npm install              # samo prvi put
+npm run gen:namaz        # generiše namaz MP3-eve
+npm run gen:vokabular    # generiše vokabular MP3-eve
+npm run gen:all          # oba odjednom
 ```
 
-### Kako proširiti audio na druge dijelove kursa (A0, A1, vokabular, vjezbe)
+Trenutno generisano:
+- **namaz/** — 111 fajlova, 2.4 MB
+- **vokabular/** — 650 fajlova, 7.8 MB
 
-Pattern za bilo koji novi sadržaj:
+### Kako proširiti audio na druge dijelove kursa (A0, A1, vjezbe, itd.)
 
-**1.** Izdvoji podatke u zaseban `*-data.js` fajl (npr. `vokabular-data.js`, `a0-vjezbe-data.js`). Fajl treba imati ovu strukturu:
+Imamo dva dokazana patterna — biraj prema strukturi sadržaja:
+
+#### Pattern A: hijerarhijski sadržaj (vidi `namaz.html`)
+
+Kad podaci imaju **prirodnu hijerarhiju** (sekcija → fraza), kao u namazu. Path: `audio/<page>/<section-id>/<file>.mp3`.
+
+- Section i phrase index su stabilni (zadani u podacima).
+- Generator radi `<section.id>/full.mp3` + `<section.id>/p-<i>.mp3`.
+
+#### Pattern B: ravan spisak (vidi `vokabular.html` + `vokabular-data.js`)
+
+Kad imaš **dugu listu individualnih unosa** (riječi, fraze) bez hijerarhije. Path: `audio/<page>/<hashId>.mp3` (flat dir).
+
+- Svaki unos dobije stabilan ID preko deterministic hash funkcije (FNV-1a od `ar+cat+lvl`).
+- Funkcija je identična u browseru i Node-u (koristi `Math.imul` za 32-bit unsigned množenje).
+- Reordering, dodavanje ili brisanje unosa NE utiče na već generisane fajlove — samo izmjena samog arapskog teksta mijenja hash (pa stari fajl postaje orphan).
 
 ```js
+// vokabular-data.js
 const VOKABULAR_WORDS = [
-  { id: 'w-001', ar: '...', tr: '...', bs: '...', cat: '...', lvl: 'A0' },
+  { ar: '...', tr: '...', bs: '...', cat: '...', lvl: 'A0' },
   // ...
 ];
 
-// Export za browser (global) i Node (CommonJS)
+function vokabularWordId(w) {
+  const s = w.ar + '|' + w.cat + '|' + w.lvl;
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (h ^ s.charCodeAt(i)) >>> 0;
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h.toString(16).padStart(8, '0');
+}
+
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = VOKABULAR_WORDS;
+  module.exports = { VOKABULAR_WORDS, vokabularWordId };
 }
 ```
 
-**2.** Stranica učitava preko `<script src="vokabular-data.js"></script>`, koristi global `VOKABULAR_WORDS`.
+Generator skripta detektuje i prijavljuje slučajne hash kolizije (vrlo malo vjerovatno, ali ako se desi — promijeni hash u širi prostor).
 
-**3.** Dodaj novu generator skriptu u `tools/`, npr. `generate-vokabular-audio.mjs`:
+#### Koraci za novu stranicu (npr. A0 vjezbe)
 
-```js
-import { MsEdgeTTS, OUTPUT_FORMAT } from 'msedge-tts';
-import { createRequire } from 'node:module';
-import { mkdir, access, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const require = createRequire(import.meta.url);
-const WORDS = require('../vokabular-data.js');
-
-const AUDIO_ROOT = resolve(__dirname, '..', 'audio', 'vokabular');
-const VOICE = 'ar-SA-HamedNeural';
-const FORMAT = OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3;
-
-// ... (kopiraj `exists`, `synthesize`, `main` iz generate-namaz-audio.mjs i prilagodi)
-```
-
-Ključni princip: svaki audio item dobije **stabilan ID** (npr. `w-001`, ili hash arapskog teksta) — taj ID postaje ime MP3 fajla. Tako se već generisani fajlovi prepoznaju i ne regenerišu nepotrebno.
-
-**4.** Dodaj script entry u `tools/package.json`:
-
-```json
-"scripts": {
-  "gen": "node generate-namaz-audio.mjs",
-  "gen:vokabular": "node generate-vokabular-audio.mjs",
-  "gen:all": "npm run gen && npm run gen:vokabular"
-}
-```
-
-**5.** U HTML-u dodaj `data-audio="audio/vokabular/<id>.mp3"` atribut i copy-paste `playAudio()` + `setBtnState()` + `stopCurrent()` iz `namaz.html`. (Razmisli da li je vrijedno izdvojiti u shared `audio-player.js` ako se ponavlja na 3+ stranica.)
-
-**6.** Pokreni `npm run gen:vokabular` — generišu se svi MP3-evi. Commituj ih u repo (mala su, projektni CDN ih svejedno servira).
+1. **Izdvoji podatke** u zaseban `*-data.js` fajl po jednom od pattern-a iznad.
+2. **HTML stranica:** `<script src="<page>-data.js"></script>` u `<head>`, pa u glavnom JS koristi globalni naziv (npr. `A0_VJEZBE_DATA`).
+3. **Generator:** kopiraj `tools/generate-vokabular-audio.mjs` (za pattern B) ili `generate-namaz-audio.mjs` (za pattern A), prilagodi paths i naziv data fajla.
+4. **package.json:** dodaj script `"gen:<page>": "node generate-<page>-audio.mjs"`. Ažuriraj `gen:all` da uključuje novi.
+5. **UI:** u HTML-u dodaj play dugme (`<button data-audio="...">`) + copy-paste `playVokAudio` / `playAudio` funkciju (vidi `vokabular.html` ili `namaz.html`). Razmisli da izdvojiš u shared `audio-player.js` ako pattern bude na 3+ stranica.
+6. **Pokreni** `npm run gen:<page>` — generišu se samo novi MP3-evi (postojeći se preskaču).
 
 ### Naming convention za audio fajlove
 

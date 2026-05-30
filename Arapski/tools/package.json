@@ -5,7 +5,10 @@
   "type": "module",
   "description": "Generates MP3 audio files for namaz.html using Microsoft Edge TTS (free, no API key).",
   "scripts": {
-    "gen": "node generate-namaz-audio.mjs"
+    "gen": "node generate-namaz-audio.mjs",
+    "gen:namaz": "node generate-namaz-audio.mjs",
+    "gen:vokabular": "node generate-vokabular-audio.mjs",
+    "gen:all": "node generate-namaz-audio.mjs && node generate-vokabular-audio.mjs"
   },
   "dependencies": {
     "msedge-tts": "^2.0.5"
