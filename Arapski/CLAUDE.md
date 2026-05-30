@@ -22,12 +22,15 @@ Arapski/
 │   │   └── <section-id>/
 │   │       ├── full.mp3   # Cijeli ajet / sekcija
 │   │       └── p-<i>.mp3  # Pojedinačne fraze
-│   └── vokabular/
-│       └── <wordId>.mp3   # Po riječi, ime = FNV-1a hash (vidi vokabularWordId)
+│   ├── vokabular/
+│   │   └── <wordId>.mp3   # Po riječi, ime = FNV-1a hash (vidi vokabularWordId)
+│   └── a1-gradivo/
+│       └── <hash>.mp3     # Po td.ar ćeliji u A1/gradivo.html, ime = FNV-1a hash arapskog teksta
 ├── tools/                 # Node skripte (audio generator itd.)
 │   ├── package.json
 │   ├── generate-namaz-audio.mjs
 │   ├── generate-vokabular-audio.mjs
+│   ├── generate-a1-gradivo-audio.mjs
 │   └── node_modules/      # gitignored
 └── andalus.css            # Shared theme za sve stranice
 ```
@@ -69,16 +72,18 @@ cd Arapski/tools
 npm install              # samo prvi put
 npm run gen:namaz        # generiše namaz MP3-eve
 npm run gen:vokabular    # generiše vokabular MP3-eve
-npm run gen:all          # oba odjednom
+npm run gen:a1-gradivo   # generiše A1/gradivo.html MP3-eve
+npm run gen:all          # sve odjednom
 ```
 
 Trenutno generisano:
 - **namaz/** — 111 fajlova, 2.4 MB
 - **vokabular/** — 650 fajlova, 7.8 MB
+- **a1-gradivo/** — 430 fajlova, 6.1 MB
 
 ### Kako proširiti audio na druge dijelove kursa (A0, A1, vjezbe, itd.)
 
-Imamo dva dokazana patterna — biraj prema strukturi sadržaja:
+Imamo tri dokazana patterna — biraj prema strukturi sadržaja:
 
 #### Pattern A: hijerarhijski sadržaj (vidi `namaz.html`)
 
