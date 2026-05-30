@@ -13,6 +13,45 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="andalus.css">
+
+  <style>
+    /* Play (TTS) dugme uz svaku td.ar ćeliju — MP3 fajlovi su pre-generisani
+       preko tools/generate-brzi-pregled-audio.mjs i serviraju se iz audio/brzi-pregled/ */
+    .tbl-play {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      color: var(--emerald);
+      cursor: pointer;
+      padding: 0;
+      margin-right: 10px;
+      vertical-align: middle;
+      flex-shrink: 0;
+      transition: background 0.12s, color 0.12s, border-color 0.12s, box-shadow 0.12s;
+    }
+    .tbl-play:hover {
+      background: var(--emerald);
+      color: var(--paper);
+      border-color: var(--emerald);
+    }
+    .tbl-play.playing {
+      background: var(--emerald);
+      color: var(--paper);
+      border-color: var(--emerald);
+      animation: tbl-pulse 1.2s ease-in-out infinite;
+    }
+    .tbl-play.error {
+      background: rgba(176, 74, 42, 0.12);
+      color: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+    @keyframes tbl-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(20, 84, 60, 0.45); }
+      50%      { box-shadow: 0 0 0 5px rgba(20, 84, 60, 0); }
+    }
+  </style>
 </head>
 
 <body>
@@ -1238,6 +1277,92 @@
       });
       if (btn) btn.textContent = allCollapsed ? '▲ Proširi sve' : '▼ Skupi sve';
     }
+
+    // ============================================================
+    // AUDIO — koristi pre-generisane MP3 fajlove iz audio/brzi-pregled/
+    // Generator: tools/generate-brzi-pregled-audio.mjs (parsira ovaj HTML direktno)
+    // ============================================================
+    (function () {
+      // Identičan FNV-1a hash kao u tools/generate-brzi-pregled-audio.mjs.
+      function arabicHash(s) {
+        let h = 2166136261 >>> 0;
+        for (let i = 0; i < s.length; i++) {
+          h = (h ^ s.charCodeAt(i)) >>> 0;
+          h = Math.imul(h, 16777619) >>> 0;
+        }
+        return h.toString(16).padStart(8, '0');
+      }
+
+      // Iz ćelije td.ar uzima samo glavni arapski tekst — preskače parenthetical
+      // pojašnjenja koja dolaze nakon <br> ili u <span class="meta">.
+      function extractArabic(cell) {
+        let html = cell.innerHTML;
+        let cutAt = html.length;
+        const m1 = html.search(/<br\b/i);
+        const m2 = html.search(/<span\s+class="meta"/i);
+        if (m1 >= 0 && m1 < cutAt) cutAt = m1;
+        if (m2 >= 0 && m2 < cutAt) cutAt = m2;
+        html = html.slice(0, cutAt);
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        return (tmp.textContent || '').replace(/\s+/g, ' ').trim();
+      }
+
+      let curAudio = null;
+      let curBtn = null;
+      function setBtnState(btn, state) {
+        if (!btn) return;
+        btn.classList.remove('playing', 'error');
+        if (state === 'playing') btn.classList.add('playing');
+        else if (state === 'error') {
+          btn.classList.add('error');
+          setTimeout(() => btn.classList.remove('error'), 2000);
+        }
+      }
+      function playAudio(btn) {
+        if (curAudio) { try { curAudio.pause(); } catch (e) { } curAudio = null; }
+        if (curBtn) { setBtnState(curBtn, 'idle'); curBtn = null; }
+        const url = btn.dataset.audio;
+        setBtnState(btn, 'playing');
+        curBtn = btn;
+        const audio = new Audio(url);
+        curAudio = audio;
+        audio.addEventListener('ended', () => {
+          if (curAudio === audio) {
+            curAudio = null;
+            if (curBtn === btn) { setBtnState(btn, 'idle'); curBtn = null; }
+          }
+        });
+        audio.addEventListener('error', () => {
+          if (curAudio === audio) curAudio = null;
+          setBtnState(btn, 'error');
+          if (curBtn === btn) curBtn = null;
+          console.warn('Audio load failed:', url);
+        });
+        audio.play().catch(err => {
+          if (curAudio === audio) curAudio = null;
+          setBtnState(btn, 'error');
+          if (curBtn === btn) curBtn = null;
+          console.warn('Audio play failed:', url, err);
+        });
+      }
+
+      const PLAY_SVG = '<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/></svg>';
+
+      document.querySelectorAll('td.ar').forEach(cell => {
+        const text = extractArabic(cell);
+        if (!text) return;
+        const url = 'audio/brzi-pregled/' + arabicHash(text) + '.mp3';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tbl-play';
+        btn.setAttribute('data-audio', url);
+        btn.setAttribute('aria-label', 'Izgovori');
+        btn.innerHTML = PLAY_SVG;
+        btn.addEventListener('click', (e) => { e.stopPropagation(); playAudio(btn); });
+        cell.appendChild(btn);
+      });
+    })();
   </script>
   <script src="nav-mobile.js"></script>
 </body>

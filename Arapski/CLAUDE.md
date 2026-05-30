@@ -26,14 +26,17 @@ Arapski/
 │   │   └── <wordId>.mp3   # Po riječi, ime = FNV-1a hash (vidi vokabularWordId)
 │   ├── a0-gradivo/
 │   │   └── <hash>.mp3     # Po td.ar ćeliji u A0/gradivo.html, ime = FNV-1a hash arapskog teksta
-│   └── a1-gradivo/
-│       └── <hash>.mp3     # Po td.ar ćeliji u A1/gradivo.html, ime = FNV-1a hash arapskog teksta
+│   ├── a1-gradivo/
+│   │   └── <hash>.mp3     # Po td.ar ćeliji u A1/gradivo.html, ime = FNV-1a hash arapskog teksta
+│   └── brzi-pregled/
+│       └── <hash>.mp3     # Po td.ar ćeliji u brzi-pregled.html, ime = FNV-1a hash arapskog teksta
 ├── tools/                 # Node skripte (audio generator itd.)
 │   ├── package.json
 │   ├── generate-namaz-audio.mjs
 │   ├── generate-vokabular-audio.mjs
 │   ├── generate-a0-gradivo-audio.mjs
 │   ├── generate-a1-gradivo-audio.mjs
+│   ├── generate-brzi-pregled-audio.mjs
 │   └── node_modules/      # gitignored
 └── andalus.css            # Shared theme za sve stranice
 ```
@@ -73,11 +76,12 @@ Koristi `msedge-tts` npm paket koji se preko WebSocket-a spaja na Microsoft Edge
 ```powershell
 cd Arapski/tools
 npm install              # samo prvi put
-npm run gen:namaz        # generiše namaz MP3-eve
-npm run gen:vokabular    # generiše vokabular MP3-eve
-npm run gen:a0-gradivo   # generiše A0/gradivo.html MP3-eve
-npm run gen:a1-gradivo   # generiše A1/gradivo.html MP3-eve
-npm run gen:all          # sve odjednom
+npm run gen:namaz         # generiše namaz MP3-eve
+npm run gen:vokabular     # generiše vokabular MP3-eve
+npm run gen:a0-gradivo    # generiše A0/gradivo.html MP3-eve
+npm run gen:a1-gradivo    # generiše A1/gradivo.html MP3-eve
+npm run gen:brzi-pregled  # generiše brzi-pregled.html MP3-eve
+npm run gen:all           # sve odjednom
 ```
 
 Trenutno generisano:
@@ -85,6 +89,7 @@ Trenutno generisano:
 - **vokabular/** — 650 fajlova, 7.8 MB
 - **a0-gradivo/** — 369 fajlova, 4.4 MB
 - **a1-gradivo/** — 430 fajlova, 6.1 MB
+- **brzi-pregled/** — 204 fajlova, 2.7 MB
 
 ### Kako proširiti audio na druge dijelove kursa (A0, A1, vjezbe, itd.)
 
