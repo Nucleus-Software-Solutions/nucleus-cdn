@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="bs" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Namaz — Arapski jezik</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="andalus.css">
+
+  <style>
+    /* ====== NAMAZ — page-specific styles ====== */
+    .nmz-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+      padding: 0 56px 60px;
+      align-items: start;
+    }
+    .nmz-side {
+      position: sticky;
+      top: 24px;
+      align-self: start;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 16px 14px;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+    }
+    .nmz-side-head {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      padding: 6px 8px 10px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 8px;
+    }
+    .nmz-side-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--ink-2);
+      font-size: 13px;
+      line-height: 1.3;
+      transition: background 0.12s, color 0.12s;
+      cursor: pointer;
+    }
+    .nmz-side-link:hover { background: var(--paper-2); color: var(--ink); }
+    .nmz-side-link.active { background: var(--paper-2); color: var(--emerald); font-weight: 500; }
+    .nmz-side-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-3);
+      font-weight: 500;
+      min-width: 18px;
+    }
+    .nmz-side-link.done .nmz-side-num {
+      color: var(--emerald);
+    }
+    .nmz-side-link.done::after {
+      content: '✓';
+      color: var(--emerald);
+      font-size: 12px;
+      margin-left: auto;
+    }
+
+    .nmz-content { min-width: 0; }
+
+    .nmz-controls {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex; flex-direction: column; gap: 14px;
+      margin-bottom: 28px;
+    }
+    .nmz-controls-row {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap;
+    }
+    .nmz-search { position: relative; flex: 1; min-width: 220px; }
+    .nmz-search input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--paper);
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--ink);
+      outline: none;
+    }
+    .nmz-search input:focus { border-color: var(--emerald); background: var(--card); }
+    .nmz-search-icon {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-3);
+      pointer-events: none;
+    }
+
+    .nmz-mode-toggles {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .nmz-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-2);
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+    }
+    .nmz-toggle:hover { background: var(--paper-2); }
+    .nmz-toggle.active {
+      background: var(--emerald);
+      color: var(--paper);
+      border-color: var(--emerald);
+    }
+    .nmz-toggle .nmz-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+    }
+    .nmz-toggle.active .nmz-dot { opacity: 1; }
+
+    .nmz-stats {
+      text-align: center;
+      font-size: 13px;
+      color: var(--ink-3);
+      margin-bottom: 24px;
+    }
+    .nmz-stats em { color: var(--emerald); font-style: normal; font-weight: 600; }
+
+    /* Section cards */
+    .nmz-section {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 32px 32px 28px;
+      margin-bottom: 24px;
+      scroll-margin-top: 16px;
+    }
+    .nmz-sec-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nmz-sec-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .nmz-sec-title {
+      font-family: 'Fraunces', serif;
+      font-size: 30px;
+      font-weight: 400;
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
+    }
+    .nmz-sec-title-ar {
+      font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+      font-size: 26px;
+      color: var(--terracotta);
+      direction: rtl;
+    }
+    .nmz-sec-desc {
+      color: var(--ink-2);
+      font-size: 14px;
+      margin: 8px 0 0;
+      max-width: 560px;
+      line-height: 1.55;
+    }
+    .nmz-sec-actions {
+      display: flex; align-items: center; gap: 8px;
+      flex-shrink: 0;
+    }
+    .nmz-mark {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--emerald);
+      background: rgba(20, 84, 60, 0.08);
+      border: 1px solid rgba(20, 84, 60, 0.25);
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .nmz-mark:hover { background: rgba(20, 84, 60, 0.14); }
+    .nmz-section.done .nmz-mark {
+      background: var(--emerald);
+      color: var(--paper);
+      border-color: var(--emerald);
+    }
+    .nmz-section.done {
+      border-color: rgba(20, 84, 60, 0.35);
+    }
+
+    /* Full block (whole prayer text in Arabic+translit+BS) */
+    .nmz-full {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 22px 56px 22px 24px;
+      margin-bottom: 22px;
+    }
+    .nmz-full-play {
+      position: absolute;
+      top: 18px; right: 18px;
+      width: 36px; height: 36px;
+    }
+    .nmz-full-ar {
+      font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+      font-size: 28px;
+      color: var(--emerald);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+    .nmz-full-tr {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink-2);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .nmz-full-bs {
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.6;
+    }
+
+    /* Phrase-by-phrase breakdown */
+    .nmz-breakdown-head {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 12px;
+    }
+    .nmz-phrases {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .nmz-phrase {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 14px 18px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      transition: border-color 0.12s, background 0.12s;
+    }
+    .nmz-phrase:hover { border-color: var(--emerald); }
+    .nmz-phrase.search-hit {
+      border-color: var(--gold);
+      background: rgba(184, 137, 58, 0.08);
+    }
+    .nmz-ph-ar {
+      font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+      font-size: 22px;
+      color: var(--emerald);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.5;
+    }
+    .nmz-ph-tr {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-2);
+    }
+    .nmz-ph-bs {
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .nmz-ph-play {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--rule);
+      background: var(--card);
+      color: var(--emerald);
+      cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background 0.12s, border-color 0.12s, color 0.12s;
+      padding: 0;
+    }
+    .nmz-ph-play:hover {
+      background: var(--emerald);
+      color: var(--paper);
+      border-color: var(--emerald);
+    }
+    .nmz-ph-play:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .nmz-ph-play.playing {
+      background: var(--emerald);
+      color: var(--paper);
+      border-color: var(--emerald);
+      animation: nmz-pulse 1.2s ease-in-out infinite;
+    }
+    .nmz-ph-play.error {
+      background: rgba(176, 74, 42, 0.12);
+      color: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+    @keyframes nmz-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(20, 84, 60, 0.45); }
+      50%      { box-shadow: 0 0 0 6px rgba(20, 84, 60, 0); }
+    }
+
+    /* Hide modes — controlled by body classes */
+    body.hide-bs .nmz-ph-bs,
+    body.hide-bs .nmz-full-bs {
+      color: transparent;
+      background: var(--paper-2);
+      border-radius: 4px;
+      user-select: none;
+      cursor: pointer;
+      position: relative;
+    }
+    body.hide-bs .nmz-ph-bs:hover,
+    body.hide-bs .nmz-full-bs:hover {
+      color: var(--ink);
+      background: transparent;
+    }
+    body.hide-tr .nmz-ph-tr,
+    body.hide-tr .nmz-full-tr {
+      color: transparent;
+      background: var(--paper-2);
+      border-radius: 4px;
+      user-select: none;
+      cursor: pointer;
+    }
+    body.hide-tr .nmz-ph-tr:hover,
+    body.hide-tr .nmz-full-tr:hover {
+      color: var(--ink-2);
+      background: transparent;
+    }
+    body.hide-ar .nmz-ph-ar,
+    body.hide-ar .nmz-full-ar {
+      color: transparent;
+      background: var(--paper-2);
+      border-radius: 4px;
+      user-select: none;
+      cursor: pointer;
+    }
+    body.hide-ar .nmz-ph-ar:hover,
+    body.hide-ar .nmz-full-ar:hover {
+      color: var(--emerald);
+      background: transparent;
+    }
+
+    /* When searching, dim non-matching */
+    body.searching .nmz-section:not(.has-hit) {
+      opacity: 0.35;
+    }
+    body.searching .nmz-phrase:not(.search-hit) {
+      opacity: 0.4;
+    }
+
+    /* Quiz mode panel */
+    .nmz-quiz {
+      background: var(--card);
+      border: 2px solid var(--terracotta);
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .nmz-quiz-head {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--terracotta);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .nmz-quiz-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 36px 28px;
+      margin: 20px auto;
+      max-width: 560px;
+    }
+    .nmz-quiz-ar {
+      font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+      font-size: 36px;
+      color: var(--emerald);
+      direction: rtl;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .nmz-quiz-tr {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink-3);
+      margin-bottom: 18px;
+    }
+    .nmz-quiz-answer {
+      display: none;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      margin-top: 18px;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--terracotta);
+      font-family: 'Fraunces', serif;
+    }
+    .nmz-quiz.reveal .nmz-quiz-answer { display: block; }
+    .nmz-quiz-actions {
+      display: flex; gap: 10px; justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .nmz-quiz-empty {
+      color: var(--ink-3);
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+      padding: 20px;
+    }
+    .nmz-quiz-progress {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .nmz-layout {
+        grid-template-columns: 1fr;
+        padding: 0 24px 40px;
+      }
+      .nmz-side {
+        position: relative;
+        top: auto;
+        max-height: none;
+      }
+      .nmz-section { padding: 24px 22px 22px; }
+      .nmz-phrase { grid-template-columns: 1fr; gap: 8px; padding: 14px; }
+      .nmz-ph-ar { text-align: right; }
+      .nmz-sec-title { font-size: 24px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <div class="brand-mark">ع</div>
+        <div>
+          <div class="brand-name">Arapski jezik</div>
+          <div class="brand-sub">Kurs · 7 nivoa</div>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html">Početna</a>
+
+        <div class="nav-dropdown" id="levelsDropdown">
+          <button class="nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Nivoi
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 4.5L6 7.5L9 4.5" />
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-head">Svi nivoi kursa</div>
+            <a class="nav-dropdown-item" href="A0/index.html">
+              <span class="nav-dropdown-code">A0</span>
+              <span class="nav-dropdown-title">Osnove</span><span></span>
+            </a>
+            <a class="nav-dropdown-item" href="A1/index.html">
+              <span class="nav-dropdown-code">A1</span>
+              <span class="nav-dropdown-title">Lekcije</span><span></span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A2</span>
+              <span class="nav-dropdown-title">Glagolski sistem</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A3</span>
+              <span class="nav-dropdown-title">Buduće vrijeme</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A4</span>
+              <span class="nav-dropdown-title">Složene rečenice</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A5</span>
+              <span class="nav-dropdown-title">Tekstovi</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+            <a class="nav-dropdown-item soon" href="#" aria-disabled="true">
+              <span class="nav-dropdown-code">A6</span>
+              <span class="nav-dropdown-title">Akademski jezik</span>
+              <span class="nav-dropdown-tag">Uskoro</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="vokabular.html">Vokabular</a>
+        <a href="brzi-pregled.html">Gramatika</a>
+        <a href="namaz.html" class="active">Namaz</a>
+      </nav>
+
+      <a class="btn btn-ghost btn-sm" href="A0/index.html">Nastavi učiti</a>
+      <button class="btn btn-ghost btn-sm menu-btn" type="button" aria-label="Meni">☰</button>
+    </header>
+
+    <section class="inner-hero">
+      <div>
+        <div class="level-badge">Referenca · Ibadet</div>
+        <h1 class="serif">Namaz — riječi i značenja</h1>
+        <p>Interaktivno učenje prijevoda svih dijelova namaza — od tekbira do selama. Arapski tekst,
+          transliteracija i bosanski prijevod, riječ po riječ.</p>
+      </div>
+      <div class="inner-arabic">الصَّلَاة</div>
+    </section>
+
+    <div class="breadcrumb">
+      <a href="index.html">← Početna</a>
+      <span>·</span>
+      <span>Namaz</span>
+    </div>
+
+    <div class="nmz-layout">
+
+      <aside class="nmz-side" id="sideNav">
+        <div class="nmz-side-head">Dijelovi namaza</div>
+        <!-- side links populated by JS -->
+      </aside>
+
+      <div class="nmz-content">
+
+        <div class="nmz-controls">
+          <div class="nmz-controls-row">
+            <div class="nmz-search">
+              <svg class="nmz-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3" />
+              </svg>
+              <input type="text" id="searchInput"
+                placeholder="Pretraži — bosanski, arapski ili transliteracija…">
+            </div>
+          </div>
+
+          <div class="nmz-controls-row">
+            <div class="nmz-mode-toggles">
+              <button class="nmz-toggle" id="toggleAr" type="button">
+                <span class="nmz-dot"></span> Sakrij arapski
+              </button>
+              <button class="nmz-toggle" id="toggleTr" type="button">
+                <span class="nmz-dot"></span> Sakrij transliteraciju
+              </button>
+              <button class="nmz-toggle" id="toggleBs" type="button">
+                <span class="nmz-dot"></span> Sakrij prijevod
+              </button>
+              <button class="nmz-toggle" id="toggleQuiz" type="button">
+                <span class="nmz-dot"></span> Vježba (kviz)
+              </button>
+              <button class="nmz-toggle" id="resetProgress" type="button" style="margin-left:auto;color:var(--terracotta);border-color:rgba(176,74,42,0.25);background:rgba(176,74,42,0.06);">
+                ↻ Resetuj napredak
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="nmz-stats" id="stats">
+          <em>0</em> / 0 dijelova naučeno · klikom na riječ moguće je čuti izgovor
+        </div>
+
+        <!-- Quiz panel (hidden by default) -->
+        <div class="nmz-quiz" id="quizPanel" style="display:none;">
+          <div class="nmz-quiz-head">Vježba prijevoda</div>
+          <div class="nmz-quiz-progress" id="quizProgress">— / —</div>
+          <div class="nmz-quiz-card" id="quizCard">
+            <div class="nmz-quiz-ar" id="quizAr"></div>
+            <div class="nmz-quiz-tr" id="quizTr"></div>
+            <div class="nmz-quiz-answer" id="quizBs"></div>
+          </div>
+          <div class="nmz-quiz-actions">
+            <button class="btn btn-ghost btn-sm" id="quizReveal">Otkrij prijevod</button>
+            <button class="btn btn-primary btn-sm" id="quizNext">Sljedeća →</button>
+          </div>
+        </div>
+
+        <div id="sectionsRoot"><!-- sections populated by JS --></div>
+
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span>© 2026 · Kurs arapskog jezika · Namaz</span>
+      <span class="footer-arabic">وَفَّقَكُمُ الله</span>
+    </footer>
+
+  </div>
+
+  <script>
+    // ----- Nivoi dropdown -----
+    (function () {
+      var dd = document.getElementById('levelsDropdown');
+      if (!dd) return;
+      var trigger = dd.querySelector('.nav-dropdown-trigger');
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = dd.classList.toggle('force-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          dd.classList.remove('force-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+
+  <!-- Sadržaj (dijelovi namaza) — dijeljeni s tools/generate-namaz-audio.mjs -->
+  <script src="namaz-data.js"></script>
+
+  <script>
+    // SECTIONS dolazi iz namaz-data.js (kao globalni NAMAZ_SECTIONS).
+    // Ako trebaš dodati novi dio namaza, uredi taj fajl, pa pokreni:
+    //   cd tools && npm run gen
+    const SECTIONS = NAMAZ_SECTIONS;
+
+
+    // ============================================================
+    // RENDERING
+    // ============================================================
+    const STORAGE_KEY = 'namaz_progress_v1';
+
+    function loadProgress() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      } catch (e) { return {}; }
+    }
+    function saveProgress(p) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+    }
+    let progress = loadProgress();
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[c]);
+    }
+
+    function renderSide() {
+      const side = document.getElementById('sideNav');
+      const head = side.querySelector('.nmz-side-head');
+      // Clear existing links (keep head)
+      [...side.querySelectorAll('.nmz-side-link')].forEach(n => n.remove());
+      SECTIONS.forEach((s, i) => {
+        const a = document.createElement('a');
+        a.className = 'nmz-side-link' + (progress[s.id] ? ' done' : '');
+        a.href = '#sec-' + s.id;
+        a.dataset.target = 'sec-' + s.id;
+        a.innerHTML = `<span class="nmz-side-num">${String(i + 1).padStart(2, '0')}</span>
+                       <span>${escapeHtml(s.title)}</span>`;
+        side.appendChild(a);
+      });
+    }
+
+    function renderSections() {
+      const root = document.getElementById('sectionsRoot');
+      root.innerHTML = '';
+      SECTIONS.forEach((s, i) => {
+        const sec = document.createElement('section');
+        sec.className = 'nmz-section' + (progress[s.id] ? ' done' : '');
+        sec.id = 'sec-' + s.id;
+        sec.dataset.id = s.id;
+
+        const phrasesHtml = s.phrases.map((p, pi) => `
+          <div class="nmz-phrase"
+               data-ar="${escapeHtml(p.ar)}"
+               data-tr="${escapeHtml(p.tr.toLowerCase())}"
+               data-bs="${escapeHtml(p.bs.toLowerCase())}">
+            <div class="nmz-ph-ar">${escapeHtml(p.ar)}</div>
+            <div class="nmz-ph-tr">${escapeHtml(p.tr)}</div>
+            <div class="nmz-ph-bs">${escapeHtml(p.bs)}</div>
+            <button class="nmz-ph-play" type="button" title="Izgovori"
+                    data-audio="audio/namaz/${s.id}/p-${pi}.mp3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 9v6h4l5 5V4L7 9H3z"/>
+                <path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12z" opacity="0.6"/>
+              </svg>
+            </button>
+          </div>
+        `).join('');
+
+        sec.innerHTML = `
+          <div class="nmz-sec-head">
+            <div>
+              <div class="nmz-sec-num">${String(i + 1).padStart(2, '0')} / ${SECTIONS.length}</div>
+              <h2 class="nmz-sec-title">${escapeHtml(s.title)}</h2>
+              <div class="nmz-sec-title-ar">${escapeHtml(s.titleAr)}</div>
+              <p class="nmz-sec-desc">${escapeHtml(s.desc)}</p>
+            </div>
+            <div class="nmz-sec-actions">
+              <button class="nmz-mark" type="button" data-mark="${s.id}">
+                ${progress[s.id] ? '✓ Naučeno' : 'Označi naučenim'}
+              </button>
+            </div>
+          </div>
+
+          <div class="nmz-full">
+            <button class="nmz-ph-play nmz-full-play" type="button" title="Pusti cijeli ajet/sekciju"
+                    data-audio="audio/namaz/${s.id}/full.mp3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 9v6h4l5 5V4L7 9H3z"/>
+                <path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12z" opacity="0.6"/>
+              </svg>
+            </button>
+            <div class="nmz-full-ar">${escapeHtml(s.full.ar)}</div>
+            <div class="nmz-full-tr">${escapeHtml(s.full.tr)}</div>
+            <div class="nmz-full-bs">${escapeHtml(s.full.bs)}</div>
+          </div>
+
+          <div class="nmz-breakdown-head">Riječ po riječ / fraza po fraza</div>
+          <div class="nmz-phrases">${phrasesHtml}</div>
+        `;
+        root.appendChild(sec);
+      });
+      updateStats();
+    }
+
+    function updateStats() {
+      const total = SECTIONS.length;
+      const done = SECTIONS.filter(s => progress[s.id]).length;
+      const el = document.getElementById('stats');
+      el.innerHTML = `<em>${done}</em> / ${total} dijelova označeno kao naučeno`;
+    }
+
+    // ----- Event handlers -----
+    document.addEventListener('click', function (e) {
+      // Mark/unmark as done
+      const markBtn = e.target.closest('[data-mark]');
+      if (markBtn) {
+        const id = markBtn.dataset.mark;
+        if (progress[id]) {
+          delete progress[id];
+        } else {
+          progress[id] = Date.now();
+        }
+        saveProgress(progress);
+        renderSide();
+        // Update only this section
+        const sec = document.getElementById('sec-' + id);
+        if (sec) {
+          sec.classList.toggle('done', !!progress[id]);
+          markBtn.textContent = progress[id] ? '✓ Naučeno' : 'Označi naučenim';
+        }
+        updateStats();
+        return;
+      }
+      // Play audio (lokalni MP3 generisan preko tools/generate-namaz-audio.mjs)
+      const playBtn = e.target.closest('[data-audio]');
+      if (playBtn) {
+        playAudio(playBtn.dataset.audio, playBtn);
+        return;
+      }
+    });
+
+    // ============================================================
+    // AUDIO — koristi pre-generisane MP3 fajlove iz audio/namaz/...
+    // Generisani preko Microsoft Edge TTS-a (vidi tools/generate-namaz-audio.mjs).
+    // ============================================================
+    let currentAudio = null;
+    let currentBtn = null;
+
+    function setBtnState(btn, state) {
+      if (!btn) return;
+      btn.classList.remove('playing', 'error');
+      if (state === 'playing') btn.classList.add('playing');
+      else if (state === 'error') {
+        btn.classList.add('error');
+        setTimeout(() => btn.classList.remove('error'), 2500);
+      }
+    }
+
+    function stopCurrent() {
+      if (currentAudio) {
+        try { currentAudio.pause(); } catch (e) { }
+        currentAudio = null;
+      }
+      if (currentBtn) {
+        setBtnState(currentBtn, 'idle');
+        currentBtn = null;
+      }
+    }
+
+    function playAudio(url, btn) {
+      stopCurrent();
+      setBtnState(btn, 'playing');
+      currentBtn = btn;
+
+      const audio = new Audio(url);
+      currentAudio = audio;
+
+      audio.addEventListener('ended', () => {
+        if (currentAudio === audio) {
+          currentAudio = null;
+          if (currentBtn === btn) { setBtnState(btn, 'idle'); currentBtn = null; }
+        }
+      });
+      audio.addEventListener('error', () => {
+        if (currentAudio === audio) currentAudio = null;
+        setBtnState(btn, 'error');
+        if (currentBtn === btn) currentBtn = null;
+        console.warn('Audio load failed:', url);
+      });
+
+      audio.play().catch(err => {
+        if (currentAudio === audio) currentAudio = null;
+        setBtnState(btn, 'error');
+        if (currentBtn === btn) currentBtn = null;
+        console.warn('Audio play failed:', url, err);
+      });
+    }
+
+    // ----- Toggles -----
+    function setupToggle(id, bodyClass) {
+      const btn = document.getElementById(id);
+      btn.addEventListener('click', () => {
+        const on = document.body.classList.toggle(bodyClass);
+        btn.classList.toggle('active', on);
+      });
+    }
+    setupToggle('toggleAr', 'hide-ar');
+    setupToggle('toggleTr', 'hide-tr');
+    setupToggle('toggleBs', 'hide-bs');
+
+    // ----- Reset progress -----
+    document.getElementById('resetProgress').addEventListener('click', () => {
+      if (!confirm('Resetovati napredak za sve dijelove namaza?')) return;
+      progress = {};
+      saveProgress(progress);
+      renderSide();
+      renderSections();
+    });
+
+    // ----- Search -----
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      const phrases = document.querySelectorAll('.nmz-phrase');
+      const sections = document.querySelectorAll('.nmz-section');
+      if (!q) {
+        document.body.classList.remove('searching');
+        phrases.forEach(p => p.classList.remove('search-hit'));
+        sections.forEach(s => s.classList.remove('has-hit'));
+        return;
+      }
+      document.body.classList.add('searching');
+      sections.forEach(s => s.classList.remove('has-hit'));
+      phrases.forEach(p => {
+        const ar = p.dataset.ar;
+        const tr = p.dataset.tr;
+        const bs = p.dataset.bs;
+        const hit = ar.includes(q) || tr.includes(q) || bs.includes(q);
+        p.classList.toggle('search-hit', hit);
+        if (hit) {
+          p.closest('.nmz-section').classList.add('has-hit');
+        }
+      });
+    });
+
+    // ----- Side nav active highlight on scroll -----
+    function setupScrollSpy() {
+      const links = [...document.querySelectorAll('.nmz-side-link')];
+      const map = new Map();
+      links.forEach(l => map.set(l.dataset.target, l));
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          const link = map.get(e.target.id);
+          if (!link) return;
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+      document.querySelectorAll('.nmz-section').forEach(s => observer.observe(s));
+    }
+
+    // ============================================================
+    // QUIZ MODE
+    // ============================================================
+    const quizState = { items: [], idx: 0, active: false };
+
+    function buildQuizItems() {
+      const items = [];
+      SECTIONS.forEach(s => {
+        s.phrases.forEach(p => {
+          items.push({ ar: p.ar, tr: p.tr, bs: p.bs, section: s.title });
+        });
+      });
+      // shuffle
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      return items;
+    }
+
+    function renderQuiz() {
+      const panel = document.getElementById('quizPanel');
+      if (!quizState.active) {
+        panel.style.display = 'none';
+        return;
+      }
+      panel.style.display = 'block';
+      panel.classList.remove('reveal');
+      if (!quizState.items.length) {
+        quizState.items = buildQuizItems();
+        quizState.idx = 0;
+      }
+      const item = quizState.items[quizState.idx];
+      document.getElementById('quizAr').textContent = item.ar;
+      document.getElementById('quizTr').textContent = item.tr;
+      document.getElementById('quizBs').textContent = item.bs + '  —  (' + item.section + ')';
+      document.getElementById('quizProgress').textContent =
+        (quizState.idx + 1) + ' / ' + quizState.items.length;
+    }
+
+    document.getElementById('toggleQuiz').addEventListener('click', () => {
+      quizState.active = !quizState.active;
+      document.getElementById('toggleQuiz').classList.toggle('active', quizState.active);
+      if (quizState.active && !quizState.items.length) {
+        quizState.items = buildQuizItems();
+        quizState.idx = 0;
+      }
+      renderQuiz();
+      if (quizState.active) {
+        document.getElementById('quizPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+    document.getElementById('quizReveal').addEventListener('click', () => {
+      document.getElementById('quizPanel').classList.toggle('reveal');
+    });
+    document.getElementById('quizNext').addEventListener('click', () => {
+      if (!quizState.items.length) return;
+      quizState.idx = (quizState.idx + 1) % quizState.items.length;
+      renderQuiz();
+    });
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    renderSide();
+    renderSections();
+    setupScrollSpy();
+  </script>
+</body>
+
+</html>
