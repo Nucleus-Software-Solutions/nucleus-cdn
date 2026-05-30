@@ -1368,13 +1368,83 @@ body {
    MOBILE
    ============================================================ */
 @media (max-width: 860px) {
-  .topbar { padding: 16px 20px; }
+  /* Topbar layout: grid s "brand | menu" u prvom redu, drawer u drugom kad je otvoren */
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "brand menu";
+    column-gap: 12px;
+    row-gap: 0;
+    padding: 16px 20px;
+  }
+  .brand { grid-area: brand; }
+  .menu-btn { grid-area: menu; }
   .brand-name { font-size: 14px; }
   .brand-mark { width: 32px; height: 32px; font-size: 18px; }
-  .nav, .topbar > .btn { display: none; }
+  .nav { display: none; }
   .menu-btn {
     display: inline-grid; place-items: center;
     padding: 6px 10px; font-size: 16px;
+  }
+
+  /* Mobile drawer: kad je body.menu-open, .nav se pojavi kao drugi red u topbar gridu */
+  body.menu-open .topbar {
+    grid-template-areas:
+      "brand menu"
+      "nav   nav";
+    row-gap: 10px;
+  }
+  body.menu-open .nav {
+    grid-area: nav;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+    font-size: 15px;
+  }
+  body.menu-open .nav > a {
+    padding: 12px 14px;
+    border-radius: 8px;
+  }
+  body.menu-open .nav > a.active {
+    background: var(--paper-2);
+  }
+  body.menu-open .nav > a.active::after { display: none; }
+
+  /* Dropdown (Nivoi) u mobile drawer-u — uvijek expanded, bez trigger dugmeta */
+  body.menu-open .nav-dropdown { width: 100%; }
+  body.menu-open .nav-dropdown-trigger { display: none; }
+  body.menu-open .nav-dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    max-height: none !important;
+  }
+  body.menu-open .nav-dropdown-head {
+    padding: 14px 14px 6px;
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.1em;
+  }
+  body.menu-open .nav-dropdown-item {
+    padding: 11px 14px;
+    border-radius: 8px;
+  }
+
+  body.menu-open .menu-btn {
+    background: var(--paper-2);
+    border-color: var(--rule);
   }
 
   .hero {
