@@ -1,2 +1,5 @@
 .DS_Store
 node_modules/
+
+# Arabic recitation audio is NOT self-hosted — streamed from everyayah.com instead.
+Quranbs/ajet-po-ajet/ar/
