@@ -30,9 +30,9 @@
             --white: #ffffff;
             --radius: 16px;
             --radius-sm: 10px;
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-            --shadow-lg: 0 20px 50px -12px rgba(0,0,0,0.15);
-            --shadow-xl: 0 25px 60px -12px rgba(0,0,0,0.25);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 50px -12px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 25px 60px -12px rgba(0, 0, 0, 0.25);
         }
 
         html {
@@ -192,16 +192,23 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-40px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-40px);
+            }
         }
 
         .hero-grid {
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 60px 60px;
         }
 
@@ -237,8 +244,15 @@
         }
 
         @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .hero-badge span {
@@ -456,10 +470,21 @@
             line-height: 1.6;
         }
 
-        .icon-blue { background: #dbeafe; }
-        .icon-purple { background: #ede9fe; }
-        .icon-green { background: #dcfce7; }
-        .icon-orange { background: #fff7ed; }
+        .icon-blue {
+            background: #dbeafe;
+        }
+
+        .icon-purple {
+            background: #ede9fe;
+        }
+
+        .icon-green {
+            background: #dcfce7;
+        }
+
+        .icon-orange {
+            background: #fff7ed;
+        }
 
         /* ===== SERVICES ===== */
         .services {
@@ -705,7 +730,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3));
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.3));
         }
 
         .project-logo {
@@ -727,6 +752,26 @@
             border-radius: 10px;
         }
 
+        .project-card.featured {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .project-card.featured .project-image {
+            width: 44%;
+            height: auto;
+            min-height: 360px;
+            flex-shrink: 0;
+        }
+
+        .project-card.featured .project-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .project-content {
             padding: 2rem;
         }
@@ -743,23 +788,6 @@
             font-size: 0.95rem;
             line-height: 1.7;
             margin-bottom: 1.5rem;
-        }
-
-        .project-tech {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            background: rgba(0, 194, 255, 0.1);
-            color: var(--accent);
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            border: 1px solid rgba(0, 194, 255, 0.15);
         }
 
         .store-buttons {
@@ -812,7 +840,7 @@
             right: -20%;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
             border-radius: 50%;
         }
 
@@ -937,7 +965,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .contact-card > p {
+        .contact-card>p {
             color: var(--gray);
             font-size: 0.95rem;
             margin-bottom: 1.5rem;
@@ -1106,6 +1134,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1231,6 +1260,16 @@
                 grid-template-columns: 1fr;
             }
 
+            .project-card.featured {
+                flex-direction: column;
+            }
+
+            .project-card.featured .project-image {
+                width: 100%;
+                min-height: 220px;
+                height: 220px;
+            }
+
             .services-grid {
                 grid-template-columns: 1fr;
             }
@@ -1324,8 +1363,7 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <img src="https://nucleus-software-solutions.github.io/nucleus-cdn/Nucleus/logo.png" alt="Nucleus Logo"
-                    width="36" height="36">
+                <img src="assets/logo.png" alt="Nucleus Logo" width="36" height="36">
                 <span class="logo-text">Nucleus</span>
             </div>
             <div class="nav-center">
@@ -1333,7 +1371,7 @@
                     <li><a href="#home" data-key="nav-home">Početna</a></li>
                     <li><a href="#about" data-key="nav-about">O nama</a></li>
                     <li><a href="#services" data-key="nav-services">Usluge</a></li>
-                    <li><a href="#projects" data-key="nav-projects">Projekti</a></li>
+                    <li><a href="projekti.html" data-key="nav-projects">Projekti</a></li>
                     <li><a href="#contact" data-key="nav-contact">Kontakt</a></li>
                 </ul>
                 <div class="language-toggle">
@@ -1350,7 +1388,7 @@
                 <a href="#home" onclick="toggleMobileMenu()" data-key="nav-home">Početna</a>
                 <a href="#about" onclick="toggleMobileMenu()" data-key="nav-about">O nama</a>
                 <a href="#services" onclick="toggleMobileMenu()" data-key="nav-services">Usluge</a>
-                <a href="#projects" onclick="toggleMobileMenu()" data-key="nav-projects">Projekti</a>
+                <a href="projekti.html" onclick="toggleMobileMenu()" data-key="nav-projects">Projekti</a>
                 <a href="#contact" onclick="toggleMobileMenu()" data-key="nav-contact">Kontakt</a>
                 <div class="language-toggle">
                     <button class="lang-btn active" onclick="switchLanguage('bs')">BS</button>
@@ -1369,21 +1407,31 @@
                     <div class="hero-badge-dot"></div>
                     <span data-key="hero-badge">Dostupni za nove projekte</span>
                 </div>
-                <h1 data-key="hero-title">Gradimo softver koji <span class="gradient-text" data-key="hero-highlight">pokreće budućnost</span></h1>
-                <p data-key="hero-description">Od ideje do gotovog proizvoda — kreiramo mobilne i web aplikacije koje rješavaju stvarne probleme i pružaju izvanredno korisničko iskustvo.</p>
+                <h1 data-key="hero-title">Gradimo softver koji <span class="gradient-text"
+                        data-key="hero-highlight">pokreće budućnost</span></h1>
+                <p data-key="hero-description">Od ideje do gotovog proizvoda — kreiramo mobilne i web aplikacije koje
+                    rješavaju stvarne probleme i pružaju izvanredno korisničko iskustvo.</p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn-primary" data-key="cta-projects">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18" />
+                            <path d="M9 21V9" />
+                        </svg>
                         Pogledajte projekte
                     </a>
                     <a href="#contact" class="btn-secondary" data-key="cta-contact">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
                         Kontaktirajte nas
                     </a>
                 </div>
                 <div class="hero-stats">
                     <div class="hero-stat">
-                        <h3 data-key="stat-projects">2+</h3>
+                        <h3 data-key="stat-projects">3+</h3>
                         <p data-key="stat-projects-label">Završenih projekata</p>
                     </div>
                     <div class="hero-stat">
@@ -1406,8 +1454,11 @@
                 <div class="about-text reveal">
                     <div class="section-label" data-key="about-label">O nama</div>
                     <h2 class="section-title" data-key="about-title">Tehnologija u službi vaših ideja</h2>
-                    <p data-key="about-desc-1">Nucleus je softverska agencija specijalizirana za razvoj mobilnih i web aplikacija. Kombinujemo najnovije tehnologije s pažljivim dizajnom kako bismo kreirali proizvode koji korisnici vole.</p>
-                    <p data-key="about-desc-2">Svaki projekat pristupamo s punom posvećenošću — od razumijevanja vaših potreba, kroz dizajn i razvoj, do lansiranja i podrške.</p>
+                    <p data-key="about-desc-1">Nucleus je softverska agencija specijalizirana za razvoj mobilnih i web
+                        aplikacija. Kombinujemo najnovije tehnologije s pažljivim dizajnom kako bismo kreirali proizvode
+                        koji korisnici vole.</p>
+                    <p data-key="about-desc-2">Svaki projekat pristupamo s punom posvećenošću — od razumijevanja vaših
+                        potreba, kroz dizajn i razvoj, do lansiranja i podrške.</p>
                 </div>
                 <div class="about-features reveal">
                     <div class="about-feature">
@@ -1418,7 +1469,8 @@
                     <div class="about-feature">
                         <div class="about-feature-icon icon-purple">⚡</div>
                         <h4 data-key="about-feat-2-title">Brza isporuka</h4>
-                        <p data-key="about-feat-2-desc">Agilni pristup s redovnim isporukama i transparentnom komunikacijom</p>
+                        <p data-key="about-feat-2-desc">Agilni pristup s redovnim isporukama i transparentnom
+                            komunikacijom</p>
                     </div>
                     <div class="about-feature">
                         <div class="about-feature-icon icon-green">🔒</div>
@@ -1441,15 +1493,20 @@
             <div class="services-header reveal">
                 <div class="section-label" data-key="services-label">Usluge</div>
                 <h2 class="section-title" data-key="services-title">Naša ekspertiza</h2>
-                <p class="section-subtitle" data-key="services-subtitle">Pružamo kompletna softverska rješenja prilagođena vašim potrebama</p>
+                <p class="section-subtitle" data-key="services-subtitle">Pružamo kompletna softverska rješenja
+                    prilagođena vašim potrebama</p>
             </div>
             <div class="services-grid">
                 <div class="service-card reveal">
                     <div class="service-icon-wrapper">
-                        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                            <line x1="12" y1="18" x2="12.01" y2="18" />
+                        </svg>
                     </div>
                     <h3 data-key="service-mobile-title">Mobilni razvoj</h3>
-                    <p data-key="service-mobile-desc">Native i cross-platform mobilne aplikacije koristeći Flutter i moderne razvojne prakse za iOS i Android platforme</p>
+                    <p data-key="service-mobile-desc">Native i cross-platform mobilne aplikacije koristeći Flutter i
+                        moderne razvojne prakse za iOS i Android platforme</p>
                     <div class="service-tags">
                         <span class="service-tag">Flutter</span>
                         <span class="service-tag">iOS</span>
@@ -1459,10 +1516,16 @@
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon-wrapper">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
                     </div>
                     <h3 data-key="service-web-title">Web rješenja</h3>
-                    <p data-key="service-web-desc">Skalabilne web aplikacije izgrađene s najmodernijim tehnologijama i robusnim backend sistemima</p>
+                    <p data-key="service-web-desc">Skalabilne web aplikacije izgrađene s najmodernijim tehnologijama i
+                        robusnim backend sistemima</p>
                     <div class="service-tags">
                         <span class="service-tag">React</span>
                         <span class="service-tag">ASP.NET</span>
@@ -1472,10 +1535,14 @@
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon-wrapper">
-                        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
+                        </svg>
                     </div>
                     <h3 data-key="service-integration-title">Integracija sistema</h3>
-                    <p data-key="service-integration-desc">Besprijekorna integracija složenih sistema s PostgreSQL, MSSQL i .NET tehnologijama</p>
+                    <p data-key="service-integration-desc">Besprijekorna integracija složenih sistema s PostgreSQL,
+                        MSSQL i .NET tehnologijama</p>
                     <div class="service-tags">
                         <span class="service-tag">PostgreSQL</span>
                         <span class="service-tag">MSSQL</span>
@@ -1493,7 +1560,8 @@
             <div class="process-header reveal">
                 <div class="section-label" data-key="process-label">Proces</div>
                 <h2 class="section-title" data-key="process-title">Kako radimo</h2>
-                <p class="section-subtitle" data-key="process-subtitle">Sistematičan pristup koji garantuje kvalitetu i transparentnost</p>
+                <p class="section-subtitle" data-key="process-subtitle">Sistematičan pristup koji garantuje kvalitetu i
+                    transparentnost</p>
             </div>
             <div class="process-grid">
                 <div class="process-step reveal">
@@ -1526,29 +1594,67 @@
             <div class="projects-header reveal">
                 <div class="section-label" data-key="projects-label">Portfolio</div>
                 <h2 class="section-title" data-key="projects-title">Izdvojeni projekti</h2>
-                <p class="section-subtitle" data-key="projects-subtitle">Aplikacije koje smo razvili i koje su dostupne korisnicima širom svijeta</p>
+                <p class="section-subtitle" data-key="projects-subtitle">Aplikacije koje smo razvili i koje su dostupne
+                    korisnicima širom svijeta</p>
             </div>
             <div class="projects-grid">
+                <div class="project-card featured reveal">
+                    <div class="project-image"
+                        style="background-image: url('assets/apps/eStanar/promo.png'); background-size: cover; background-position: center;">
+                        <div class="project-logo">
+                            <img src="assets/apps/eStanar/logo.png" alt="eStanar Logo">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">eStanar</h3>
+                        <p class="project-description" data-key="project-estanar-desc">
+                            eStanar je sve-u-jednom platforma za nekretnine i upravljanje najmom u Bosni i
+                            Hercegovini. Pronađite oglas, vodite dnevnik stanovanja, upravljajte zgradom i
+                            komunicirajte sa stanarima — sve iz jedne aplikacije.
+                        </p>
+                        <div class="store-buttons">
+                            <a href="https://play.google.com/store/apps/details?id=ba.nucleus.estanar" target="_blank"
+                                class="store-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                                </svg>
+                                Play Store
+                            </a>
+                            <a href="https://apps.apple.com/us/app/estanar/id6756219923" target="_blank"
+                                class="store-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z" />
+                                </svg>
+                                App Store
+                            </a>
+                            <a href="https://estanar.ba" target="_blank"
+                                class="store-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                                </svg>
+                                estanar.ba
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="project-card reveal">
                     <div class="project-image"
-                        style="background-image: url('https://nucleus-software-solutions.github.io/nucleus-cdn/Origin/screenshot.png'); background-size: cover; background-position: center;">
+                        style="background-image: url('assets/apps/Origin/promo.png'); background-size: cover; background-position: center;">
                         <div class="project-logo">
-                            <img src="https://nucleus-software-solutions.github.io/nucleus-cdn/Origin/logo.png"
-                                alt="Origin Logo">
+                            <img src="assets/apps/Origin/logo.png" alt="Origin Logo">
                         </div>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Origin</h3>
                         <p class="project-description" data-key="project-origin-desc">
-                            Sveobuhvatna mobilna aplikacija koja omogućava korisnicima da otkriju zemlju porijekla
-                            proizvoda kroz napredne mogućnosti pretrage i opsežne baze podataka proizvoda.
+                            Origin ima skener barkodova koji omogućava skeniranje barkodova proizvoda i trenutni
+                            uvid u zemlju porijekla proizvoda. Time se podstiče transparentnost pri kupovini i
+                            pomaže vam da donosite informisanije odluke.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag" data-key="tech-mobile">Mobilno</span>
-                            <span class="tech-tag" data-key="tech-search">Pretraga</span>
-                            <span class="tech-tag" data-key="tech-database">Baza podataka</span>
-                        </div>
                         <div class="store-buttons">
                             <a href="https://play.google.com/store/apps/details?id=com.nucleus.origin" target="_blank"
                                 class="store-button">
@@ -1572,24 +1678,16 @@
 
                 <div class="project-card reveal">
                     <div class="project-image"
-                        style="background-image: url('https://nucleus-software-solutions.github.io/nucleus-cdn/Quranbs/screenshot.png'); background-size: cover; background-position: center;">
+                        style="background-image: url('assets/apps/Quranbs/promo.jpg'); background-size: cover; background-position: center;">
                         <div class="project-logo">
-                            <img src="https://nucleus-software-solutions.github.io/nucleus-cdn/Quranbs/logo.png"
-                                alt="Quran Logo">
+                            <img src="assets/apps/Quranbs/logo.png" alt="Quran Logo">
                         </div>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title" data-key="project-quran-title">Kur'an sa prijevodom</h3>
                         <p class="project-description" data-key="project-quran-desc">
-                            Mobilna aplikacija koja pruža Kur'an s mogućnostima prevoda, sadrži intuitivnu
-                            navigaciju, funkciju pretrage i offline pristup za poboljšano korisničko iskustvo.
+                            Kur'an s prijevodom na bosanski jezik — za čitanje i slušanje, jednostavno i pregledno.
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag" data-key="tech-mobile">Mobilno</span>
-                            <span class="tech-tag" data-key="tech-translation">Prevod</span>
-                            <span class="tech-tag" data-key="tech-offline">Offline</span>
-                        </div>
                         <div class="store-buttons">
                             <a href="https://play.google.com/store/apps/details?id=com.nucleus.quran_bs" target="_blank"
                                 class="store-button">
@@ -1619,7 +1717,7 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item reveal">
-                    <h3 data-key="stats-apps">2+</h3>
+                    <h3 data-key="stats-apps">3+</h3>
                     <p data-key="stats-apps-label">Objavljenih aplikacija</p>
                 </div>
                 <div class="stat-item reveal">
@@ -1646,11 +1744,17 @@
             <div class="contact-grid">
                 <div class="contact-text reveal">
                     <h3 data-key="contact-heading">Imate ideju? Hajde da razgovaramo.</h3>
-                    <p data-key="contact-desc">Bez obzira da li vam treba mobilna aplikacija, web platforma ili integracija sistema — tu smo da pomognemo. Javite nam se i zajedno ćemo pronaći najbolje rješenje.</p>
+                    <p data-key="contact-desc">Bez obzira da li vam treba mobilna aplikacija, web platforma ili
+                        integracija sistema — tu smo da pomognemo. Javite nam se i zajedno ćemo pronaći najbolje
+                        rješenje.</p>
                     <div class="contact-items">
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
                             </div>
                             <div class="contact-item-text">
                                 <h4>Email</h4>
@@ -1659,11 +1763,15 @@
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
                             </div>
                             <div class="contact-item-text">
                                 <h4 data-key="contact-address">Adresa</h4>
-                                <p>Šehovina 20, broj 13<br>88108 Mostar<br data-key="contact-country">Bosna i Hercegovina</p>
+                                <p>Šehovina 20, broj 13<br>88108 Mostar<br data-key="contact-country">Bosna i
+                                    Hercegovina</p>
                             </div>
                         </div>
                     </div>
@@ -1682,7 +1790,8 @@
                         </div>
                         <div class="form-group">
                             <label data-key="form-message">Poruka</label>
-                            <textarea required placeholder="" data-key-placeholder="form-message-placeholder"></textarea>
+                            <textarea required placeholder=""
+                                data-key-placeholder="form-message-placeholder"></textarea>
                         </div>
                         <button type="submit" class="form-submit" data-key="form-submit">Pošaljite poruku</button>
                     </form>
@@ -1697,11 +1806,11 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="logo">
-                        <img src="https://nucleus-software-solutions.github.io/nucleus-cdn/Nucleus/logo.png"
-                            alt="Nucleus Logo" width="32" height="32">
+                        <img src="assets/logo.png" alt="Nucleus Logo" width="32" height="32">
                         <span class="logo-text">Nucleus</span>
                     </div>
-                    <p data-key="footer-desc">Softverska agencija specijalizirana za razvoj mobilnih i web aplikacija koje rješavaju stvarne probleme.</p>
+                    <p data-key="footer-desc">Softverska agencija specijalizirana za razvoj mobilnih i web aplikacija
+                        koje rješavaju stvarne probleme.</p>
                 </div>
                 <div class="footer-col">
                     <h4 data-key="footer-nav">Navigacija</h4>
@@ -1709,7 +1818,7 @@
                         <li><a href="#home" data-key="nav-home">Početna</a></li>
                         <li><a href="#about" data-key="nav-about">O nama</a></li>
                         <li><a href="#services" data-key="nav-services">Usluge</a></li>
-                        <li><a href="#projects" data-key="nav-projects">Projekti</a></li>
+                        <li><a href="projekti.html" data-key="nav-projects">Projekti</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -1731,8 +1840,12 @@
             <div class="footer-bottom">
                 <p data-key="footer-text">&copy; 2025 Nucleus Software Solutions. Sva prava zadržana.</p>
                 <div class="social-links">
-                    <a href="https://github.com/nucleus-software-solutions" target="_blank" class="social-link" aria-label="GitHub">
-                        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <a href="https://github.com/nucleus-software-solutions" target="_blank" class="social-link"
+                        aria-label="GitHub">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -1754,7 +1867,7 @@
                 'hero-description': 'Od ideje do gotovog proizvoda — kreiramo mobilne i web aplikacije koje rješavaju stvarne probleme i pružaju izvanredno korisničko iskustvo.',
                 'cta-projects': 'Pogledajte projekte',
                 'cta-contact': 'Kontaktirajte nas',
-                'stat-projects': '2+',
+                'stat-projects': '3+',
                 'stat-projects-label': 'Završenih projekata',
                 'stat-platforms': '3',
                 'stat-platforms-label': 'Platforme',
@@ -1794,15 +1907,11 @@
                 'projects-label': 'Portfolio',
                 'projects-title': 'Izdvojeni projekti',
                 'projects-subtitle': 'Aplikacije koje smo razvili i koje su dostupne korisnicima širom svijeta',
-                'project-origin-desc': 'Sveobuhvatna mobilna aplikacija koja omogućava korisnicima da otkriju zemlju porijekla proizvoda kroz napredne mogućnosti pretrage i opsežne baze podataka proizvoda.',
+                'project-estanar-desc': 'eStanar je sve-u-jednom platforma za nekretnine i upravljanje najmom u Bosni i Hercegovini. Pronađite oglas, vodite dnevnik stanovanja, upravljajte zgradom i komunicirajte sa stanarima — sve iz jedne aplikacije.',
+                'project-origin-desc': 'Origin ima skener barkodova koji omogućava skeniranje barkodova proizvoda i trenutni uvid u zemlju porijekla proizvoda. Time se podstiče transparentnost pri kupovini i pomaže vam da donosite informisanije odluke.',
                 'project-quran-title': 'Kur\'an sa prijevodom',
-                'project-quran-desc': 'Mobilna aplikacija koja pruža Kur\'an s mogućnostima prevoda, sadrži intuitivnu navigaciju, funkciju pretrage i offline pristup za poboljšano korisničko iskustvo.',
-                'tech-mobile': 'Mobilno',
-                'tech-search': 'Pretraga',
-                'tech-database': 'Baza podataka',
-                'tech-translation': 'Prevod',
-                'tech-offline': 'Offline',
-                'stats-apps': '2+',
+                'project-quran-desc': 'Kur\'an s prijevodom na bosanski jezik — za čitanje i slušanje, jednostavno i pregledno.',
+                'stats-apps': '3+',
                 'stats-apps-label': 'Objavljenih aplikacija',
                 'stats-downloads': '3K+',
                 'stats-downloads-label': 'Preuzimanja',
@@ -1840,7 +1949,7 @@
                 'hero-description': 'From idea to finished product — we create mobile and web applications that solve real problems and deliver outstanding user experiences.',
                 'cta-projects': 'View Projects',
                 'cta-contact': 'Contact Us',
-                'stat-projects': '2+',
+                'stat-projects': '3+',
                 'stat-projects-label': 'Completed projects',
                 'stat-platforms': '3',
                 'stat-platforms-label': 'Platforms',
@@ -1880,15 +1989,11 @@
                 'projects-label': 'Portfolio',
                 'projects-title': 'Featured Projects',
                 'projects-subtitle': 'Applications we developed that are available to users worldwide',
-                'project-origin-desc': 'A comprehensive mobile application that enables users to discover the origin country of products through advanced search capabilities and extensive product databases.',
+                'project-estanar-desc': 'eStanar is an all-in-one platform for real estate and rental management in Bosnia and Herzegovina. Find a listing, keep a housing journal, manage your building, and communicate with tenants — all from a single app.',
+                'project-origin-desc': 'Origin features a barcode scanner that allows users to scan product barcodes and instantly access information about the origin country of the product. This feature promotes transparency in your shopping choices, allowing you to make more informed decisions.',
                 'project-quran-title': 'Quran with Translation',
-                'project-quran-desc': 'A mobile application providing the Quran with translation capabilities, featuring intuitive navigation, search functionality, and offline access for enhanced user experience.',
-                'tech-mobile': 'Mobile',
-                'tech-search': 'Search',
-                'tech-database': 'Database',
-                'tech-translation': 'Translation',
-                'tech-offline': 'Offline',
-                'stats-apps': '2+',
+                'project-quran-desc': 'The Quran with a Bosnian translation — for reading and listening, simple and clear.',
+                'stats-apps': '3+',
                 'stats-apps-label': 'Published apps',
                 'stats-downloads': '3K+',
                 'stats-downloads-label': 'Downloads',
